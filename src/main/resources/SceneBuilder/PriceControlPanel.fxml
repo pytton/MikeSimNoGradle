@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane minHeight="-Infinity" prefHeight="800.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox minHeight="-Infinity" prefHeight="900.0" prefWidth="130.0">
+         <children>
+            <BorderPane minHeight="-Infinity" prefHeight="900.0" prefWidth="100.0">
+               <center>
+                  <Slider orientation="VERTICAL" prefHeight="700.0" prefWidth="71.0" BorderPane.alignment="CENTER" />
+               </center>
+               <top>
+                  <HBox prefHeight="25.0" prefWidth="130.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <TextField prefHeight="25.0" text="200" />
+                        <Label alignment="CENTER_RIGHT" minWidth="-Infinity" text="Max Price">
+                           <padding>
+                              <Insets bottom="5.0" left="2.0" top="5.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                  </HBox>
+               </top>
+               <bottom>
+                  <VBox prefHeight="57.0" prefWidth="130.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <HBox prefHeight="25.0" prefWidth="130.0">
+                           <children>
+                              <TextField prefHeight="25.0" text="100" />
+                              <Label alignment="BOTTOM_RIGHT" minWidth="-Infinity" text="Min Price">
+                                 <padding>
+                                    <Insets bottom="5.0" left="2.0" top="5.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox minHeight="30.0" prefHeight="35.0" prefWidth="200.0">
+                           <children>
+                              <TextField prefHeight="25.0" prefWidth="85.0" />
+                              <Button mnemonicParsing="false" prefHeight="20.0" prefWidth="92.0" text="Bid/Ask" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </bottom>
+            </BorderPane>
+         </children>
+      </VBox>
+      <Button layoutX="181.0" layoutY="138.0" mnemonicParsing="false" text="Button" />
+      <VBox layoutX="157.0" layoutY="202.0" prefHeight="112.0" prefWidth="100.0" spacing="10.0">
+         <children>
+            <Label text="Price source" />
+            <RadioButton mnemonicParsing="false" text="Manual" />
+            <RadioButton mnemonicParsing="false" text="Live" />
+            <RadioButton mnemonicParsing="false" text="Historical" />
+         </children>
+      </VBox>
+   </children>
+</Pane>
