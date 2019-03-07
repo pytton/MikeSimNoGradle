@@ -1,0 +1,29 @@
+1. Connect to TWS API
+2. Used to trade SPY only - possibly allow to trade something else in the future. but only one instrument at a time. In the future - enable trading other instruments. For now - make SPY the default
+3. Allow three types of price control:
+    a. manual prices regulated by up/down button and a slider - to check algo behaviour
+    b. live market bid/ask with volume prices
+    c. historical prices stored in file (implement last)
+4. Display current postitions:
+    a. how many shares at what price
+    b. Profit/Loss for each position for each price level and for the whole position
+    c. Multiple independent 'postions' or 'accounts' to split up decisions - one for 'scalper' another for 'manual' another for 'soft stop' etc. Each of these - one for long positions and one for short positions. Have at least 10 for starters
+5. Display total aggregated position with its total amount, average price, open P/L, closed P/L, 'break even price' etc - make it expandable
+6. Ability to place orders manually
+7. Ability to add new algos to this program - to test their behaviour.
+8. Ability for algos to make decisions based on positions and orders taken by other algos and manual postions/orders - implement something for every algo/manual positions that enables to lookup current open orders
+9. Ability to start/stop algos, to modify their parameters.
+10. Ability to have multiple algos running at the same time.
+11. Cancel button cancelling all algo activity 'STOP ALL ALGOS'
+12. Cancel button cancelling all manual orders 'CANCEL ALL MANUAL'
+13. Close all positions button sending market order to make position flat and cancel all algos 'FLATTEN ALL'
+14. 'Aggregate Algos' - algos having multiple algos inside them and making decisions based on 'internal algo' behaviour
+
+
+DETAILS:
+
+1. One (big?) user interface window with price control, all status 'lights', buttons 11,12,13 from above list, summary of all positions P/L, buttons for displaying other windows (see below)
+2. Several (hidable) windows - one for each 'positions' 'class' - one for manual long positions, one for manual short positions, one for each of different algos; separate window for 'aggregate algos'. Possibly - just a few windows but each window with ability to choose which 'positions' it displays
+3. Separate object running in its own thread responsible for connecting and receiving/sending data to TWS API
+4. Seperate object handling all orders - with ability to route orders either to TWS API or internal 'simulated fills' order server.
+5. 'Simulated fills' order server running in its own thread. Something that does not send orders to TWS but instead several times per second checks the current bid/ask price to see if orders would be filled.

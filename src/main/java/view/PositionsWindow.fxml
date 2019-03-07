@@ -10,15 +10,15 @@
 
 <BorderPane fx:id="mainBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controller.ControllerPostitionsWindow">
    <center>
-      <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-        <columns>
-            <TableColumn prefWidth="75.0" text="Column X" />
-            <TableColumn prefWidth="75.0" text="Column X" />
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-            <TableColumn prefWidth="75.0" text="Column X" />
-        </columns>
-      </TableView>
+      <!--<TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">-->
+        <!--<columns>-->
+            <!--<TableColumn prefWidth="75.0" text="Column X" />-->
+            <!--<TableColumn prefWidth="75.0" text="Column X" />-->
+          <!--<TableColumn prefWidth="75.0" text="C1" />-->
+          <!--<TableColumn prefWidth="75.0" text="C2" />-->
+            <!--<TableColumn prefWidth="75.0" text="Column X" />-->
+        <!--</columns>-->
+      <!--</TableView>-->
    </center>
    <right>
       <VBox prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">

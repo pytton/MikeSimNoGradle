@@ -8,12 +8,13 @@ public class ControllerPostitionsWindow {
 
     public TextField askPriceTextField;
     public TextField bidPriceTextField;
+    public BorderPane mainBorderPane;
 
     public BorderPane getMainBorderPane() {
         return mainBorderPane;
     }
 
-    public BorderPane mainBorderPane;
+
 
 
 

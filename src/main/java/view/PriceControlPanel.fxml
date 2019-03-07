@@ -7,9 +7,9 @@
 
 <Pane minHeight="-Infinity" prefHeight="800.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controller.ControllerPriceControlPanel">
    <children>
-      <VBox minHeight="-Infinity" prefHeight="800.0" prefWidth="130.0">
+      <HBox alignment="CENTER" prefHeight="800.0" prefWidth="300.0">
          <children>
-            <BorderPane minHeight="-Infinity" prefHeight="800.0" prefWidth="100.0">
+            <BorderPane minHeight="-Infinity" prefHeight="800.0" prefWidth="200.0" style="-fx-border-: black; -fx-border-width: 3; -fx-border-style: solid;">
                <center>
                   <Slider fx:id="priceSlider" onMouseDragged="#onMouseDragged" orientation="VERTICAL" prefHeight="700.0" prefWidth="71.0" BorderPane.alignment="CENTER" />
                </center>
@@ -47,17 +47,32 @@
                      </children>
                   </VBox>
                </bottom>
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
             </BorderPane>
+            <VBox prefHeight="196.0" prefWidth="200.0" spacing="3.0">
+               <children>
+                  <Button mnemonicParsing="false" text="Connect to TWS" />
+                  <HBox alignment="CENTER" prefHeight="30.0" prefWidth="140.0">
+                     <children>
+                        <Label prefWidth="70.0" text="Bid Price" />
+                        <TextField fx:id="bidPriceTextField" prefWidth="70.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="30.0" prefWidth="140.0">
+                     <children>
+                        <Label prefWidth="70.0" text="Ask Price" />
+                        <TextField fx:id="askPriceTextField" prefWidth="70.0" />
+                     </children>
+                  </HBox>
+                  <Label text="Price source" />
+                  <RadioButton mnemonicParsing="false" text="Manual" />
+                  <RadioButton mnemonicParsing="false" text="Live" />
+                  <RadioButton mnemonicParsing="false" text="Historical" />
+               </children>
+            </VBox>
          </children>
-      </VBox>
-      <Button layoutX="181.0" layoutY="138.0" mnemonicParsing="false" text="Button" />
-      <VBox layoutX="157.0" layoutY="202.0" prefHeight="112.0" prefWidth="100.0" spacing="10.0">
-         <children>
-            <Label text="Price source" />
-            <RadioButton mnemonicParsing="false" text="Manual" />
-            <RadioButton mnemonicParsing="false" text="Live" />
-            <RadioButton mnemonicParsing="false" text="Historical" />
-         </children>
-      </VBox>
+      </HBox>
    </children>
 </Pane>
