@@ -5,26 +5,37 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import main.java.model.ClockTicker;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("../resources/SceneBuilder/PriceControlPanel.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("view/SceneBuilder/PriceControlPanel.fxml"));
         primaryStage.setTitle("Hello World");
+
+
+
         primaryStage.setScene(new Scene(root));
         primaryStage.setX(1200);
         primaryStage.setY(50);
 
-        Parent root2 = FXMLLoader.load(getClass().getResource("../resources/SceneBuilder/PositionsWindow.fxml"));
+        Parent root2 = FXMLLoader.load(getClass().getResource("view/SceneBuilder/PositionsWindow.fxml"));
 
         Stage secondStage = new Stage();
         secondStage.setX(0);
         secondStage.setY(50);
-        secondStage.setScene(new Scene(root2));
 
+        Scene positions1 = new Scene(root2);
+        
+        secondStage.setScene(positions1);
         secondStage.show();
         primaryStage.show();
+
+
+
+        ClockTicker ct = new ClockTicker();
+        ct.start();
     }
 
 

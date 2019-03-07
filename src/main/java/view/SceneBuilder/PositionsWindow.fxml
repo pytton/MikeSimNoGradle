@@ -8,8 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="mainBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controller.ControllerPostitionsWindow">
    <center>
       <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <columns>
@@ -27,13 +26,13 @@
             <HBox alignment="CENTER" prefHeight="30.0" prefWidth="140.0">
                <children>
                   <Label prefWidth="70.0" text="Ask Price" />
-                  <TextField prefWidth="70.0" />
+                  <TextField fx:id="askPriceTextField" prefWidth="70.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="30.0" prefWidth="140.0">
                <children>
                   <Label prefWidth="70.0" text="Bid Price" />
-                  <TextField prefWidth="70.0" />
+                  <TextField fx:id="bidPriceTextField" prefWidth="70.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="30.0" prefWidth="140.0">
@@ -55,7 +54,7 @@
       <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
             <Button mnemonicParsing="false" text="Button" />
-            <Button mnemonicParsing="false" text="Button" />
+            <Button mnemonicParsing="false" onAction="#buttonClicked" text="Button" />
          </children>
       </HBox>
    </top>
