@@ -11,7 +11,9 @@ public class ControllerPriceControlPanel {
 
     public TextField bidPriceTextField;
     public TextField askPriceTextField;
-    PriceServer priceServer;
+    private PriceServer priceServer;
+    private Integer minSliderValue = 27300;
+    private Integer maxSliderValue = 27000;
 
     public PriceServer getPriceServer() {
         return priceServer;
@@ -74,8 +76,11 @@ public class ControllerPriceControlPanel {
 
 
         try {
-            priceSlider.setMax((double)Integer.parseInt(maxPriceTextField.getText()));
-            priceSlider.setMin((double)Integer.parseInt(minPriceTextField.getText()));
+            minSliderValue = Integer.parseInt(minPriceTextField.getText());
+            maxSliderValue = Integer.parseInt(maxPriceTextField.getText());
+            if(minSliderValue < maxSliderValue)priceSlider.setMin(minSliderValue);
+            if(maxSliderValue > minSliderValue)priceSlider.setMax(maxSliderValue);
+
             priceServer.setBidPrice((int) priceSlider.getValue());
             priceServer.setAskPrice((int)priceSlider.getValue()+1);
             bidPriceTextField.setText(""+priceServer.getBidPrice());

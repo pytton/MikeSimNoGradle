@@ -1,4 +1,5 @@
 MainLoop.java line 23:
 //                    button.setText(count.toString());
 
-uncomment gives exception - 'not a javaFX thread'
+1. uncomment gives exception - 'not a javaFX thread'
+2. ControllerPriceControlPanel - make constructor, link minSliderValue with Textfield minPriceTextField - possible with a reference?
