@@ -5,11 +5,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import main.java.controller.ControllerPriceControlPanel;
 import main.java.model.MainLoop;
+import main.java.model.PriceServer;
 import main.java.view.MikePositionsWindowCreator;
 
 public class Main extends Application {
 
+private PriceServer priceServer = new PriceServer();
 
 
     @Override
@@ -18,6 +21,8 @@ public class Main extends Application {
         //create Price Control window:
         FXMLLoader priceControlPanelLoader = new FXMLLoader(getClass().getResource("view/PriceControlPanel.fxml"));
         Parent pricePanelRoot =  priceControlPanelLoader.load(); //FXMLLoader.load(getClass().getResource("view/SceneBuilder/PriceControlPanel.fxml"));
+        ControllerPriceControlPanel priceControlPanel = (ControllerPriceControlPanel) priceControlPanelLoader.getController();
+        priceControlPanel.setPriceServer(priceServer);
         primaryStage.setTitle("Price Control");
         primaryStage.setScene(new Scene(pricePanelRoot));
         primaryStage.setX(1200);

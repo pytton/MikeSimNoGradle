@@ -2,10 +2,10 @@ package main.java.model;
 
 public class PriceServer {
 
-    private int bidPrice;
-    private int askPrice;
-    private int bidVolume;
-    private int askVolume;
+    private int bidPrice = 27100;
+    private int askPrice = 27101;
+    private int bidVolume = 10;
+    private int askVolume = 10;
 
     //add timestamp variable
 

@@ -3,10 +3,23 @@ package main.java.controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import main.java.model.PriceServer;
 
 import java.awt.*;
 
 public class ControllerPriceControlPanel {
+
+    public TextField bidPriceTextField;
+    public TextField askPriceTextField;
+    PriceServer priceServer;
+
+    public PriceServer getPriceServer() {
+        return priceServer;
+    }
+
+    public void setPriceServer(PriceServer priceServer) {
+        this.priceServer = priceServer;
+    }
 
     @FXML
     public TextField maxPriceTextField;
@@ -63,6 +76,10 @@ public class ControllerPriceControlPanel {
         try {
             priceSlider.setMax((double)Integer.parseInt(maxPriceTextField.getText()));
             priceSlider.setMin((double)Integer.parseInt(minPriceTextField.getText()));
+            priceServer.setBidPrice((int) priceSlider.getValue());
+            priceServer.setAskPrice((int)priceSlider.getValue()+1);
+            bidPriceTextField.setText(""+priceServer.getBidPrice());
+            askPriceTextField.setText(""+priceServer.getAskPrice());
 
         } catch (NumberFormatException e) {
             e.printStackTrace();
