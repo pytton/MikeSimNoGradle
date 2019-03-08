@@ -1,0 +1,4 @@
+MainLoop.java line 23:
+//                    button.setText(count.toString());
+
+uncomment gives exception - 'not a javaFX thread'

@@ -7,7 +7,7 @@ import main.java.controller.ControllerPostitionsWindow;
 
 import java.io.IOException;
 
-public class MikePositionsWindow {
+public class MikePositionsWindowCreator {
 
     private FXMLLoader posWindowLoader;// = new FXMLLoader(getClass().getResource("PositionsWindow.fxml"));
     private Parent positionsWindowRoot;
@@ -15,18 +15,19 @@ public class MikePositionsWindow {
     private MikeGridPane buttonTable;
 
 
-    public MikePositionsWindow() throws IOException {
+    public MikePositionsWindowCreator() throws IOException {
         //load FXML file
         posWindowLoader = new FXMLLoader(getClass().getResource("PositionsWindow.fxml"));
         //this needed by JavaFX Scene constructor:
         positionsWindowRoot = posWindowLoader.load(); //this might throw IOException
-        //this is used to access elements of MikePositionsWindow:
+        //this is used to access elements of MikePositionsWindowCreator:
         positionsWindowController = (ControllerPostitionsWindow)posWindowLoader.getController();
         //this adds a custom table of buttons to the scene
         buttonTable = new MikeGridPane();
 
         //experimenting with modifing this window:
         positionsWindowController.getMainBorderPane().setCenter(buttonTable);
+        positionsWindowController.setMikeGridPane(buttonTable);
 
         Button button = buttonTable.getButton(3,1);
 

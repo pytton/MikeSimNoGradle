@@ -2,24 +2,25 @@ package main.java.model;
 
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
+import main.java.view.MikeGridPane;
 
-public class ClockTicker extends Thread {
+public class MainLoop extends Thread {
 
-    public void setGridPane(GridPane gridPane) {
-        this.gridPane = gridPane;
+    MikeGridPane mikeGridPane;
+
+    public MainLoop(MikeGridPane mikeGridPane) {
+        this.mikeGridPane = mikeGridPane;
     }
-
-    GridPane gridPane;
-
 
     public void run()  {
 
         Integer count = 0;
         while (true){
             try {
-                if (gridPane != null){
-                    Button button = (Button)gridPane.getChildren().get(1);
-                    button.setText(count.toString());
+                if (mikeGridPane != null){
+
+                    Button button = mikeGridPane.getButton(8, 3);
+//                    button.setText(count.toString());
                     count++;
                 }
                 Thread.sleep(1000);

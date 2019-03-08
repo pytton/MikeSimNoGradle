@@ -4,15 +4,9 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.Background;
 import javafx.stage.Stage;
-import main.java.controller.ControllerPostitionsWindow;
-import main.java.model.ClockTicker;
-import main.java.view.MikeGridPane;
-import main.java.view.MikePositionsWindow;
-
-import java.awt.*;
+import main.java.model.MainLoop;
+import main.java.view.MikePositionsWindowCreator;
 
 public class Main extends Application {
 
@@ -55,7 +49,7 @@ public class Main extends Application {
 
 
         //create Positions Window:
-        MikePositionsWindow posWindow = new MikePositionsWindow();
+        MikePositionsWindowCreator posWindow = new MikePositionsWindowCreator();
 
 
         Stage secondStage = new Stage();
@@ -68,9 +62,7 @@ public class Main extends Application {
         secondStage.show();
         primaryStage.show();
 
-
-
-        ClockTicker ct = new ClockTicker();
+        MainLoop ct = new MainLoop(posWindow.getPositionsWindowController().getMikeGridPane());
         ct.start();
     }
 
