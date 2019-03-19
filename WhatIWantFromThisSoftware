@@ -23,7 +23,9 @@
 DETAILS:
 
 1. One (big?) user interface window with price control, all status 'lights', buttons 11,12,13 from above list, summary of all positions P/L, buttons for displaying other windows (see below)
-2. Several (hidable) windows - one for each 'positions' 'class' - one for manual long positions, one for manual short positions, one for each of different algos; separate window for 'aggregate algos'. Possibly - just a few windows but each window with ability to choose which 'positions' it displays
+2. Several (hidable) windows - one for each 'positions' 'class' - one for manual long positions, one for manual short positions, one for each of different algos; separate window for 'aggregate algos'.
+Possibly - just a few windows but each window with ability to choose which 'positions' it displays
 3. Separate object running in its own thread responsible for connecting and receiving/sending data to TWS API
 4. Seperate object handling all orders - with ability to route orders either to TWS API or internal 'simulated fills' order server.
-5. 'Simulated fills' order server running in its own thread. Something that does not send orders to TWS but instead several times per second checks the current bid/ask price to see if orders would be filled.
+5. 'Simulated fills' order server running in its own thread. Something that does not send orders to TWS but instead several times per second
+checks the current bid/ask price to see if orders would be filled.
