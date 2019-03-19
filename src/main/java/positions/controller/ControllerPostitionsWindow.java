@@ -1,9 +1,9 @@
-package main.java.controller;
+package main.java.positions.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import main.java.view.MikeGridPane;
+import main.java.positions.view.MikeGridPane;
 
 public class ControllerPostitionsWindow {
 

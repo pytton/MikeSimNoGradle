@@ -1,4 +1,4 @@
-package main.java.view;
+package main.java.positions.view;
 
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;

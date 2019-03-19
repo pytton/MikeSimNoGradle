@@ -24,6 +24,7 @@ public class MikeOrder {
     //for future use - for passing orders into outside API
     long orderId;
 
+
     //for checking fills - has the order been filled already?
     boolean isFilled = false;
 

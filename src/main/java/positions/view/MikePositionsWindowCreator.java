@@ -1,9 +1,9 @@
-package main.java.view;
+package main.java.positions.view;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import main.java.controller.ControllerPostitionsWindow;
+import main.java.positions.controller.ControllerPostitionsWindow;
 
 import java.io.IOException;
 
@@ -17,7 +17,7 @@ public class MikePositionsWindowCreator {
 
     public MikePositionsWindowCreator() throws IOException {
         //load FXML file
-        posWindowLoader = new FXMLLoader(getClass().getResource("PositionsWindow.fxml"));
+        posWindowLoader = new FXMLLoader(getClass().getResource("../../resources/PositionsWindow.fxml"));
         //this needed by JavaFX Scene constructor:
         positionsWindowRoot = posWindowLoader.load(); //this might throw IOException
         //this is used to access elements of MikePositionsWindowCreator:

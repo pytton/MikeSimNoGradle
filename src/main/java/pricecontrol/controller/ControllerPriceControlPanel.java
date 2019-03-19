@@ -1,10 +1,8 @@
-package main.java.controller;
+package main.java.pricecontrol.controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import javafx.scene.input.InputMethodEvent;
 import main.java.model.PriceServer;
 
 public class ControllerPriceControlPanel {
