@@ -22,7 +22,7 @@ private PriceServer priceServer = new PriceServer();
         FXMLLoader priceControlPanelLoader = new FXMLLoader(getClass().getResource("view/PriceControlPanel.fxml"));
         Parent pricePanelRoot =  priceControlPanelLoader.load(); //FXMLLoader.load(getClass().getResource("view/SceneBuilder/PriceControlPanel.fxml"));
         ControllerPriceControlPanel priceControlPanel = (ControllerPriceControlPanel) priceControlPanelLoader.getController();
-//        priceControlPanel.setPriceServer(priceServer);
+        priceControlPanel.setPriceServer(priceServer);
         primaryStage.setTitle("Price Control");
         primaryStage.setScene(new Scene(pricePanelRoot));
         primaryStage.setX(1200);

@@ -1,5 +1,6 @@
 package main.java.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
@@ -18,7 +19,7 @@ public class ControllerPriceControlPanel {
     public TextField bidPriceTextField;
     @FXML
     public TextField askPriceTextField;
-//    public PriceServer priceServer;
+    public PriceServer priceServer;
     @FXML
     private Integer minSliderValue = 27000;
     @FXML
@@ -34,8 +35,8 @@ public class ControllerPriceControlPanel {
         System.out.println(priceSlider.getMax());
         System.out.println(priceSlider.getValue());
 
-//        priceSlider.setValue((double)(maxSliderValue - (maxSliderValue-minSliderValue)/2));
-        priceSlider.setValue(27150.0);
+        priceSlider.setValue((double)(maxSliderValue - (maxSliderValue-minSliderValue)/2));
+//        priceSlider.setValue(27150.0);
         maxPriceTextField.setText(maxSliderValue.toString());
         minPriceTextField.setText(minSliderValue.toString());
 
@@ -44,13 +45,13 @@ public class ControllerPriceControlPanel {
 //        priceSlider.notifyAll();
     }
 
-//    public PriceServer getPriceServer() {
-//        return priceServer;
-//    }
+    public PriceServer getPriceServer() {
+        return priceServer;
+    }
 
-//    public void setPriceServer(PriceServer priceServer) {
-//        this.priceServer = priceServer;
-//    }
+    public void setPriceServer(PriceServer priceServer) {
+        this.priceServer = priceServer;
+    }
 
 
 
@@ -99,46 +100,52 @@ public class ControllerPriceControlPanel {
 
 
         try {
+//            System.out.println((int)priceSlider.getValue());
+//            System.out.println("send this to PriceServer!");
+            priceServer.setBidPrice((int)priceSlider.getValue());
+            priceServer.setAskPrice((int)(priceSlider.getValue() + 1)); // TODO: 1 is the bid-ask spread, make this changable by user
 
-//            int value = Integer.parseInt(minPriceTextField.getText());
-//
-////            int value = 117;
-//
-//            System.out.println(value);
-
-//            double value = priceSlider.getValue();
-//
-//            minSliderValue = Integer.parseInt(minPriceTextField.getText());
-//            maxSliderValue = Integer.parseInt(maxPriceTextField.getText());
-//            if(minSliderValue < maxSliderValue)priceSlider.setMin((double)minSliderValue);
-//            if(maxSliderValue > minSliderValue)priceSlider.setMax((double)maxSliderValue);
-
-
-
-//            priceServer.setBidPrice((int) priceSlider.getValue());
-//            priceServer.setAskPrice((int)priceSlider.getValue()+1);
-//            bidPriceTextField.setText(""+priceServer.getBidPrice());
-//            askPriceTextField.setText(""+priceServer.getAskPrice());
 
         } catch (NumberFormatException e) {
             e.printStackTrace();
             System.out.println("Exception in onMouseDragged");
         }
-        System.out.println((int)priceSlider.getValue());
 
-
-       // System.out.println("Slider onMouseDragged");
     }
 
     @FXML
-    private void setMaxPrice(InputMethodEvent inputMethodEvent) {
-        String text = maxPriceTextField.getText();
+    /**
+     * sets the maximum value returned by the slider
+     */
+    private void setMaxPrice() {
 
-        System.out.println("setMaxPrice called");
-        Integer maxvalue = Integer.parseInt(text);
-        int value = (int)maxvalue.intValue();
-        System.out.println((double)value);
+        int maxvalue = maxSliderValue.intValue();
+        try {
+            maxvalue = Integer.parseInt(maxPriceTextField.getText());
+            if (maxvalue > minSliderValue.intValue()) {
+                priceSlider.setMax((double) maxvalue);
+                maxPriceTextField.setText(""+maxvalue);
+                maxSliderValue = maxvalue;
+            }else {maxPriceTextField.setText(maxSliderValue.toString());}
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+    }
 
-        if (maxvalue > minSliderValue) priceSlider.setMax((double)maxvalue);
+    public void setMinPrice() {
+
+        int minvalue = minSliderValue.intValue();
+        try {
+            minvalue = Integer.parseInt(minPriceTextField.getText());
+//            System.out.println("minvalue: " + minvalue + "minSliderValue: " + minSliderValue.intValue());
+            if (minvalue < maxSliderValue.intValue()) {
+//                System.out.println("setting slider");
+                priceSlider.setMin((double) minvalue);
+                minPriceTextField.setText(""+minvalue);
+                minSliderValue = minvalue;
+            }else{minPriceTextField.setText(minSliderValue.toString());}
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
     }
 }

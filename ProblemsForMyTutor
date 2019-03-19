@@ -3,3 +3,5 @@ MainLoop.java line 23:
 
 1. uncomment gives exception - 'not a javaFX thread'
 2. ControllerPriceControlPanel - make constructor, link minSliderValue with Textfield minPriceTextField - possible with a reference?
+3. setMaxPrice in ControllerPriceControlPanel.java
+4. small text in buttons

@@ -16,6 +16,7 @@ public class PriceServer {
 
     public void setBidPrice(int bidPrice) {
         this.bidPrice = bidPrice;
+        System.out.println("Bid price set to: " + bidPrice);
     }
 
     public int getAskPrice() {
@@ -24,6 +25,7 @@ public class PriceServer {
 
     public void setAskPrice(int askPrice) {
         this.askPrice = askPrice;
+        System.out.println("Ask price set to: " + askPrice);
     }
 
     public int getBidVolume() {
