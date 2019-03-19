@@ -9,21 +9,37 @@ import main.java.model.PriceServer;
 public class ControllerPriceControlPanel {
 
     @FXML
+    public TextField maxPriceTextField;
+    @FXML
+    public TextField minPriceTextField;
+    @FXML
+    public Slider priceSlider;
+    @FXML
     public TextField bidPriceTextField;
+    @FXML
     public TextField askPriceTextField;
 //    public PriceServer priceServer;
-    public Integer minSliderValue = 27000;
-    public Integer maxSliderValue = 27300;
+    @FXML
+    private Integer minSliderValue = 27000;
+    @FXML
+    private Integer maxSliderValue = 27300;
 
     @FXML
     public void initialize() {
 
         System.out.println("ControllerPriceControlPanel created");
         priceSlider.setMin((double)minSliderValue);
-        priceSlider.setMin((double)maxSliderValue);
-        priceSlider.setValue((double)((maxSliderValue-minSliderValue)/2));
+        priceSlider.setMax((double)maxSliderValue);
+
+        System.out.println(priceSlider.getMax());
+        System.out.println(priceSlider.getValue());
+
+//        priceSlider.setValue((double)(maxSliderValue - (maxSliderValue-minSliderValue)/2));
+        priceSlider.setValue(27150.0);
         maxPriceTextField.setText(maxSliderValue.toString());
         minPriceTextField.setText(minSliderValue.toString());
+
+        System.out.println(""+ priceSlider.getValue());
 
 //        priceSlider.notifyAll();
     }
@@ -36,13 +52,7 @@ public class ControllerPriceControlPanel {
 //        this.priceServer = priceServer;
 //    }
 
-    @FXML
-    public TextField maxPriceTextField;
-    @FXML
-    public TextField minPriceTextField;
 
-    @FXML
-    public Slider priceSlider;
 
 //    @FXML
 //    private void dragDetected() {
@@ -126,9 +136,9 @@ public class ControllerPriceControlPanel {
 
         System.out.println("setMaxPrice called");
         Integer maxvalue = Integer.parseInt(text);
-        int value = (int)maxvalue;
+        int value = (int)maxvalue.intValue();
         System.out.println((double)value);
 
-//        if (maxvalue > minSliderValue) priceSlider.setMax((double)maxvalue);
+        if (maxvalue > minSliderValue) priceSlider.setMax((double)maxvalue);
     }
 }

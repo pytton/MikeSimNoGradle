@@ -70,8 +70,8 @@ public class MikeGridPane extends GridPane {
 //                button.setMaxHeight(5);
 //                button.setStyle("-fx-background-color: lightgrey;-fx-border-color: black; -fx-border-width: 1px");
 //                button.setStyle("-fx-background-color: white");
-                System.out.println(button.getLabelPadding());
-                System.out.println(button.getLayoutBounds());
+//                System.out.println(button.getLabelPadding());
+//                System.out.println(button.getLayoutBounds());
 
 
                 this.add(button, col, row);

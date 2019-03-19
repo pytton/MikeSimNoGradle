@@ -11,12 +11,12 @@
          <children>
             <BorderPane minHeight="-Infinity" prefHeight="800.0" prefWidth="200.0" style="-fx-border-: black; -fx-border-width: 3; -fx-border-style: solid;">
                <center>
-                  <Slider fx:id="priceSlider" onMouseDragged="#onMouseDragged" orientation="VERTICAL" prefHeight="700.0" prefWidth="71.0" BorderPane.alignment="CENTER" />
+                  <Slider fx:id="priceSlider" blockIncrement="0.0" max="0.0" onMouseDragged="#onMouseDragged" orientation="VERTICAL" prefHeight="700.0" prefWidth="71.0" BorderPane.alignment="CENTER" />
                </center>
                <top>
                   <HBox prefHeight="25.0" prefWidth="130.0" BorderPane.alignment="CENTER">
                      <children>
-                        <TextField fx:id="maxPriceTextField" prefHeight="25.0" onAction="#setMaxPrice" />
+                        <TextField fx:id="maxPriceTextField" onAction="#setMaxPrice" prefHeight="25.0" />
                         <Label alignment="CENTER_RIGHT" minWidth="-Infinity" text="Max Price">
                            <padding>
                               <Insets bottom="5.0" left="2.0" top="5.0" />

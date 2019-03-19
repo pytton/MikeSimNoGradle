@@ -68,7 +68,7 @@ private PriceServer priceServer = new PriceServer();
         primaryStage.show();
 
         MainLoop ct = new MainLoop(posWindow.getPositionsWindowController().getMikeGridPane());
-        ct.start();
+//        ct.start();
     }
 
 
