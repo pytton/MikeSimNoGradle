@@ -1,5 +1,6 @@
 package main.java.view;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -57,7 +58,9 @@ public class MikeGridPane extends GridPane {
 
                 int number = col + (row + col);
                 button.setText(""+number);
-                button.setFont(Font.font(10));
+                button.setFont(Font.font(15));
+                button.setPadding(new Insets(0, 0, 0, 0));
+
 
                 buttons[row][col] = button;
 

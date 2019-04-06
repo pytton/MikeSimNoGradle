@@ -9,5 +9,11 @@ C++ MikeSimulator here: https://github.com/pytton/MikeSimulator/tree/experiment/
 3. 'Priceserver' class which has three modules - manual prices, live Interactive Brokers prices, historical prices. Implement only manual prices now.
 4. Link 'Priceserver' class with UI. 
 
-5. Bug in PriceControlPanel - setting MinPrice higher than MaxPrice makes the slider disappear - fix this
+5. Bug in PriceControlPanel - setting MinPrice higher than MaxPrice makes the slider disappear - fixed
+
+
+#current commit:
+cleaned up comments in code
+changed padding in MikeGridPane
+added JavaFXHacks.md
 

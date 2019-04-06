@@ -27,22 +27,15 @@ public class ControllerPriceControlPanel {
 
     @FXML
     public void initialize() {
-
-        System.out.println("ControllerPriceControlPanel created");
         priceSlider.setMin((double)minSliderValue);
         priceSlider.setMax((double)maxSliderValue);
-
-        System.out.println(priceSlider.getMax());
-        System.out.println(priceSlider.getValue());
-
         priceSlider.setValue((double)(maxSliderValue - (maxSliderValue-minSliderValue)/2));
-//        priceSlider.setValue(27150.0);
         maxPriceTextField.setText(maxSliderValue.toString());
         minPriceTextField.setText(minSliderValue.toString());
-
-        System.out.println(""+ priceSlider.getValue());
-
-//        priceSlider.notifyAll();
+//        System.out.println("ControllerPriceControlPanel created");
+//        System.out.println(priceSlider.getMax());
+//        System.out.println(priceSlider.getValue());
+//        System.out.println(""+ priceSlider.getValue());
     }
 
     public PriceServer getPriceServer() {
@@ -96,16 +89,14 @@ public class ControllerPriceControlPanel {
 //    }
 
     @FXML
+    /**
+     * triggered when user moves the slider
+     */
     private void onMouseDragged() {
-
-
+        //change the bid & ask prices in priceServer:
         try {
-//            System.out.println((int)priceSlider.getValue());
-//            System.out.println("send this to PriceServer!");
             priceServer.setBidPrice((int)priceSlider.getValue());
             priceServer.setAskPrice((int)(priceSlider.getValue() + 1)); // TODO: 1 is the bid-ask spread, make this changable by user
-
-
         } catch (NumberFormatException e) {
             e.printStackTrace();
             System.out.println("Exception in onMouseDragged");
@@ -132,6 +123,10 @@ public class ControllerPriceControlPanel {
         }
     }
 
+    @FXML
+    /**
+     * sets the minimum value returned by the slider
+     */
     public void setMinPrice() {
 
         int minvalue = minSliderValue.intValue();
