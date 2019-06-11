@@ -13,6 +13,40 @@ import static javafx.geometry.Pos.CENTER;
  */
 public class MikeGridPane extends GridPane {
 
+
+    /**
+     *
+     * Button which can tell which row and column it occupies. Has to be set after constructing it.
+     */
+    public class MikeButton extends Button{
+        public int getRowOfButton() {
+            return rowOfButton;
+        }
+
+        public void setRowOfButton(int rowOfButton) {
+            this.rowOfButton = rowOfButton;
+        }
+
+        public int getColOfButton() {
+            return colOfButton;
+        }
+
+        public void setColOfButton(int colOfButton) {
+            this.colOfButton = colOfButton;
+        }
+
+        int rowOfButton = 0;
+        int colOfButton = 0;
+        public MikeButton() {
+            super();
+        }
+        public MikeButton(int rowPosition, int colPosition){
+            this();
+            rowOfButton = rowPosition;
+            colOfButton = colPosition;
+        }
+    }
+
     public int getHowManyRows() {
         int rows = howManyRows;
         return rows;
@@ -53,7 +87,7 @@ public class MikeGridPane extends GridPane {
 
 
             for (int col = 0; col < howManyCols; col++) {
-                Button button = new Button();
+                MikeButton button = new MikeButton(row, col);
 //                button.setPrefWidth(50);
 
                 int number = col + (row + col);
