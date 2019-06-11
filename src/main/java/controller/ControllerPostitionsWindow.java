@@ -3,7 +3,7 @@ package main.java.controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import main.java.view.MikeGridPane;
+import main.java.positions.view.MikeGridPane;
 
 public class ControllerPostitionsWindow {
 

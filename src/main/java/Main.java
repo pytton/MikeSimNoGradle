@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import main.java.controller.ControllerPriceControlPanel;
 import main.java.model.MainLoop;
 import main.java.model.PriceServer;
-import main.java.view.MikePositionsWindowCreator;
+import main.java.positions.view.MikePositionsWindowCreator;
 
 public class Main extends Application {
 
@@ -19,7 +19,7 @@ private PriceServer priceServer = new PriceServer();
     public void start(Stage primaryStage) throws Exception{
 
         //create Price Control window:
-        FXMLLoader priceControlPanelLoader = new FXMLLoader(getClass().getResource("view/PriceControlPanel.fxml"));
+        FXMLLoader priceControlPanelLoader = new FXMLLoader(getClass().getResource("../resources/PriceControlPanel.fxml"));
         Parent pricePanelRoot =  priceControlPanelLoader.load(); //FXMLLoader.load(getClass().getResource("view/SceneBuilder/PriceControlPanel.fxml"));
         ControllerPriceControlPanel priceControlPanel = (ControllerPriceControlPanel) priceControlPanelLoader.getController();
         priceControlPanel.setPriceServer(priceServer);

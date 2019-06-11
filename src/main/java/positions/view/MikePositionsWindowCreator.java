@@ -1,23 +1,24 @@
-package main.java.view;
+package main.java.positions.view;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import main.java.controller.ControllerPostitionsWindow;
+import main.java.positions.view.MikeGridPane;
 
 import java.io.IOException;
 
 public class MikePositionsWindowCreator {
 
     private FXMLLoader posWindowLoader;// = new FXMLLoader(getClass().getResource("PositionsWindow.fxml"));
-    private Parent positionsWindowRoot;
-    private ControllerPostitionsWindow positionsWindowController;
+    public Parent positionsWindowRoot;
+    public ControllerPostitionsWindow positionsWindowController;
     private MikeGridPane buttonTable;
 
 
     public MikePositionsWindowCreator() throws IOException {
         //load FXML file
-        posWindowLoader = new FXMLLoader(getClass().getResource("PositionsWindow.fxml"));
+        posWindowLoader = new FXMLLoader(getClass().getResource("../../../resources/PositionsWindow.fxml"));
         //this needed by JavaFX Scene constructor:
         positionsWindowRoot = posWindowLoader.load(); //this might throw IOException
         //this is used to access elements of MikePositionsWindowCreator:
