@@ -1,10 +1,10 @@
-package main.java.controller;
+package main.java.controllerandview.positionswindow.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import main.java.model.PriceServer;
-import main.java.positions.view.MikeGridPane;
+import main.java.model.prices.PriceServer;
+import main.java.controllerandview.positionswindow.view.MikeGridPane;
 
 public class ControllerPostitionsWindow {
 

@@ -1,4 +1,4 @@
-package main.java.model;
+package main.java.model.positionsorders;
 
 public class MikeOrder {
     enum MikeOrderType{

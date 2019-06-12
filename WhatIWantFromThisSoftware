@@ -1,5 +1,5 @@
 1. Connect to TWS API
-2. Used to trade SPY only - possibly allow to trade something else in the future. but only one instrument at a time. In the future - enable trading other instruments. For now - make SPY the default
+2. Used to trade mainly SPY and DIA. In the future - enable trading other instruments. For now - make SPY the default
 3. Allow three types of price control:
     a. manual prices regulated by up/down button and a slider - to check algo behaviour
     b. live market bid/ask with volume prices

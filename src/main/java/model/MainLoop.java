@@ -1,7 +1,8 @@
 package main.java.model;
 
 import javafx.scene.control.Button;
-import main.java.positions.view.MikeGridPane;
+import main.java.model.prices.PriceServer;
+import main.java.controllerandview.positionswindow.view.MikeGridPane;
 
 public class MainLoop extends Thread {
 

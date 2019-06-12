@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane minHeight="-Infinity" prefHeight="800.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controller.ControllerPriceControlPanel">
+<Pane minHeight="-Infinity" prefHeight="800.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllerandview.pricecontrolwindow.controller.ControllerPriceControlPanel">
    <children>
       <HBox alignment="CENTER" prefHeight="800.0" prefWidth="300.0">
          <children>
@@ -76,6 +76,12 @@
                         <TextField fx:id="experimentalTextField1" prefWidth="70.0" />
                      </children>
                   </HBox>
+                  <VBox alignment="CENTER" prefHeight="184.0" prefWidth="150.0">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" text="INSTRUMENT" />
+                        <ListView fx:id="instrumentsList" prefHeight="141.0" prefWidth="150.0" />
+                     </children>
+                  </VBox>
                </children>
             </VBox>
          </children>

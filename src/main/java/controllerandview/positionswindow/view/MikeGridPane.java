@@ -1,4 +1,4 @@
-package main.java.positions.view;
+package main.java.controllerandview.positionswindow.view;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;

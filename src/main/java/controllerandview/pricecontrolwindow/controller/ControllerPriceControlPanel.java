@@ -1,11 +1,12 @@
-package main.java.controller;
+package main.java.controllerandview.pricecontrolwindow.controller;
 
-import javafx.event.ActionEvent;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import javafx.scene.input.InputMethodEvent;
-import main.java.model.PriceServer;
+import main.java.model.prices.PriceServer;
 
 public class ControllerPriceControlPanel {
 
@@ -20,10 +21,13 @@ public class ControllerPriceControlPanel {
     @FXML
     public TextField askPriceTextField;
     public PriceServer priceServer;
+    public ListView instrumentsList;
     @FXML
     private Integer minSliderValue = 27000;
     @FXML
     private Integer maxSliderValue = 27300;
+
+    private ObservableList<String> instrumentNamesList;
 
     @FXML
     public void initialize() {
@@ -32,6 +36,10 @@ public class ControllerPriceControlPanel {
         priceSlider.setValue((double)(maxSliderValue - (maxSliderValue-minSliderValue)/2));
         maxPriceTextField.setText(maxSliderValue.toString());
         minPriceTextField.setText(minSliderValue.toString());
+
+        instrumentNamesList = FXCollections.<String>observableArrayList("SPY", "DIA", "IWM", "EUR");
+        instrumentsList.getItems().addAll(instrumentNamesList);
+
 //        System.out.println("ControllerPriceControlPanel created");
 //        System.out.println(priceSlider.getMax());
 //        System.out.println(priceSlider.getValue());

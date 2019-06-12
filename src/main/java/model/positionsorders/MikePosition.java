@@ -1,4 +1,4 @@
-package main.java.model;
+package main.java.model.positionsorders;
 
 public class MikePosition {
 
@@ -17,7 +17,7 @@ public class MikePosition {
 
     //this is for indexing purposes - set to TRUE if position was ever
     //accessed or changed. Mainly to avoid iterating through tens of thousands
-    //of positions
+    //of positionswindow
     boolean checkifActive() { if (isActive == true) return true; else  return false; }
     void setActive() { isActive = true; }
     void setInactive() { isActive = false; }

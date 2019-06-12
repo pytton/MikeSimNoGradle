@@ -1,11 +1,10 @@
-package main.java.positions.view;
+package main.java.controllerandview.positionswindow.view;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import main.java.controller.ControllerPostitionsWindow;
-import main.java.model.PriceServer;
-import main.java.positions.view.MikeGridPane;
+import main.java.controllerandview.positionswindow.controller.ControllerPostitionsWindow;
+import main.java.model.prices.PriceServer;
 
 import java.io.IOException;
 
@@ -19,7 +18,7 @@ public class MikePositionsWindowCreator {
 
     public MikePositionsWindowCreator() throws IOException {
         //load FXML file
-        posWindowLoader = new FXMLLoader(getClass().getResource("../../../resources/PositionsWindow.fxml"));
+        posWindowLoader = new FXMLLoader(getClass().getResource("../../../../resources/PositionsWindow.fxml"));
         //this needed by JavaFX Scene constructor:
         positionsWindowRoot = posWindowLoader.load(); //this might throw IOException
         //this is used to access elements of MikePositionsWindowCreator:
