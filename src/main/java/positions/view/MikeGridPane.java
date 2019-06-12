@@ -6,6 +6,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Font;
 
+import java.util.ArrayList;
+
 import static javafx.geometry.Pos.CENTER;
 
 /**
@@ -64,6 +66,8 @@ public class MikeGridPane extends GridPane {
      */
     Button[][] buttons = new Button[howManyRows][howManyCols];
 
+    ArrayList<ArrayList<MikeButton>> buttonList = new ArrayList<>();
+
     public Button getButton(int row, int col) {
         if(row<= howManyRows && col<=howManyCols) return buttons[row][col];
         else return null;
@@ -85,6 +89,8 @@ public class MikeGridPane extends GridPane {
 //            RowConstraints rowConstr = new RowConstraints(7);
             this.getRowConstraints().add(rowConstraints);
 
+            buttonList.add(new ArrayList<MikeButton>());
+
 
             for (int col = 0; col < howManyCols; col++) {
                 MikeButton button = new MikeButton(row, col);
@@ -97,6 +103,8 @@ public class MikeGridPane extends GridPane {
 
 
                 buttons[row][col] = button;
+                buttonList.get(row).add(button);
+
 
                 button.setPrefWidth(45);
                 button.setMinHeight(20);
@@ -114,6 +122,9 @@ public class MikeGridPane extends GridPane {
                 this.add(button, col, row);
 
             }
+
+
+
 
 //            this.getRowConstraints().get(row).setPrefHeight(6);
         }

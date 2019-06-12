@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import main.java.controller.ControllerPostitionsWindow;
+import main.java.model.PriceServer;
 import main.java.positions.view.MikeGridPane;
 
 import java.io.IOException;
@@ -41,9 +42,11 @@ public class MikePositionsWindowCreator {
         buttonTable.getButton(4,1).setStyle("-fx-background-color: grey;-fx-border-color: black; -fx-border-width: 1px");
         buttonTable.getButton(5,1).setStyle("-fx-background-color: blue;-fx-border-color: black; -fx-border-width: 1px");
 //        buttonTable.getButton(5,1).setStyle("-fx-border-color: black; -fx-border-width: 1px;");
+    }
 
-
-
+    public MikePositionsWindowCreator(PriceServer priceServer) throws IOException{
+        this();
+        positionsWindowController.setPriceServer(priceServer);
     }
 
     public Parent getPositionsWindowRoot() {

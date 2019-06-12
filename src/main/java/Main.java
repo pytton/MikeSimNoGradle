@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import main.java.controller.ControllerPostitionsWindow;
 import main.java.controller.ControllerPriceControlPanel;
 import main.java.model.MainLoop;
 import main.java.model.PriceServer;
@@ -28,34 +29,10 @@ private PriceServer priceServer = new PriceServer();
         primaryStage.setX(1200);
         primaryStage.setY(50);
 
-
-
-//
-//        //load the FXML file
-//        FXMLLoader posWindowLoader = new FXMLLoader(getClass().getResource("view/PositionsWindow.fxml"));
-//
-//
-//        Parent positionsWindowRoot = posWindowLoader.load();
-//        //access the controller of the FXML file:
-//        ControllerPostitionsWindow positionsWindowController = (ControllerPostitionsWindow)posWindowLoader.getController();
-//        //set something inside the controller:
-//        positionsWindowController.setAskPriceTextField(145);
-//
-//        MikeGridPane buttonTable = new MikeGridPane();
-//
-//        positionsWindowController.getMainBorderPane().setCenter(buttonTable);
-//
-//        Button button = buttonTable.getButton(3,1);
-//
-//        button.setText("Hello!");
-//        button.setStyle("-fx-background-color: red");
-//
-//        buttonTable.getButton(3,2).setText("");
-
-
         //create Positions Window:
-        MikePositionsWindowCreator posWindow = new MikePositionsWindowCreator();
 
+        MikePositionsWindowCreator posWindow = new MikePositionsWindowCreator(priceServer);
+        ControllerPostitionsWindow posWindowController = posWindow.getPositionsWindowController();
 
         Stage secondStage = new Stage();
         secondStage.setX(0);
@@ -68,7 +45,9 @@ private PriceServer priceServer = new PriceServer();
         primaryStage.show();
 
         MainLoop ct = new MainLoop(posWindow.getPositionsWindowController().getMikeGridPane());
-//        ct.start();
+        ct.setPriceServer(priceServer);
+
+        ct.start();
     }
 
 

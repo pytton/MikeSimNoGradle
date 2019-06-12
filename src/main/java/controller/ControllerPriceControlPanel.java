@@ -46,48 +46,6 @@ public class ControllerPriceControlPanel {
         this.priceServer = priceServer;
     }
 
-
-
-//    @FXML
-//    private void dragDetected() {
-//        System.out.println("dragDetected");
-//    }
-//
-//    @FXML
-//    private void dragDone() {
-//        System.out.println("dragDone");
-//    }
-//
-//    @FXML
-//    private void dragExited() {
-//        System.out.println("Slider dragExited");
-//    }
-//
-//    @FXML
-//    private void dragOver() {
-//        System.out.println("Slider dragOver");
-//    }
-//
-//    @FXML
-//    private void dragDropped() {
-//        System.out.println("Slider dragDropped");
-//    }
-//
-//    @FXML
-//    private void onScroll() {
-//        System.out.println("Slider onScroll");
-//    }
-//
-//    @FXML
-//    private void onScrollFinished() {
-//        System.out.println("Slider onScrollFinished");
-//    }
-//
-//    @FXML
-//    private void onScrollStarted() {
-//        System.out.println("Slider onScrollStarted");
-//    }
-
     @FXML
     /**
      * triggered when user moves the slider
@@ -97,6 +55,11 @@ public class ControllerPriceControlPanel {
         try {
             priceServer.setBidPrice((int)priceSlider.getValue());
             priceServer.setAskPrice((int)(priceSlider.getValue() + 1)); // TODO: 1 is the bid-ask spread, make this changable by user
+
+            //TODO: finish this
+
+            //get bid price from Priceserver and update bid price textfield
+
         } catch (NumberFormatException e) {
             e.printStackTrace();
             System.out.println("Exception in onMouseDragged");

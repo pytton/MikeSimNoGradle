@@ -6,9 +6,19 @@ import main.java.positions.view.MikeGridPane;
 public class MainLoop extends Thread {
 
     MikeGridPane mikeGridPane;
+    PriceServer priceServer;
+
+    public void setPriceServer(PriceServer priceServer) {
+        this.priceServer = priceServer;
+    }
 
     public MainLoop(MikeGridPane mikeGridPane) {
         this.mikeGridPane = mikeGridPane;
+    }
+
+    public MainLoop(MikeGridPane mikeGridPane, PriceServer priceServer) {
+        this.mikeGridPane = mikeGridPane;
+        this.priceServer = priceServer;
     }
 
     public void run()  {
@@ -27,6 +37,9 @@ public class MainLoop extends Thread {
                 e.printStackTrace();
             }
             System.out.println("1 second tick");
+            //TODO: experimenting:
+            int experimental = (int)(Math.random()*100);
+            priceServer.setExperimentalNumber(experimental);
 
         }
     }

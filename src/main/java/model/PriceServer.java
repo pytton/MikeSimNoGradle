@@ -3,23 +3,32 @@ package main.java.model;
 public class PriceServer {
 
     private int bidPrice = 27100;
-    private int askPrice = 27101;
+    private Integer askPrice = 27101;
     private int bidVolume = 10;
     private int askVolume = 10;
 
-    //add timestamp variable
+    private Integer experimentalNumber = 0;
+
+    public Integer getExperimentalNumber() {
+        return experimentalNumber;
+    }
+
+    public void setExperimentalNumber(int experimentalNumber) {
+        this.experimentalNumber = experimentalNumber;
+    }
+//add timestamp variable
 
 
     public int getBidPrice() {
         return bidPrice;
     }
 
-    public void setBidPrice(int bidPrice) {
+    synchronized public void setBidPrice(int bidPrice) {
         this.bidPrice = bidPrice;
         System.out.println("Bid price set to: " + bidPrice);
     }
 
-    public int getAskPrice() {
+    public Integer getAskPrice() {
         return askPrice;
     }
 

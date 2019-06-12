@@ -13,7 +13,7 @@ C++ MikeSimulator here: https://github.com/pytton/MikeSimulator/tree/experiment/
 
 
 #current commit:
-cleaned up comments in code
-changed padding in MikeGridPane
-added JavaFXHacks.md
+Added "Experimental Number" in PriceServer - this is set randomly from Mainloop which runs in a seperate thread.
+
+Changed "Button" in PositionsWindow to "Get Ask Price" - this takes ask price from PriceServer and prints it in a TextField; also gets and prints the "Experimental Number" from PriceServer.
 

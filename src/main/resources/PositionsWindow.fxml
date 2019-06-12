@@ -37,8 +37,8 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="30.0" prefWidth="140.0">
                <children>
-                  <Label prefWidth="70.0" text="Label" />
-                  <TextField prefWidth="70.0" />
+                  <Label prefWidth="70.0" text="experimental" />
+                  <TextField fx:id="experimentalTextField" prefWidth="70.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="30.0" prefWidth="140.0">
@@ -54,7 +54,7 @@
       <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
             <Button mnemonicParsing="false" text="Button" />
-            <Button mnemonicParsing="false" onAction="#buttonClicked" text="Button" />
+            <Button mnemonicParsing="false" onAction="#buttonClicked" text="Get Ask Price" />
          </children>
       </HBox>
    </top>
