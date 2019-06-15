@@ -19,8 +19,15 @@ import com.ib.client.TagValue;
 import com.ib.client.CommissionReport;
 import com.ib.client.UnderComp;
 
-
+/**
+ * Experimental class used to familiarize with IB TWS API
+ */
 public class RealTimeData implements EWrapper {
+
+    // Keep track of the next Order ID
+    private int nextOrderID = 0;
+    // The IB API Client Socket object
+    private EClientSocket client = null;
 
     public static void main (String args[])
     {
@@ -36,12 +43,10 @@ public class RealTimeData implements EWrapper {
         {
             e.printStackTrace ();
         }
+
     } // end main
 
-
-
-    public RealTimeData ()
-    {
+    public void consolePrintRealTimeData(){
         // Create a new EClientSocket object
         client = new EClientSocket (this);
         // Connect to the TWS or IB Gateway application
@@ -81,12 +86,12 @@ public class RealTimeData implements EWrapper {
 
         // At this point our call is done and any market data events
         // will be returned via the tickPrice method
-    } // end RealTimeData
+    }
 
-    // Keep track of the next Order ID
-    private int nextOrderID = 0;
-    // The IB API Client Socket object
-    private EClientSocket client = null;
+    public RealTimeData ()
+    {
+
+    } // end RealTimeData
 
     @Override
     public void tickPrice(int tickerId, int field, double price, int canAutoExecute) {
@@ -224,6 +229,17 @@ public class RealTimeData implements EWrapper {
     @Override
     public void historicalData(int reqId, String date, double open, double high, double low, double close, int volume, int count, double WAP, boolean hasGaps) {
 
+        // Display Historical data
+        try
+        {
+            System.out.println("historicalData: " + reqId + "," + date + "," +
+                    open + "," + high  + "," + low  + "," + close + "," +
+                    volume);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace ();
+        }
     }
 
     @Override
