@@ -1,5 +1,7 @@
 # MikeSimJava
 Trading simulator using TWS API for paper trading. Test bed for custom algos.
+package com.ib.* is needed to connect to Interactive Brokers API.
+
 
 ###TODO:
 
