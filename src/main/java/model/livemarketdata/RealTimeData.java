@@ -22,6 +22,24 @@ import com.ib.client.UnderComp;
 
 public class RealTimeData implements EWrapper {
 
+    public static void main (String args[])
+    {
+        try
+        {
+            // Create an instance
+            // At this time a connection will be made
+            // and the request for market data will happen
+            RealTimeData myData = new RealTimeData();
+            Thread.sleep(3000);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace ();
+        }
+    } // end main
+
+
+
     public RealTimeData ()
     {
         // Create a new EClientSocket object
@@ -35,12 +53,13 @@ public class RealTimeData implements EWrapper {
         {
             while (! (client.isConnected()));
             // Can also try: while (client.NextOrderId <= 0);
+            Thread.sleep(1500);
         }
         catch (Exception e)
         {
         }
 
-        // Create a new contract
+        // Create a new contracte
         Contract contract = new Contract ();
         contract.m_symbol = "EUR";
         contract.m_exchange = "IDEALPRO";
@@ -71,6 +90,18 @@ public class RealTimeData implements EWrapper {
 
     @Override
     public void tickPrice(int tickerId, int field, double price, int canAutoExecute) {
+        try
+        {
+            // Print out the current price.
+            // field will provide the price type:
+            // 1 = bid,  2 = ask, 4 = last
+            // 6 = high, 7 = low, 9 = close
+            System.out.println("tickPrice: " + tickerId + "," + field + "," + price);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace ();
+        }
 
     }
 
@@ -136,7 +167,8 @@ public class RealTimeData implements EWrapper {
 
     @Override
     public void nextValidId(int orderId) {
-
+        // Return the next valid OrderID
+        nextOrderID = orderId;
     }
 
     @Override
@@ -271,12 +303,16 @@ public class RealTimeData implements EWrapper {
 
     @Override
     public void error(String str) {
+        // Print out the error message
+        System.err.println (str);
 
     }
 
     @Override
     public void error(int id, int errorCode, String errorMsg) {
-
+        // Overloaded error event (from IB) with their own error
+        // codes and messages
+        System.err.println ("error: " + id + "," + errorCode + "," + errorMsg);
     }
 
     @Override
