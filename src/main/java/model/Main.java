@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import main.java.controllerandview.positionswindow.controller.ControllerPostitionsWindow;
 import main.java.controllerandview.pricecontrolwindow.controller.ControllerPriceControlPanel;
 import main.java.model.livemarketdata.RealTimeData;
+import main.java.model.livemarketdata.TWSRealTimeData;
 import main.java.model.prices.PriceServer;
 import main.java.controllerandview.positionswindow.view.MikePositionsWindowCreator;
 
@@ -21,10 +22,12 @@ private PriceServer priceServer = new PriceServer();
 
         //TODO: experimenting here:
 
-        RealTimeData data = new RealTimeData();
+        RealTimeData data = new TWSRealTimeData();
+        data.connect();
 
-        data.consolePrintRealTimeData();
+        Thread.sleep(3000);
 
+        System.out.println("EUR Bid price: " + data.getBidPrice());
 
         //create Price Control window:
         FXMLLoader priceControlPanelLoader = new FXMLLoader(getClass().getResource("../../resources/PriceControlPanel.fxml"));
