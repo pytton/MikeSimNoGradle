@@ -33,13 +33,15 @@ public class ControllerPostitionsWindow {
 
     @FXML
     private void buttonClicked(){
+        //TODO: experimenting here:
         System.out.println("Clicked");
-//        experimentalTextField.setText(((Double)(Math.random())).toString());
         String exper = priceServer.getExperimentalNumber().toString();
         experimentalTextField.setText(exper);
-        askPriceTextField.setText(priceServer.getAskPrice().toString());
 
 
+        //display realtime bid ask prices:
+        askPriceTextField.setText(((Double)priceServer.getRealTimeAskPrice()).toString());
+        bidPriceTextField.setText(((Double)priceServer.getRealTimeBidPrice()).toString());
     }
 
 

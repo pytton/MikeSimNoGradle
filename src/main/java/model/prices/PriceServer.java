@@ -1,6 +1,8 @@
 package main.java.model.prices;
 
 
+import main.java.model.livemarketdata.RealTimeData;
+
 /**
  * Provides prices bid/ask volumes for a single instrument.
  * Prices can be one of three: live, manual or historical
@@ -9,12 +11,13 @@ package main.java.model.prices;
  */
 public class PriceServer {
 
+    private RealTimeData realTimeData = null;
 
-
-    private int bidPrice = 27100;
-    private Integer askPrice = 27101;
-    private int bidVolume = 10;
-    private int askVolume = 10;
+    //simulatad manual prices and volumes:
+    private double bidPrice = 27100;
+    private double askPrice = 27101;
+    private double bidVolume = -5;
+    private double askVolume = -5;
 
     private Integer experimentalNumber = 0;
 
@@ -28,37 +31,58 @@ public class PriceServer {
 //add timestamp variable
 
 
-    public int getBidPrice() {
+    public double getBidPrice() {
         return bidPrice;
     }
 
-    synchronized public void setBidPrice(int bidPrice) {
+    synchronized public void setBidPrice(Double bidPrice) {
         this.bidPrice = bidPrice;
         System.out.println("Bid price set to: " + bidPrice);
     }
 
-    public Integer getAskPrice() {
+    public double getAskPrice() {
         return askPrice;
     }
 
-    public void setAskPrice(int askPrice) {
+    public void setAskPrice(Double askPrice) {
         this.askPrice = askPrice;
         System.out.println("Ask price set to: " + askPrice);
     }
 
-    public int getBidVolume() {
+    public double getBidVolume() {
         return bidVolume;
     }
 
-    public void setBidVolume(int bidVolume) {
+    public void setBidVolume(double bidVolume) {
         this.bidVolume = bidVolume;
     }
 
-    public int getAskVolume() {
+    public double getAskVolume() {
         return askVolume;
     }
 
-    public void setAskVolume(int askVolume) {
+    public void setAskVolume(double askVolume) {
         this.askVolume = askVolume;
     }
+
+    //Use below methods to get real market data from outside trading software API:
+
+    public void setRealTimeDataSource(RealTimeData realTimeData) {
+        this.realTimeData = realTimeData;
+    }
+
+    public double getRealTimeBidPrice(){
+        if(!(realTimeData == null)){
+            return realTimeData.getBidPrice();
+        }
+        return -5;
+    }
+
+    public double getRealTimeAskPrice(){
+        if(!(realTimeData == null)){
+            return realTimeData.getAskPrice();
+        }
+        return -5;
+    }
+
 }

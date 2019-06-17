@@ -26,6 +26,10 @@ import com.ib.client.UnderComp;
  */
 public class TWSRealTimeData implements EWrapper, RealTimeData {
 
+    //TODO: TickerID for development experiments set here:
+    private final int defaulTickerID = 4;
+
+
     // Keep track of the next Order ID
     private int nextOrderID = 0;
     // The IB API Client Socket object
@@ -35,6 +39,8 @@ public class TWSRealTimeData implements EWrapper, RealTimeData {
 
     private double bidPrice = -5;
     private double askPrice = -5;
+    private double bidSize = -5;
+    private double askSize = -5;
 
     //RealTimeData interface implementaions:
 
@@ -196,7 +202,7 @@ public class TWSRealTimeData implements EWrapper, RealTimeData {
             // 1 = bid,  2 = ask, 4 = last
             // 6 = high, 7 = low, 9 = close
 
-            if(tickerId == 0){
+            if(tickerId == defaulTickerID){
 
                 if(field ==1) bidPrice = price;
                 if(field ==2) askPrice = price;

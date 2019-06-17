@@ -22,6 +22,10 @@ public class MainLoop extends Thread {
         this.priceServer = priceServer;
     }
 
+    public MainLoop(PriceServer priceServer) {
+        this.priceServer = priceServer;
+    }
+
     public void run()  {
 
         Integer count = 0;

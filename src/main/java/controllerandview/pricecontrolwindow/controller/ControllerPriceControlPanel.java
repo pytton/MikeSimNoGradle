@@ -59,10 +59,11 @@ public class ControllerPriceControlPanel {
      * triggered when user moves the slider
      */
     private void onMouseDragged() {
+        int bidAskSpread = 1;
         //change the bid & ask prices in priceServer:
         try {
-            priceServer.setBidPrice((int)priceSlider.getValue());
-            priceServer.setAskPrice((int)(priceSlider.getValue() + 1)); // TODO: 1 is the bid-ask spread, make this changable by user
+            priceServer.setBidPrice((Double) priceSlider.getValue());
+            priceServer.setAskPrice((Double) (priceSlider.getValue() + bidAskSpread));
 
             //TODO: finish this
 

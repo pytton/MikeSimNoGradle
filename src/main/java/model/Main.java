@@ -13,26 +13,44 @@ import main.java.model.prices.PriceServer;
 import main.java.controllerandview.positionswindow.view.MikePositionsWindowCreator;
 
 public class Main extends Application {
+    //GUI controllers:
+    private ControllerPriceControlPanel priceControlPanel = null;
+    private ControllerPostitionsWindow posWindowController = null;
 
-private PriceServer priceServer = new PriceServer();
 
+    //priceServer handles prices for single instrument:
+    private PriceServer priceServer = new PriceServer();
+
+    //RealTimeData interfaces with outside trading software API for market data and orders:
+    RealTimeData data = null;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
 
+        initializeGUI(primaryStage);
+
         //TODO: experimenting here:
 
-        RealTimeData data = new TWSRealTimeData();
+        data = new TWSRealTimeData();
         data.connect();
+        Thread.sleep(2000);
 
-        Thread.sleep(3000);
-
+        //small test to see if connected to realtime data
         System.out.println("EUR Bid price: " + data.getBidPrice());
 
+        priceServer.setRealTimeDataSource(data);
+
+        MainLoop ct = new MainLoop(priceServer);
+        ct.setPriceServer(priceServer);
+        ct.start();
+
+    }
+
+    public void initializeGUI(Stage primaryStage) throws Exception{
         //create Price Control window:
         FXMLLoader priceControlPanelLoader = new FXMLLoader(getClass().getResource("../../resources/PriceControlPanel.fxml"));
         Parent pricePanelRoot =  priceControlPanelLoader.load(); //FXMLLoader.load(getClass().getResource("view/SceneBuilder/PriceControlPanel.fxml"));
-        ControllerPriceControlPanel priceControlPanel = (ControllerPriceControlPanel) priceControlPanelLoader.getController();
+        priceControlPanel = (ControllerPriceControlPanel) priceControlPanelLoader.getController();
         priceControlPanel.setPriceServer(priceServer);
         primaryStage.setTitle("Price Control");
         primaryStage.setScene(new Scene(pricePanelRoot));
@@ -40,24 +58,15 @@ private PriceServer priceServer = new PriceServer();
         primaryStage.setY(50);
 
         //create Positions Window:
-
         MikePositionsWindowCreator posWindow = new MikePositionsWindowCreator(priceServer);
-        ControllerPostitionsWindow posWindowController = posWindow.getPositionsWindowController();
-
+        posWindowController = posWindow.getPositionsWindowController();
         Stage secondStage = new Stage();
         secondStage.setX(0);
         secondStage.setY(50);
-
         Scene positions1 = new Scene(posWindow.getPositionsWindowRoot());
-
         secondStage.setScene(positions1);
         secondStage.show();
         primaryStage.show();
-
-        MainLoop ct = new MainLoop(posWindow.getPositionsWindowController().getMikeGridPane());
-        ct.setPriceServer(priceServer);
-
-        ct.start();
     }
 
 
