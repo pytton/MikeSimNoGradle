@@ -1,6 +1,15 @@
 package main.java.model.prices;
 
+
+/**
+ * Provides prices bid/ask volumes for a single instrument.
+ * Prices can be one of three: live, manual or historical
+ * One PriceServer per one instrument to be traded.
+ * So one for SPY, another one for DIA etc.
+ */
 public class PriceServer {
+
+
 
     private int bidPrice = 27100;
     private Integer askPrice = 27101;

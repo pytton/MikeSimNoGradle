@@ -6,6 +6,8 @@ package main.java.model.livemarketdata;
 // R. Holowczak
 //http://holowczak.com/ib-api-java-realtime/7/
 
+//https://interactivebrokers.github.io/tws-api/interfaceIBApi_1_1EWrapper.html
+
 
 import java.util.Vector;
 import com.ib.client.Contract;
@@ -54,9 +56,9 @@ public class TWSRealTimeData implements EWrapper, RealTimeData {
     }
 
 
-    public boolean connectToTWS(){
+    private boolean connectToTWS(){
         //check if already connected:
-        if (connectedToTWS == true) {
+        if (connectedToTWS) {
             System.out.println("RealTimeData already connected to TWS!");
             return true;
         }else{
@@ -98,7 +100,7 @@ public class TWSRealTimeData implements EWrapper, RealTimeData {
      * TickerID 3 = QQQ
      * TickerID 4 = EUR (FOREX)
      */
-    public boolean setUpContracts(){
+    private boolean setUpContracts(){
 
         //check if connected to data:
         if(!connectToTWS()) return false;
@@ -117,7 +119,7 @@ public class TWSRealTimeData implements EWrapper, RealTimeData {
             contract.m_secType = "STK";
             contract.m_currency = "USD";
             // Create a TagValue list
-            Vector<TagValue> mktDataOptions = new Vector<TagValue>();
+//            Vector<TagValue> mktDataOptions = new Vector<TagValue>();
             // Make a call to reqMktData to start off data retrieval with parameters:
             // ConID    - Connection Identifier.
             // Contract - The financial instrument we are requesting data on
@@ -176,51 +178,14 @@ public class TWSRealTimeData implements EWrapper, RealTimeData {
     }
 
     public void consolePrintRealTimeData(){
-//        // Create a new EClientSocket object
-//        client = new EClientSocket (this);
-//        // Connect to the TWS or IB Gateway application
-//        // Leave null for localhost
-//        // Port Number (should match TWS/IB Gateway configuration
-//        client.eConnect (null, 7496, 0);
-//        // Pause here for connection to complete
-//        try
-//        {
-//            while (! (client.isConnected()));
-//            // Can also try: while (client.NextOrderId <= 0);
-//            Thread.sleep(1500);
-//        }
-//        catch (Exception e)
-//        {
-//        }
 
-        // Create a new contracte
-        Contract contract = new Contract ();
-        contract.m_symbol = "EUR";
-        contract.m_exchange = "IDEALPRO";
-        contract.m_secType = "CASH";
-        contract.m_currency = "USD";
-        // Create a TagValue list
-        Vector<TagValue> mktDataOptions = new Vector<TagValue>();
-        // Make a call to reqMktData to start off data retrieval with parameters:
-        // ConID    - Connection Identifier.
-        // Contract - The financial instrument we are requesting data on
-        // Ticks    - Any custom tick values we are looking for (null in this case)
-        // Snapshot - false give us streaming data, true gives one data snapshot
-        // MarketDataOptions - tagValue list of additional options (API 9.71 and newer)
-
-        client.reqMktData(0, contract, null, false);
-
-        // For API Version 9.73 and higher, add one more parameter: regulatory snapshot
-//         client.reqMktData(0, contract, null, false, false, mktDataOptions);
-
-        // At this point our call is done and any market data events
-        // will be returned via the tickPrice method
+        if (!connectedToTWS){
+            System.out.println("Not connected to live data!");
+            return;
+        }
+        System.out.println("Bid Price: " + getBidPrice());
+        System.out.println("Ask Price: " + getAskPrice());
     }
-
-//    public TWSRealTimeData()
-//    {
-//
-//    } // end TWSRealTimeData
 
     @Override
     public void tickPrice(int tickerId, int field, double price, int canAutoExecute) {
@@ -230,24 +195,18 @@ public class TWSRealTimeData implements EWrapper, RealTimeData {
             // field will provide the price type:
             // 1 = bid,  2 = ask, 4 = last
             // 6 = high, 7 = low, 9 = close
-            //TODO: comment this out once completed implementing class:
-            System.out.println("tickPrice: " + tickerId + "," + field + "," + price);
 
             if(tickerId == 0){
 
                 if(field ==1) bidPrice = price;
                 if(field ==2) askPrice = price;
             }
-
-
-
         }
         catch (Exception e)
         {
             System.out.println("ERROR IN TWSRealTimeData tickPrice method!");
             e.printStackTrace ();
         }
-
     }
 
     @Override
