@@ -19,13 +19,15 @@ public class Main extends Application {
 
 
     //priceServer handles prices for single instrument:
-    private PriceServer priceServer = new PriceServer();
+    private PriceServer priceServer = null;
 
     //RealTimeData interfaces with outside trading software API for market data and orders:
     RealTimeData data = null;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+
+        priceServer = new PriceServer();
 
         initializeGUI(primaryStage);
 
@@ -34,7 +36,6 @@ public class Main extends Application {
         data = new TWSRealTimeData();
         data.connect();
         Thread.sleep(2000);
-
         //small test to see if connected to realtime data
         System.out.println("EUR Bid price: " + data.getBidPrice());
 

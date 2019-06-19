@@ -45,7 +45,6 @@ public class MainLoop extends Thread {
             //TODO: experimenting:
             int experimental = (int)(Math.random()*100);
             priceServer.setExperimentalNumber(experimental);
-
         }
     }
 }
