@@ -1,0 +1,79 @@
+OK a wiec tak:
+
+calosc projektu tutaj:
+https://github.com/pytton/MikeSimNoGradle
+
+package com.ib.* - to cie nie interesuje. to API z gieldy z ktorym nie mam problemow
+
+W Main.java:
+
+    public void start(Stage primaryStage) throws Exception{
+
+	priceServer = new PriceServer();
+
+        initializeGUI(primaryStage);	//bez problemow
+
+	//to tutaj niewazne
+
+        MainLoop ct = new MainLoop(priceServer);
+        ct.setPriceServer(priceServer);
+        ct.start();
+
+    }
+
+odpalam MainLoop ktory idzie wlasnym watkiem i w petli losowo zmienia jedna zmienna w priceServer:
+
+W MainLoop.java:
+
+    public void run()  {
+
+
+        while (true){
+
+	//to tutaj nieistotne
+[...]
+	Thread.sleep(1000);
+
+            int experimental = (int)(Math.random()*100);
+            priceServer.setExperimentalNumber(experimental);
+        }
+    }
+
+Potem w ControllerPostitionsWindow.java:
+
+    @FXML
+    private void buttonClicked(){
+//nieistotne
+
+
+//TUTAJ CALY PROBLEM:
+        String exper = priceServer.getExperimentalNumber().toString();
+        experimentalTextField.setText(exper);
+
+//to tu ponizej dziala bez problemow
+        //display realtime bid ask prices:
+        askPriceTextField.setText(((Double)priceServer.getRealTimeAskPrice()).toString());
+        bidPriceTextField.setText(((Double)priceServer.getRealTimeBidPrice()).toString());
+    }
+
+
+PROBLEM:
+
+Wszystko dziala fajnie. Tylko zeby wyswietlic biezacy 'experimentalNumber' oraz update'owac te dwa pozostale pola nizej musze nacisnac na przycisk w GUI.
+
+Chodzi o to zeby nie naciskac na przycisk, tylko zeby osobny watek odpowiadal za wywolanie tego:
+
+        String exper = priceServer.getExperimentalNumber().toString();
+        experimentalTextField.setText(exper);
+
+
+I to jest ten moj problem. Bo generalnie backend musi dzialac we wlasnym watku i calkiem mozliwe ze sam jeszcze generowac wlasne dodatkowe watki dla swoich potrzeb. A GUI powinno tak tylko 5 do 10 razy na sekunde wyswietlic dane z backendu i wyslac do backendu komendy od uzytkownika. To w tej chwili glowny problem ze 'szkieletem'.
+
+Oczywiscie to na poczatek bo potem cale GUI bedzie dzialac na podobnej zasadzie. Moze w ten sposob a moze jednak nie? Bo cos gdzies slyszalem o "ObservableArrayList" - wiec moze to co ja mysle to w ogole blad i trzeba to rozwiazac inaczej?
+Wiem ze JavaFX ma ponoc jakies swoje wlasne wyspecjalizowane watki? Tylko ja nie chce tego studiowac i odkrywac przez 2 tygodnie - wolalbym zeby ktos mi pokazal co jest tak naprawde istotne bo specialista od JavaFX to ja nie mam ambicji byc.
+Jak ktos zrobi szkielet to ja potem moge dzialac sam dalej.
+
+
+Ogarniesz to czy ktos z JavaFX bedzie potrzebny?
+
+Pytania dzwon 693618324 - skype nie zawsze dziala. Ja wychodze z domu zalatwiac sprawy - bedziesz mial wiecej pytan daj znac kiedy mniej wiecej chcesz o tym pogadac to przyjade do domu.

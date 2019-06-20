@@ -77,12 +77,14 @@ public class TWSRealTimeData implements EWrapper, RealTimeData {
             // Leave null for localhost
             // Port Number (should match TWS/IB Gateway configuration
             client.eConnect (null, 7496, 0);
-            // Pause here for connection to complete
-                for (int i = 0; i < 10; i++) {
+                int connectionAttempts = 5;
+
+                for (int i = 0; i < connectionAttempts; i++) {
                     if(client.isConnected()) {
                         connectedToTWS = true;
                         return true;
                     }
+                    // Pause here for connection to complete
                     Thread.sleep(1000);
                 }
             }
