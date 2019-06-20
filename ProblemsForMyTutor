@@ -1,7 +1,3 @@
-MainLoop.java line 23:
-//                    button.setText(count.toString());
-
-1. uncomment gives exception - 'not a javaFX thread'
-2. ControllerPriceControlPanel - make constructor, link minSliderValue with Textfield minPriceTextField - possible with a reference?
-3. setMaxPrice in ControllerPriceControlPanel.java
-4. small text in buttons
+1. Check project structure
+2. Radio buttons in PriceControlPanel
+3. "Get Ask Price" - how to do autoupdate?
