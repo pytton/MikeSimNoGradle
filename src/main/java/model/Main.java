@@ -49,7 +49,10 @@ public class Main extends Application {
 
     public void initializeGUI(Stage primaryStage) throws Exception{
         //create Price Control window:
-        FXMLLoader priceControlPanelLoader = new FXMLLoader(getClass().getResource("../../resources/PriceControlPanel.fxml"));
+
+        //../../resources/
+
+        FXMLLoader priceControlPanelLoader = new FXMLLoader(getClass().getResource("/PriceControlPanel.fxml"));
         Parent pricePanelRoot =  priceControlPanelLoader.load(); //FXMLLoader.load(getClass().getResource("view/SceneBuilder/PriceControlPanel.fxml"));
         priceControlPanel = (ControllerPriceControlPanel) priceControlPanelLoader.getController();
         priceControlPanel.setPriceServer(priceServer);

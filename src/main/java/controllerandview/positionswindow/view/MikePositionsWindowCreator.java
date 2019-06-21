@@ -18,7 +18,10 @@ public class MikePositionsWindowCreator {
 
     public MikePositionsWindowCreator() throws IOException {
         //load FXML file
-        posWindowLoader = new FXMLLoader(getClass().getResource("../../../../resources/PositionsWindow.fxml"));
+
+        // ../../../../resources
+
+        posWindowLoader = new FXMLLoader(getClass().getResource("/PositionsWindow.fxml"));
         //this needed by JavaFX Scene constructor:
         positionsWindowRoot = posWindowLoader.load(); //this might throw IOException
         //this is used to access elements of MikePositionsWindowCreator:
