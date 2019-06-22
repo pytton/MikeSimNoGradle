@@ -1150,7 +1150,7 @@ public class EClientSocket {
         			orderComboLeg = order.m_orderComboLegs.get(i);
         			if (orderComboLeg.m_price != Double.MAX_VALUE) {
         			error(id, EClientErrors.UPDATE_TWS,
-        				"  It does not support per-leg prices for order combo legs.");
+        				"  It does not support per-leg priceserver for order combo legs.");
         			return;
         			}
         		}

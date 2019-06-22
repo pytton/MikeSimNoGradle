@@ -3,8 +3,8 @@ package main.java.controllerandview.positionswindow.view;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import main.java.controllerandview.positionswindow.controller.ControllerPostitionsWindow;
-import main.java.model.prices.PriceServer;
+import main.java.controllerandview.positionswindow.controller.ControllerPositionsWindow;
+import main.java.model.priceserver.PriceServer;
 
 import java.io.IOException;
 
@@ -12,7 +12,7 @@ public class MikePositionsWindowCreator {
 
     private FXMLLoader posWindowLoader;// = new FXMLLoader(getClass().getResource("PositionsWindow.fxml"));
     public Parent positionsWindowRoot;
-    public ControllerPostitionsWindow positionsWindowController;
+    public ControllerPositionsWindow positionsWindowController;
     private MikeGridPane buttonTable;
 
 
@@ -25,7 +25,7 @@ public class MikePositionsWindowCreator {
         //this needed by JavaFX Scene constructor:
         positionsWindowRoot = posWindowLoader.load(); //this might throw IOException
         //this is used to access elements of MikePositionsWindowCreator:
-        positionsWindowController = (ControllerPostitionsWindow)posWindowLoader.getController();
+        positionsWindowController = (ControllerPositionsWindow)posWindowLoader.getController();
         //this adds a custom table of buttons to the scene
         buttonTable = new MikeGridPane();
 
@@ -55,7 +55,7 @@ public class MikePositionsWindowCreator {
         return positionsWindowRoot;
     }
 
-    public ControllerPostitionsWindow getPositionsWindowController() {
+    public ControllerPositionsWindow getPositionsWindowController() {
         return positionsWindowController;
     }
 }

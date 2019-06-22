@@ -15,7 +15,7 @@ public class MikeOrder {
     //once order is filled - this tells which position is updated
     long assignedToPosition = 0;
 
-    //the price of the order. prices are in cents.
+    //the price of the order. priceserver are in cents.
     long price = 0;
 
     //the size of the order

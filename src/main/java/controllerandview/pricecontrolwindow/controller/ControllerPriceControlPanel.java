@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import main.java.model.prices.PriceServer;
+import main.java.model.priceserver.PriceServer;
 
 public class ControllerPriceControlPanel {
 
@@ -60,7 +60,7 @@ public class ControllerPriceControlPanel {
      */
     private void onMouseDragged() {
         int bidAskSpread = 1;
-        //change the bid & ask prices in priceServer:
+        //change the bid & ask priceserver in priceServer:
         try {
             priceServer.setBidPrice((Double) priceSlider.getValue());
             priceServer.setAskPrice((Double) (priceSlider.getValue() + bidAskSpread));

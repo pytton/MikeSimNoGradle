@@ -5,20 +5,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import main.java.controllerandview.positionswindow.controller.ControllerPostitionsWindow;
+import main.java.controllerandview.positionswindow.controller.ControllerPositionsWindow;
 import main.java.controllerandview.pricecontrolwindow.controller.ControllerPriceControlPanel;
 import main.java.model.livemarketdata.RealTimeData;
 import main.java.model.livemarketdata.TWSRealTimeData;
-import main.java.model.prices.PriceServer;
+import main.java.model.priceserver.PriceServer;
 import main.java.controllerandview.positionswindow.view.MikePositionsWindowCreator;
 
 public class Main extends Application {
     //GUI controllers:
     private ControllerPriceControlPanel priceControlPanel = null;
-    private ControllerPostitionsWindow posWindowController = null;
+    private ControllerPositionsWindow posWindowController = null;
 
 
-    //priceServer handles prices for single instrument:
+    //priceServer handles priceserver for single instrument:
     private PriceServer priceServer = null;
 
     //RealTimeData interfaces with outside trading software API for market data and orders:
@@ -41,8 +41,13 @@ public class Main extends Application {
 
         priceServer.setRealTimeDataSource(data);
 
-        MainLoop ct = new MainLoop(priceServer);
+        MainLoop ct = new MainLoop(priceServer, posWindowController);
         ct.setPriceServer(priceServer);
+
+        ct.setMikeGridPane(posWindowController.getMikeGridPane());
+
+
+
         ct.start();
 
     }
@@ -73,6 +78,10 @@ public class Main extends Application {
         primaryStage.show();
     }
 
+    @Override
+    public void stop(){
+        MainLoop.interrupted = true;
+    }
 
     public static void main(String[] args) {
         launch(args);

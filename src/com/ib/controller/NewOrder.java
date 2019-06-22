@@ -103,7 +103,7 @@ public class NewOrder {
 
 	// combo orders
 	private final ArrayList<TagValue> m_smartComboRoutingParams = new ArrayList<TagValue>();
-	private final ArrayList<Double> m_orderComboLegs = new ArrayList<Double>(); // array of leg prices
+	private final ArrayList<Double> m_orderComboLegs = new ArrayList<Double>(); // array of leg priceserver
 
 	// processing control
 	private boolean m_whatIf;

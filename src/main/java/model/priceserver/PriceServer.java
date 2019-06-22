@@ -1,10 +1,10 @@
-package main.java.model.prices;
+package main.java.model.priceserver;
 
 
 import main.java.model.livemarketdata.RealTimeData;
 
 /**
- * Provides prices bid/ask volumes for a single instrument.
+ * Provides priceserver bid/ask volumes for a single instrument.
  * Prices can be one of three: live, manual or historical
  * One PriceServer per one instrument to be traded.
  * So one for SPY, another one for DIA etc.
@@ -13,7 +13,7 @@ public class PriceServer {
 
     private RealTimeData realTimeData = null;
 
-    //simulatad manual prices and volumes:
+    //simulatad manual priceserver and volumes:
     private double bidPrice = 27100;
     private double askPrice = 27101;
     private double bidVolume = -5;
