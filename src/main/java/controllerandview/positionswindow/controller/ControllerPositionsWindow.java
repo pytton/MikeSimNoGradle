@@ -52,6 +52,21 @@ public class ControllerPositionsWindow {
         bidPriceTextField.setText(((Double)priceServer.getRealTimeBidPrice()).toString());
     }
 
+    public void updateGUI(){
+
+
+
+        String exper = priceServer.getExperimentalNumber().toString();
+        experimentalTextField.setText(exper);
+
+
+        //display realtime bid ask priceserver:
+        askPriceTextField.setText(((Double)priceServer.getRealTimeAskPrice()).toString());
+        bidPriceTextField.setText(((Double)priceServer.getRealTimeBidPrice()).toString());
+
+        System.out.println("Window updated");
+    }
+
 
     public void setAskPriceTextField(Integer price){
         askPriceTextField.setText(price.toString());

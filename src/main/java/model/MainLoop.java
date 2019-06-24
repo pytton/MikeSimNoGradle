@@ -14,7 +14,7 @@ public class MainLoop extends Thread {
 
     MikeGridPane mikeGridPane;
     PriceServer priceServer;
-    private ControllerPositionsWindow controllerPositionsWindow;
+    ControllerPositionsWindow controllerPositionsWindow;
 
     TimedRunnable myTimedRunnable;
 
@@ -23,14 +23,14 @@ public class MainLoop extends Thread {
         this.priceServer = priceServer;
     }
 
-    public MainLoop(MikeGridPane mikeGridPane) {
-        this.mikeGridPane = mikeGridPane;
-    }
+//    public MainLoop(MikeGridPane mikeGridPane) {
+//        this.mikeGridPane = mikeGridPane;
+//    }
 
-    public MainLoop(MikeGridPane mikeGridPane, PriceServer priceServer) {
-        this.mikeGridPane = mikeGridPane;
-        this.priceServer = priceServer;
-    }
+//    public MainLoop(MikeGridPane mikeGridPane, PriceServer priceServer) {
+//        this.mikeGridPane = mikeGridPane;
+//        this.priceServer = priceServer;
+//    }
 
     public MainLoop(PriceServer priceServer, ControllerPositionsWindow controllerPositionsWindow) {
         this.priceServer = priceServer;
@@ -61,28 +61,35 @@ public class MainLoop extends Thread {
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
-                            controllerPositionsWindow.setSpecificButtonInMikeGridPane(8, 3, "" + count);
-
-                            for (int i = 0; i < 20; i++) {
-                                controllerPositionsWindow.setSpecificButtonInMikeGridPane(i, 0, "" + ((Math.sqrt((count * 79 + count))) * 1) % 567);
-                                controllerPositionsWindow.setSpecificButtonInMikeGridPane(i, 1, "" + count);
-                                controllerPositionsWindow.setSpecificButtonInMikeGridPane(i, 2, "" + Math.sqrt((count * 79 + i + count)) % 7);
-                                controllerPositionsWindow.setSpecificButtonInMikeGridPane(i, 3, "" + Math.sqrt((count * 79 + i + count)) % 56);
-                                controllerPositionsWindow.setSpecificButtonInMikeGridPane(i, 4, "" + Math.sqrt((count * 73 + i + count)) % 74);
-                                controllerPositionsWindow.setSpecificButtonInMikeGridPane(i, 5, "" + Math.sqrt((count * 987 + i + count)) % 34);
-                                controllerPositionsWindow.setSpecificButtonInMikeGridPane(i, 6, "" + Math.sqrt((count * 453 + i + count)) % 9);
-                            }
-                            controllerPositionsWindow.askPriceTextField.setText(((Double) priceServer.getRealTimeAskPrice()).toString());
-                            controllerPositionsWindow.bidPriceTextField.setText(((Double) priceServer.getRealTimeBidPrice()).toString());
-
-
+                            controllerPositionsWindow.updateGUI();
                         }
                     });
+
+//                    Platform.runLater(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            controllerPositionsWindow.setSpecificButtonInMikeGridPane(8, 3, "" + count);
+//
+//                            for (int i = 0; i < 20; i++) {
+//                                controllerPositionsWindow.setSpecificButtonInMikeGridPane(i, 0, "" + ((Math.sqrt((count * 79 + count))) * 1) % 567);
+//                                controllerPositionsWindow.setSpecificButtonInMikeGridPane(i, 1, "" + count);
+//                                controllerPositionsWindow.setSpecificButtonInMikeGridPane(i, 2, "" + Math.sqrt((count * 79 + i + count)) % 7);
+//                                controllerPositionsWindow.setSpecificButtonInMikeGridPane(i, 3, "" + Math.sqrt((count * 79 + i + count)) % 56);
+//                                controllerPositionsWindow.setSpecificButtonInMikeGridPane(i, 4, "" + Math.sqrt((count * 73 + i + count)) % 74);
+//                                controllerPositionsWindow.setSpecificButtonInMikeGridPane(i, 5, "" + Math.sqrt((count * 987 + i + count)) % 34);
+//                                controllerPositionsWindow.setSpecificButtonInMikeGridPane(i, 6, "" + Math.sqrt((count * 453 + i + count)) % 9);
+//                            }
+//                            controllerPositionsWindow.askPriceTextField.setText(((Double) priceServer.getRealTimeAskPrice()).toString());
+//                            controllerPositionsWindow.bidPriceTextField.setText(((Double) priceServer.getRealTimeBidPrice()).toString());
+//
+//
+//                        }
+//                    });
 
                     count++;
 
                 }
-                Thread.sleep(1000);
+                Thread.sleep(200);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
