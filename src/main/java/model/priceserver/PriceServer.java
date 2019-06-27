@@ -11,47 +11,72 @@ import main.java.model.livemarketdata.OutsideTradingSoftwareAPIConnection;
  */
 public class PriceServer {
 
+    public enum PriceType{
+        MANUAL,
+        LIVEMARKET,
+        HISTORICAL
+    }
+
     private OutsideTradingSoftwareAPIConnection outsideTradingSoftwareAPIConnection = null;
 
     //simulatad manual prices and volumes:
-    private double bidPrice = 27100;
-    private double askPrice = 27101;
-    private double bidVolume = -5;
-    private double askVolume = -5;
+    private int bidPrice = 27100;
+    private int askPrice = 27101;
+    private int bidVolume = -5;
+    private int askVolume = -5;
 
-    private Integer experimentalNumber = 0;
+    //livemarket prices and volumes:
+    private int liveBidPrice = 27100;
+    private int liveAskPrice = 27101;
+    private int liveBidVolume = -5;
+    private int liveAskVolume = -5;
+
+    //historical prices and volumes:
+    private int historicalBidPrice = 27100;
+    private int historicalAskPrice = 27101;
+    private int historicalBidVolume = -5;
+    private int historicalAskVolume = -5;
+
+    private PriceType priceType = PriceType.MANUAL;
+
+//    private Integer experimentalNumber = 0;
 
     public double getBidPrice() {
-        return bidPrice;
+        switch (priceType){
+            case MANUAL: return bidPrice;
+            case HISTORICAL: return historicalBidPrice;
+            case LIVEMARKET: return liveBidPrice;
+            default: return bidPrice;
+        }
     }
 
-    synchronized public void setBidPrice(Double bidPrice) {
+    synchronized public void setBidPrice(int bidPrice) {
         this.bidPrice = bidPrice;
-        System.out.println("Bid price set to: " + bidPrice);
+//        System.out.println("Bid price set to: " + bidPrice);
     }
 
     public double getAskPrice() {
         return askPrice;
     }
 
-    public void setAskPrice(Double askPrice) {
+    public void setAskPrice(int askPrice) {
         this.askPrice = askPrice;
-        System.out.println("Ask price set to: " + askPrice);
+//        System.out.println("Ask price set to: " + askPrice);
     }
 
-    public double getBidVolume() {
+    public int getBidVolume() {
         return bidVolume;
     }
 
-    public void setBidVolume(double bidVolume) {
+    public void setBidVolume(int bidVolume) {
         this.bidVolume = bidVolume;
     }
 
-    public double getAskVolume() {
+    public int getAskVolume() {
         return askVolume;
     }
 
-    public void setAskVolume(double askVolume) {
+    public void setAskVolume(int askVolume) {
         this.askVolume = askVolume;
     }
 
@@ -74,11 +99,20 @@ public class PriceServer {
         }
         return -5;
     }
-    public Integer getExperimentalNumber() {
-        return experimentalNumber;
+
+    public PriceType getPriceType() {
+        return priceType;
     }
 
-    public void setExperimentalNumber(int experimentalNumber) {
-        this.experimentalNumber = experimentalNumber;
+    public void setPriceType(PriceType priceType) {
+        this.priceType = priceType;
     }
+
+    //    public Integer getExperimentalNumber() {
+//        return experimentalNumber;
+//    }
+
+//    public void setExperimentalNumber(int experimentalNumber) {
+//        this.experimentalNumber = experimentalNumber;
+//    }
 }

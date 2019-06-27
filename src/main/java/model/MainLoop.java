@@ -57,6 +57,7 @@ public class MainLoop extends Thread {
 //                        myTimedRunnable.setPriceServer(priceServer);
 //                        Platform.runLater(myTimedRunnable);
 //                    }
+                }
 
                     Platform.runLater(new Runnable() {
                         @Override
@@ -88,7 +89,7 @@ public class MainLoop extends Thread {
 
                     count++;
 
-                }
+
                 Thread.sleep(200);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -96,7 +97,7 @@ public class MainLoop extends Thread {
             System.out.println("1 second tick");
             //TODO: experimenting:
             int experimental = (int) (Math.random() * 100);
-            priceServer.setExperimentalNumber(experimental);
+//            priceServer.setExperimentalNumber(experimental);
 //            controllerPositionsWindow.setExperimentalTextField(experimental);
         }
     }

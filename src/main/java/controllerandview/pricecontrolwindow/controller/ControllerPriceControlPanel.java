@@ -1,15 +1,20 @@
 package main.java.controllerandview.pricecontrolwindow.controller;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import main.java.model.priceserver.PriceServer;
 
 public class ControllerPriceControlPanel {
+
+    public PriceServer priceServer;
+    private PriceServer.PriceType priceType = PriceServer.PriceType.MANUAL;
+    private ObservableList<String> instrumentNamesList;
+
 
     @FXML
     public TextField maxPriceTextField;
@@ -21,14 +26,17 @@ public class ControllerPriceControlPanel {
     public TextField bidPriceTextField;
     @FXML
     public TextField askPriceTextField;
-    public PriceServer priceServer;
     public ListView instrumentsList;
+    @FXML
+    public ToggleGroup priceSourceToggleGroup;
+    public RadioButton historicalRadioButton;
+    public RadioButton manualRadioButton;
+    public RadioButton liveRadioButton;
+    public TextField experimentalTextField1;
     @FXML
     private Integer minSliderValue = 27000;
     @FXML
     private Integer maxSliderValue = 27300;
-
-    private ObservableList<String> instrumentNamesList;
 
     @FXML
     public void initialize() {
@@ -45,6 +53,32 @@ public class ControllerPriceControlPanel {
 //        System.out.println(priceSlider.getMax());
 //        System.out.println(priceSlider.getValue());
 //        System.out.println(""+ priceSlider.getValue());
+
+        //assign a listener to the radiobuttons. pressing the radiobutton selects the price source for the priceserver:
+        priceSourceToggleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+                                                                        @Override
+                                                                        public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+                                                                            if(priceSourceToggleGroup.getSelectedToggle() == manualRadioButton){
+                                                                                experimentalTextField1.setText("Manual");
+                                                                                priceServer.setPriceType(PriceServer.PriceType.MANUAL);
+                                                                            }
+                                                                            if(priceSourceToggleGroup.getSelectedToggle() == liveRadioButton){
+                                                                                experimentalTextField1.setText("Live");
+                                                                                priceServer.setPriceType(PriceServer.PriceType.LIVEMARKET);
+                                                                            }
+                                                                            if(priceSourceToggleGroup.getSelectedToggle() == historicalRadioButton){
+                                                                                experimentalTextField1.setText("Live");
+                                                                                priceServer.setPriceType(PriceServer.PriceType.HISTORICAL);
+                                                                            }
+                                                                        }
+                                                                    }
+        );
+
+
+
+
+
+
     }
 
     @FXML
@@ -55,8 +89,8 @@ public class ControllerPriceControlPanel {
         int bidAskSpread = 1;
         //change the bid & ask priceserver in priceServer:
         try {
-            priceServer.setBidPrice((Double) priceSlider.getValue());
-            priceServer.setAskPrice((Double) (priceSlider.getValue() + bidAskSpread));
+            priceServer.setBidPrice((int) priceSlider.getValue());
+            priceServer.setAskPrice((int) (priceSlider.getValue() + bidAskSpread));
 
             //TODO: finish this
 

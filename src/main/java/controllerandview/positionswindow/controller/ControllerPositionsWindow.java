@@ -54,30 +54,12 @@ public class ControllerPositionsWindow {
     //private ObservableList<List<Integer>> pricelist;
 
 
-
-    public void setPriceServer(PriceServer priceServer) {
-        this.priceServer = priceServer;
-    }
-
-    public BorderPane getMainBorderPane() {
-        return mainBorderPane;
-    }
-
-    public MikeGridPane getMikeGridPane(){
-        return mikeGridPane;
-    }
-
-    public void setMikeGridPane(MikeGridPane mikeGridPane) {
-        this.mikeGridPane = mikeGridPane;
-    }
-
-
     @FXML
     private void testThreeButtonClicked(){
         //TODO: experimenting here:
         System.out.println("Clicked");
-        String exper = priceServer.getExperimentalNumber().toString();
-        askVolumeTextField.setText(exper);
+//        String exper = priceServer.getExperimentalNumber().toString();
+//        askVolumeTextField.setText(exper);
 
 
         //display realtime bid ask priceserver:
@@ -91,26 +73,15 @@ public class ControllerPositionsWindow {
 
     public void updateGUI(){
 
-
-
-        String exper = priceServer.getExperimentalNumber().toString();
-        experimentalTextField.setText(exper);
+//        String exper = priceServer.getExperimentalNumber().toString();
+//        experimentalTextField.setText(exper);
 
 
         //display realtime bid ask priceserver:
-        askPriceTextField.setText(((Double)priceServer.getRealTimeAskPrice()).toString());
-        bidPriceTextField.setText(((Double)priceServer.getRealTimeBidPrice()).toString());
+        askPriceTextField.setText("" + (int)priceServer.getAskPrice());
+        bidPriceTextField.setText("" + (int)priceServer.getBidPrice());
 
         System.out.println("Window updated");
-    }
-
-
-    public void setAskPriceTextField(Integer price){
-        askPriceTextField.setText(price.toString());
-    }
-
-    public void setExperimentalTextField(int num) {
-        experimentalTextField.setText("" + num);
     }
 
     public void setSpecificButtonInMikeGridPane(int row, int col, String text) {
@@ -139,4 +110,29 @@ public class ControllerPositionsWindow {
 
     public void sellStopButtonClicked(ActionEvent actionEvent) {
     }
+
+    public void setPriceServer(PriceServer priceServer) {
+        this.priceServer = priceServer;
+    }
+
+    public BorderPane getMainBorderPane() {
+        return mainBorderPane;
+    }
+
+    public MikeGridPane getMikeGridPane(){
+        return mikeGridPane;
+    }
+
+    public void setMikeGridPane(MikeGridPane mikeGridPane) {
+        this.mikeGridPane = mikeGridPane;
+    }
+
+    public void setAskPriceTextField(Integer price){
+        askPriceTextField.setText(price.toString());
+    }
+
+    public void setExperimentalTextField(int num) {
+        experimentalTextField.setText("" + num);
+    }
+
 }

@@ -81,13 +81,13 @@
                   <VBox alignment="CENTER_LEFT" prefHeight="68.0" prefWidth="150.0" spacing="3.0">
                      <children>
                         <Label fx:id="priceSourceLabel" text="Current Price source:" />
-                        <RadioButton mnemonicParsing="false" text="Historical">
+                        <RadioButton fx:id="historicalRadioButton" mnemonicParsing="false" text="Historical">
                            <toggleGroup>
-                              <ToggleGroup fx:id="priceSource" />
+                              <ToggleGroup fx:id="priceSourceToggleGroup" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton mnemonicParsing="false" text="Manual" toggleGroup="$priceSource" />
-                        <RadioButton mnemonicParsing="false" text="Live" toggleGroup="$priceSource" />
+                        <RadioButton fx:id="manualRadioButton" mnemonicParsing="false" selected="true" text="Manual" toggleGroup="$priceSourceToggleGroup" />
+                        <RadioButton fx:id="liveRadioButton" mnemonicParsing="false" text="Live" toggleGroup="$priceSourceToggleGroup" />
                      </children>
                   </VBox>
                   <HBox alignment="CENTER" prefHeight="30.0" prefWidth="140.0">

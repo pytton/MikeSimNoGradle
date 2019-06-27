@@ -14,11 +14,11 @@ import main.java.controllerandview.positionswindow.view.MikePositionsWindowCreat
 
 public class Main extends Application {
     //GUI controllers:
-    private ControllerPriceControlPanel priceControlPanel = null;
-    private ControllerPositionsWindow posWindowController = null;
+    private ControllerPriceControlPanel priceControlPanel;
+    private ControllerPositionsWindow posWindowController;
 
     //priceServer handles priceserver for single instrument:
-    private PriceServer priceServer = null;
+    private PriceServer priceServer;
 
     //OutsideTradingSoftwareAPIConnection interfaces with outside trading software API for market data and orders:
     OutsideTradingSoftwareAPIConnection data = null;
@@ -37,7 +37,7 @@ public class Main extends Application {
         //set up connection to outside trading software for market data, orders, etc:
         data = new InteractiveBrokersAPI();
 //        data.connect();
-//        Thread.sleep(2000);
+        Thread.sleep(1000);
         //small test to see if connected to realtime data
 //        System.out.println("EUR Bid price: " + data.getBidPrice());
 
@@ -46,9 +46,9 @@ public class Main extends Application {
 
 
         //start the main loop:
-        MainLoop ct = new MainLoop(priceServer, posWindowController);
-        ct.setPriceServer(priceServer);
-        ct.start();
+        MainLoop mainLoop = new MainLoop(priceServer, posWindowController);
+        mainLoop.setPriceServer(priceServer);
+        mainLoop.start();
 
     }
 
