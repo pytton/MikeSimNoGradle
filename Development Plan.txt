@@ -1,0 +1,7 @@
+In PositionsWindow:
+    create simple order entry pane in PositionsWindow:
+    buttons: buylmt, selllmt, buy stop, sell stop
+    textareas: order size, order price
+
+    another pane: buttons: Cancel all orders, Clear all positions, Print all orders, Print all positions
+

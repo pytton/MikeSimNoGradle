@@ -7,8 +7,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import main.java.controllerandview.positionswindow.controller.ControllerPositionsWindow;
 import main.java.controllerandview.pricecontrolwindow.controller.ControllerPriceControlPanel;
-import main.java.model.livemarketdata.RealTimeData;
-import main.java.model.livemarketdata.TWSRealTimeData;
+import main.java.model.livemarketdata.InteractiveBrokersAPI;
+import main.java.model.livemarketdata.OutsideTradingSoftwareAPIConnection;
 import main.java.model.priceserver.PriceServer;
 import main.java.controllerandview.positionswindow.view.MikePositionsWindowCreator;
 
@@ -17,63 +17,72 @@ public class Main extends Application {
     private ControllerPriceControlPanel priceControlPanel = null;
     private ControllerPositionsWindow posWindowController = null;
 
-
     //priceServer handles priceserver for single instrument:
     private PriceServer priceServer = null;
 
-    //RealTimeData interfaces with outside trading software API for market data and orders:
-    RealTimeData data = null;
+    //OutsideTradingSoftwareAPIConnection interfaces with outside trading software API for market data and orders:
+    OutsideTradingSoftwareAPIConnection data = null;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
 
+        //provides prices for the program:
         priceServer = new PriceServer();
 
+        //set up initial display:
         initializeGUI(primaryStage);
 
         //TODO: experimenting here:
 
-        data = new TWSRealTimeData();
-        data.connect();
-        Thread.sleep(2000);
+        //set up connection to outside trading software for market data, orders, etc:
+        data = new InteractiveBrokersAPI();
+//        data.connect();
+//        Thread.sleep(2000);
         //small test to see if connected to realtime data
-        System.out.println("EUR Bid price: " + data.getBidPrice());
+//        System.out.println("EUR Bid price: " + data.getBidPrice());
 
+        //let priceserver know about real time market data:
         priceServer.setRealTimeDataSource(data);
 
+
+        //start the main loop:
         MainLoop ct = new MainLoop(priceServer, posWindowController);
         ct.setPriceServer(priceServer);
-
-        ct.setMikeGridPane(posWindowController.getMikeGridPane());
-
-
-
         ct.start();
 
     }
 
     public void initializeGUI(Stage primaryStage) throws Exception{
         //create Price Control window:
-
-        //../../resources/
-
         FXMLLoader priceControlPanelLoader = new FXMLLoader(getClass().getResource("/PriceControlPanel.fxml"));
         Parent pricePanelRoot =  priceControlPanelLoader.load(); //FXMLLoader.load(getClass().getResource("view/SceneBuilder/PriceControlPanel.fxml"));
+
+        //get the controller class:
         priceControlPanel = (ControllerPriceControlPanel) priceControlPanelLoader.getController();
         priceControlPanel.setPriceServer(priceServer);
+
+        //create the window:
         primaryStage.setTitle("Price Control");
         primaryStage.setScene(new Scene(pricePanelRoot));
-        primaryStage.setX(1200);
-        primaryStage.setY(50);
+        primaryStage.setX(850);
+        primaryStage.setY(0);
 
         //create Positions Window:
+        //we need to add custom MikeGridPane not defined in FXML:
         MikePositionsWindowCreator posWindow = new MikePositionsWindowCreator(priceServer);
         posWindowController = posWindow.getPositionsWindowController();
+
+        //create the window:
         Stage secondStage = new Stage();
         secondStage.setX(0);
-        secondStage.setY(50);
-        Scene positions1 = new Scene(posWindow.getPositionsWindowRoot());
-        secondStage.setScene(positions1);
+        secondStage.setY(0);
+//        Scene positions1 = ;
+        secondStage.setScene(new Scene(posWindow.getPositionsWindowRoot()));
+
+//        Scene positions1 = new Scene(posWindow.getPositionsWindowRoot());
+//        secondStage.setScene(positions1);
+
+        //display the windows:
         secondStage.show();
         primaryStage.show();
     }

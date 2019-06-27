@@ -1,6 +1,6 @@
 package main.java.model.livemarketdata;
 
-// TWSRealTimeData.java
+// InteractiveBrokersAPI.java
 // Version 1.0
 // 20141028
 // R. Holowczak
@@ -9,7 +9,6 @@ package main.java.model.livemarketdata;
 //https://interactivebrokers.github.io/tws-api/interfaceIBApi_1_1EWrapper.html
 
 
-import java.util.Vector;
 import com.ib.client.Contract;
 import com.ib.client.ContractDetails;
 import com.ib.client.EClientSocket;
@@ -17,14 +16,13 @@ import com.ib.client.EWrapper;
 import com.ib.client.Execution;
 import com.ib.client.Order;
 import com.ib.client.OrderState;
-import com.ib.client.TagValue;
 import com.ib.client.CommissionReport;
 import com.ib.client.UnderComp;
 
 /**
  * Experimental class used to familiarize with IB TWS API
  */
-public class TWSRealTimeData implements EWrapper, RealTimeData {
+public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAPIConnection {
 
     //TODO: TickerID for development experiments set here:
     private final int defaulTickerID = 4;
@@ -42,7 +40,7 @@ public class TWSRealTimeData implements EWrapper, RealTimeData {
     private double bidSize = -5;
     private double askSize = -5;
 
-    //RealTimeData interface implementaions:
+    //OutsideTradingSoftwareAPIConnection interface implementaions:
 
     @Override
     public double getBidPrice() {
@@ -65,7 +63,7 @@ public class TWSRealTimeData implements EWrapper, RealTimeData {
     private boolean connectToTWS(){
         //check if already connected:
         if (connectedToTWS) {
-            System.out.println("RealTimeData already connected to TWS!");
+            System.out.println("OutsideTradingSoftwareAPIConnection already connected to TWS!");
             return true;
         }else{
             // Create a new EClientSocket object
@@ -212,7 +210,7 @@ public class TWSRealTimeData implements EWrapper, RealTimeData {
         }
         catch (Exception e)
         {
-            System.out.println("ERROR IN TWSRealTimeData tickPrice method!");
+            System.out.println("ERROR IN InteractiveBrokersAPI tickPrice method!");
             e.printStackTrace ();
         }
     }
@@ -442,4 +440,9 @@ public class TWSRealTimeData implements EWrapper, RealTimeData {
     public void connectionClosed() {
 
     }
+}
+
+
+class InteractiveBrokersAPITestDrive{
+
 }

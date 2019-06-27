@@ -1,7 +1,7 @@
 package main.java.model.priceserver;
 
 
-import main.java.model.livemarketdata.RealTimeData;
+import main.java.model.livemarketdata.OutsideTradingSoftwareAPIConnection;
 
 /**
  * Provides priceserver bid/ask volumes for a single instrument.
@@ -11,25 +11,15 @@ import main.java.model.livemarketdata.RealTimeData;
  */
 public class PriceServer {
 
-    private RealTimeData realTimeData = null;
+    private OutsideTradingSoftwareAPIConnection outsideTradingSoftwareAPIConnection = null;
 
-    //simulatad manual priceserver and volumes:
+    //simulatad manual prices and volumes:
     private double bidPrice = 27100;
     private double askPrice = 27101;
     private double bidVolume = -5;
     private double askVolume = -5;
 
     private Integer experimentalNumber = 0;
-
-    public Integer getExperimentalNumber() {
-        return experimentalNumber;
-    }
-
-    public void setExperimentalNumber(int experimentalNumber) {
-        this.experimentalNumber = experimentalNumber;
-    }
-//add timestamp variable
-
 
     public double getBidPrice() {
         return bidPrice;
@@ -67,22 +57,28 @@ public class PriceServer {
 
     //Use below methods to get real market data from outside trading software API:
 
-    public void setRealTimeDataSource(RealTimeData realTimeData) {
-        this.realTimeData = realTimeData;
+    public void setRealTimeDataSource(OutsideTradingSoftwareAPIConnection outsideTradingSoftwareAPIConnection) {
+        this.outsideTradingSoftwareAPIConnection = outsideTradingSoftwareAPIConnection;
     }
 
     public double getRealTimeBidPrice(){
-        if(!(realTimeData == null)){
-            return realTimeData.getBidPrice();
+        if(!(outsideTradingSoftwareAPIConnection == null)){
+            return outsideTradingSoftwareAPIConnection.getBidPrice();
         }
         return -5;
     }
 
     public double getRealTimeAskPrice(){
-        if(!(realTimeData == null)){
-            return realTimeData.getAskPrice();
+        if(!(outsideTradingSoftwareAPIConnection == null)){
+            return outsideTradingSoftwareAPIConnection.getAskPrice();
         }
         return -5;
     }
+    public Integer getExperimentalNumber() {
+        return experimentalNumber;
+    }
 
+    public void setExperimentalNumber(int experimentalNumber) {
+        this.experimentalNumber = experimentalNumber;
+    }
 }

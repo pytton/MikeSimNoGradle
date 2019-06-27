@@ -2,7 +2,7 @@ package main.java.model.orderserver;
 
 public class OrderServer {
 
-    private int mikeSimmOrderNumber = 0;
+    private int mikeSimOrderNumber = 0;
 
     /**
      * Use this to place a new order.
@@ -10,7 +10,7 @@ public class OrderServer {
      */
     public int newOrder(){
 
-        return mikeSimmOrderNumber++;
+        return mikeSimOrderNumber++;
     }
 
     private boolean addOrderToQueue(){

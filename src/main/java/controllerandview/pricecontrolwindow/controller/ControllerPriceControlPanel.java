@@ -2,6 +2,7 @@ package main.java.controllerandview.pricecontrolwindow.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
@@ -44,14 +45,6 @@ public class ControllerPriceControlPanel {
 //        System.out.println(priceSlider.getMax());
 //        System.out.println(priceSlider.getValue());
 //        System.out.println(""+ priceSlider.getValue());
-    }
-
-    public PriceServer getPriceServer() {
-        return priceServer;
-    }
-
-    public void setPriceServer(PriceServer priceServer) {
-        this.priceServer = priceServer;
     }
 
     @FXML
@@ -114,5 +107,18 @@ public class ControllerPriceControlPanel {
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
+    }
+
+    public void connectRealTimeData(ActionEvent actionEvent) {
+        //TODO:
+        //connect to real-time data
+    }
+
+    public PriceServer getPriceServer() {
+        return priceServer;
+    }
+
+    public void setPriceServer(PriceServer priceServer) {
+        this.priceServer = priceServer;
     }
 }

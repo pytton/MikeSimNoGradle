@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -11,7 +16,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="mainBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllerandview.positionswindow.controller.ControllerPositionsWindow">
+<BorderPane fx:id="mainBorderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pickOnBounds="false" prefHeight="1000.0" prefWidth="850.0" scaleShape="false" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllerandview.positionswindow.controller.ControllerPositionsWindow">
    <center>
       <!--<TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">-->
         <!--<columns>-->
@@ -24,56 +29,130 @@
       <!--</TableView>-->
    </center>
    <right>
-      <VBox prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" fillWidth="false" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="140.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
                <children>
-                  <Label prefWidth="70.0" text="Ask Price" />
-                  <TextField fx:id="askPriceTextField" prefWidth="70.0" />
+                  <Label prefHeight="50.0" prefWidth="100.0" text="Ask Price" />
+                  <TextField fx:id="askPriceTextField" prefWidth="90.0" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="140.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
                <children>
-                  <Label prefWidth="70.0" text="Bid Price" />
-                  <TextField fx:id="bidPriceTextField" prefWidth="70.0" />
+                  <Label prefHeight="50.0" prefWidth="100.0" text="Bid Price" />
+                  <TextField fx:id="bidPriceTextField" prefWidth="90.0" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="140.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
                <children>
-                  <Label prefWidth="70.0" text="Ask Volume" />
-                  <TextField fx:id="askVolumeTextField" prefWidth="70.0" />
+                  <Label prefHeight="50.0" prefWidth="100.0" text="Ask Volume" />
+                  <TextField fx:id="askVolumeTextField" prefWidth="90.0" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="140.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
                <children>
-                  <Label prefWidth="70.0" text="Bid Volume" />
-                  <TextField fx:id="bidVolumeTextField" prefWidth="70.0" />
+                  <Label prefHeight="50.0" prefWidth="100.0" text="Bid Volume" />
+                  <TextField fx:id="bidVolumeTextField" prefWidth="90.0" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="140.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
                <children>
-                  <Label prefWidth="70.0" text="experimental" />
-                  <TextField fx:id="experimentalTextField" prefWidth="70.0" />
+                  <Label prefHeight="50.0" prefWidth="100.0" text="Total Open Pos" />
+                  <TextField fx:id="totalOpenPosTextField" prefWidth="90.0" />
                </children>
             </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="50.0" prefWidth="100.0" text="Weighed Avg Price">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="weighedAveragePriceTextField" prefWidth="90.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="50.0" prefWidth="100.0" text="Zero Profit Point">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="zeroProfitPoint" prefWidth="90.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="50.0" prefWidth="100.0" text="Total Profit/Loss" />
+                  <TextField fx:id="totalPLTextField" prefWidth="90.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="50.0" prefWidth="100.0" text="Total Open P/L" />
+                  <TextField fx:id="totalOpenPLTextField" prefWidth="90.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="50.0" prefWidth="100.0" text="Total Closed P/L" />
+                  <TextField fx:id="totalClosedPLTextField" prefWidth="90.0" />
+               </children>
+            </HBox>
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="150.0" text="Cancel All Orders" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="150.0" text="Clear All Positions" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="150.0" text="Print All Orders" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="150.0" text="Print All Positions" />
+            <VBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
+                     <children>
+                        <Label prefHeight="50.0" prefWidth="100.0" text="Order Size" />
+                        <TextField fx:id="orderSizeTextField" prefWidth="90.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
+                     <children>
+                        <Label prefHeight="50.0" prefWidth="100.0" text="Order Price" />
+                        <TextField fx:id="orderPriceTextField" prefWidth="90.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="buyLimitButton" mnemonicParsing="false" onAction="#buyLimitButtonClicked" prefWidth="100.0" text="Buy Limit" />
+                        <Button fx:id="sellLimitButton" mnemonicParsing="false" onAction="#sellLimitButtonClicked" prefWidth="100.0" text="Sell Limit" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="buyStopButton" mnemonicParsing="false" onAction="#buyStopButtonClicked" prefWidth="100.0" text="Buy Stop" />
+                        <Button fx:id="sellStopButton" mnemonicParsing="false" onAction="#sellStopButtonClicked" prefWidth="100.0" text="Sell Stop" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
          </children>
       </VBox>
    </right>
    <top>
       <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" text="Button" />
-            <Button mnemonicParsing="false" onAction="#buttonClicked" text="Get Ask Price" />
+            <Button fx:id="testOneButton" mnemonicParsing="false" onAction="#testOneButtonClicked" text="Test One" />
+            <Button fx:id="testTwoButton" mnemonicParsing="false" onAction="#testTwoButtonClicked" text="Test Two" />
+            <Button mnemonicParsing="false" onAction="#testThreeButtonClicked" text="Test Three" />
+            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="displayedPriceTextField" prefWidth="90.0" />
+                  <Button mnemonicParsing="false" text="Set Displayed Price">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
          </children>
       </HBox>
    </top>
-   <left>
-      <Pane prefHeight="200.0" prefWidth="100.0">
-         <children>
-            <Canvas height="651.0" width="101.0" />
-         </children>
-      </Pane>
-   </left>
    <bottom>
       <ScrollPane prefHeight="150.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
          <content>
@@ -81,4 +160,7 @@
          </content>
       </ScrollPane>
    </bottom>
+   <center>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
 </BorderPane>
