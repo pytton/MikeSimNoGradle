@@ -1,6 +1,9 @@
 package main.java.model.positionsorders;
 
 public class MikeOrder {
+    //orderID used inside MikeSimulator
+    long orderId;
+
     enum MikeOrderType{
         BUYLMT,
         SELLLMT,
@@ -12,7 +15,7 @@ public class MikeOrder {
 
     //this stores which position the order is assigned to
     //there can be multiple orders for one price
-    //once order is filled - this tells which position is updated
+    //once order is filled - this tells which position is updateed
     long assignedToPosition = 0;
 
     //the price of the order. priceserver are in cents.
@@ -20,9 +23,6 @@ public class MikeOrder {
 
     //the size of the order
     long amount = 0;
-
-    //for future use - for passing orders into outside API
-    long orderId;
 
     //for checking fills - has the order been filled already?
     boolean isFilled = false;

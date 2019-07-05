@@ -1,7 +1,28 @@
 In PositionsWindow:
-    create simple order entry pane in PositionsWindow:
+    create simple order entry pane in PositionsWindow: DONE
     buttons: buylmt, selllmt, buy stop, sell stop
     textareas: order size, order price
 
-    another pane: buttons: Cancel all orders, Clear all positions, Print all orders, Print all positions
+    another pane: buttons: Cancel all orders, Clear all positions, Print all orders, Print all positions DONE
 
+In MikePosOrders:
+    think through order placement and checking fills
+//In mikePosOrders:
+//set of activeOrders
+//set of ordersToProcess
+//set of processedOrders
+
+//In orderServer:
+//map of (orderID, activeOrders)
+//map of (orderID, filledOrders)
+//set of cancelledOrders
+
+ORDER PROCESS:
+1. call newOrder() in MikePosOrders
+2. neworder() calls addOrder() in orderServer
+3. orderServer creates new order and adds it to its activeOrders set
+4. orderServer assigns unique orderID to the order and returns the orderID to mikePosOrders
+5. mikePosOrders adds the order to its activeOrders set
+
+CHECKING FOR FILLS:
+1. checkfills called in orderServer
