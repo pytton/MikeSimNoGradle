@@ -81,7 +81,7 @@ public class ControllerPositionsWindow {
         askPriceTextField.setText("" + (int)priceServer.getAskPrice());
         bidPriceTextField.setText("" + (int)priceServer.getBidPrice());
 
-        System.out.println("Window updated");
+//        System.out.println("Window updated");
     }
 
     public void setSpecificButtonInMikeGridPane(int row, int col, String text) {

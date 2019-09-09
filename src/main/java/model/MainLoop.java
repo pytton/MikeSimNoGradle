@@ -1,138 +1,69 @@
 package main.java.model;
 
 import javafx.application.Platform;
-import javafx.scene.control.Button;
 import main.java.controllerandview.MainGUIController;
-import main.java.controllerandview.positionswindow.controller.ControllerPositionsWindow;
 import main.java.model.priceserver.PriceServer;
 import main.java.controllerandview.positionswindow.view.MikeGridPane;
 
 public class MainLoop extends Thread {
 
+    private long count = 0;
+    public static boolean interrupted;
+    int refreshInMiliseconds = 100;
+    MikeGridPane mikeGridPane;
+    MainGUIController mainGUIController;
+    GUIUpdateDispatcher myGUIUpdateDispatcher;
+
     public void setMikeGridPane(MikeGridPane mikeGridPane) {
         this.mikeGridPane = mikeGridPane;
     }
 
-    MikeGridPane mikeGridPane;
-    PriceServer priceServer;
-    ControllerPositionsWindow controllerPositionsWindow;
-    MainGUIController mainGUIController;
-
-    TimedRunnable myTimedRunnable;
-
-
-    public void setPriceServer(PriceServer priceServer) {
-        this.priceServer = priceServer;
-    }
-
-//    public MainLoop(MikeGridPane mikeGridPane) {
-//        this.mikeGridPane = mikeGridPane;
-//    }
-
-//    public MainLoop(MikeGridPane mikeGridPane, PriceServer priceServer) {
-//        this.mikeGridPane = mikeGridPane;
-//        this.priceServer = priceServer;
-//    }
-
-    public MainLoop(PriceServer priceServer, ControllerPositionsWindow controllerPositionsWindow) {
-        this.priceServer = priceServer;
-        this.controllerPositionsWindow = controllerPositionsWindow;
-    }
-
-    public MainLoop(PriceServer priceServer, MainGUIController mainGUIController){
-        this.priceServer = priceServer;
+    public MainLoop(MainGUIController mainGUIController){
         this.mainGUIController = mainGUIController;
     }
-
-
-    private Integer count = 0;
-    public static boolean interrupted;
-
+    @Override
     public void run() {
 
-        myTimedRunnable = new TimedRunnable();
-        myTimedRunnable.setMainGUIController(mainGUIController);
-
-        int refreshInMiliseconds = 500;
-
+        myGUIUpdateDispatcher = new GUIUpdateDispatcher();
+        myGUIUpdateDispatcher.setMainGUIController(mainGUIController);
 
         while (!interrupted) {
             try {
-                if (mikeGridPane != null) {
-
-                    Button button = mikeGridPane.getButton(8, 3);
-                    button.setText(count.toString());
-
-//                    if(myTimedRunnable.isReady()){
-//                        myTimedRunnable.setControllerPositionsWindow(controllerPositionsWindow);
-//                        myTimedRunnable.setPriceServer(priceServer);
-//                        Platform.runLater(myTimedRunnable);
-//                    }
-                }
-
-                if(myTimedRunnable.isReady()){
-                Platform.runLater(myTimedRunnable);}
+                if(myGUIUpdateDispatcher.isReady()){
+                Platform.runLater(myGUIUpdateDispatcher);}
                 else {
-                    System.out.println("myTimedRunnable not ready");
-
+                    System.out.println("myGUIUpdateDispatcher not ready");
                 }
 
-
-//                    Platform.runLater(new Runnable() {
-//                        @Override
-//                        public void run() {
-//
-////                            controllerPositionsWindow.updateGUI();
-//
-//                            mainGUIController.updateGUI(MainLoop.this);
-//                        }
-//                    });
-
-//                    Platform.runLater(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            controllerPositionsWindow.setSpecificButtonInMikeGridPane(8, 3, "" + count);
-//
-//                            for (int i = 0; i < 20; i++) {
-//                                controllerPositionsWindow.setSpecificButtonInMikeGridPane(i, 0, "" + ((Math.sqrt((count * 79 + count))) * 1) % 567);
-//                                controllerPositionsWindow.setSpecificButtonInMikeGridPane(i, 1, "" + count);
-//                                controllerPositionsWindow.setSpecificButtonInMikeGridPane(i, 2, "" + Math.sqrt((count * 79 + i + count)) % 7);
-//                                controllerPositionsWindow.setSpecificButtonInMikeGridPane(i, 3, "" + Math.sqrt((count * 79 + i + count)) % 56);
-//                                controllerPositionsWindow.setSpecificButtonInMikeGridPane(i, 4, "" + Math.sqrt((count * 73 + i + count)) % 74);
-//                                controllerPositionsWindow.setSpecificButtonInMikeGridPane(i, 5, "" + Math.sqrt((count * 987 + i + count)) % 34);
-//                                controllerPositionsWindow.setSpecificButtonInMikeGridPane(i, 6, "" + Math.sqrt((count * 453 + i + count)) % 9);
-//                            }
-//                            controllerPositionsWindow.askPriceTextField.setText(((Double) priceServer.getRealTimeAskPrice()).toString());
-//                            controllerPositionsWindow.bidPriceTextField.setText(((Double) priceServer.getRealTimeBidPrice()).toString());
-//
-//
-//                        }
-//                    });
-
-                System.out.println("Mainloop count: " + count);
-                    count++;
-
-
-
+                if (count%10 == 0) System.out.println("Mainloop count: " + count);
+                count++;
                 Thread.sleep(refreshInMiliseconds);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.println("" + refreshInMiliseconds + " milisecond tick");
-            //TODO: experimenting:
-            int experimental = (int) (Math.random() * 100);
-//            priceServer.setExperimentalNumber(experimental);
-//            controllerPositionsWindow.setExperimentalTextField(experimental);
         }
     }
 
+    private class GUIUpdateDispatcher implements Runnable {
 
-    private class GUIUpdater implements Runnable{
+        MainGUIController mainGUIController;
+        boolean isReady = true;
+        long count = 0;
 
+        public void setMainGUIController(MainGUIController mainGUIController) {
+            this.mainGUIController = mainGUIController;
+        }
 
         @Override
         public void run() {
+            isReady = false;
+            mainGUIController.updateGUI();
+            count++;
+            isReady = true;
+        }
 
+        public boolean isReady() {
+            return isReady;
         }
     }
 }

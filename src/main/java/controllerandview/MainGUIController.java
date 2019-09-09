@@ -13,24 +13,23 @@ import main.java.model.priceserver.PriceServer;
 public class MainGUIController {
     private ControllerPriceControlPanel priceControlPanel;
     private ControllerPositionsWindow posWindowController;
-
+    private long count =0;
 
     //called by Mainloop. Updates all GUI windows
     public void updateGUI(){
         if (posWindowController != null) posWindowController.updateGUI();
+//        for (int i = 0; i < 20; i++) {
+//            posWindowController.setSpecificButtonInMikeGridPane(i, 0, "" + ((Math.sqrt((count * 79 + count))) * 1) % 567);
+//            posWindowController.setSpecificButtonInMikeGridPane(i, 1, "" + count);
+//            posWindowController.setSpecificButtonInMikeGridPane(i, 2, "" + Math.sqrt((count * 79 + i + count)) % 7);
+//            posWindowController.setSpecificButtonInMikeGridPane(i, 3, "" + Math.sqrt((count * 79 + i + count)) % 56);
+//            posWindowController.setSpecificButtonInMikeGridPane(i, 4, "" + Math.sqrt((count * 73 + i + count)) % 74);
+//            posWindowController.setSpecificButtonInMikeGridPane(i, 5, "" + Math.sqrt((count * 987 + i + count)) % 34);
+//            posWindowController.setSpecificButtonInMikeGridPane(i, 6, "" + Math.sqrt((count * 453 + i + count)) % 9);
+//        }
+        count++;
     }
-    public void updateGUI(MainLoop mainLoop){
-        updateGUI();
-        System.out.println("Gui updated");
-    }
 
-
-
-
-
-    public ControllerPositionsWindow getPosWindowController() {
-        return posWindowController;
-    }
 
     public void initializeGUI(Stage primaryStage, PriceServer priceServer) throws Exception{
         //create Price Control window:
@@ -66,7 +65,4 @@ public class MainGUIController {
         secondStage.show();
         primaryStage.show();
     }
-
-
-
 }
