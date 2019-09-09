@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import main.java.controllerandview.MainGUIController;
 import main.java.controllerandview.positionswindow.controller.ControllerPositionsWindow;
 import main.java.controllerandview.pricecontrolwindow.controller.ControllerPriceControlPanel;
 import main.java.model.livemarketdata.InteractiveBrokersAPI;
@@ -13,6 +14,11 @@ import main.java.model.priceserver.PriceServer;
 import main.java.controllerandview.positionswindow.view.MikePositionsWindowCreator;
 
 public class Main extends Application {
+    //working on this:
+    //This class handles the GUI part:
+    private MainGUIController mainGUIController;
+
+
     //GUI controllers:
     private ControllerPriceControlPanel priceControlPanel;
     private ControllerPositionsWindow posWindowController;
@@ -29,8 +35,16 @@ public class Main extends Application {
         //provides prices for the program:
         priceServer = new PriceServer();
 
+        //new code here:
+        mainGUIController = new MainGUIController();
+
+        mainGUIController.initializeGUI(primaryStage, priceServer);
+        posWindowController = mainGUIController.getPosWindowController();
+
+
+
         //set up initial display:
-        initializeGUI(primaryStage);
+//        initializeGUI(primaryStage);
 
         //TODO: experimenting here:
 
@@ -46,10 +60,9 @@ public class Main extends Application {
 
 
         //start the main loop:
-        MainLoop mainLoop = new MainLoop(priceServer, posWindowController);
+        MainLoop mainLoop = new MainLoop(priceServer, mainGUIController);
         mainLoop.setPriceServer(priceServer);
         mainLoop.start();
-
     }
 
     public void initializeGUI(Stage primaryStage) throws Exception{

@@ -1,6 +1,7 @@
 package main.java.model;
 
 
+import main.java.controllerandview.MainGUIController;
 import main.java.controllerandview.positionswindow.controller.ControllerPositionsWindow;
 import main.java.model.priceserver.PriceServer;
 
@@ -8,6 +9,12 @@ class TimedRunnable implements Runnable {
 
     PriceServer priceServer;
     ControllerPositionsWindow controllerPositionsWindow;
+
+    public void setMainGUIController(MainGUIController mainGUIController) {
+        this.mainGUIController = mainGUIController;
+    }
+
+    MainGUIController mainGUIController;
 
     boolean isReady = true;
     int count = 0;
@@ -17,8 +24,11 @@ class TimedRunnable implements Runnable {
         isReady = false;
 
 
-        controllerPositionsWindow.updateGUI();
+//        controllerPositionsWindow.updateGUI();
 
+        mainGUIController.updateGUI();
+
+        System.out.println("myTimedRunnable called.");
 
 //
 //
@@ -35,7 +45,15 @@ class TimedRunnable implements Runnable {
 //        controllerPositionsWindow.askPriceTextField.setText(((Double) priceServer.getRealTimeAskPrice()).toString());
 //        controllerPositionsWindow.bidPriceTextField.setText(((Double) priceServer.getRealTimeBidPrice()).toString());
 
+        System.out.println("Timedrunnable count: " + count);
+
         count++;
+
+        try {
+            Thread.sleep(600);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
 
         isReady = true;

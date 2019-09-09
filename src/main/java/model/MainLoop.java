@@ -2,6 +2,7 @@ package main.java.model;
 
 import javafx.application.Platform;
 import javafx.scene.control.Button;
+import main.java.controllerandview.MainGUIController;
 import main.java.controllerandview.positionswindow.controller.ControllerPositionsWindow;
 import main.java.model.priceserver.PriceServer;
 import main.java.controllerandview.positionswindow.view.MikeGridPane;
@@ -15,6 +16,7 @@ public class MainLoop extends Thread {
     MikeGridPane mikeGridPane;
     PriceServer priceServer;
     ControllerPositionsWindow controllerPositionsWindow;
+    MainGUIController mainGUIController;
 
     TimedRunnable myTimedRunnable;
 
@@ -37,6 +39,11 @@ public class MainLoop extends Thread {
         this.controllerPositionsWindow = controllerPositionsWindow;
     }
 
+    public MainLoop(PriceServer priceServer, MainGUIController mainGUIController){
+        this.priceServer = priceServer;
+        this.mainGUIController = mainGUIController;
+    }
+
 
     private Integer count = 0;
     public static boolean interrupted;
@@ -44,13 +51,17 @@ public class MainLoop extends Thread {
     public void run() {
 
         myTimedRunnable = new TimedRunnable();
+        myTimedRunnable.setMainGUIController(mainGUIController);
+
+        int refreshInMiliseconds = 500;
+
 
         while (!interrupted) {
             try {
                 if (mikeGridPane != null) {
 
                     Button button = mikeGridPane.getButton(8, 3);
-//                    button.setText(count.toString());
+                    button.setText(count.toString());
 
 //                    if(myTimedRunnable.isReady()){
 //                        myTimedRunnable.setControllerPositionsWindow(controllerPositionsWindow);
@@ -59,12 +70,23 @@ public class MainLoop extends Thread {
 //                    }
                 }
 
-                    Platform.runLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            controllerPositionsWindow.updateGUI();
-                        }
-                    });
+                if(myTimedRunnable.isReady()){
+                Platform.runLater(myTimedRunnable);}
+                else {
+                    System.out.println("myTimedRunnable not ready");
+
+                }
+
+
+//                    Platform.runLater(new Runnable() {
+//                        @Override
+//                        public void run() {
+//
+////                            controllerPositionsWindow.updateGUI();
+//
+//                            mainGUIController.updateGUI(MainLoop.this);
+//                        }
+//                    });
 
 //                    Platform.runLater(new Runnable() {
 //                        @Override
@@ -87,18 +109,30 @@ public class MainLoop extends Thread {
 //                        }
 //                    });
 
+                System.out.println("Mainloop count: " + count);
                     count++;
 
 
-                Thread.sleep(200);
+
+                Thread.sleep(refreshInMiliseconds);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.println("1 second tick");
+            System.out.println("" + refreshInMiliseconds + " milisecond tick");
             //TODO: experimenting:
             int experimental = (int) (Math.random() * 100);
 //            priceServer.setExperimentalNumber(experimental);
 //            controllerPositionsWindow.setExperimentalTextField(experimental);
+        }
+    }
+
+
+    private class GUIUpdater implements Runnable{
+
+
+        @Override
+        public void run() {
+
         }
     }
 }
