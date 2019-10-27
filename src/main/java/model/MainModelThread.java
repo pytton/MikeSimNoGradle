@@ -2,10 +2,13 @@ package main.java.model;
 
 import javafx.application.Platform;
 import main.java.controllerandview.MainGUIController;
+import main.java.model.livemarketdata.InteractiveBrokersAPI;
+import main.java.model.livemarketdata.OutsideTradingSoftwareAPIConnection;
 import main.java.model.priceserver.PriceServer;
 import main.java.controllerandview.positionswindow.view.MikeGridPane;
+import main.java.model.priceserver.PriceServerManager;
 
-public class MainLoop extends Thread {
+public class MainModelThread extends Thread {
 
     private long count = 0;
     public static boolean interrupted;
@@ -13,13 +16,18 @@ public class MainLoop extends Thread {
     MikeGridPane mikeGridPane;
     MainGUIController mainGUIController;
     GUIUpdateDispatcher myGUIUpdateDispatcher;
+    PriceServer priceServer;
+    OutsideTradingSoftwareAPIConnection marketConnection;
+    PriceServerManager priceServerManager;
 
     public void setMikeGridPane(MikeGridPane mikeGridPane) {
         this.mikeGridPane = mikeGridPane;
     }
 
-    public MainLoop(MainGUIController mainGUIController){
+    public MainModelThread(MainGUIController mainGUIController){
         this.mainGUIController = mainGUIController;
+        priceServer = new PriceServer();
+        marketConnection = new InteractiveBrokersAPI();
     }
     @Override
     public void run() {
@@ -29,6 +37,10 @@ public class MainLoop extends Thread {
 
         while (!interrupted) {
             try {
+                processOrders();
+                processAlgos();
+
+
                 if(myGUIUpdateDispatcher.isReady()){
                 Platform.runLater(myGUIUpdateDispatcher);}
                 else {
@@ -43,6 +55,10 @@ public class MainLoop extends Thread {
             }
         }
     }
+
+    private void processAlgos(){}
+    private void processOrders(){}
+
 
     private class GUIUpdateDispatcher implements Runnable {
 

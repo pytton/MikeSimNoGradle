@@ -15,8 +15,5 @@ C++ MikeSimulator here: https://github.com/pytton/MikeSimulator/tree/experiment/
 
 
 #current commit:
-Added RealTimeData interface which is currently implemented in TWSRealTimeData class. In the future, implement RealTimeData interface
-with a different class if you need to connect to trading software other that Interactive Brokers.
-
-added methods connectToTWS and setUpContracts to TWSRealtimeData.
-method tickPrice in TWSRealTimeData sets bid and ask for default TickerID = 0 prices in its class.
+Working on GUI. Create all windows in MainGUIController.
+Create methods for making PositionsWindow and PriceController Window.

@@ -36,22 +36,26 @@ public class Main extends Application {
         //let priceserver know about real time market data:
         priceServer.setRealTimeDataSource(data);
 
-        //set up the GUI and show initial windows:
+        //set up the GUI:
         mainGUIController = new MainGUIController();
+
+        //create the main model thread:
+        MainModelThread mainModelThread = new MainModelThread(mainGUIController);
+
+        //initialize the GUI and show the windows:
         mainGUIController.initializeGUI(primaryStage, priceServer);
 
-        //start the main loop thread:
-        MainLoop mainLoop = new MainLoop(mainGUIController);
-        mainLoop.start();
-
+        //start the main model thread:
+        mainModelThread.start();
     }
 
     @Override
     public void stop(){
-        MainLoop.interrupted = true;
+        MainModelThread.interrupted = true;
     }
 
     public static void main(String[] args) {
+        //JavaFX application reguires this line. It does JavaFX stuff and then calls start(Stage primaryStage)
         launch(args);
     }
 }

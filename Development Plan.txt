@@ -26,3 +26,8 @@ ORDER PROCESS:
 
 CHECKING FOR FILLS:
 1. checkfills called in orderServer
+
+
+PRICESERVER:
+1. Create PriceServerManager in mainModelThread
+2. Add first default priceServer to PriceServerManager from mainModelThread

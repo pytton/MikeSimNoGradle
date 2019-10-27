@@ -11,6 +11,8 @@ import main.java.model.livemarketdata.OutsideTradingSoftwareAPIConnection;
  */
 public class PriceServer {
 
+    public String instrumentName;
+
     public enum PriceType{
         MANUAL,
         LIVEMARKET,
@@ -39,8 +41,6 @@ public class PriceServer {
 
     private PriceType priceType = PriceType.MANUAL;
 
-//    private Integer experimentalNumber = 0;
-
     public double getBidPrice() {
         switch (priceType){
             case MANUAL: return bidPrice;
@@ -59,7 +59,7 @@ public class PriceServer {
         return askPrice;
     }
 
-    public void setAskPrice(int askPrice) {
+    synchronized public void setAskPrice(int askPrice) {
         this.askPrice = askPrice;
 //        System.out.println("Ask price set to: " + askPrice);
     }
@@ -107,12 +107,4 @@ public class PriceServer {
     public void setPriceType(PriceType priceType) {
         this.priceType = priceType;
     }
-
-    //    public Integer getExperimentalNumber() {
-//        return experimentalNumber;
-//    }
-
-//    public void setExperimentalNumber(int experimentalNumber) {
-//        this.experimentalNumber = experimentalNumber;
-//    }
 }

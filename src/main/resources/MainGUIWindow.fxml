@@ -6,14 +6,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainGUIWindow">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="308.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane layoutX="224.0" layoutY="73.0" prefHeight="296.0" prefWidth="204.0">
+      <VBox alignment="TOP_CENTER" layoutX="38.0" layoutY="89.0" prefHeight="200.0" prefWidth="232.0">
          <children>
-            <Button layoutY="40.0" mnemonicParsing="false" text="Create Positions Window" />
-            <Button layoutY="88.0" mnemonicParsing="false" text="Create Price Control WIndow" />
+            <Button mnemonicParsing="false" text="Create Positions Window" />
+            <Button mnemonicParsing="false" text="Create Price Control WIndow" />
          </children>
-      </Pane>
+      </VBox>
    </children>
-</AnchorPane>
+</Pane>

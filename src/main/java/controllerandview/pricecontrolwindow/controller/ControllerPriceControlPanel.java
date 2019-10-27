@@ -40,9 +40,9 @@ public class ControllerPriceControlPanel {
 
     @FXML
     public void initialize() {
-        priceSlider.setMin((double)minSliderValue);
-        priceSlider.setMax((double)maxSliderValue);
-        priceSlider.setValue((double)(maxSliderValue - (maxSliderValue-minSliderValue)/2));
+        priceSlider.setMin((double) minSliderValue);
+        priceSlider.setMax((double) maxSliderValue);
+        priceSlider.setValue((double) (maxSliderValue - (maxSliderValue - minSliderValue) / 2));
         maxPriceTextField.setText(maxSliderValue.toString());
         minPriceTextField.setText(minSliderValue.toString());
 
@@ -58,25 +58,21 @@ public class ControllerPriceControlPanel {
         priceSourceToggleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
                                                                         @Override
                                                                         public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
-                                                                            if(priceSourceToggleGroup.getSelectedToggle() == manualRadioButton){
+                                                                            if (priceSourceToggleGroup.getSelectedToggle() == manualRadioButton) {
                                                                                 experimentalTextField1.setText("Manual");
                                                                                 priceServer.setPriceType(PriceServer.PriceType.MANUAL);
                                                                             }
-                                                                            if(priceSourceToggleGroup.getSelectedToggle() == liveRadioButton){
+                                                                            if (priceSourceToggleGroup.getSelectedToggle() == liveRadioButton) {
                                                                                 experimentalTextField1.setText("Live");
                                                                                 priceServer.setPriceType(PriceServer.PriceType.LIVEMARKET);
                                                                             }
-                                                                            if(priceSourceToggleGroup.getSelectedToggle() == historicalRadioButton){
+                                                                            if (priceSourceToggleGroup.getSelectedToggle() == historicalRadioButton) {
                                                                                 experimentalTextField1.setText("Live");
                                                                                 priceServer.setPriceType(PriceServer.PriceType.HISTORICAL);
                                                                             }
                                                                         }
                                                                     }
         );
-
-
-
-
 
 
     }
@@ -114,9 +110,11 @@ public class ControllerPriceControlPanel {
             maxvalue = Integer.parseInt(maxPriceTextField.getText());
             if (maxvalue > minSliderValue.intValue()) {
                 priceSlider.setMax((double) maxvalue);
-                maxPriceTextField.setText(""+maxvalue);
+                maxPriceTextField.setText("" + maxvalue);
                 maxSliderValue = maxvalue;
-            }else {maxPriceTextField.setText(maxSliderValue.toString());}
+            } else {
+                maxPriceTextField.setText(maxSliderValue.toString());
+            }
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
@@ -135,9 +133,11 @@ public class ControllerPriceControlPanel {
             if (minvalue < maxSliderValue.intValue()) {
 //                System.out.println("setting slider");
                 priceSlider.setMin((double) minvalue);
-                minPriceTextField.setText(""+minvalue);
+                minPriceTextField.setText("" + minvalue);
                 minSliderValue = minvalue;
-            }else{minPriceTextField.setText(minSliderValue.toString());}
+            } else {
+                minPriceTextField.setText(minSliderValue.toString());
+            }
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
