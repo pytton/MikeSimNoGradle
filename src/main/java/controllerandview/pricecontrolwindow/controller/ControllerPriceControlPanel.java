@@ -77,6 +77,9 @@ public class ControllerPriceControlPanel {
 
     }
 
+    public void updateGUI(){
+        askPriceTextField.setText(""+priceServer.getAskPrice());
+    }
     @FXML
     /**
      * triggered when user moves the slider

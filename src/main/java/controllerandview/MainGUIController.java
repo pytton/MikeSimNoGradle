@@ -16,9 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainGUIController {
-//    private ControllerPrimaryGUIWindow primaryGUIWindow;
-    private ControllerPriceControlPanel priceControlPanel;
-    private ControllerPositionsWindow posWindowController;
+
     private long count =0;
     private MainModelThread mainModelThread;
     private PriceServer priceServer;
@@ -28,7 +26,6 @@ public class MainGUIController {
 
     //called by Mainloop. Updates all GUI windows
     public void updateGUI(){
-//        if (posWindowController != null) posWindowController.updateGUI();
 
         for(ControllerPositionsWindow controller :posWindowControllerList){
             if (controller != null) {
@@ -36,6 +33,14 @@ public class MainGUIController {
             }
         }
 
+        for(ControllerPriceControlPanel controller :priceControlPanelControllerList){
+            if (controller != null) {
+                controller.updateGUI();
+            }
+        }
+
+//        //below for testing only:
+//        ControllerPositionsWindow posWindowController = posWindowControllerList.get(0);
 //        for (int i = 0; i < 20; i++) {
 //            posWindowController.setSpecificButtonInMikeGridPane(i, 0, "" + ((Math.sqrt((count * 79 + count))) * 1) % 567);
 //            posWindowController.setSpecificButtonInMikeGridPane(i, 1, "" + count);
@@ -52,65 +57,20 @@ public class MainGUIController {
 
         this.priceServer = priceServer;
 
-
-
         //create PrimaryGUIWindow
 
         FXMLLoader primaryGUIWindowLoader = new FXMLLoader(getClass().getResource("/MainGUIWindow.fxml"));
         Parent primaryGUIRoot = primaryGUIWindowLoader.load();
         ControllerPrimaryGUIWindow primaryGUIWindow = (ControllerPrimaryGUIWindow) primaryGUIWindowLoader.getController();
+        primaryGUIWindow.setMainGUIController(this);
+
         initialStage.setScene(new Scene(primaryGUIRoot));
+        
         initialStage.show();
-
-
-
-        //create Price Control window:
-        createPriceControlWindow();
-//        FXMLLoader priceControlPanelLoader = new FXMLLoader(getClass().getResource("/PriceControlPanel.fxml"));
-//        Parent pricePanelRoot =  priceControlPanelLoader.load(); //FXMLLoader.load(getClass().getResource("view/SceneBuilder/PriceControlPanel.fxml"));
-//
-//        //get the controller class:
-//        priceControlPanel = (ControllerPriceControlPanel) priceControlPanelLoader.getController();
-//        priceControlPanel.setPriceServer(priceServer);
-//
-//        //create the window:
-//        Stage primaryStage = new Stage();
-//        primaryStage.setTitle("Price Control");
-//        primaryStage.setScene(new Scene(pricePanelRoot));
-//        primaryStage.setX(850);
-//        primaryStage.setY(0);
-//        //display the window:
-//        primaryStage.show();
-
-
-        //create Positions Window:
-
-        createPosWindow();
-        createPosWindow();
-        createPosWindow();
-        createPosWindow();
-        createPosWindow();
-
-//        //we need to add custom MikeGridPane not defined in FXML:
-//        MikePositionsWindowCreator posWindow = new MikePositionsWindowCreator(priceServer);
-//        posWindowController = posWindow.getPositionsWindowController();
-//
-//        //create the window:
-//        Stage secondStage = new Stage();
-//        secondStage.setX(0);
-//        secondStage.setY(0);
-//        secondStage.setScene(new Scene(posWindow.getPositionsWindowRoot()));
-//        //display the window:
-//        secondStage.show();
-
-
-        //display the windows:
-
-
 
     }
 
-    private void createPosWindow(){
+    public void createPosWindow(){
         //create Positions Window:
         //we need to add custom MikeGridPane not defined in FXML:
         MikePositionsWindowCreator posWindow = null;
@@ -120,7 +80,7 @@ public class MainGUIController {
             System.out.println("Exception in createPosWindow");
             e.printStackTrace();
         }
-        posWindowController = posWindow.getPositionsWindowController();
+        ControllerPositionsWindow posWindowController = posWindow.getPositionsWindowController();
 
         //add the controller to the list of controllers:
         posWindowControllerList.add(posWindowController);
@@ -136,14 +96,13 @@ public class MainGUIController {
         secondStage.show();
 
         //name the window:
-//        String name = "PositionsWindow";
         String name = ("PositionsWindow " + posWindowControllerList.size());
         secondStage.setTitle(name);
 
 
     }
 
-    private void createPriceControlWindow(){
+    public void createPriceControlWindow(){
         //create Price Control window:
         FXMLLoader priceControlPanelLoader = new FXMLLoader(getClass().getResource("/PriceControlPanel.fxml"));
         Parent pricePanelRoot = null; //FXMLLoader.load(getClass().getResource("view/SceneBuilder/PriceControlPanel.fxml"));
@@ -155,10 +114,11 @@ public class MainGUIController {
         }
 
         //get the controller class:
-        priceControlPanel = (ControllerPriceControlPanel) priceControlPanelLoader.getController();
+        ControllerPriceControlPanel priceControlPanel = (ControllerPriceControlPanel) priceControlPanelLoader.getController();
         priceControlPanel.setPriceServer(priceServer);
 
-
+        //add the controller to the list of controllers:
+        priceControlPanelControllerList.add(priceControlPanel);
 
         //create the window:
         Stage primaryStage = new Stage();
@@ -168,5 +128,10 @@ public class MainGUIController {
         primaryStage.setY(0);
         //display the window:
         primaryStage.show();
+
+        //name the window:
+        String name = ("Price Control " + priceControlPanelControllerList.size());
+        primaryStage.setTitle(name);
+
     }
 }
