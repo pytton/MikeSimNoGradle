@@ -28,6 +28,31 @@ public class OrderServer {
 
             if(order.getOrderType()== MikeOrder.MikeOrderType.BUYLMT && askPrice <= order.getPrice()){
                 order.setFilled(true);
+                order.setFilledPrice(askPrice);
+                order.setFilledAmount(order.getAmount());
+                filledOrderIDs.add(orderID);
+
+                System.out.println("Order Filled!");
+            }
+            if(order.getOrderType()== MikeOrder.MikeOrderType.BUYSTP && askPrice >= order.getPrice()){
+                order.setFilled(true);
+                order.setFilledPrice(askPrice);
+                order.setFilledAmount(order.getAmount());
+                filledOrderIDs.add(orderID);
+
+                System.out.println("Order Filled!");
+            }
+            if(order.getOrderType()== MikeOrder.MikeOrderType.SELLLMT && bidPrice >= order.getPrice()){
+                order.setFilled(true);
+                order.setFilledPrice(bidPrice);
+                order.setFilledAmount(order.getAmount());
+                filledOrderIDs.add(orderID);
+
+                System.out.println("Order Filled!");
+            }
+            if(order.getOrderType()== MikeOrder.MikeOrderType.SELLSTP && bidPrice <= order.getPrice()){
+                order.setFilled(true);
+                order.setFilledPrice(bidPrice);
                 order.setFilledAmount(order.getAmount());
                 filledOrderIDs.add(orderID);
 

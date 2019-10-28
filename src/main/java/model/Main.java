@@ -33,6 +33,7 @@ public class Main extends Application {
 
     @Override
     public void stop(){
+        System.out.println("Shutting down.");
         MainModelThread.interrupted = true;
     }
 

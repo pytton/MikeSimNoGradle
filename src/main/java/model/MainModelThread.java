@@ -24,9 +24,14 @@ public class MainModelThread extends Thread {
     private long count = 0;
     public static boolean interrupted;
     int refreshGUIInMiliseconds = 200;
+    long mainLoopTurnaroundTime = 0;
 
 
 //    PriceServerManager priceServerManager;
+
+    public void shutDownMikeSim(){
+        interrupted = true;
+    }
 
     public MainModelThread(MainGUIClass mainGUIClass){
         this.mainGUIClass = mainGUIClass;
@@ -47,29 +52,31 @@ public class MainModelThread extends Thread {
     @Override
     public void run() {
 
+        //Hangle GUI updates in seperate thread:
         long timeOfLastGUIUpdate = System.currentTimeMillis();
-
-
         myGUIUpdateDispatcher = new GUIUpdateDispatcher();
         myGUIUpdateDispatcher.setMainGUIClass(mainGUIClass);
 
+
+
         while (!interrupted) {
             try {
+                long timeStartLoop = System.currentTimeMillis();
                 orderServer.checkSimulatedFills(priceServer);
 
                 processOrders();
                 processAlgos();
 
-
-                if (timeOfLastGUIUpdate + refreshGUIInMiliseconds < System.currentTimeMillis()) {
+                //Update the GUI:
+                if (System.currentTimeMillis() > timeOfLastGUIUpdate + refreshGUIInMiliseconds) {
                     if(myGUIUpdateDispatcher.isReady()){
                     Platform.runLater(myGUIUpdateDispatcher);
                     timeOfLastGUIUpdate = System.currentTimeMillis();
                         count++;}
                 }
 
-
                 Thread.sleep(1);
+                mainLoopTurnaroundTime = System.currentTimeMillis() - timeStartLoop;
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -107,7 +114,7 @@ public class MainModelThread extends Thread {
                 count++;
 //                Thread.sleep(refreshGUIInMiliseconds);
                 isReady = true;
-                if (count%10 == 0) System.out.println("Mainloop count: " + count);
+                if (count%10 == 0) System.out.println("Mainloop count: " + count + " MainLoop turnaround in miliseconds: " + mainLoopTurnaroundTime);
             } catch (Exception e) {
                 e.printStackTrace();
             }

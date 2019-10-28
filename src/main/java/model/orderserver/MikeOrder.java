@@ -2,11 +2,19 @@ package main.java.model.orderserver;
 
 public class MikeOrder {
 
+    public int getFilledPrice() {
+        return filledPrice;
+    }
+
+    public void setFilledPrice(int filledPrice) {
+        this.filledPrice = filledPrice;
+    }
+
     //BUYLMT, SELLLMT, BUYSTP, SELLSTP
     public enum MikeOrderType{
         BUYLMT,
         SELLLMT,
-        BUTSTP,
+        BUYSTP,
         SELLSTP
     };
 
@@ -22,6 +30,9 @@ public class MikeOrder {
 
     //the size of the order
     private int amount = 0;
+
+    //the price at which the order got filled:
+    private int filledPrice = 0;
 
     //the filled amount of the order
     private int filledAmount = 0;
