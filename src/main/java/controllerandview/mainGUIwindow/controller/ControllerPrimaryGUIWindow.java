@@ -2,32 +2,36 @@ package main.java.controllerandview.mainGUIwindow.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import main.java.controllerandview.MainGUIController;
-import main.java.controllerandview.positionswindow.controller.ControllerPositionsWindow;
-import main.java.controllerandview.pricecontrolwindow.controller.ControllerPriceControlPanel;
+import main.java.controllerandview.MainGUIClass;
 
 public class ControllerPrimaryGUIWindow {
 
-    private MainGUIController mainGUIController;
+    private MainGUIClass mainGUIClass;
 
 
 
 //    @FXML
 //    private Button createPosWindowButton;
 
-    public void setMainGUIController(MainGUIController controller){
-        mainGUIController = controller;
+    public void setMainGUIClass(MainGUIClass controller){
+        mainGUIClass = controller;
     }
 
     @FXML
     public void createPosWindowsButtonClicked(){
         System.out.println("Primary GUI window clicked!");
-        mainGUIController.createPosWindow();
+        mainGUIClass.createPosWindow();
 
     }
 
+    @FXML
     public void createPriceContrWinClicked(ActionEvent actionEvent) {
-        mainGUIController.createPriceControlWindow();
+        mainGUIClass.createPriceControlWindow();
     }
+
+    @FXML
+    public void connectOutsideData(){
+        mainGUIClass.getMainModelThread().connectOutsideData();
+    }
+
 }

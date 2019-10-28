@@ -6,12 +6,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="308.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllerandview.mainGUIwindow.controller.ControllerPrimaryGUIWindow">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="352.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllerandview.mainGUIwindow.controller.ControllerPrimaryGUIWindow">
    <children>
-      <VBox alignment="TOP_CENTER" layoutX="38.0" layoutY="89.0" prefHeight="200.0" prefWidth="232.0">
+      <VBox alignment="TOP_CENTER" layoutX="60.0" layoutY="100.0" prefHeight="200.0" prefWidth="232.0">
          <children>
             <Button fx:id="createPosWindowButton" mnemonicParsing="false" onAction="#createPosWindowsButtonClicked" text="Create Positions Window" />
             <Button fx:id="createPriceContrButton" mnemonicParsing="false" onAction="#createPriceContrWinClicked" text="Create Price Control WIndow" />
+            <Button fx:id="connectOutsideDataButton" mnemonicParsing="false" onAction="#connectOutsideData" text="Connect Outside Data" />
          </children>
       </VBox>
    </children>

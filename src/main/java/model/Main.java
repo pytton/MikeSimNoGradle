@@ -2,48 +2,30 @@ package main.java.model;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import main.java.controllerandview.MainGUIController;
+import main.java.controllerandview.MainGUIClass;
 import main.java.model.livemarketdata.InteractiveBrokersAPI;
 import main.java.model.livemarketdata.OutsideTradingSoftwareAPIConnection;
 import main.java.model.priceserver.PriceServer;
 
 public class Main extends Application {
-    //working on this:
+
+    //All logic handled here:
+    public MainModelThread mainModelThread;
+
     //This class handles the GUI part:
-    private MainGUIController mainGUIController;
-
-    //priceServer handles priceserver for single instrument:
-    private PriceServer priceServer;
-
-    //OutsideTradingSoftwareAPIConnection interfaces with outside trading software API for market data and orders:
-    OutsideTradingSoftwareAPIConnection data = null;
+    public MainGUIClass mainGUIClass;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        //provides prices for the program:
-        priceServer = new PriceServer();
-
-
-        //TODO: experimenting here:
-        //set up connection to outside trading software for market data, orders, etc:
-        data = new InteractiveBrokersAPI();
-//        data.connect();
-        Thread.sleep(1000);
-        //small test to see if connected to realtime data
-        //System.out.println("EUR Bid price: " + data.getBidPrice());
-
-        //let priceserver know about real time market data:
-        priceServer.setRealTimeDataSource(data);
-
         //set up the GUI:
-        mainGUIController = new MainGUIController();
+        mainGUIClass = new MainGUIClass();
 
         //create the main model thread:
-        MainModelThread mainModelThread = new MainModelThread(mainGUIController);
+        mainModelThread = new MainModelThread(mainGUIClass);
 
-        //initialize the GUI and show the windows:
-        mainGUIController.initializeGUI(primaryStage, priceServer);
+        //initialize the GUI and show the primary window:
+        mainGUIClass.initializeGUI(primaryStage, mainModelThread);
 
         //start the main model thread:
         mainModelThread.start();

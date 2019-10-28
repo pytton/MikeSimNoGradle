@@ -15,11 +15,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainGUIController {
+public class MainGUIClass {
 
     private long count =0;
-    private MainModelThread mainModelThread;
-    private PriceServer priceServer;
+    public MainModelThread mainModelThread;
 
     private List<ControllerPriceControlPanel> priceControlPanelControllerList = new ArrayList<>();
     private List<ControllerPositionsWindow> posWindowControllerList = new ArrayList<>();
@@ -39,33 +38,39 @@ public class MainGUIController {
             }
         }
 
-//        //below for testing only:
-//        ControllerPositionsWindow posWindowController = posWindowControllerList.get(0);
-//        for (int i = 0; i < 20; i++) {
-//            posWindowController.setSpecificButtonInMikeGridPane(i, 0, "" + ((Math.sqrt((count * 79 + count))) * 1) % 567);
-//            posWindowController.setSpecificButtonInMikeGridPane(i, 1, "" + count);
-//            posWindowController.setSpecificButtonInMikeGridPane(i, 2, "" + Math.sqrt((count * 79 + i + count)) % 7);
-//            posWindowController.setSpecificButtonInMikeGridPane(i, 3, "" + Math.sqrt((count * 79 + i + count)) % 56);
-//            posWindowController.setSpecificButtonInMikeGridPane(i, 4, "" + Math.sqrt((count * 73 + i + count)) % 74);
-//            posWindowController.setSpecificButtonInMikeGridPane(i, 5, "" + Math.sqrt((count * 987 + i + count)) % 34);
-//            posWindowController.setSpecificButtonInMikeGridPane(i, 6, "" + Math.sqrt((count * 453 + i + count)) % 9);
-//        }
+        try {
+            //below for testing only:
+            ControllerPositionsWindow posWindowController = posWindowControllerList.get(0);
+            for (int i = 0; i < 20; i++) {
+                posWindowController.setSpecificButtonInMikeGridPane(i, 0, "" + ((Math.sqrt((count * 79 + count))) * 1) % 567);
+                posWindowController.setSpecificButtonInMikeGridPane(i, 1, "" + count);
+                posWindowController.setSpecificButtonInMikeGridPane(i, 2, "" + Math.sqrt((count * 79 + i + count)) % 7);
+                posWindowController.setSpecificButtonInMikeGridPane(i, 3, "" + Math.sqrt((count * 79 + i + count)) % 56);
+                posWindowController.setSpecificButtonInMikeGridPane(i, 4, "" + Math.sqrt((count * 73 + i + count)) % 74);
+                posWindowController.setSpecificButtonInMikeGridPane(i, 5, "" + Math.sqrt((count * 987 + i + count)) % 34);
+                posWindowController.setSpecificButtonInMikeGridPane(i, 6, "" + Math.sqrt((count * 453 + i + count)) % 9);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         count++;
     }
 
-    public void initializeGUI(Stage initialStage, PriceServer priceServer/*, MainModelThread mainModelThread*/) throws Exception{
+    public void initializeGUI(Stage initialStage, /*PriceServer priceServer,*/ MainModelThread mainModelThread) throws Exception{
 
-        this.priceServer = priceServer;
+
+        this.mainModelThread = mainModelThread;
 
         //create PrimaryGUIWindow
 
         FXMLLoader primaryGUIWindowLoader = new FXMLLoader(getClass().getResource("/MainGUIWindow.fxml"));
         Parent primaryGUIRoot = primaryGUIWindowLoader.load();
         ControllerPrimaryGUIWindow primaryGUIWindow = (ControllerPrimaryGUIWindow) primaryGUIWindowLoader.getController();
-        primaryGUIWindow.setMainGUIController(this);
+        primaryGUIWindow.setMainGUIClass(this);
 
         initialStage.setScene(new Scene(primaryGUIRoot));
-        
+        initialStage.setTitle("MikeSimulator prototype 0.1");
+
         initialStage.show();
 
     }
@@ -75,12 +80,13 @@ public class MainGUIController {
         //we need to add custom MikeGridPane not defined in FXML:
         MikePositionsWindowCreator posWindow = null;
         try {
-            posWindow = new MikePositionsWindowCreator(priceServer);
+            posWindow = new MikePositionsWindowCreator(getMainModelThread().getPriceServer());
         } catch (IOException e) {
             System.out.println("Exception in createPosWindow");
             e.printStackTrace();
         }
         ControllerPositionsWindow posWindowController = posWindow.getPositionsWindowController();
+        posWindowController.setModel(mainModelThread);
 
         //add the controller to the list of controllers:
         posWindowControllerList.add(posWindowController);
@@ -115,7 +121,7 @@ public class MainGUIController {
 
         //get the controller class:
         ControllerPriceControlPanel priceControlPanel = (ControllerPriceControlPanel) priceControlPanelLoader.getController();
-        priceControlPanel.setPriceServer(priceServer);
+        priceControlPanel.setPriceServer(getMainModelThread().getPriceServer());
 
         //add the controller to the list of controllers:
         priceControlPanelControllerList.add(priceControlPanel);
@@ -133,5 +139,10 @@ public class MainGUIController {
         String name = ("Price Control " + priceControlPanelControllerList.size());
         primaryStage.setTitle(name);
 
+    }
+
+
+    public MainModelThread getMainModelThread() {
+        return mainModelThread;
     }
 }

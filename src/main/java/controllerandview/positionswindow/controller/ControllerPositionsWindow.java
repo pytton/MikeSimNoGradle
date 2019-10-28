@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import main.java.model.MainModelThread;
+import main.java.model.orderserver.MikeOrder;
 import main.java.model.priceserver.PriceServer;
 import main.java.controllerandview.positionswindow.view.MikeGridPane;
 
@@ -50,6 +52,7 @@ public class ControllerPositionsWindow {
 
     private MikeGridPane mikeGridPane = null;
     private PriceServer priceServer;
+    private MainModelThread model;
 
     //private ObservableList<List<Integer>> pricelist;
 
@@ -94,12 +97,20 @@ public class ControllerPositionsWindow {
     }
 
     public void testOneButtonClicked(ActionEvent actionEvent) {
+        model.getOrderServer().checkSimulatedFills(model.getPriceServer());
     }
 
     public void testTwoButtonClicked(ActionEvent actionEvent) {
+        model.getOrderServer().printActiveOrdersToConsole();
     }
 
     public void buyLimitButtonClicked(ActionEvent actionEvent) {
+        Integer price = Integer.parseInt(orderPriceTextField.getText());
+        Integer amount = Integer.parseInt(orderSizeTextField.getText());
+
+        System.out.println("Buy limit pressed. Order price: " + price + " Order size: " + amount);
+
+        model.getOrderServer().placeNewOrder(MikeOrder.MikeOrderType.BUYLMT, price, price, amount);
     }
 
     public void sellLimitButtonClicked(ActionEvent actionEvent) {
@@ -135,4 +146,7 @@ public class ControllerPositionsWindow {
         experimentalTextField.setText("" + num);
     }
 
+    public void setModel(MainModelThread model) {
+        this.model = model;
+    }
 }

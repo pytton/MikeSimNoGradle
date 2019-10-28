@@ -41,7 +41,7 @@ public class PriceServer {
 
     private PriceType priceType = PriceType.MANUAL;
 
-    public double getBidPrice() {
+    public int getBidPrice() {
         switch (priceType){
             case MANUAL: return bidPrice;
             case HISTORICAL: return historicalBidPrice;
@@ -55,7 +55,8 @@ public class PriceServer {
 //        System.out.println("Bid price set to: " + bidPrice);
     }
 
-    public double getAskPrice() {
+    //TODO: finish this. returns only manual prices now
+    public int getAskPrice() {
         return askPrice;
     }
 
