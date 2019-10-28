@@ -59,7 +59,7 @@ public class ControllerPositionsWindow {
 
     @FXML
     private void testThreeButtonClicked(){
-        //TODO: experimenting here:
+
         System.out.println("Clicked");
 //        String exper = priceServer.getExperimentalNumber().toString();
 //        askVolumeTextField.setText(exper);
@@ -114,12 +114,31 @@ public class ControllerPositionsWindow {
     }
 
     public void sellLimitButtonClicked(ActionEvent actionEvent) {
+        Integer price = Integer.parseInt(orderPriceTextField.getText());
+        Integer amount = Integer.parseInt(orderSizeTextField.getText());
+
+        System.out.println("Sell limit pressed. Order price: " + price + " Order size: " + amount);
+
+        model.getOrderServer().placeNewOrder(MikeOrder.MikeOrderType.SELLLMT, price, price, amount);
     }
 
     public void buyStopButtonClicked(ActionEvent actionEvent) {
+
+        Integer price = Integer.parseInt(orderPriceTextField.getText());
+        Integer amount = Integer.parseInt(orderSizeTextField.getText());
+
+        System.out.println("Buy stop pressed. Order price: " + price + " Order size: " + amount);
+
+        model.getOrderServer().placeNewOrder(MikeOrder.MikeOrderType.BUYSTP, price, price, amount);
     }
 
     public void sellStopButtonClicked(ActionEvent actionEvent) {
+        Integer price = Integer.parseInt(orderPriceTextField.getText());
+        Integer amount = Integer.parseInt(orderSizeTextField.getText());
+
+        System.out.println("Sell stop pressed. Order price: " + price + " Order size: " + amount);
+
+        model.getOrderServer().placeNewOrder(MikeOrder.MikeOrderType.SELLSTP, price, price, amount);
     }
 
     public void setPriceServer(PriceServer priceServer) {

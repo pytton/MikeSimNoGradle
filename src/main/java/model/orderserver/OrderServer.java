@@ -10,6 +10,7 @@ public class OrderServer {
     public Map<Long, MikeOrder> allOrdersMap = new HashMap<>();
     public SortedSet<Long> activeOrdersList = new TreeSet<>();
     public SortedSet<Long> filledOrdersList = new TreeSet<>();
+    public SortedSet<Long> cancelledOrdersList = new TreeSet<>();
     private long mikeSimOrderNumber = 0;
 
     /**
@@ -21,42 +22,43 @@ public class OrderServer {
         int askPrice = priceServer.getAskPrice();
 
         List<Long> filledOrderIDs = new ArrayList<>();
-        //TODO: finish this. currently this fills the whole order based on bid/ask prices
+
+        //This fills the whole order based on bid/ask prices
         //check all the active orders
         for(long orderID : activeOrdersList){
             MikeOrder order = allOrdersMap.get(orderID);
 
-            if(order.getOrderType()== MikeOrder.MikeOrderType.BUYLMT && askPrice <= order.getPrice()){
+            if(order.getOrderType()== MikeOrder.MikeOrderType.BUYLMT && askPrice <= order.getPrice() && !order.isCancelled()){
                 order.setFilled(true);
                 order.setFilledPrice(askPrice);
                 order.setFilledAmount(order.getAmount());
                 filledOrderIDs.add(orderID);
 
-                System.out.println("Order Filled!");
+                System.out.println("Order Filled! Fill Price: " + order.getFilledPrice());
             }
-            if(order.getOrderType()== MikeOrder.MikeOrderType.BUYSTP && askPrice >= order.getPrice()){
+            if(order.getOrderType()== MikeOrder.MikeOrderType.BUYSTP && askPrice >= order.getPrice() && !order.isCancelled()){
                 order.setFilled(true);
                 order.setFilledPrice(askPrice);
                 order.setFilledAmount(order.getAmount());
                 filledOrderIDs.add(orderID);
 
-                System.out.println("Order Filled!");
+                System.out.println("Order Filled! Fill Price: " + order.getFilledPrice());
             }
-            if(order.getOrderType()== MikeOrder.MikeOrderType.SELLLMT && bidPrice >= order.getPrice()){
+            if(order.getOrderType()== MikeOrder.MikeOrderType.SELLLMT && bidPrice >= order.getPrice() && !order.isCancelled()){
                 order.setFilled(true);
                 order.setFilledPrice(bidPrice);
                 order.setFilledAmount(order.getAmount());
                 filledOrderIDs.add(orderID);
 
-                System.out.println("Order Filled!");
+                System.out.println("Order Filled! Fill Price: " + order.getFilledPrice());
             }
-            if(order.getOrderType()== MikeOrder.MikeOrderType.SELLSTP && bidPrice <= order.getPrice()){
+            if(order.getOrderType()== MikeOrder.MikeOrderType.SELLSTP && bidPrice <= order.getPrice() && !order.isCancelled()){
                 order.setFilled(true);
                 order.setFilledPrice(bidPrice);
                 order.setFilledAmount(order.getAmount());
                 filledOrderIDs.add(orderID);
 
-                System.out.println("Order Filled!");
+                System.out.println("Order Filled! Fill Price: " + order.getFilledPrice());
             }
         }
 
@@ -91,15 +93,24 @@ public class OrderServer {
         //this is a new order so add it to activeOrders:
         activeOrdersList.add(mikeSimOrderNumber);
 
-        //TODO: erase this once everthing is working:
-        //printout to console:
-
-
         return mikeSimOrderNumber++;
     }
 
-//    private boolean addOrderToQueue(){
-//        return true;
-//    }
-//
+    public void cancelOrder(long orderID){
+        try {
+            MikeOrder order = allOrdersMap.get(orderID);
+            order.setCancelled(true);
+        } catch (Exception e) {
+            System.out.println("Exception in cancelOrder!");
+            e.printStackTrace();
+        }
+
+        try {
+            activeOrdersList.remove(orderID);
+        } catch (Exception e) {
+            System.out.println("Exception in cancelOrder!");
+            e.printStackTrace();
+        }
+        cancelledOrdersList.add(orderID);
+    }
 }
