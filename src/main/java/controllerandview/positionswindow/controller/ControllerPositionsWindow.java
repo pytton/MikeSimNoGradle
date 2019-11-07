@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import main.java.model.MainModelThread;
 import main.java.model.orderserver.MikeOrder;
+import main.java.model.positionsorders.MikePosOrders;
 import main.java.model.priceserver.PriceServer;
 import main.java.controllerandview.positionswindow.view.MikeGridPane;
 
@@ -50,29 +51,16 @@ public class ControllerPositionsWindow {
     private Button buyStopButton;
 
 
+
     private MikeGridPane mikeGridPane = null;
     private PriceServer priceServer;
     private MainModelThread model;
+    private MikePosOrders mikePosOrders;
 
     //private ObservableList<List<Integer>> pricelist;
 
 
-    @FXML
-    private void testThreeButtonClicked(){
 
-        System.out.println("Clicked");
-//        String exper = priceServer.getExperimentalNumber().toString();
-//        askVolumeTextField.setText(exper);
-
-
-        //display realtime bid ask priceserver:
-        askPriceTextField.setText(((Double)priceServer.getRealTimeAskPrice()).toString());
-        bidPriceTextField.setText(((Double)priceServer.getRealTimeBidPrice()).toString());
-
-        //experiment:
-//        mikeGridPane.getButton(3,7).setPrefWidth(120);
-
-    }
 
     public void updateGUI(){
 
@@ -96,12 +84,31 @@ public class ControllerPositionsWindow {
 //        mikeGridPane.getButton(3,7).setPrefWidth(30);
     }
 
+    @FXML
     public void testOneButtonClicked(ActionEvent actionEvent) {
         model.getOrderServer().checkSimulatedFills(model.getPriceServer());
     }
 
+    @FXML
     public void testTwoButtonClicked(ActionEvent actionEvent) {
         model.getOrderServer().printActiveOrdersToConsole();
+    }
+
+    @FXML
+    private void testThreeButtonClicked(){
+
+        System.out.println("Clicked");
+//        String exper = priceServer.getExperimentalNumber().toString();
+//        askVolumeTextField.setText(exper);
+
+
+        //display realtime bid ask priceserver:
+        askPriceTextField.setText(((Double)priceServer.getRealTimeAskPrice()).toString());
+        bidPriceTextField.setText(((Double)priceServer.getRealTimeBidPrice()).toString());
+
+        //experiment:
+//        mikeGridPane.getButton(3,7).setPrefWidth(120);
+
     }
 
     public void buyLimitButtonClicked(ActionEvent actionEvent) {
@@ -110,7 +117,8 @@ public class ControllerPositionsWindow {
 
         System.out.println("Buy limit pressed. Order price: " + price + " Order size: " + amount);
 
-        model.getOrderServer().placeNewOrder(MikeOrder.MikeOrderType.BUYLMT, price, price, amount);
+        mikePosOrders.placeNewOrder(MikeOrder.MikeOrderType.BUYLMT, price, price, amount);
+//        model.getOrderServer().placeNewOrder(MikeOrder.MikeOrderType.BUYLMT, price, price, amount);
     }
 
     public void sellLimitButtonClicked(ActionEvent actionEvent) {
@@ -119,7 +127,8 @@ public class ControllerPositionsWindow {
 
         System.out.println("Sell limit pressed. Order price: " + price + " Order size: " + amount);
 
-        model.getOrderServer().placeNewOrder(MikeOrder.MikeOrderType.SELLLMT, price, price, amount);
+        mikePosOrders.placeNewOrder(MikeOrder.MikeOrderType.SELLLMT, price, price, amount);
+//        model.getOrderServer().placeNewOrder(MikeOrder.MikeOrderType.SELLLMT, price, price, amount);
     }
 
     public void buyStopButtonClicked(ActionEvent actionEvent) {
@@ -129,7 +138,8 @@ public class ControllerPositionsWindow {
 
         System.out.println("Buy stop pressed. Order price: " + price + " Order size: " + amount);
 
-        model.getOrderServer().placeNewOrder(MikeOrder.MikeOrderType.BUYSTP, price, price, amount);
+        mikePosOrders.placeNewOrder(MikeOrder.MikeOrderType.BUYSTP, price, price, amount);
+//        model.getOrderServer().placeNewOrder(MikeOrder.MikeOrderType.BUYSTP, price, price, amount);
     }
 
     public void sellStopButtonClicked(ActionEvent actionEvent) {
@@ -138,7 +148,8 @@ public class ControllerPositionsWindow {
 
         System.out.println("Sell stop pressed. Order price: " + price + " Order size: " + amount);
 
-        model.getOrderServer().placeNewOrder(MikeOrder.MikeOrderType.SELLSTP, price, price, amount);
+        mikePosOrders.placeNewOrder(MikeOrder.MikeOrderType.SELLSTP, price, price, amount);
+//        model.getOrderServer().placeNewOrder(MikeOrder.MikeOrderType.SELLSTP, price, price, amount);
     }
 
     public void setPriceServer(PriceServer priceServer) {
@@ -167,5 +178,13 @@ public class ControllerPositionsWindow {
 
     public void setModel(MainModelThread model) {
         this.model = model;
+    }
+
+    public MikePosOrders getMikePosOrders() {
+        return mikePosOrders;
+    }
+
+    public void setMikePosOrders(MikePosOrders mikePosOrders) {
+        this.mikePosOrders = mikePosOrders;
     }
 }

@@ -2,50 +2,54 @@ package main.java.model.positionsorders;
 
 public class MikePosition {
 
-    long price = 0;
-    long open_amount = 0;//positive open_amount means the position is 'long'. negative open_amount means the position is 'short'.
-    long open_pl = 0;
-    long closed_pl = 0;
-    long total_pl = 0;
+    private int price = 0;
+    private int open_amount = 0;//positive open_amount means the position is 'long'. negative open_amount means the position is 'short'.
+    private int open_pl = 0;
+    private int closed_pl = 0;
+    private int total_pl = 0;
 
 
-    boolean isActive = false;
-    long prevbidprice = 0;  //to check if open_pl needs to be recalculated
-    long prevaskprice = 0;
+    private boolean isActive = false;
+    private int prevbidprice = -10;  //to check if open_pl needs to be recalculated
+    private int prevaskprice = -10;
 
+    public MikePosition(int price) {
+        this.price = price;
+    }
 
 
     //this is for indexing purposes - set to TRUE if position was ever
     //accessed or changed. Mainly to avoid iterating through tens of thousands
     //of positionswindow
-    boolean checkifActive() { if (isActive == true) return true; else  return false; }
-    void setActive() { isActive = true; }
-    void setInactive() { isActive = false; }
+    public boolean checkifActive() { if (isActive == true) return true; else  return false; }
+    private void setActive() { isActive = true; }
+    private void setInactive() { isActive = false; }
 
 
 
     //positive amount for buy orders, negative amount for sell orders!
-    void fill(long fillprice, long filledamount)
+    void fill(int fillprice, int filledamount)
     {
         //this will modify the closed_pl by:
         //difference in fill price and price of this position
         //multiplied by amount
-        long tempclosed_pl = closed_pl;
-        long profitloss;
+        int tempclosed_pl = closed_pl;
+        int profitloss;
         ////////////////////////////////////////////////
         profitloss = (price - fillprice) * filledamount;
         closed_pl = tempclosed_pl + profitloss;
         ////////////////////////////////////////////////
         //this updates the current open_amount by the amount that was filled
-        long tempopenamount = open_amount;
+        int tempopenamount = open_amount;
         open_amount = tempopenamount + filledamount;
         //recalculate PL because the size of position has changed:
-        calculatePL(prevbidprice, prevaskprice);
+        //need to temporarily change prevbidprice otherwise calculatePL
+        //will think no price change and no reason to recalculate:
+        prevbidprice = prevbidprice -1;
+        calculatePL(prevbidprice+1, prevaskprice);
     }
-    void calculatePL(long bidprice, long askprice)
+    void calculatePL(int bidprice, int askprice)
     {
-        //	static long prevbidprice = 0;
-        //	static long prevaskprice = 0;
         if (bidprice != prevbidprice || askprice != prevaskprice)
         {
             open_pl = 0;
@@ -62,4 +66,27 @@ public class MikePosition {
         }
     }
 
+    public int getPrice() {
+        return price;
+    }
+
+    public int getOpen_amount() {
+        return open_amount;
+    }
+
+    public int getOpen_pl() {
+        return open_pl;
+    }
+
+    public int getClosed_pl() {
+        return closed_pl;
+    }
+
+    public int getTotal_pl() {
+        return total_pl;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
 }

@@ -1,10 +1,13 @@
 package main.java.model;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import main.java.controllerandview.MainGUIClass;
 import main.java.model.livemarketdata.InteractiveBrokersAPI;
 import main.java.model.livemarketdata.OutsideTradingSoftwareAPIConnection;
 import main.java.model.orderserver.OrderServer;
+import main.java.model.positionsorders.MikePosOrders;
 import main.java.model.priceserver.PriceServer;
 
 public class MainModelThread extends Thread {
@@ -20,11 +23,17 @@ public class MainModelThread extends Thread {
     //handles all orders, checking for order fills:
     private OrderServer orderServer;
 
+    //MikePosOrders - this is used to have multiple separate 'books' of orders and positions - to manage trading.
+    // TODO: for now this is just one instance. Modify to be able to have as many as you want.
+    public MikePosOrders mikePosOrders;
+    public ObservableList<MikePosOrders> posOrdersObservableList = FXCollections.observableArrayList();
+    private long mikePosOrdersNumber = 0;
+
     private GUIUpdateDispatcher myGUIUpdateDispatcher;
     private long count = 0;
     public static boolean interrupted;
-    int refreshGUIInMiliseconds = 200;
-    long mainLoopTurnaroundTime = 0;
+    int refreshGUIInMiliseconds = 200;//set this to change GUI refresh rate
+    long mainLoopTurnaroundTime = 0;//for monitoring performance
 
 
 //    PriceServerManager priceServerManager;
@@ -47,6 +56,8 @@ public class MainModelThread extends Thread {
         priceServer.setRealTimeDataSource(marketConnection);
 
         orderServer = new OrderServer();
+
+        createMikePosorders();
     }
 
     @Override
@@ -85,6 +96,22 @@ public class MainModelThread extends Thread {
 
     private void processAlgos(){}
     private void processOrders(){}
+
+    /**
+     * Create an instance of MikePosOrders and add it to the list
+     * @return
+     */
+    synchronized public MikePosOrders createMikePosorders(){
+        MikePosOrders posOrders = new MikePosOrders();
+        posOrders.setOrderServer(orderServer);//TODO: finish this so that you set the correct orderServer based on the instrument
+        posOrdersObservableList.add(posOrders);
+        posOrders.setName("Positions number " + mikePosOrdersNumber++);
+        return posOrders;
+    }
+
+    public MikePosOrders getMikePosOrders(int mikePosOrdersNumber) {
+        return posOrdersObservableList.get(mikePosOrdersNumber);
+    }
 
     synchronized public void connectOutsideData(){
         marketConnection.connect();

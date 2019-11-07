@@ -21,7 +21,6 @@ public class ControllerPrimaryGUIWindow {
     public void createPosWindowsButtonClicked(){
         System.out.println("Primary GUI window clicked!");
         mainGUIClass.createPosWindow();
-
     }
 
     @FXML

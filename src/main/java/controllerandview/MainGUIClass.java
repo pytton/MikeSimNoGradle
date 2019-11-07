@@ -9,6 +9,7 @@ import main.java.controllerandview.positionswindow.controller.ControllerPosition
 import main.java.controllerandview.positionswindow.view.MikePositionsWindowCreator;
 import main.java.controllerandview.pricecontrolwindow.controller.ControllerPriceControlPanel;
 import main.java.model.MainModelThread;
+import main.java.model.positionsorders.MikePosOrders;
 import main.java.model.priceserver.PriceServer;
 
 import java.io.IOException;
@@ -94,6 +95,9 @@ public class MainGUIClass {
         ControllerPositionsWindow posWindowController = posWindow.getPositionsWindowController();
         posWindowController.setModel(mainModelThread);
 
+        //TODO: this assignes a default MikePosOrders:
+        posWindowController.setMikePosOrders(mainModelThread.getMikePosOrders(0));
+
         //add the controller to the list of controllers:
         posWindowControllerList.add(posWindowController);
 
@@ -110,8 +114,6 @@ public class MainGUIClass {
         //name the window:
         String name = ("PositionsWindow " + posWindowControllerList.size());
         secondStage.setTitle(name);
-
-
     }
 
     public void createPriceControlWindow(){
