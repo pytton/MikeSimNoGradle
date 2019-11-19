@@ -65,7 +65,7 @@
             </BorderPane>
             <VBox prefHeight="196.0" prefWidth="200.0" spacing="3.0">
                <children>
-                  <Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#connectRealTimeData" text="Connect  Realtime Data" />
+                  <Button fx:id="TestButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#testButtonClicked" text="Test" />
                   <HBox alignment="CENTER" prefHeight="30.0" prefWidth="140.0">
                      <children>
                         <Label prefWidth="70.0" text="Ask Price" />

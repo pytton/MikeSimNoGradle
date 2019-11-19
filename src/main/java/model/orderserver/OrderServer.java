@@ -70,7 +70,7 @@ public class OrderServer {
         //notify mikePosOrders about orders that have been filled and
         //remove all the filled orderIDs from the activeOrdersList and add them to the filledOrdersList:
         for(long orderId : filledOrderIDs){
-//            (allOrdersMap.get(orderId)).getPosOrders()
+            (allOrdersMap.get(orderId)).getPosOrders().notifyAboutFill(orderId);
             getActiveOrdersList().remove(orderId);
             getFilledOrdersList().add(orderId);
         }
@@ -78,12 +78,34 @@ public class OrderServer {
         //TODO: think of something to notify PosOrders class what placed the order that it has been filled.
     }
 
+    /**
+     * For testing
+     */
+    public void printAllOrdersToConsole(){
+        System.out.println("Printing all orders");
+        for(MikeOrder order : getAllOrdersMap().values()){
+            System.out.println("Order id: " + order.getMikeOrderNumber() +
+                    " Order price: " + order.getPrice() +
+                    " Order amount: " + order.getAmount());
+        }
+
+    }
+
+    /**
+     * for testing
+     */
     public void printActiveOrdersToConsole(){
+        System.out.println("Printing active orders in OrderServer");
+
         for(long orderID : getActiveOrdersList()){
             //print out active orders to console:
             System.out.println("Active order ID: " + getAllOrdersMap().get(orderID).getMikeOrderNumber() + " Order price: "
                     + getAllOrdersMap().get(orderID).getPrice());
         }
+
+
+
+
     }
 
     /**

@@ -1,6 +1,5 @@
 package main.java.controllerandview.positionswindow.controller;
 
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,15 +8,16 @@ import javafx.scene.layout.BorderPane;
 import main.java.model.MainModelThread;
 import main.java.model.orderserver.MikeOrder;
 import main.java.model.positionsorders.MikePosOrders;
+import main.java.model.positionsorders.MikePosition;
 import main.java.model.priceserver.PriceServer;
 import main.java.controllerandview.positionswindow.view.MikeGridPane;
 
-import java.util.List;
-
-public class ControllerPositionsWindow {
+public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler {
 
     @FXML
     public BorderPane mainBorderPane;
+    @FXML
+    private TextField TopRowPriceTextField;
     @FXML
     private TextField askPriceTextField;
     @FXML
@@ -52,6 +52,8 @@ public class ControllerPositionsWindow {
 
 
 
+    private int topRowPrice = 27150; //used with MikeGridPane and UpdateGUI
+
     private MikeGridPane mikeGridPane = null;
     private PriceServer priceServer;
     private MainModelThread model;
@@ -60,7 +62,9 @@ public class ControllerPositionsWindow {
     //private ObservableList<List<Integer>> pricelist;
 
 
+    public void mikeGridPaneButtonClicked(ActionEvent event) {
 
+    }
 
     public void updateGUI(){
 
@@ -72,7 +76,24 @@ public class ControllerPositionsWindow {
         askPriceTextField.setText("" + (int)priceServer.getAskPrice());
         bidPriceTextField.setText("" + (int)priceServer.getBidPrice());
 
-//        System.out.println("Window updated");
+        //printout data in MikeGridPane:
+        for(int row = 0 ; row < mikeGridPane.getHowManyRows() ; row++){
+            int priceToPrint = topRowPrice - row;
+            MikePosition position = mikePosOrders.getMikePositionAtPrice(priceToPrint);
+
+
+            //print open positions in first column:
+            if (position == null) {
+                setSpecificButtonInMikeGridPane( row,0, "" );
+            } else {
+                setSpecificButtonInMikeGridPane(row, 0, ""+ position.getOpen_amount());
+            }
+
+            //print prices in the third column of mikeGridPane:
+            setSpecificButtonInMikeGridPane( row,2, "" +(topRowPrice - row)
+            );
+        }
+
     }
 
     public void setSpecificButtonInMikeGridPane(int row, int col, String text) {
@@ -86,7 +107,12 @@ public class ControllerPositionsWindow {
 
     @FXML
     public void testOneButtonClicked(ActionEvent actionEvent) {
-        model.getOrderServer().checkSimulatedFills(model.getPriceServer());
+//        model.getOrderServer().checkSimulatedFills(model.getPriceServer());
+
+        Button button = (Button)(actionEvent.getSource());
+        button.setText("Print Positions");
+        //printout positions to console:
+        mikePosOrders.printPositionsToConsole();
     }
 
     @FXML
@@ -97,18 +123,27 @@ public class ControllerPositionsWindow {
     @FXML
     private void testThreeButtonClicked(){
 
+        model.marketConnection.consolePrintRealTimeData();
+
         System.out.println("Clicked");
 //        String exper = priceServer.getExperimentalNumber().toString();
 //        askVolumeTextField.setText(exper);
 
 
+
+
         //display realtime bid ask priceserver:
-        askPriceTextField.setText(((Double)priceServer.getRealTimeAskPrice()).toString());
-        bidPriceTextField.setText(((Double)priceServer.getRealTimeBidPrice()).toString());
+//        askPriceTextField.setText(((Double)priceServer.getRealTimeAskPrice()).toString());
+//        bidPriceTextField.setText(((Double)priceServer.getRealTimeBidPrice()).toString());
 
         //experiment:
 //        mikeGridPane.getButton(3,7).setPrefWidth(120);
 
+    }
+
+    public void setTopRowPriceBtnClicked(ActionEvent actionEvent) {
+        Integer topRowPriceToBeSet = Integer.parseInt(TopRowPriceTextField.getText());
+        topRowPrice = topRowPriceToBeSet;
     }
 
     public void buyLimitButtonClicked(ActionEvent actionEvent) {
@@ -186,5 +221,16 @@ public class ControllerPositionsWindow {
 
     public void setMikePosOrders(MikePosOrders mikePosOrders) {
         this.mikePosOrders = mikePosOrders;
+    }
+
+
+    @Override
+    public void handleMikeButtonClicked(MikeGridPane.MikeButton button) {
+
+
+
+        System.out.println("MikeButton clicked. column: " +button.getColOfButton());
+
+
     }
 }

@@ -12,6 +12,8 @@ import main.java.model.priceserver.PriceServer;
 
 public class MainModelThread extends Thread {
 
+    public ObservableList<PriceServer> priceServers;
+
     public MainGUIClass mainGUIClass;
 
     //provides prices for the program:
@@ -32,7 +34,7 @@ public class MainModelThread extends Thread {
     private GUIUpdateDispatcher myGUIUpdateDispatcher;
     private long count = 0;
     public static boolean interrupted;
-    int refreshGUIInMiliseconds = 200;//set this to change GUI refresh rate
+    int refreshGUIInMiliseconds = 100;//set this to change GUI refresh rate
     long mainLoopTurnaroundTime = 0;//for monitoring performance
 
 
@@ -45,15 +47,18 @@ public class MainModelThread extends Thread {
     public MainModelThread(MainGUIClass mainGUIClass){
         this.mainGUIClass = mainGUIClass;
 
-        //provides prices for the program:
-        priceServer = new PriceServer();
-
-        //TODO: experimenting here:
         //set up connection to outside trading software for market data, orders, etc:
         marketConnection = new InteractiveBrokersAPI();
 
-        //let priceserver know about real time market data:
-        priceServer.setRealTimeDataSource(marketConnection);
+        //provides prices for the program:
+        //one priceserver for each tickerID
+        priceServers = FXCollections.observableArrayList();
+        priceServer = new PriceServer(0, "SPY", marketConnection);
+        priceServers.add(priceServer);
+        priceServers.add(new PriceServer(1, "DIA", marketConnection));
+        priceServers.add(new PriceServer(2, "IWM", marketConnection));
+        priceServers.add(new PriceServer(3, "QQQ", marketConnection));
+        priceServers.add(new PriceServer(4, "EUR FOREX", marketConnection));
 
         orderServer = new OrderServer();
 
@@ -73,13 +78,17 @@ public class MainModelThread extends Thread {
         while (!interrupted) {
             try {
                 long timeStartLoop = System.currentTimeMillis();
-                orderServer.checkSimulatedFills(priceServer);
+
+
 
                 processOrders();
                 processAlgos();
 
                 //Update the GUI:
                 if (System.currentTimeMillis() > timeOfLastGUIUpdate + refreshGUIInMiliseconds) {
+
+
+
                     if(myGUIUpdateDispatcher.isReady()){
                     Platform.runLater(myGUIUpdateDispatcher);
                     timeOfLastGUIUpdate = System.currentTimeMillis();
@@ -95,17 +104,27 @@ public class MainModelThread extends Thread {
     }
 
     private void processAlgos(){}
-    private void processOrders(){}
+    private void processOrders(){
+        orderServer.checkSimulatedFills(priceServer);
+
+        if (getMikePosOrders(0) != null) {
+            getMikePosOrders(0).processFilledOrders();
+        }
+    }
 
     /**
      * Create an instance of MikePosOrders and add it to the list
      * @return
      */
     synchronized public MikePosOrders createMikePosorders(){
-        MikePosOrders posOrders = new MikePosOrders();
-        posOrders.setOrderServer(orderServer);//TODO: finish this so that you set the correct orderServer based on the instrument
-        posOrdersObservableList.add(posOrders);
+        MikePosOrders posOrders = new MikePosOrders(orderServer, priceServer);
+        //TODO: finish this so that you set the correct orderServer based on the instrument
+
+
+
         posOrders.setName("Positions number " + mikePosOrdersNumber++);
+        posOrdersObservableList.add(posOrders);
+
         return posOrders;
     }
 

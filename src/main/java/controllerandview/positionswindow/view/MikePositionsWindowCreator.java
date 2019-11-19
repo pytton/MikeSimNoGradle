@@ -12,7 +12,7 @@ import java.io.IOException;
 public class MikePositionsWindowCreator {
 
     private FXMLLoader posWindowLoader;// = new FXMLLoader(getClass().getResource("PositionsWindow.fxml"));
-    public Parent positionsWindowRoot;
+    private Parent positionsWindowRoot;
     public ControllerPositionsWindow positionsWindowController;
     private MikeGridPane buttonTable;
 
@@ -28,7 +28,10 @@ public class MikePositionsWindowCreator {
         //this is used to access elements of MikePositionsWindowCreator:
         positionsWindowController = (ControllerPositionsWindow)posWindowLoader.getController();
         //this adds a custom table of buttons to the scene
-        buttonTable = new MikeGridPane(9,100);
+        buttonTable = new MikeGridPane(100,9, positionsWindowController);
+
+
+
 
         //experimenting with modifing this window:
         ScrollPane sp = new ScrollPane();

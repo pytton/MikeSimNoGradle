@@ -19,14 +19,15 @@ import com.ib.client.OrderState;
 import com.ib.client.CommissionReport;
 import com.ib.client.UnderComp;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
+
 /**
  * Experimental class used to familiarize with IB TWS API
  */
 public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAPIConnection {
-
-    //TODO: TickerID for development experiments set here:
-    private final int defaulTickerID = 4;
-
 
     // Keep track of the next Order ID
     private int nextOrderID = 0;
@@ -35,12 +36,107 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
     private boolean connectedToTWS = false;
     private boolean contractsAlreadySetupFlag = false;
 
+
+    //TickerID for development experiments set here:
+    private final int defaulTickerID = 0;
+    //for default contract (without need for tickerID):
     private double bidPrice = -5;
     private double askPrice = -5;
     private double bidSize = -5;
     private double askSize = -5;
 
-    //OutsideTradingSoftwareAPIConnection interface implementaions:
+//    this stores all the live market data for each tickerID
+//     * Currently:
+//     * TickerID 0 = SPY
+//     * TickerID 1 = DIA
+//     * TickerID 2 = IWM
+//     * TickerID 3 = QQQ
+//     * TickerID 4 = EUR (FOREX)
+    private Map<Integer /*tickerID*/, PriceData> priceDataMap= new HashMap<>();
+
+    public InteractiveBrokersAPI() {
+        for (int tickerID = 0; tickerID < 5; tickerID++) {
+            priceDataMap.put(tickerID, new PriceData());
+        }
+    }
+
+    private class PriceData {
+        public double bidPrice = -5;
+        public double askPrice = -5;
+        public double bidSize = -5;
+        public double askSize = -5;
+
+        public double getBidPrice() {
+            return bidPrice;
+        }
+
+        public void setBidPrice(double bidPrice) {
+            this.bidPrice = bidPrice;
+        }
+
+        public double getAskPrice() {
+            return askPrice;
+        }
+
+        public void setAskPrice(double askPrice) {
+            this.askPrice = askPrice;
+        }
+
+        public double getBidSize() {
+            return bidSize;
+        }
+
+        public void setBidSize(double bidSize) {
+            this.bidSize = bidSize;
+        }
+
+        public double getAskSize() {
+            return askSize;
+        }
+
+        public void setAskSize(double askSize) {
+            this.askSize = askSize;
+        }
+    }
+
+    @Override
+    public double getBidPrice(int tickerID) {
+        try {
+            return priceDataMap.get(tickerID).getBidPrice();
+        } catch (Exception e) {
+            return -55;
+        }
+    }
+
+    @Override
+    public double getAskPrice(int tickerID) {
+        try {
+            return priceDataMap.get(tickerID).getAskPrice();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -55;
+        }
+    }
+
+    @Override
+    public double getBidSize(int tickerID) {
+        try {
+            return priceDataMap.get(tickerID).getBidSize();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -55;
+        }
+    }
+
+    @Override
+    public double getAskSize(int tickerID) {
+        try {
+            return priceDataMap.get(tickerID).getAskSize();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -55;
+        }
+    }
 
     @Override
     public double getBidPrice() {
@@ -55,39 +151,38 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
     @Override
     synchronized public boolean connect() {
         //return true is connection attempt and setting up contracts successful:
-        if(connectToTWS()){return setUpContracts();}
+        if (connectToTWS()) {
+            return setUpContracts();
+        }
         return false;
     }
 
 
-    private boolean connectToTWS(){
+    private boolean connectToTWS() {
         //check if already connected:
         if (connectedToTWS) {
             System.out.println("OutsideTradingSoftwareAPIConnection already connected to TWS!");
             return true;
-        }else{
+        } else {
             // Create a new EClientSocket object
-            client = new EClientSocket (this);
+            client = new EClientSocket(this);
 
-            try
-            {
-            // Connect to the TWS or IB Gateway application
-            // Leave null for localhost
-            // Port Number (should match TWS/IB Gateway configuration
-            client.eConnect (null, 7496, 0);
+            try {
+                // Connect to the TWS or IB Gateway application
+                // Leave null for localhost
+                // Port Number (should match TWS/IB Gateway configuration
+                client.eConnect(null, 7496, 0);
                 int connectionAttempts = 5;
 
                 for (int i = 0; i < connectionAttempts; i++) {
-                    if(client.isConnected()) {
+                    if (client.isConnected()) {
                         connectedToTWS = true;
                         return true;
                     }
                     // Pause here for connection to complete
                     Thread.sleep(1000);
                 }
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 System.out.println("Error connecting to TWS!");
                 return false;
             }
@@ -106,20 +201,21 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
      * TickerID 3 = QQQ
      * TickerID 4 = EUR (FOREX)
      */
-    private boolean setUpContracts(){
+    private boolean setUpContracts() {
 
         //check if connected to data:
-        if(!connectToTWS()) return false;
+        if (!connectToTWS()) return false;
 
         //if contracts had been previously set up, return true:
-        if(contractsAlreadySetupFlag) {
+        if (contractsAlreadySetupFlag) {
             System.out.println("Contracts have already been set up!");
-            return true;}
+            return true;
+        }
 
         try {
             //Procedure for setting up a new contract:
             // Create a new contract
-            Contract contract = new Contract ();
+            Contract contract = new Contract();
             contract.m_symbol = "SPY";
             contract.m_exchange = "SMART";
             contract.m_secType = "STK";
@@ -134,6 +230,7 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
             // MarketDataOptions - tagValue list of additional options (API 9.71 and newer)
 
             client.reqMktData(0, contract, null, false);
+            priceDataMap.put(0, new PriceData()); //priceDataMap stores market data for each tickerId
 
             // For API Version 9.73 and higher, add one more parameter: regulatory snapshot
             // client.reqMktData(0, contract, null, false, false, mktDataOptions);
@@ -148,6 +245,7 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
             contract.m_secType = "STK";
             contract.m_currency = "USD";
             client.reqMktData(1, contract, null, false);
+            priceDataMap.put(1, new PriceData()); //priceDataMap stores market data for each tickerId
 
             contract = new Contract();
             contract.m_symbol = "IWM";
@@ -155,6 +253,7 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
             contract.m_secType = "STK";
             contract.m_currency = "USD";
             client.reqMktData(2, contract, null, false);
+            priceDataMap.put(2, new PriceData()); //priceDataMap stores market data for each tickerId
 
             contract = new Contract();
             contract.m_symbol = "QQQ";
@@ -162,6 +261,7 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
             contract.m_secType = "STK";
             contract.m_currency = "USD";
             client.reqMktData(3, contract, null, false);
+            priceDataMap.put(3, new PriceData()); //priceDataMap stores market data for each tickerId
 
             contract = new Contract();
             contract.m_symbol = "EUR";
@@ -169,6 +269,7 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
             contract.m_secType = "CASH";
             contract.m_currency = "USD";
             client.reqMktData(4, contract, null, false);
+            priceDataMap.put(4, new PriceData()); //priceDataMap stores market data for each tickerId
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -183,41 +284,72 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
 
     }
 
-    public void consolePrintRealTimeData(){
+    public void consolePrintRealTimeData() {
 
-        if (!connectedToTWS){
+        if (!connectedToTWS) {
             System.out.println("Not connected to live data!");
             return;
         }
         System.out.println("Bid Price: " + getBidPrice());
         System.out.println("Ask Price: " + getAskPrice());
+
+        for (int tickerID : priceDataMap.keySet()) {
+            System.out.println("Prices: " + priceDataMap.get(tickerID).getAskPrice());
+        }
     }
 
     @Override
     public void tickPrice(int tickerId, int field, double price, int canAutoExecute) {
-        try
-        {
+        try {
             // Print out the current price.
             // field will provide the price type:
             // 1 = bid,  2 = ask, 4 = last
             // 6 = high, 7 = low, 9 = close
+            // 3 = ask size, 0 = bid size
 
-            if(tickerId == defaulTickerID){
+            //https://interactivebrokers.github.io/tws-api/tick_types.html
 
-                if(field ==1) bidPrice = price;
-                if(field ==2) askPrice = price;
+            //priceDataMap contains prices for all tickerIds
+            PriceData priceData = priceDataMap.get(tickerId);
+
+            switch (field) {
+                case 1: priceData.setBidPrice(price);
+                case 2: priceData.setAskPrice(price);
             }
-        }
-        catch (Exception e)
-        {
+
+            if (tickerId == defaulTickerID) {
+
+                if (field == 1) bidPrice = price;
+                if (field == 2) askPrice = price;
+            }
+        } catch (Exception e) {
             System.out.println("ERROR IN InteractiveBrokersAPI tickPrice method!");
-            e.printStackTrace ();
+            e.printStackTrace();
         }
     }
 
     @Override
     public void tickSize(int tickerId, int field, int size) {
 
+        //look in tickPrice for comments
+        // field: 3 = ask size, 0 = bid size
+
+        try {
+            PriceData priceData = priceDataMap.get(tickerId);
+
+            switch (field) {
+                case 0: priceData.setBidSize(size);
+                case 3: priceData.setAskSize(size);
+            }
+
+            if (tickerId == defaulTickerID) {
+                if (field == 0) bidSize = size;
+                if (field == 3) askSize = size;
+            }
+        } catch (Exception e) {
+            System.out.println("Error in InteractiveBrokersAPI.java.tickSize");
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -335,15 +467,12 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
     public void historicalData(int reqId, String date, double open, double high, double low, double close, int volume, int count, double WAP, boolean hasGaps) {
 
         // Display Historical data
-        try
-        {
+        try {
             System.out.println("historicalData: " + reqId + "," + date + "," +
-                    open + "," + high  + "," + low  + "," + close + "," +
+                    open + "," + high + "," + low + "," + close + "," +
                     volume);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace ();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -425,7 +554,7 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
     @Override
     public void error(String str) {
         // Print out the error message
-        System.err.println (str);
+        System.err.println(str);
 
     }
 
@@ -433,7 +562,7 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
     public void error(int id, int errorCode, String errorMsg) {
         // Overloaded error event (from IB) with their own error
         // codes and messages
-        System.err.println ("error: " + id + "," + errorCode + "," + errorMsg);
+        System.err.println("error: " + id + "," + errorCode + "," + errorMsg);
     }
 
     @Override

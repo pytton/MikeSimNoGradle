@@ -139,15 +139,15 @@
          <children>
             <Button fx:id="testOneButton" mnemonicParsing="false" onAction="#testOneButtonClicked" text="Test One" />
             <Button fx:id="testTwoButton" mnemonicParsing="false" onAction="#testTwoButtonClicked" text="Test Two" />
-            <Button mnemonicParsing="false" onAction="#testThreeButtonClicked" text="Test Three" />
-            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
+            <Button fx:id="testTwoButton" mnemonicParsing="false" onAction="#testThreeButtonClicked" text="Test Three" />
+            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="250.0">
                <children>
-                  <TextField fx:id="displayedPriceTextField" prefWidth="90.0" />
-                  <Button mnemonicParsing="false" text="Set Displayed Price">
+                  <Button fx:id="setTopRowPriceButton" mnemonicParsing="false" onAction="#setTopRowPriceBtnClicked" prefHeight="24.0" prefWidth="185.0" text="Set Top Row Price -&gt;">
                      <font>
                         <Font size="11.0" />
                      </font>
                   </Button>
+                  <TextField fx:id="TopRowPriceTextField" prefWidth="90.0" />
                </children>
             </HBox>
          </children>

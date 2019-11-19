@@ -1,48 +1,61 @@
 package main.java.controllerandview.positionswindow.view;
 
+import com.ib.controller.Types;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Font;
+import main.java.controllerandview.positionswindow.controller.ControllerPositionsWindow;
 
 import java.util.ArrayList;
 
 import static javafx.geometry.Pos.CENTER;
+
+
+
 
 /**
  *Custom GridPane with buttons that can be accessed with getButton function
  */
 public class MikeGridPane extends GridPane {
 
+    /**
+     * This interface gets an event when a button within the MikeGridPane is clicked
+     */
+    public interface MikeButtonHandler{
+        public void handleMikeButtonClicked(MikeGridPane.MikeButton event);
+//        public ActionEvent handleMikeButtonClicked(ActionEvent event);
+    }
+
     private int howManyRows = 20;
     private int howManyCols = 7;
 
     /**
+     * Interface that handles clicks on MikeButtons within the MikeGridPane.
+     * Must have handleMikeButtonClicked(ActionEvent event) implemented
+     */
+    private  MikeButtonHandler handler;
+
+    private ControllerPositionsWindow positionsWindow;
+    /**
      * Buttons in this GridPane. Access via getButton(row,column)
      */
-    Button[][] buttons;
+    private MikeButton[][] buttons;
 
     ArrayList<ArrayList<MikeButton>> buttonList = new ArrayList<>();
 
-    public Button getButton(int row, int col) {
-        if(row<= howManyRows && col<=howManyCols) return buttons[row][col];
-        else return null;
-    }
-
-    public MikeGridPane(){
-        this(7,20);
-    }
-
-
-
-    public MikeGridPane(int colsToCreate, int rowsToCreate) {
+    public MikeGridPane(int rowsToCreate, int colsToCreate, MikeButtonHandler handler) {
         super();
 
+        //set the handler for clicking buttons inside MikeGridPane
+        this.handler = handler;
         howManyCols = colsToCreate;
         howManyRows = rowsToCreate;
 
-        buttons = new Button[howManyRows][howManyCols];
+        buttons = new MikeButton [howManyRows][howManyCols];
 
         this.setVgap(0);
         this.setHgap(1);
@@ -56,8 +69,12 @@ public class MikeGridPane extends GridPane {
             buttonList.add(new ArrayList<MikeButton>());
 
             for (int col = 0; col < howManyCols; col++) {
-                MikeButton button = new MikeButton(row, col);
+                MikeButton button = new MikeButton(row, col, this.getHandler());
 //                button.setPrefWidth(90);//not working
+
+                button.setButtonClickHandler(this.getHandler());
+
+//                button.setOnAction();
 
                 int number = col + (row + col);
                 button.setText(""+number);
@@ -67,8 +84,8 @@ public class MikeGridPane extends GridPane {
                 buttons[row][col] = button;
                 buttonList.get(row).add(button);
 
-                button.setPrefWidth(45);
-                if (col == 3) button.setPrefWidth(90);
+                button.setPrefWidth(60);
+//                if (col == 3) button.setPrefWidth(90);
                 button.setMinHeight(20);
                 button.setMaxHeight(20);
                 button.setPrefHeight(20);
@@ -91,6 +108,10 @@ public class MikeGridPane extends GridPane {
         System.out.println("MikeGridPane generated");
     }
 
+    public MikeButton getButton(int row, int col) {
+        if(row<= howManyRows && col<=howManyCols) return  buttons[row][col];
+        else return null;
+    }
     /**
      * Button which can tell which row and column it occupies. Has to be set after constructing it.
      */
@@ -98,15 +119,25 @@ public class MikeGridPane extends GridPane {
         int rowOfButton = 0;
         int colOfButton = 0;
 
+        //interface which is called when MikeButton is pressed
+        public MikeButtonHandler buttonClickHandler;
 
+        //handler for pressing the button. This gets called when the button is pressed
+        EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                //pass the MikeButton which was pressed to the interface which handles it:
+                getButtonClickHandler().handleMikeButtonClicked((MikeButton)event.getSource());
+            }
+        };
 
-        public MikeButton() {
-            super();
-        }
-        public MikeButton(int rowPosition, int colPosition){
-            this();
+        public MikeButton(int rowPosition, int colPosition, MikeButtonHandler handler){
             rowOfButton = rowPosition;
             colOfButton = colPosition;
+            //set where will an event be sent once the button is clicked
+            this.setButtonClickHandler(handler);
+            //add the handler method to the button. this is what is called when the button is pressed
+            this.setOnAction(buttonHandler);
         }
 
         public int getRowOfButton() {
@@ -124,6 +155,14 @@ public class MikeGridPane extends GridPane {
         public void setColOfButton(int colOfButton) {
             this.colOfButton = colOfButton;
         }
+
+        public void setButtonClickHandler(MikeButtonHandler buttonClickHandler) {
+            this.buttonClickHandler = buttonClickHandler;
+        }
+
+        public MikeButtonHandler getButtonClickHandler() {
+            return buttonClickHandler;
+        }
     }
 
     public int getHowManyRows() {
@@ -134,4 +173,13 @@ public class MikeGridPane extends GridPane {
     public int getHowManyCols() {
         return howManyCols;
     }
+
+    public MikeButtonHandler getHandler() {
+        return handler;
+    }
+
+    public void setHandler(MikeButtonHandler handler) {
+        this.handler = handler;
+    }
+
 }

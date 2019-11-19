@@ -39,26 +39,26 @@ public class MainGUIClass {
             }
         }
 
-        try {
-            //below for testing only:
-            ControllerPositionsWindow posWindowController = null;
-            if (!posWindowControllerList.isEmpty()) {
-                posWindowController = posWindowControllerList.get(0);
-            }
-            if (posWindowController != null) {
-                for (int i = 0; i < 20; i++) {
-                    posWindowController.setSpecificButtonInMikeGridPane(i, 0, "" + ((Math.sqrt((count * 79 + count))) * 1) % 567);
-                    posWindowController.setSpecificButtonInMikeGridPane(i, 1, "" + count);
-                    posWindowController.setSpecificButtonInMikeGridPane(i, 2, "" + Math.sqrt((count * 79 + i + count)) % 7);
-                    posWindowController.setSpecificButtonInMikeGridPane(i, 3, "" + Math.sqrt((count * 79 + i + count)) % 56);
-                    posWindowController.setSpecificButtonInMikeGridPane(i, 4, "" + Math.sqrt((count * 73 + i + count)) % 74);
-                    posWindowController.setSpecificButtonInMikeGridPane(i, 5, "" + Math.sqrt((count * 987 + i + count)) % 34);
-                    posWindowController.setSpecificButtonInMikeGridPane(i, 6, "" + Math.sqrt((count * 453 + i + count)) % 9);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            //below for testing only:
+//            ControllerPositionsWindow posWindowController = null;
+//            if (!posWindowControllerList.isEmpty()) {
+//                posWindowController = posWindowControllerList.get(0);
+//            }
+//            if (posWindowController != null) {
+//                for (int i = 0; i < 20; i++) {
+//                    posWindowController.setSpecificButtonInMikeGridPane(i, 0, "" + ((Math.sqrt((count * 79 + count))) * 1) % 567);
+//                    posWindowController.setSpecificButtonInMikeGridPane(i, 1, "" + count);
+//                    posWindowController.setSpecificButtonInMikeGridPane(i, 2, "" + Math.sqrt((count * 79 + i + count)) % 7);
+//                    posWindowController.setSpecificButtonInMikeGridPane(i, 3, "" + Math.sqrt((count * 79 + i + count)) % 56);
+//                    posWindowController.setSpecificButtonInMikeGridPane(i, 4, "" + Math.sqrt((count * 73 + i + count)) % 74);
+//                    posWindowController.setSpecificButtonInMikeGridPane(i, 5, "" + Math.sqrt((count * 987 + i + count)) % 34);
+//                    posWindowController.setSpecificButtonInMikeGridPane(i, 6, "" + Math.sqrt((count * 453 + i + count)) % 9);
+//                }
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         count++;
     }
 
@@ -101,8 +101,6 @@ public class MainGUIClass {
         //add the controller to the list of controllers:
         posWindowControllerList.add(posWindowController);
 
-
-
         //create the window:
         Stage secondStage = new Stage();
         secondStage.setX(0);
@@ -130,6 +128,10 @@ public class MainGUIClass {
         //get the controller class:
         ControllerPriceControlPanel priceControlPanel = (ControllerPriceControlPanel) priceControlPanelLoader.getController();
         priceControlPanel.setPriceServer(getMainModelThread().getPriceServer());
+
+        //todo: experimenting. adding list of priceservers:
+        priceControlPanel.addToInstrumentList(mainModelThread.priceServers);
+
 
         //add the controller to the list of controllers:
         priceControlPanelControllerList.add(priceControlPanel);

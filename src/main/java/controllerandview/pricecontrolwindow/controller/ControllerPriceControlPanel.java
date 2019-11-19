@@ -11,7 +11,7 @@ import main.java.model.priceserver.PriceServer;
 
 public class ControllerPriceControlPanel {
 
-    public PriceServer priceServer;
+    private PriceServer priceServer;
     private PriceServer.PriceType priceType = PriceServer.PriceType.MANUAL;
     private ObservableList<String> instrumentNamesList;
 
@@ -26,6 +26,11 @@ public class ControllerPriceControlPanel {
     public TextField bidPriceTextField;
     @FXML
     public TextField askPriceTextField;
+
+    public void addToInstrumentList(ObservableList<PriceServer> instrumentNamesList){
+        instrumentsList.getItems().addAll(instrumentNamesList);
+    }
+
     public ListView instrumentsList;
     @FXML
     public ToggleGroup priceSourceToggleGroup;
@@ -46,8 +51,40 @@ public class ControllerPriceControlPanel {
         maxPriceTextField.setText(maxSliderValue.toString());
         minPriceTextField.setText(minSliderValue.toString());
 
-        instrumentNamesList = FXCollections.<String>observableArrayList("SPY", "DIA", "IWM", "EUR");
-        instrumentsList.getItems().addAll(instrumentNamesList);
+        class MyChangeListener implements ChangeListener{
+            ControllerPriceControlPanel controllerPriceControlPanel;
+            MyChangeListener(ControllerPriceControlPanel controllerPriceControlPanel){
+                this.controllerPriceControlPanel = controllerPriceControlPanel;
+            }
+
+            @Override
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+
+                System.out.println("Clicked!");
+
+                controllerPriceControlPanel.priceServer =   (PriceServer) instrumentsList.getSelectionModel().getSelectedItem();
+
+                System.out.println("Price: " + controllerPriceControlPanel.priceServer.getAskPrice());
+
+                System.out.println("Chosen: " + controllerPriceControlPanel.priceServer.toString());
+
+            }
+        }
+
+        MyChangeListener listener = new MyChangeListener(this);
+
+        instrumentsList.getSelectionModel().selectedItemProperty().addListener( listener );
+
+
+//        instrumentNamesList = FXCollections.<String>observableArrayList("SPY", "DIA", "IWM", "EUR");
+//
+//        ObservableList<PriceServer> instrumentNamesList2 = FXCollections.observableArrayList(new PriceServer(0, "SPY"), new PriceServer(1, "DIA"));
+//
+//        instrumentsList.getItems().addAll(instrumentNamesList2);
+
+
+
+        //instrumentsList.getItems().addAll(instrumentNamesList);
 
 //        System.out.println("ControllerPriceControlPanel created");
 //        System.out.println(priceSlider.getMax());
@@ -60,15 +97,18 @@ public class ControllerPriceControlPanel {
                                                                         public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
                                                                             if (priceSourceToggleGroup.getSelectedToggle() == manualRadioButton) {
                                                                                 experimentalTextField1.setText("Manual");
-                                                                                priceServer.setPriceType(PriceServer.PriceType.MANUAL);
+                                                                                getPriceServer().setPriceType(PriceServer.PriceType.MANUAL);
                                                                             }
                                                                             if (priceSourceToggleGroup.getSelectedToggle() == liveRadioButton) {
                                                                                 experimentalTextField1.setText("Live");
-                                                                                priceServer.setPriceType(PriceServer.PriceType.LIVEMARKET);
+                                                                                getPriceServer().setPriceType(PriceServer.PriceType.LIVEMARKET);
+
+                                                                                System.out.println("Live prices selected");
+                                                                                System.out.println("Live ask price: " + getPriceServer().getRealTimeAskPrice());
                                                                             }
                                                                             if (priceSourceToggleGroup.getSelectedToggle() == historicalRadioButton) {
                                                                                 experimentalTextField1.setText("Live");
-                                                                                priceServer.setPriceType(PriceServer.PriceType.HISTORICAL);
+                                                                                getPriceServer().setPriceType(PriceServer.PriceType.HISTORICAL);
                                                                             }
                                                                         }
                                                                     }
@@ -79,6 +119,7 @@ public class ControllerPriceControlPanel {
 
     public void updateGUI(){
         askPriceTextField.setText(""+priceServer.getAskPrice());
+        bidPriceTextField.setText(""+priceServer.getBidPrice());
     }
     @FXML
     /**
@@ -146,9 +187,21 @@ public class ControllerPriceControlPanel {
         }
     }
 
-    public void connectRealTimeData(ActionEvent actionEvent) {
+    public void testButtonClicked(ActionEvent actionEvent) {
         //TODO:
         //connect to real-time data
+        System.out.println("Test button clicked");
+
+
+        System.out.println("Ask price: " + getPriceServer().getAskPrice());
+
+        System.out.println("Realtime ask price: " + getPriceServer().getRealTimeAskPrice());
+
+
+        instrumentNamesList.add("Hello" /*+ getPriceServer().getAskPrice()*/);
+
+
+        instrumentsList.getItems().add("Hello");
     }
 
     public PriceServer getPriceServer() {

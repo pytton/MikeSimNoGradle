@@ -2,6 +2,7 @@ package main.java.model.positionsorders;
 
 import main.java.model.orderserver.MikeOrder;
 import main.java.model.orderserver.OrderServer;
+import main.java.model.priceserver.PriceServer;
 
 import java.util.*;
 
@@ -13,6 +14,8 @@ public class MikePosOrders {
     private String name;
 
     private OrderServer orderServer;
+    private PriceServer priceServer; //we need this to calculate Profit/Loss (PL)
+
     private Map<Integer, MikePosition> positionsMap = new HashMap<>();
     private SortedSet<Long> activeOrdersSet = new TreeSet<>();
     private Set<Long> filledOrdersToBeProcessed = new HashSet<>();
@@ -26,12 +29,15 @@ public class MikePosOrders {
         }
     }
 
-
-    public MikePosOrders(OrderServer orderServer) {
-        this.orderServer = orderServer;
+    public MikePosition getMikePositionAtPrice(int price){
+        return positionsMap.get(price);
     }
 
-    public MikePosOrders() {
+
+
+    public MikePosOrders(OrderServer orderServer, PriceServer priceServer) {
+        this.orderServer = orderServer;
+        this.priceServer = priceServer;
     }
 
     /**
@@ -40,13 +46,13 @@ public class MikePosOrders {
      */
     synchronized public long placeNewOrder(MikeOrder.MikeOrderType orderType, int assignedToPos, int price, int amount){
 
+        System.out.println("Placing new order in " + getName());
         //send the order to orderserver and get the order number:
         long orderNumber = orderServer.placeNewOrder(this, orderType, assignedToPos, price, amount);
         //add the order number to the list of active orders:
         activeOrdersSet.add(orderNumber);
         return orderNumber;
     }
-
 
     /**
      * Once order gets filled in OrderServer, OrderServer uses this method to notify MikePosOrders about it, so that
@@ -61,6 +67,8 @@ public class MikePosOrders {
      * the amounts that have been filled
      */
     synchronized public void processFilledOrders(){
+
+//        System.out.println("Processing orders");
 
         //if there are no orders to process then do nothing:
         if(filledOrdersToBeProcessed.isEmpty()) return;
@@ -81,6 +89,9 @@ public class MikePosOrders {
             //fill the position:
             position.fill(order.getFilledPrice(), order.getFilledAmount());
 
+            //recalculate the PL for the position:
+            position.calculatePL(priceServer.getBidPrice(), priceServer.getAskPrice());
+
             //order has been filled so is no longer active:
             activeOrdersSet.remove(orderId);
         }
@@ -92,11 +103,25 @@ public class MikePosOrders {
     }
 
     /**
-     * Cancel an order if you know it's orderId
+     * Cancel an order if you know its orderId
      * @param orderId
      */
     public void cancelOrder(long orderId) {
         orderServer.cancelOrder(orderId);
+        activeOrdersSet.remove(orderId);
+    }
+
+    /**
+     * For testing purposes
+     */
+    public void printPositionsToConsole(){
+
+        System.out.println("Printing positions!");
+        for (MikePosition position : positionsMap.values()) {
+            System.out.println("Position price: " + position.getPrice()+
+                    " Position amount: " + position.getOpen_amount()+
+                    " Position total PL: " + position.getTotal_pl());
+        }
     }
 
     /**
@@ -109,8 +134,6 @@ public class MikePosOrders {
             System.out.println("Active order ID: " + getOrderServer().getAllOrdersMap().get(orderId).getMikeOrderNumber() + " Order price: "
                     + getOrderServer().getAllOrdersMap().get(orderId).getPrice());
         }
-
-
     }
 
     public OrderServer getOrderServer() {

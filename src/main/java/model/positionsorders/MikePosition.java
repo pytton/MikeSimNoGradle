@@ -8,8 +8,6 @@ public class MikePosition {
     private int closed_pl = 0;
     private int total_pl = 0;
 
-
-    private boolean isActive = false;
     private int prevbidprice = -10;  //to check if open_pl needs to be recalculated
     private int prevaskprice = -10;
 
@@ -18,18 +16,24 @@ public class MikePosition {
     }
 
 
-    //this is for indexing purposes - set to TRUE if position was ever
+/*    //this is for indexing purposes - set to TRUE if position was ever
     //accessed or changed. Mainly to avoid iterating through tens of thousands
     //of positionswindow
+    private boolean isActive = false;
     public boolean checkifActive() { if (isActive == true) return true; else  return false; }
     private void setActive() { isActive = true; }
     private void setInactive() { isActive = false; }
+    public boolean isActive() {
+        return isActive;
+    }*/
 
 
 
     //positive amount for buy orders, negative amount for sell orders!
     void fill(int fillprice, int filledamount)
     {
+
+        System.out.println("Testing. Filling position in MikePosition");
         //this will modify the closed_pl by:
         //difference in fill price and price of this position
         //multiplied by amount
@@ -84,9 +88,5 @@ public class MikePosition {
 
     public int getTotal_pl() {
         return total_pl;
-    }
-
-    public boolean isActive() {
-        return isActive;
     }
 }

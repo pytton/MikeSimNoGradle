@@ -11,7 +11,19 @@ import main.java.model.livemarketdata.OutsideTradingSoftwareAPIConnection;
  */
 public class PriceServer {
 
-    public String instrumentName;
+    @Override
+    public String toString() {
+        return instrumentName;
+    }
+
+    public PriceServer(int tickerID, String instrumentName, OutsideTradingSoftwareAPIConnection marketConnection){
+        this.tickerID = tickerID;
+        this.instrumentName = instrumentName;
+        setRealTimeDataSource(marketConnection);
+    }
+
+    final private int tickerID;
+    final public String instrumentName;
 
     public enum PriceType{
         MANUAL,
@@ -28,10 +40,10 @@ public class PriceServer {
     private int askVolume = -5;
 
     //livemarket prices and volumes:
-    private int liveBidPrice = 27100;
-    private int liveAskPrice = 27101;
-    private int liveBidVolume = -5;
-    private int liveAskVolume = -5;
+//    private int liveBidPrice = 27100;
+//    private int liveAskPrice = 27101;
+//    private int liveBidVolume = -5;
+//    private int liveAskVolume = -5;
 
     //historical prices and volumes:
     private int historicalBidPrice = 27100;
@@ -45,7 +57,7 @@ public class PriceServer {
         switch (priceType){
             case MANUAL: return bidPrice;
             case HISTORICAL: return historicalBidPrice;
-            case LIVEMARKET: return liveBidPrice;
+            case LIVEMARKET: return getRealTimeBidPrice();
             default: return bidPrice;
         }
     }
@@ -55,9 +67,13 @@ public class PriceServer {
 //        System.out.println("Bid price set to: " + bidPrice);
     }
 
-    //TODO: finish this. returns only manual prices now
     public int getAskPrice() {
-        return askPrice;
+        switch (priceType){
+            case MANUAL: return askPrice;
+            case HISTORICAL: return historicalAskPrice;
+            case LIVEMARKET: return getRealTimeAskPrice();
+            default: return bidPrice;
+        }
     }
 
     synchronized public void setAskPrice(int askPrice) {
@@ -87,16 +103,16 @@ public class PriceServer {
         this.outsideTradingSoftwareAPIConnection = outsideTradingSoftwareAPIConnection;
     }
 
-    public double getRealTimeBidPrice(){
+    public int getRealTimeBidPrice(){
         if(!(outsideTradingSoftwareAPIConnection == null)){
-            return outsideTradingSoftwareAPIConnection.getBidPrice();
+            return (int)(100*outsideTradingSoftwareAPIConnection.getBidPrice(tickerID));
         }
         return -5;
     }
 
-    public double getRealTimeAskPrice(){
+    public int getRealTimeAskPrice(){
         if(!(outsideTradingSoftwareAPIConnection == null)){
-            return outsideTradingSoftwareAPIConnection.getAskPrice();
+            return(int)(100* outsideTradingSoftwareAPIConnection.getAskPrice(tickerID));
         }
         return -5;
     }
