@@ -74,8 +74,6 @@ public class OrderServer {
             getActiveOrdersList().remove(orderId);
             getFilledOrdersList().add(orderId);
         }
-
-        //TODO: think of something to notify PosOrders class what placed the order that it has been filled.
     }
 
     /**

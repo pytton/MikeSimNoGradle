@@ -20,6 +20,11 @@ public class MikePosOrders {
     private SortedSet<Long> activeOrdersSet = new TreeSet<>();
     private Set<Long> filledOrdersToBeProcessed = new HashSet<>();
 
+    public MikePosOrders(OrderServer orderServer, PriceServer priceServer) {
+        this.orderServer = orderServer;
+        this.priceServer = priceServer;
+    }
+
     public class OrdersAtPrice{
 
         public int getOpenOrdersAtPrice(int price) {
@@ -33,11 +38,9 @@ public class MikePosOrders {
         return positionsMap.get(price);
     }
 
-
-
-    public MikePosOrders(OrderServer orderServer, PriceServer priceServer) {
-        this.orderServer = orderServer;
-        this.priceServer = priceServer;
+    @Override
+    public String toString() {
+        return name;
     }
 
     /**
@@ -72,8 +75,6 @@ public class MikePosOrders {
 
         //if there are no orders to process then do nothing:
         if(filledOrdersToBeProcessed.isEmpty()) return;
-
-        //TODO: write this
 
         MikeOrder order;
         for (long orderId : filledOrdersToBeProcessed) {

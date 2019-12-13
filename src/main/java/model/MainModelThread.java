@@ -10,25 +10,17 @@ import main.java.model.orderserver.OrderServer;
 import main.java.model.positionsorders.MikePosOrders;
 import main.java.model.priceserver.PriceServer;
 
+import java.util.Map;
+
 public class MainModelThread extends Thread {
 
-    public ObservableList<PriceServer> priceServers;
-
     public MainGUIClass mainGUIClass;
-
-    //provides prices for the program:
-    public PriceServer priceServer;
+    public PosOrdersManager posOrdersManager; // = new PosOrdersManager();
 
     //set up connection to outside trading software for market data, orders, etc:
     public OutsideTradingSoftwareAPIConnection marketConnection;
 
-    //handles all orders, checking for order fills:
-    private OrderServer orderServer;
-
-    //MikePosOrders - this is used to have multiple separate 'books' of orders and positions - to manage trading.
-    // TODO: for now this is just one instance. Modify to be able to have as many as you want.
-    public MikePosOrders mikePosOrders;
-    public ObservableList<MikePosOrders> posOrdersObservableList = FXCollections.observableArrayList();
+    //used for unique names:
     private long mikePosOrdersNumber = 0;
 
     private GUIUpdateDispatcher myGUIUpdateDispatcher;
@@ -37,8 +29,6 @@ public class MainModelThread extends Thread {
     int refreshGUIInMiliseconds = 100;//set this to change GUI refresh rate
     long mainLoopTurnaroundTime = 0;//for monitoring performance
 
-
-//    PriceServerManager priceServerManager;
 
     public void shutDownMikeSim(){
         interrupted = true;
@@ -50,19 +40,8 @@ public class MainModelThread extends Thread {
         //set up connection to outside trading software for market data, orders, etc:
         marketConnection = new InteractiveBrokersAPI();
 
-        //provides prices for the program:
-        //one priceserver for each tickerID
-        priceServers = FXCollections.observableArrayList();
-        priceServer = new PriceServer(0, "SPY", marketConnection);
-        priceServers.add(priceServer);
-        priceServers.add(new PriceServer(1, "DIA", marketConnection));
-        priceServers.add(new PriceServer(2, "IWM", marketConnection));
-        priceServers.add(new PriceServer(3, "QQQ", marketConnection));
-        priceServers.add(new PriceServer(4, "EUR FOREX", marketConnection));
+        posOrdersManager = new PosOrdersManager();
 
-        orderServer = new OrderServer();
-
-        createMikePosorders();
     }
 
     @Override
@@ -105,43 +84,117 @@ public class MainModelThread extends Thread {
 
     private void processAlgos(){}
     private void processOrders(){
-        orderServer.checkSimulatedFills(priceServer);
+        posOrdersManager.orderServer.checkSimulatedFills(posOrdersManager.priceServer);
 
-        if (getMikePosOrders(0) != null) {
-            getMikePosOrders(0).processFilledOrders();
+        if (posOrdersManager.getMikePosOrders(0, this) != null) {
+            posOrdersManager.getMikePosOrders(0, this).processFilledOrders();
         }
-    }
-
-    /**
-     * Create an instance of MikePosOrders and add it to the list
-     * @return
-     */
-    synchronized public MikePosOrders createMikePosorders(){
-        MikePosOrders posOrders = new MikePosOrders(orderServer, priceServer);
-        //TODO: finish this so that you set the correct orderServer based on the instrument
-
-
-
-        posOrders.setName("Positions number " + mikePosOrdersNumber++);
-        posOrdersObservableList.add(posOrders);
-
-        return posOrders;
-    }
-
-    public MikePosOrders getMikePosOrders(int mikePosOrdersNumber) {
-        return posOrdersObservableList.get(mikePosOrdersNumber);
     }
 
     synchronized public void connectOutsideData(){
         marketConnection.connect();
     }
 
-    synchronized public PriceServer getPriceServer(){return priceServer;}
+    synchronized public PriceServer getPriceServer(){return posOrdersManager.priceServer;}
 
     public OrderServer getOrderServer() {
-        return orderServer;
+        return posOrdersManager.orderServer;
     }
 
+    /**
+     * This class is responsible for creating and managing new PosOrders and assigning them the correct
+     * PriceServer and OrderServer depending on which instrument the PosOrders is supposed to trade.
+     * PosOrders needs a PriceServer and OrderServer. There is only one PriceServer and one OrderServer
+     * for every instrument traded. The traded instruments are identified by their tickerId,
+     * just like in the InterActive Brokers API.
+     * There can be many PosOrders for one traded instrument.
+     * Once a PosOrders is created, it can only be used to trade the instrument it was
+     * created for trading initially
+     */
+    public class PosOrdersManager {
+
+        private class Data{
+            
+
+        }
+
+        private Map<Integer, Data> dataMap;
+
+        private Map<Integer, String> tickerIdMap;
+
+        //handles all orders, checking for order fills:
+        private OrderServer orderServer;
+
+        //provides prices for the program:
+        private PriceServer priceServer;
+
+        //MikePosOrders - this is used to have multiple separate 'books' of orders and positions - to manage trading.
+        // TODO: for now this is just one instance. Modify to be able to have as many as you want.
+        private ObservableList<MikePosOrders> posOrdersObservableList;// = FXCollections.observableArrayList();
+
+        //provides prices for the program:
+        //one priceserver for each tickerID
+        private ObservableList<PriceServer> priceServerObservableList;// = FXCollections.observableArrayList();
+
+        private ObservableList<OrderServer> orderServerObservableList = FXCollections.observableArrayList();
+
+        public PosOrdersManager() {
+
+            posOrdersObservableList = FXCollections.observableArrayList();
+
+            priceServerObservableList = FXCollections.observableArrayList();
+
+            /*posOrdersManager.*/
+            priceServer = new PriceServer(0, "SPY", marketConnection);
+            /*posOrdersManager.*/
+            priceServerObservableList.add(priceServer);
+            /*posOrdersManager.*/
+            priceServerObservableList.add(new PriceServer(1, "DIA", marketConnection));
+            /*posOrdersManager.*/
+            priceServerObservableList.add(new PriceServer(2, "IWM", marketConnection));
+            /*posOrdersManager.*/
+            priceServerObservableList.add(new PriceServer(3, "QQQ", marketConnection));
+            /*posOrdersManager.*/
+            priceServerObservableList.add(new PriceServer(4, "EUR FOREX", marketConnection));
+
+            /*posOrdersManager.*/
+            orderServer = new OrderServer();
+
+            createMikePosorders(0);
+
+        }
+
+        public MikePosOrders getMikePosOrders(int mikePosOrdersNumber, MainModelThread mainModelThread) {
+            return posOrdersObservableList.get(mikePosOrdersNumber);
+        }
+
+        /**
+         * Create an instance of MikePosOrders and add it to the list
+         */
+        synchronized public MikePosOrders createMikePosorders(Integer tickerId) {
+            MikePosOrders posOrders = new MikePosOrders(orderServer, priceServer);
+            //TODO: finish this so that you set the correct orderServer based on the instrument
+
+            posOrders.setName("Positions number " + /*mainModelThread.*/mikePosOrdersNumber++);
+            posOrdersObservableList.add(posOrders);
+
+            return posOrders;
+        }
+
+        public ObservableList<PriceServer> getPriceServerObservableList(/*MainModelThread mainModelThread*/) {
+            return /*mainModelThread.posOrdersManager.*/priceServerObservableList;
+        }
+
+        public ObservableList<MikePosOrders> getPosOrdersObservableList(MainModelThread mainModelThread) {
+            return posOrdersObservableList;
+        }
+    }
+
+
+    /**
+     * This is used to make sure GUI is updated in a separate thread
+     * only once every refreshGUIInMiliseconds
+     */
     private class GUIUpdateDispatcher implements Runnable {
 
         MainGUIClass mainGUIClass;
@@ -170,4 +223,5 @@ public class MainModelThread extends Thread {
             return isReady;
         }
     }
+
 }

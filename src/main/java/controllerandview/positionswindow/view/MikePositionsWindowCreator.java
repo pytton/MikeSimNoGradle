@@ -28,7 +28,7 @@ public class MikePositionsWindowCreator {
         //this is used to access elements of MikePositionsWindowCreator:
         positionsWindowController = (ControllerPositionsWindow)posWindowLoader.getController();
         //this adds a custom table of buttons to the scene
-        buttonTable = new MikeGridPane(100,9, positionsWindowController);
+        buttonTable = new MikeGridPane(100,7, positionsWindowController);
 
 
 
@@ -37,10 +37,10 @@ public class MikePositionsWindowCreator {
         ScrollPane sp = new ScrollPane();
         sp.setContent(buttonTable);
         sp.setFitToWidth(true);
-        sp.setMaxWidth(450);
+//        sp.setMaxWidth(450);
 
         positionsWindowController.getMainBorderPane().setLeft(sp);
-        positionsWindowController.getMainBorderPane().setMinWidth(850);
+//        positionsWindowController.getMainBorderPane().setMinWidth(850);
 
 //        positionsWindowController.getMainBorderPane().setCenter(sp);
         positionsWindowController.setMikeGridPane(buttonTable);

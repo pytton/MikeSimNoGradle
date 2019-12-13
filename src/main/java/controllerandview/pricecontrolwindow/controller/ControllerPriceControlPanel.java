@@ -13,7 +13,23 @@ public class ControllerPriceControlPanel {
 
     private PriceServer priceServer;
     private PriceServer.PriceType priceType = PriceServer.PriceType.MANUAL;
-    private ObservableList<String> instrumentNamesList;
+//    private ObservableList<String> instrumentNamesList;
+
+
+//    public void setInstrumentsList(ListView instrumentsList) {
+//        this.instrumentsList = instrumentsList;
+//    }
+
+    @FXML
+    public ListView instrumentsList;
+
+    public void addToInstrumentList(ObservableList<PriceServer> instrumentNamesList){
+        instrumentsList.getItems().addAll(instrumentNamesList);
+    }
+
+    public void setInstrumentList(ObservableList<PriceServer> instrumentNamesList) {
+        instrumentsList.setItems(instrumentNamesList);
+    }
 
 
     @FXML
@@ -27,11 +43,7 @@ public class ControllerPriceControlPanel {
     @FXML
     public TextField askPriceTextField;
 
-    public void addToInstrumentList(ObservableList<PriceServer> instrumentNamesList){
-        instrumentsList.getItems().addAll(instrumentNamesList);
-    }
 
-    public ListView instrumentsList;
     @FXML
     public ToggleGroup priceSourceToggleGroup;
     public RadioButton historicalRadioButton;
@@ -39,9 +51,9 @@ public class ControllerPriceControlPanel {
     public RadioButton liveRadioButton;
     public TextField experimentalTextField1;
     @FXML
-    private Integer minSliderValue = 27000;
+    private Integer minSliderValue = 27100;
     @FXML
-    private Integer maxSliderValue = 27300;
+    private Integer maxSliderValue = 27200;
 
     @FXML
     public void initialize() {
@@ -62,7 +74,7 @@ public class ControllerPriceControlPanel {
 
                 System.out.println("Clicked!");
 
-                controllerPriceControlPanel.priceServer =   (PriceServer) instrumentsList.getSelectionModel().getSelectedItem();
+                controllerPriceControlPanel.priceServer = (PriceServer) instrumentsList.getSelectionModel().getSelectedItem();
 
                 System.out.println("Price: " + controllerPriceControlPanel.priceServer.getAskPrice());
 
@@ -188,20 +200,15 @@ public class ControllerPriceControlPanel {
     }
 
     public void testButtonClicked(ActionEvent actionEvent) {
-        //TODO:
-        //connect to real-time data
-        System.out.println("Test button clicked");
 
+        System.out.println("Test button clicked");
 
         System.out.println("Ask price: " + getPriceServer().getAskPrice());
 
         System.out.println("Realtime ask price: " + getPriceServer().getRealTimeAskPrice());
 
 
-        instrumentNamesList.add("Hello" /*+ getPriceServer().getAskPrice()*/);
-
-
-        instrumentsList.getItems().add("Hello");
+//        instrumentsList.getItems().add("Hello");
     }
 
     public PriceServer getPriceServer() {

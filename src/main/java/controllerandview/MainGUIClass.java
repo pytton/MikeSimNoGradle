@@ -4,13 +4,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import main.java.controllerandview.mainGUIwindow.controller.ControllerPrimaryGUIWindow;
+import main.java.controllerandview.mainGUIwindow.controller.ControllerMainGUIWindow;
 import main.java.controllerandview.positionswindow.controller.ControllerPositionsWindow;
 import main.java.controllerandview.positionswindow.view.MikePositionsWindowCreator;
 import main.java.controllerandview.pricecontrolwindow.controller.ControllerPriceControlPanel;
 import main.java.model.MainModelThread;
-import main.java.model.positionsorders.MikePosOrders;
-import main.java.model.priceserver.PriceServer;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -71,8 +69,10 @@ public class MainGUIClass {
 
         FXMLLoader primaryGUIWindowLoader = new FXMLLoader(getClass().getResource("/MainGUIWindow.fxml"));
         Parent primaryGUIRoot = primaryGUIWindowLoader.load();
-        ControllerPrimaryGUIWindow primaryGUIWindow = (ControllerPrimaryGUIWindow) primaryGUIWindowLoader.getController();
+        ControllerMainGUIWindow primaryGUIWindow = (ControllerMainGUIWindow) primaryGUIWindowLoader.getController();
         primaryGUIWindow.setMainGUIClass(this);
+        primaryGUIWindow.setModel(mainModelThread);
+        primaryGUIWindow.instrumentsList.setItems(mainModelThread.posOrdersManager.getPriceServerObservableList(/*mainModelThread*/));
 
         initialStage.setScene(new Scene(primaryGUIRoot));
         initialStage.setTitle("MikeSimulator prototype 0.1");
@@ -96,10 +96,13 @@ public class MainGUIClass {
         posWindowController.setModel(mainModelThread);
 
         //TODO: this assignes a default MikePosOrders:
-        posWindowController.setMikePosOrders(mainModelThread.getMikePosOrders(0));
+        posWindowController.setMikePosOrders(mainModelThread.posOrdersManager.getMikePosOrders(0, mainModelThread));
 
-        //add the controller to the list of controllers:
+        //add the controller to the list of controllers (for updateGUI):
         posWindowControllerList.add(posWindowController);
+
+        //TODO: finish this: populate the ListView:
+        posWindowController.positionsList.setItems(mainModelThread.posOrdersManager.getPosOrdersObservableList(mainModelThread));
 
         //create the window:
         Stage secondStage = new Stage();
@@ -130,7 +133,9 @@ public class MainGUIClass {
         priceControlPanel.setPriceServer(getMainModelThread().getPriceServer());
 
         //todo: experimenting. adding list of priceservers:
-        priceControlPanel.addToInstrumentList(mainModelThread.priceServers);
+//        priceControlPanel.addToInstrumentList(mainModelThread.priceServerObservableList);
+        priceControlPanel.setInstrumentList(mainModelThread.posOrdersManager.getPriceServerObservableList(/*mainModelThread*/));
+//        priceControlPanel.setInstrumentsList(mainModelThread.priceServerListView);
 
 
         //add the controller to the list of controllers:

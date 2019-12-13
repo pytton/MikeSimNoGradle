@@ -11,19 +11,20 @@ import main.java.model.livemarketdata.OutsideTradingSoftwareAPIConnection;
  */
 public class PriceServer {
 
+    //    private Integer tickerId;
+    final private int tickerID;
+    final public String TradedInstrumentName;
+
     @Override
     public String toString() {
-        return instrumentName;
+        return TradedInstrumentName;
     }
 
-    public PriceServer(int tickerID, String instrumentName, OutsideTradingSoftwareAPIConnection marketConnection){
+    public PriceServer(int tickerID, String TradedInstrumentName, OutsideTradingSoftwareAPIConnection marketConnection){
         this.tickerID = tickerID;
-        this.instrumentName = instrumentName;
+        this.TradedInstrumentName = TradedInstrumentName;
         setRealTimeDataSource(marketConnection);
     }
-
-    final private int tickerID;
-    final public String instrumentName;
 
     public enum PriceType{
         MANUAL,
@@ -124,4 +125,9 @@ public class PriceServer {
     public void setPriceType(PriceType priceType) {
         this.priceType = priceType;
     }
+
+    public int getTickerID() {
+        return tickerID;
+    }
+
 }

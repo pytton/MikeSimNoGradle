@@ -3,6 +3,7 @@ package main.java.controllerandview.positionswindow.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import main.java.model.MainModelThread;
@@ -16,6 +17,7 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
 
     @FXML
     public BorderPane mainBorderPane;
+    public ListView positionsList;
     @FXML
     private TextField TopRowPriceTextField;
     @FXML
@@ -89,9 +91,28 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
                 setSpecificButtonInMikeGridPane(row, 0, ""+ position.getOpen_amount());
             }
 
+            //print "BID" in the row of the bid price in second column:
+            if (topRowPrice - row == priceServer.getBidPrice()) {
+                setSpecificButtonInMikeGridPane(row, 1, "BID");
+            }else{
+                setSpecificButtonInMikeGridPane(row, 1, "");
+            }
+
+
             //print prices in the third column of mikeGridPane:
             setSpecificButtonInMikeGridPane( row,2, "" +(topRowPrice - row)
             );
+
+            //print "ASK" in the row of the ask price in fourth column:
+            if (topRowPrice - row == priceServer.getAskPrice()) {
+                setSpecificButtonInMikeGridPane(row, 3, "ASK");
+            }else{
+                setSpecificButtonInMikeGridPane(row, 3, "");
+            }
+
+
+
+
         }
 
     }
@@ -144,6 +165,13 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
     public void setTopRowPriceBtnClicked(ActionEvent actionEvent) {
         Integer topRowPriceToBeSet = Integer.parseInt(TopRowPriceTextField.getText());
         topRowPrice = topRowPriceToBeSet;
+    }
+
+    /**
+     * set the current top row price to ask price + 50
+     */
+    public void ask50Clicked(ActionEvent event) {
+        topRowPrice = priceServer.getAskPrice() + 50;
     }
 
     public void buyLimitButtonClicked(ActionEvent actionEvent) {
