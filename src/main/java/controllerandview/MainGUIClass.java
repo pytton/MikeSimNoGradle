@@ -16,6 +16,10 @@ import java.util.List;
 
 public class MainGUIClass {
 
+
+
+    //Windows can choose which instrument they refer to. this sets the default instrument
+    int defaultTickerId = 0;
     private long count =0;
     public MainModelThread mainModelThread;
 
@@ -72,7 +76,7 @@ public class MainGUIClass {
         ControllerMainGUIWindow primaryGUIWindow = (ControllerMainGUIWindow) primaryGUIWindowLoader.getController();
         primaryGUIWindow.setMainGUIClass(this);
         primaryGUIWindow.setModel(mainModelThread);
-        primaryGUIWindow.instrumentsList.setItems(mainModelThread.posOrdersManager.getPriceServerObservableList(/*mainModelThread*/));
+        primaryGUIWindow.instrumentsList.setItems(mainModelThread.posOrdersManager.getPriceServerObservableList());
 
         initialStage.setScene(new Scene(primaryGUIRoot));
         initialStage.setTitle("MikeSimulator prototype 0.1");
@@ -86,8 +90,9 @@ public class MainGUIClass {
         //create Positions Window:
         //we need to add custom MikeGridPane not defined in FXML:
         MikePositionsWindowCreator posWindow = null;
+
         try {
-            posWindow = new MikePositionsWindowCreator(getMainModelThread().getPriceServer());
+            posWindow = new MikePositionsWindowCreator(getMainModelThread().posOrdersManager.getPriceServer(defaultTickerId));
         } catch (IOException e) {
             System.out.println("Exception in createPosWindow");
             e.printStackTrace();
@@ -95,14 +100,18 @@ public class MainGUIClass {
         ControllerPositionsWindow posWindowController = posWindow.getPositionsWindowController();
         posWindowController.setModel(mainModelThread);
 
-        //TODO: this assignes a default MikePosOrders:
-        posWindowController.setMikePosOrders(mainModelThread.posOrdersManager.getMikePosOrders(0, mainModelThread));
+        //set the default instrument
+        posWindowController.setInstrumentList(mainModelThread.posOrdersManager.getPriceServerObservableList());
+//        posWindowController.instrumentsList.setItems(mainModelThread.posOrdersManager.getPriceServer(defaultTickerId));
+
+        //todo: currently only defaultTickerId = 0 . chenge this later
+        posWindowController.setMikePosOrders(mainModelThread.posOrdersManager.getMikePosOrders(defaultTickerId, 0));
 
         //add the controller to the list of controllers (for updateGUI):
         posWindowControllerList.add(posWindowController);
 
-        //TODO: finish this: populate the ListView:
-        posWindowController.positionsList.setItems(mainModelThread.posOrdersManager.getPosOrdersObservableList(mainModelThread));
+        //populate the ListView that allows choosing PosOrders
+        posWindowController.positionsList.setItems(mainModelThread.posOrdersManager.getPosOrdersObservableList(defaultTickerId));
 
         //create the window:
         Stage secondStage = new Stage();
@@ -130,17 +139,12 @@ public class MainGUIClass {
 
         //get the controller class:
         ControllerPriceControlPanel priceControlPanel = (ControllerPriceControlPanel) priceControlPanelLoader.getController();
-        priceControlPanel.setPriceServer(getMainModelThread().getPriceServer());
-
-        //todo: experimenting. adding list of priceservers:
-//        priceControlPanel.addToInstrumentList(mainModelThread.priceServerObservableList);
-        priceControlPanel.setInstrumentList(mainModelThread.posOrdersManager.getPriceServerObservableList(/*mainModelThread*/));
-//        priceControlPanel.setInstrumentsList(mainModelThread.priceServerListView);
-
-
+        //set the priceserver chosen at the beginning:
+        priceControlPanel.setPriceServer(getMainModelThread().posOrdersManager.getPriceServer(defaultTickerId));
+        //adding list of priceservers:
+        priceControlPanel.setInstrumentList(mainModelThread.posOrdersManager.getPriceServerObservableList());
         //add the controller to the list of controllers:
         priceControlPanelControllerList.add(priceControlPanel);
-
         //create the window:
         Stage primaryStage = new Stage();
         primaryStage.setTitle("Price Control");
@@ -153,9 +157,7 @@ public class MainGUIClass {
         //name the window:
         String name = ("Price Control " + priceControlPanelControllerList.size());
         primaryStage.setTitle(name);
-
     }
-
 
     public MainModelThread getMainModelThread() {
         return mainModelThread;

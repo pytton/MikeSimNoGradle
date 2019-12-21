@@ -13,25 +13,112 @@ public class MikePosOrders {
      */
     private String name;
 
-    private OrderServer orderServer;
-    private PriceServer priceServer; //we need this to calculate Profit/Loss (PL)
+    private int openPL = 0;
+    private int closedPL = 0;
+    private int totalPL = 0;
+    private double averagePrice = 0;
+    /**
+     * positive totalOpenAmount means the total position is long
+     * negative means it is short
+     */
+    private int totalOpenAmount = 0;
+
 
     private Map<Integer, MikePosition> positionsMap = new HashMap<>();
     private SortedSet<Long> activeOrdersSet = new TreeSet<>();
     private Set<Long> filledOrdersToBeProcessed = new HashSet<>();
+    public OrdersAtPrice ordersAtPrice;
+    private OrderServer orderServer;
+    private PriceServer priceServer; //we need this to calculate Profit/Loss (PL)
+
 
     public MikePosOrders(OrderServer orderServer, PriceServer priceServer) {
         this.orderServer = orderServer;
         this.priceServer = priceServer;
+        ordersAtPrice = new OrdersAtPrice();
     }
 
+    /**
+     * ask this class for the amount of open buy and sell orders at a given price
+     */
     public class OrdersAtPrice{
 
-        public int getOpenOrdersAtPrice(int price) {
+        private Map <Integer, Integer> buyOrdersAtPrice = new TreeMap<>();
+        private Map <Integer, Integer> sellOrdersAtPrice = new TreeMap<>();
 
-            //TODO: finish this:
-            return 0;
+        /**
+         * for a given price, returns the total amount of open buy (limit and stop) orders for that price
+         * @param price
+         * @return
+         */
+        public int getOpenBuyOrdersAtPrice(int price) {
+
+            if(buyOrdersAtPrice.containsKey(price)) return buyOrdersAtPrice.get(price);
+            else return 0;
         }
+
+        public int getOpenSellOrdersAtPrice(int price) {
+            if(sellOrdersAtPrice.containsKey(price)) return sellOrdersAtPrice.get(price);
+            else return 0;
+        }
+
+        /**
+         * When an order is placed, filled, modified or cancelled, this needs to be called
+         * Goes through all the open orders and updates buyOrdersAtPrice and sellOrdersAtPrice
+         */
+        synchronized public void recalculate() {
+            buyOrdersAtPrice.clear();
+            sellOrdersAtPrice.clear();
+
+            MikeOrder order;
+            int currentOpenOrdersAmount =0;
+            for (long orderId : activeOrdersSet) {
+                 order = orderServer.getAllOrdersMap().get(orderId);
+
+
+                 if (order.getOrderType() == MikeOrder.MikeOrderType.BUYLMT
+                 || order.getOrderType() == MikeOrder.MikeOrderType.BUYSTP)
+                 {
+
+                     //if there already is an entry in the map, add to it
+                     if(buyOrdersAtPrice.containsKey(order.getPrice()))
+                     {   currentOpenOrdersAmount = buyOrdersAtPrice.get(order.getPrice());
+                         currentOpenOrdersAmount += order.getAmount();
+                         buyOrdersAtPrice.put(order.getPrice(), currentOpenOrdersAmount);
+                     } else{
+                         //otherwise create a new entry
+                         buyOrdersAtPrice.put(order.getPrice(), order.getAmount());}
+                 }
+
+                if (order.getOrderType() == MikeOrder.MikeOrderType.SELLLMT
+                        || order.getOrderType() == MikeOrder.MikeOrderType.SELLSTP)
+                {
+                    //if there already is an entry in the map, add to it
+                    if(sellOrdersAtPrice.containsKey(order.getPrice()))
+                    {   currentOpenOrdersAmount = sellOrdersAtPrice.get(order.getPrice());
+                        currentOpenOrdersAmount += order.getAmount();
+                        sellOrdersAtPrice.put(order.getPrice(), currentOpenOrdersAmount);
+                    } else{
+                        //otherwise create a new entry
+                        sellOrdersAtPrice.put(order.getPrice(), order.getAmount());}
+                }
+            }
+        }
+    }
+
+    public void recalcutlatePL(){
+        openPL = 0; closedPL = 0; totalPL = 0; totalOpenAmount = 0;
+        averagePrice = 0;
+        double averagePriceCalculator = 0;
+        for (MikePosition position : positionsMap.values()) {
+            position.calculatePL(priceServer.getBidPrice(), priceServer.getAskPrice());
+            openPL += position.getOpen_pl();
+            closedPL += position.getClosed_pl();
+            totalPL += position.getTotal_pl();
+            totalOpenAmount += position.getOpen_amount();
+            averagePriceCalculator += (position.getOpen_amount() * position.getPrice());
+        }
+        averagePrice = averagePriceCalculator / totalOpenAmount;
     }
 
     public MikePosition getMikePositionAtPrice(int price){
@@ -54,6 +141,8 @@ public class MikePosOrders {
         long orderNumber = orderServer.placeNewOrder(this, orderType, assignedToPos, price, amount);
         //add the order number to the list of active orders:
         activeOrdersSet.add(orderNumber);
+        //UPDATE OPEN ORDERS BY PRICE
+        ordersAtPrice.recalculate();
         return orderNumber;
     }
 
@@ -101,6 +190,9 @@ public class MikePosOrders {
 
         //make sure filled orders are only processed once:
         filledOrdersToBeProcessed.clear();
+
+        //RECALCULATE ORDERS AT PRICE
+        ordersAtPrice.recalculate();
     }
 
     /**
@@ -110,6 +202,8 @@ public class MikePosOrders {
     public void cancelOrder(long orderId) {
         orderServer.cancelOrder(orderId);
         activeOrdersSet.remove(orderId);
+        //RECALCULATE ACTIVE ORDERS BY PRICE
+        ordersAtPrice.recalculate();
     }
 
     /**
@@ -151,5 +245,25 @@ public class MikePosOrders {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getOpenPL() {
+        return openPL;
+    }
+
+    public int getClosedPL() {
+        return closedPL;
+    }
+
+    public int getTotalPL() {
+        return totalPL;
+    }
+
+    public double getAveragePrice() {
+        return averagePrice;
+    }
+
+    public int getTotalOpenAmount() {
+        return totalOpenAmount;
     }
 }

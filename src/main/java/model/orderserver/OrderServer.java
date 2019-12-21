@@ -20,6 +20,9 @@ public class OrderServer {
 
     /**
      * Call this to check for fills of orders being simulated by monitoring bid/ask price
+     *                 for buy orders, the amount will be positive
+     *                 for sell orders, the amount has to be negative!
+     *                 a negative filled amount means the position is short
      */
     synchronized public void checkSimulatedFills(PriceServer priceServer){
 
@@ -52,7 +55,8 @@ public class OrderServer {
             if(order.getOrderType()== MikeOrder.MikeOrderType.SELLLMT && bidPrice >= order.getPrice() && !order.isCancelled()){
                 order.setFilled(true);
                 order.setFilledPrice(bidPrice);
-                order.setFilledAmount(order.getAmount());
+                //this is a sell order so the amount must be negative!
+                order.setFilledAmount(order.getAmount() * -1);
                 filledOrderIDs.add(orderId);
 
                 System.out.println("Order Filled! Fill Price: " + order.getFilledPrice());
@@ -60,7 +64,8 @@ public class OrderServer {
             if(order.getOrderType()== MikeOrder.MikeOrderType.SELLSTP && bidPrice <= order.getPrice() && !order.isCancelled()){
                 order.setFilled(true);
                 order.setFilledPrice(bidPrice);
-                order.setFilledAmount(order.getAmount());
+                //this is a sell order so the amount must be negative!
+                order.setFilledAmount(order.getAmount() * -1);
                 filledOrderIDs.add(orderId);
 
                 System.out.println("Order Filled! Fill Price: " + order.getFilledPrice());

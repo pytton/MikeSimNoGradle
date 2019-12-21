@@ -83,12 +83,6 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
                <children>
-                  <Label prefHeight="50.0" prefWidth="100.0" text="Total Profit/Loss" />
-                  <TextField fx:id="totalPLTextField" prefWidth="90.0" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
-               <children>
                   <Label prefHeight="50.0" prefWidth="100.0" text="Total Open P/L" />
                   <TextField fx:id="totalOpenPLTextField" prefWidth="90.0" />
                </children>
@@ -97,6 +91,15 @@
                <children>
                   <Label prefHeight="50.0" prefWidth="100.0" text="Total Closed P/L" />
                   <TextField fx:id="totalClosedPLTextField" prefWidth="90.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="50.0" prefWidth="100.0" text="Total Profit/Loss">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <TextField fx:id="totalPLTextField" prefWidth="90.0" />
                </children>
             </HBox>
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="150.0" text="Cancel All Orders" />

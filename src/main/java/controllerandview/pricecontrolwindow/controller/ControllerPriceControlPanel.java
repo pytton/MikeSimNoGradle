@@ -63,6 +63,8 @@ public class ControllerPriceControlPanel {
         maxPriceTextField.setText(maxSliderValue.toString());
         minPriceTextField.setText(minSliderValue.toString());
 
+        //this handles changing the instrument PriceControlPanel refers to based on what the user
+        //selected in in ListView instrumentlist:
         class MyChangeListener implements ChangeListener{
             ControllerPriceControlPanel controllerPriceControlPanel;
             MyChangeListener(ControllerPriceControlPanel controllerPriceControlPanel){
@@ -71,30 +73,12 @@ public class ControllerPriceControlPanel {
 
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
-
-                System.out.println("Clicked!");
-
                 controllerPriceControlPanel.priceServer = (PriceServer) instrumentsList.getSelectionModel().getSelectedItem();
-
-                System.out.println("Price: " + controllerPriceControlPanel.priceServer.getAskPrice());
-
                 System.out.println("Chosen: " + controllerPriceControlPanel.priceServer.toString());
-
             }
         }
-
         MyChangeListener listener = new MyChangeListener(this);
-
         instrumentsList.getSelectionModel().selectedItemProperty().addListener( listener );
-
-
-//        instrumentNamesList = FXCollections.<String>observableArrayList("SPY", "DIA", "IWM", "EUR");
-//
-//        ObservableList<PriceServer> instrumentNamesList2 = FXCollections.observableArrayList(new PriceServer(0, "SPY"), new PriceServer(1, "DIA"));
-//
-//        instrumentsList.getItems().addAll(instrumentNamesList2);
-
-
 
         //instrumentsList.getItems().addAll(instrumentNamesList);
 
@@ -105,28 +89,26 @@ public class ControllerPriceControlPanel {
 
         //assign a listener to the radiobuttons. pressing the radiobutton selects the price source for the priceserver:
         priceSourceToggleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
-                                                                        @Override
-                                                                        public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
-                                                                            if (priceSourceToggleGroup.getSelectedToggle() == manualRadioButton) {
-                                                                                experimentalTextField1.setText("Manual");
-                                                                                getPriceServer().setPriceType(PriceServer.PriceType.MANUAL);
-                                                                            }
-                                                                            if (priceSourceToggleGroup.getSelectedToggle() == liveRadioButton) {
-                                                                                experimentalTextField1.setText("Live");
-                                                                                getPriceServer().setPriceType(PriceServer.PriceType.LIVEMARKET);
+                @Override
+                public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+                    if (priceSourceToggleGroup.getSelectedToggle() == manualRadioButton) {
+                        experimentalTextField1.setText("Manual");
+                        getPriceServer().setPriceType(PriceServer.PriceType.MANUAL);
+                    }
+                    if (priceSourceToggleGroup.getSelectedToggle() == liveRadioButton) {
+                        experimentalTextField1.setText("Live");
+                        getPriceServer().setPriceType(PriceServer.PriceType.LIVEMARKET);
 
-                                                                                System.out.println("Live prices selected");
-                                                                                System.out.println("Live ask price: " + getPriceServer().getRealTimeAskPrice());
-                                                                            }
-                                                                            if (priceSourceToggleGroup.getSelectedToggle() == historicalRadioButton) {
-                                                                                experimentalTextField1.setText("Live");
-                                                                                getPriceServer().setPriceType(PriceServer.PriceType.HISTORICAL);
+                        System.out.println("Live prices selected");
+                        System.out.println("Live ask price: " + getPriceServer().getRealTimeAskPrice());
+                    }
+                    if (priceSourceToggleGroup.getSelectedToggle() == historicalRadioButton) {
+                        experimentalTextField1.setText("Live");
+                        getPriceServer().setPriceType(PriceServer.PriceType.HISTORICAL);
                                                                             }
                                                                         }
                                                                     }
         );
-
-
     }
 
     public void updateGUI(){

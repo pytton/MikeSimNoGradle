@@ -4,7 +4,7 @@ package main.java.model.priceserver;
 import main.java.model.livemarketdata.OutsideTradingSoftwareAPIConnection;
 
 /**
- * Provides priceserver bid/ask volumes for a single instrument.
+ * Provides priceserver bid/ask prices and volumes for a single instrument.
  * Prices can be one of three: live, manual or historical
  * One PriceServer per one instrument to be traded.
  * So one for SPY, another one for DIA etc.
@@ -14,6 +14,8 @@ public class PriceServer {
     //    private Integer tickerId;
     final private int tickerID;
     final public String TradedInstrumentName;
+    private OutsideTradingSoftwareAPIConnection outsideTradingSoftwareAPIConnection = null;
+
 
     @Override
     public String toString() {
@@ -25,14 +27,12 @@ public class PriceServer {
         this.TradedInstrumentName = TradedInstrumentName;
         setRealTimeDataSource(marketConnection);
     }
-
     public enum PriceType{
         MANUAL,
         LIVEMARKET,
         HISTORICAL
-    }
 
-    private OutsideTradingSoftwareAPIConnection outsideTradingSoftwareAPIConnection = null;
+    }
 
     //simulatad manual prices and volumes:
     private int bidPrice = 27100;

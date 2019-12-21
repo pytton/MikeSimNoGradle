@@ -18,11 +18,10 @@ import com.ib.client.Order;
 import com.ib.client.OrderState;
 import com.ib.client.CommissionReport;
 import com.ib.client.UnderComp;
+import main.java.model.TradedInstrument;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.SortedMap;
-import java.util.TreeMap;
 
 /**
  * Experimental class used to familiarize with IB TWS API
@@ -46,25 +45,59 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
     private double askSize = -5;
 
 //    this stores all the live market data for each tickerID
-//     * Currently:
+//     * Currently(defined in tradedInstrumentsMap):
 //     * TickerID 0 = SPY
 //     * TickerID 1 = DIA
 //     * TickerID 2 = IWM
 //     * TickerID 3 = QQQ
 //     * TickerID 4 = EUR (FOREX)
-    private Map<Integer /*tickerID*/, PriceData> priceDataMap= new HashMap<>();
+    private Map<Integer /*tickerID*/, PriceData /*TradedInstrument*/> priceDataMap = new HashMap<>();
 
-    public InteractiveBrokersAPI() {
-        for (int tickerID = 0; tickerID < 5; tickerID++) {
-            priceDataMap.put(tickerID, new PriceData());
+    //Instruments available for trading defined here:
+    private Map<Integer /*tickerID*/, TradedInstrument> tradedInstrumentMap;// = new HashMap<>();
+
+    public InteractiveBrokersAPI(Map<Integer, TradedInstrument> tradedInstrumentMap) {
+        this.tradedInstrumentMap= tradedInstrumentMap;
+
+        for(TradedInstrument instrument : tradedInstrumentMap.values()){
+            priceDataMap.put(instrument.getTickerId(), new PriceData(
+                    instrument.getTickerId(),
+                    instrument.getSymbol(),
+                    instrument.getExchange(),
+                    instrument.getSecType(),
+                    instrument.getCurrency()
+            ));
         }
+
+
+//        for (int tickerID = 0; tickerID < 5; tickerID++) {
+//            this.priceDataMap.put(tickerID, new PriceData());
+//        }
     }
 
     private class PriceData {
+
+        int tickerId = 0;
+        private String symbol = "SPY";
+        private String exchange = "SMART";
+        private String secType = "STK";
+        private String currency = "USD";
+
         public double bidPrice = -5;
         public double askPrice = -5;
         public double bidSize = -5;
         public double askSize = -5;
+
+        public PriceData() {
+        }
+
+        public PriceData(int tickerId, String symbol, String exchange, String secType, String currency) {
+            this.tickerId = tickerId;
+            this.symbol = symbol;
+            this.exchange = exchange;
+            this.secType = secType;
+            this.currency = currency;
+        }
 
         public double getBidPrice() {
             return bidPrice;
@@ -96,6 +129,26 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
 
         public void setAskSize(double askSize) {
             this.askSize = askSize;
+        }
+
+        public int getTickerId() {
+            return tickerId;
+        }
+
+        public String getSymbol() {
+            return symbol;
+        }
+
+        public String getExchange() {
+            return exchange;
+        }
+
+        public String getSecType() {
+            return secType;
+        }
+
+        public String getCurrency() {
+            return currency;
         }
     }
 
@@ -212,33 +265,37 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
             return true;
         }
 
-        try {
-            //Procedure for setting up a new contract:
-            // Create a new contract
-            Contract contract = new Contract();
-            contract.m_symbol = "SPY";
-            contract.m_exchange = "SMART";
-            contract.m_secType = "STK";
-            contract.m_currency = "USD";
-            // Create a TagValue list
-//            Vector<TagValue> mktDataOptions = new Vector<TagValue>();
-            // Make a call to reqMktData to start off data retrieval with parameters:
-            // ConID    - Connection Identifier.
-            // Contract - The financial instrument we are requesting data on
-            // Ticks    - Any custom tick values we are looking for (null in this case)
-            // Snapshot - false give us streaming data, true gives one data snapshot
-            // MarketDataOptions - tagValue list of additional options (API 9.71 and newer)
+        try {for(TradedInstrument instrument : tradedInstrumentMap.values()){
 
-            client.reqMktData(0, contract, null, false);
-            priceDataMap.put(0, new PriceData()); //priceDataMap stores market data for each tickerId
+                //Procedure for setting up a new contract:
+                // Create a new contract
+                Contract contract = new Contract();
+                contract.m_symbol = instrument.getSymbol();
+                contract.m_exchange = instrument.getExchange();
+                contract.m_secType = instrument.getSecType();
+                contract.m_currency = instrument.getCurrency();
+                // Create a TagValue list
+                // Vector<TagValue> mktDataOptions = new Vector<TagValue>();
+                // Make a call to reqMktData to start off data retrieval with parameters:
+                // ConID    - Connection Identifier.
+                // Contract - The financial instrument we are requesting data on
+                // Ticks    - Any custom tick values we are looking for (null in this case)
+                // Snapshot - false give us streaming data, true gives one data snapshot
+                // MarketDataOptions - tagValue list of additional options (API 9.71 and newer)
 
-            // For API Version 9.73 and higher, add one more parameter: regulatory snapshot
-            // client.reqMktData(0, contract, null, false, false, mktDataOptions);
+                client.reqMktData(0, contract, null, false);
+                //priceDataMap.put(0, new PriceData()); //priceDataMap stores market data for each tickerId
 
-            // At this point our call is done and any market data events
-            // will be returned via the tickPrice method
+                // For API Version 9.73 and higher, add one more parameter: regulatory snapshot
+                // client.reqMktData(0, contract, null, false, false, mktDataOptions);
 
-            //set up remaining contracts with respective TickerIDs:
+                // At this point our call is done and any market data events
+                // will be returned via the tickPrice method
+
+                //set up remaining contracts with respective TickerIDs:
+            }
+
+/*
             contract = new Contract();
             contract.m_symbol = "DIA";
             contract.m_exchange = "SMART";
@@ -270,6 +327,7 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
             contract.m_currency = "USD";
             client.reqMktData(4, contract, null, false);
             priceDataMap.put(4, new PriceData()); //priceDataMap stores market data for each tickerId
+*/
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -281,7 +339,6 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
         System.out.println("Setting up contracts successful.");
         contractsAlreadySetupFlag = true;
         return true;
-
     }
 
     public void consolePrintRealTimeData() {

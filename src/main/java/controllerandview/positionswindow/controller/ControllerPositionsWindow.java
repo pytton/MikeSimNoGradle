@@ -1,5 +1,9 @@
 package main.java.controllerandview.positionswindow.controller;
 
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -18,6 +22,7 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
     @FXML
     public BorderPane mainBorderPane;
     public ListView positionsList;
+    public ListView instrumentsList;
     @FXML
     private TextField TopRowPriceTextField;
     @FXML
@@ -56,6 +61,7 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
 
     private int topRowPrice = 27150; //used with MikeGridPane and UpdateGUI
 
+    private int tickerId = 0;
     private MikeGridPane mikeGridPane = null;
     private PriceServer priceServer;
     private MainModelThread model;
@@ -63,6 +69,57 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
 
     //private ObservableList<List<Integer>> pricelist;
 
+    public void setInstrumentList(ObservableList<PriceServer> instrumentNamesList) {
+        instrumentsList.setItems(instrumentNamesList);
+    }
+
+    @FXML
+    public void initialize(){
+        //this handles changing the instrument PositionsWindow refers to based on what the user
+        //selected in in ListView instrumentlist:
+        class MyInstrumentChangeListener implements ChangeListener {
+            ControllerPositionsWindow controllerPositionsWindow;
+            MyInstrumentChangeListener(ControllerPositionsWindow controllerPositionsWindow){
+                this.controllerPositionsWindow = controllerPositionsWindow;
+            }
+            @Override
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                try {
+                    //set the priceserver to the one chosen:
+                    controllerPositionsWindow.priceServer = (PriceServer) instrumentsList.getSelectionModel().getSelectedItem();
+                    //set the tickerId:
+                    tickerId = ((PriceServer) instrumentsList.getSelectionModel().getSelectedItem()).getTickerID();
+                    //we changed the instrument, change the PosOrders available to be chosen to those for that insturment:
+                    positionsList.setItems(model.posOrdersManager.getPosOrdersObservableList(tickerId));
+                    System.out.println("Chosen: " + controllerPositionsWindow.priceServer.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        MyInstrumentChangeListener listener = new MyInstrumentChangeListener(this);
+        instrumentsList.getSelectionModel().selectedItemProperty().addListener( listener );
+
+        //this handles changing the MikePosOrders this window controls/displays
+        class MyPosOrdersChangeListener implements ChangeListener {
+            ControllerPositionsWindow controllerPositionsWindow;
+            MyPosOrdersChangeListener(ControllerPositionsWindow controllerPositionsWindow){
+                this.controllerPositionsWindow = controllerPositionsWindow;
+            }
+            @Override
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                try {
+                    //set the MikePosOrders to the one selected:
+                    controllerPositionsWindow.mikePosOrders = (MikePosOrders) positionsList.getSelectionModel().getSelectedItem();
+                    System.out.println("Chosen: " + ((MikePosOrders) positionsList.getSelectionModel().getSelectedItem()).getName());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        MyPosOrdersChangeListener posListener = new MyPosOrdersChangeListener(this);
+        positionsList.getSelectionModel().selectedItemProperty().addListener(posListener);
+    }
 
     public void mikeGridPaneButtonClicked(ActionEvent event) {
 
@@ -74,45 +131,80 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
 //        experimentalTextField.setText(exper);
 
 
-        //display realtime bid ask priceserver:
-        askPriceTextField.setText("" + (int)priceServer.getAskPrice());
-        bidPriceTextField.setText("" + (int)priceServer.getBidPrice());
+        try {
+            //display realtime bid ask priceserver:
+            askPriceTextField.setText("" + (int)priceServer.getAskPrice());
+            bidPriceTextField.setText("" + (int)priceServer.getBidPrice());
 
-        //printout data in MikeGridPane:
-        for(int row = 0 ; row < mikeGridPane.getHowManyRows() ; row++){
-            int priceToPrint = topRowPrice - row;
-            MikePosition position = mikePosOrders.getMikePositionAtPrice(priceToPrint);
+            //display the open amount:
+            totalOpenPosTextField.setText("" + (int)mikePosOrders.getTotalOpenAmount());
+
+            //display the average price:
+            weighedAveragePriceTextField.setText("" + (double)mikePosOrders.getAveragePrice());
+
+            //display the PL:
+            totalOpenPLTextField.setText("" + mikePosOrders.getOpenPL());
+            totalClosedPLTextField.setText("" + mikePosOrders.getClosedPL());
+            totalPLTextField.setText("" + mikePosOrders.getTotalPL());
+            //printout data in MikeGridPane:
+            for(int row = 0 ; row < mikeGridPane.getHowManyRows() ; row++){
+                int priceToPrint = topRowPrice - row;
+                MikePosition position = mikePosOrders.getMikePositionAtPrice(priceToPrint);
 
 
-            //print open positions in first column:
-            if (position == null) {
-                setSpecificButtonInMikeGridPane( row,0, "" );
-            } else {
-                setSpecificButtonInMikeGridPane(row, 0, ""+ position.getOpen_amount());
+
+                //print open positions in first column:
+                if (position == null) {
+                    setSpecificButtonInMikeGridPane( row,0, "" );
+                } else {
+                    setSpecificButtonInMikeGridPane(row, 0, ""+ position.getOpen_amount());
+                }
+
+                //print active buy orders for the given price in the second column:
+                if(mikePosOrders.ordersAtPrice.getOpenBuyOrdersAtPrice(priceToPrint) != 0){
+                    setSpecificButtonInMikeGridPane(row, 1,
+                            "" + mikePosOrders.ordersAtPrice.getOpenBuyOrdersAtPrice(priceToPrint));
+                } else {
+                    setSpecificButtonInMikeGridPane(row, 1, "");
+                }
+
+
+
+                //print "BID" in the row of the bid price in third column:
+                if (topRowPrice - row == priceServer.getBidPrice()) {
+                    setSpecificButtonInMikeGridPane(row, 2, "BID");
+                }else{
+                    setSpecificButtonInMikeGridPane(row, 2, "");
+                }
+
+
+                //print prices in the fourth column of mikeGridPane:
+                setSpecificButtonInMikeGridPane( row,3, "" +(topRowPrice - row)
+                );
+
+                //print "ASK" in the row of the ask price in fifth column:
+                if (topRowPrice - row == priceServer.getAskPrice()) {
+                    setSpecificButtonInMikeGridPane(row, 4, "ASK");
+                }else{
+                    setSpecificButtonInMikeGridPane(row, 4, "");
+                }
+
+                //print active sell orders for the given price in the sixth column:
+                if(mikePosOrders.ordersAtPrice.getOpenSellOrdersAtPrice(priceToPrint) != 0){
+                    setSpecificButtonInMikeGridPane(row, 5,
+                            "" + mikePosOrders.ordersAtPrice.getOpenSellOrdersAtPrice(priceToPrint));
+                } else {
+                    setSpecificButtonInMikeGridPane(row, 5, "");
+                }
+
+
+
+
+
             }
-
-            //print "BID" in the row of the bid price in second column:
-            if (topRowPrice - row == priceServer.getBidPrice()) {
-                setSpecificButtonInMikeGridPane(row, 1, "BID");
-            }else{
-                setSpecificButtonInMikeGridPane(row, 1, "");
-            }
-
-
-            //print prices in the third column of mikeGridPane:
-            setSpecificButtonInMikeGridPane( row,2, "" +(topRowPrice - row)
-            );
-
-            //print "ASK" in the row of the ask price in fourth column:
-            if (topRowPrice - row == priceServer.getAskPrice()) {
-                setSpecificButtonInMikeGridPane(row, 3, "ASK");
-            }else{
-                setSpecificButtonInMikeGridPane(row, 3, "");
-            }
-
-
-
-
+        } catch (Exception e) {
+            System.out.println("EXCEPTION IN POSITIONSWINDOW UPDATE GUI");
+            e.printStackTrace();
         }
 
     }
@@ -138,7 +230,7 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
 
     @FXML
     public void testTwoButtonClicked(ActionEvent actionEvent) {
-        model.getOrderServer().printActiveOrdersToConsole();
+//        model.getOrderServer().printActiveOrdersToConsole();
     }
 
     @FXML
