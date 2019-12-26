@@ -6,11 +6,15 @@ import javafx.collections.ObservableList;
 import main.java.controllerandview.MainGUIClass;
 import main.java.model.livemarketdata.InteractiveBrokersAPI;
 import main.java.model.livemarketdata.OutsideTradingSoftwareAPIConnection;
+import main.java.model.mikealgos.ScalperAlgo1;
+import main.java.model.mikealgos.MikeAlgo;
 import main.java.model.orderserver.OrderServer;
 import main.java.model.positionsorders.MikePosOrders;
 import main.java.model.priceserver.PriceServer;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 public class MainModelThread extends Thread {
@@ -20,23 +24,23 @@ public class MainModelThread extends Thread {
     //set up connection to outside trading software for market data, orders, etc:
     public OutsideTradingSoftwareAPIConnection marketConnection;
 
-
+    public AlgoManager algoManager;
     private GUIUpdateDispatcher myGUIUpdateDispatcher;
-    private long count = 0;
-    public static boolean interrupted;
-    int refreshGUIInMiliseconds = 100;//set this to change GUI refresh rate
-    long mainLoopTurnaroundTime = 0;//for monitoring performance
-
+    private long count = 0; //used for printing program 'heartbeat'
+    public static boolean interrupted; //used for shutting down the program
+    int refreshGUIInMiliseconds = 100; //set this to change GUI refresh rate
+    long mainLoopTurnaroundTime = 0; //for monitoring performance
 
     public MainModelThread(MainGUIClass mainGUIClass, Map<Integer, TradedInstrument> tradedInstrumentMap){
         this.mainGUIClass = mainGUIClass;
-
         //set up connection to outside trading software for market data, orders, etc:
         marketConnection = new InteractiveBrokersAPI(tradedInstrumentMap);
         //this stores a priceserver, orderserver and a list of MikePosOrders for each traded instrument:
         posOrdersManager = new PosOrdersManager(tradedInstrumentMap);
-    }
 
+        algoManager = new AlgoManager(this);
+
+    }
 
     /**
      * This is the main loop of the program
@@ -76,7 +80,9 @@ public class MainModelThread extends Thread {
         interrupted = true;
     }
 
-    private void processAlgos(){}
+    private void processAlgos(){
+        algoManager.processAllAlgos();
+    }
 
     private void processOrdersAndCalculatePL(){
         for(PosOrdersManager.Data data: posOrdersManager.dataMap.values()){
@@ -95,16 +101,6 @@ public class MainModelThread extends Thread {
         marketConnection.connect();
     }
 
-
-//    //todo: erase this . this is temporary. you should need a tickerId for a priceserver
-//    public PriceServer getPriceServer() {
-//        return posOrdersManager.dataMap.get(0).getPriceServer();
-//    }
-//    synchronized public PriceServer getPriceServer(){return posOrdersManager.priceServer;}
-//    public OrderServer getOrderServer() {
-//        return posOrdersManager.orderServer;
-//    }
-
     /**
      * This class is responsible for creating and managing new PosOrders and assigning them the correct
      * PriceServer and OrderServer depending on which instrument the PosOrders is supposed to trade.
@@ -117,10 +113,11 @@ public class MainModelThread extends Thread {
      */
     public class PosOrdersManager {
 
+        private Map<Integer, Data> dataMap;
+        private ObservableList<PriceServer> priceServerObservableList = FXCollections.observableArrayList();
+
         public PosOrdersManager(Map<Integer, TradedInstrument> tradedInstrumentMap) {
-
             dataMap = new TreeMap<>();
-
             for (TradedInstrument instrument : tradedInstrumentMap.values()) {
                 //create an orderserver, priceserver and PosOrdersObservable list based on the instruments that can be traded:
                 Data data = new Data(instrument.getTickerId(), instrument.getSymbol());
@@ -129,18 +126,14 @@ public class MainModelThread extends Thread {
             }
         }
 
-
-
         /**
          * One Data object per instrument traded. The key is tickerId of the instrument.
          * Data holds one OrderServer, one priceServer and
          * Java FX ObservableList of MikePosOrders
          */
         private class Data{
-
             //one tickerId per one instrument traded
             private int tickerId;
-
             private String tradedInstrumentName;
 
             //handles all orders, checking for order fills:
@@ -163,14 +156,8 @@ public class MainModelThread extends Thread {
                 //marketConnection taken from outer class:
                 priceServer = new PriceServer(tickerId, tradedInstrumentName, marketConnection);
 
-
-
-//                //create at least one MikePosOrders for each instrument traded:
+                //create at least one MikePosOrders for each instrument traded:
                 createMikePosorders();
-
-//                MikePosOrders posOrders = new MikePosOrders(orderServer, priceServer);
-//                posOrders.setName("" + tradedInstrumentName + " " + mikePosOrdersNumber++);
-//                posOrdersObservableList.add(posOrders);
             }
 
             /**
@@ -201,57 +188,15 @@ public class MainModelThread extends Thread {
             }
         }
 
-        private Map<Integer, Data> dataMap;
-
-        private ObservableList<PriceServer> priceServerObservableList = FXCollections.observableArrayList();
-
-//        public PosOrdersManager() {
-////
-////            posOrdersObservableList = FXCollections.observableArrayList();
-////
-////            priceServerObservableList = FXCollections.observableArrayList();
-////
-////            /*posOrdersManager.*/
-////            priceServer = new PriceServer(0, "SPY", marketConnection);
-////            /*posOrdersManager.*/
-////            priceServerObservableList.add(priceServer);
-////            /*posOrdersManager.*/
-////            priceServerObservableList.add(new PriceServer(1, "DIA", marketConnection));
-////            /*posOrdersManager.*/
-////            priceServerObservableList.add(new PriceServer(2, "IWM", marketConnection));
-////            /*posOrdersManager.*/
-////            priceServerObservableList.add(new PriceServer(3, "QQQ", marketConnection));
-////            /*posOrdersManager.*/
-////            priceServerObservableList.add(new PriceServer(4, "EUR FOREX", marketConnection));
-////
-////            /*posOrdersManager.*/
-////            orderServer = new OrderServer();
-////
-////            createMikePosorders(0);
-//
-//        }
-
         public MikePosOrders getMikePosOrders(int tickerId,  int mikePosOrdersNumber) {
-
             return dataMap.get(tickerId).getPosOrdersObservableList().get(mikePosOrdersNumber);
-
-
-//            return posOrdersObservableList.get(mikePosOrdersNumber);
         }
 
         /**
          * Create an instance of MikePosOrders and add it to the list
          */
         synchronized public MikePosOrders createMikePosorders(Integer tickerId) {
-
             return dataMap.get(tickerId).createMikePosorders();
-//            MikePosOrders posOrders = new MikePosOrders(orderServer, priceServer);
-//            //TODO: finish this so that you set the correct orderServer based on the instrument
-//
-//            posOrders.setName("Positions number " + /*mainModelThread.*/mikePosOrdersNumber++);
-//            posOrdersObservableList.add(posOrders);
-//
-//            return posOrders;
         }
 
         public PriceServer getPriceServer (int tickerId){
@@ -268,15 +213,10 @@ public class MainModelThread extends Thread {
 
         public ObservableList<MikePosOrders> getPosOrdersObservableList(int tickerId) {
             return dataMap.get(tickerId).getPosOrdersObservableList();
-
-//            return posOrdersObservableList;
         }
 
-//        public ObservableList<MikePosOrders> getPosOrdersObservableList() {
-//            return posOrdersObservableList;
-//        }
+        public AlgoManager getAlgoManager(){return algoManager;}
     }
-
 
     /**
      * This is used to make sure GUI is updated in a separate thread
@@ -310,5 +250,5 @@ public class MainModelThread extends Thread {
             return isReady;
         }
     }
-
 }
+

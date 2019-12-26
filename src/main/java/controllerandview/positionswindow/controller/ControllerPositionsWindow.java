@@ -307,6 +307,10 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
 //        model.getOrderServer().placeNewOrder(MikeOrder.MikeOrderType.SELLSTP, price, price, amount);
     }
 
+    private int getPriceOfRow(int rowClicked) {
+        return topRowPrice - rowClicked;
+    }
+
     public void setPriceServer(PriceServer priceServer) {
         this.priceServer = priceServer;
     }
@@ -347,9 +351,17 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
     @Override
     public void handleMikeButtonClicked(MikeGridPane.MikeButton button) {
 
-
-
         System.out.println("MikeButton clicked. column: " +button.getColOfButton());
+        System.out.println("Price clicked: " + getPriceOfRow(button.getRowOfButton()));
+
+        //todo: testing:
+        if (button.getColOfButton() == 0) {
+            System.out.println("Testing. Creating ScalperAlgo1. LowTarget: " + getPriceOfRow(button.getRowOfButton())
+            + " HighTarget: LowTarget +5 (hardcoded now), amount: 100.");
+            int price = getPriceOfRow(button.getRowOfButton());
+
+            model.algoManager.createScalperAlgo1(mikePosOrders, price, price + 5, 100);
+        }
 
 
     }

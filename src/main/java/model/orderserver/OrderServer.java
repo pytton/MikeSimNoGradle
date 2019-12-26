@@ -196,4 +196,8 @@ public class OrderServer {
 //    public void setCancelledOrdersList(SortedSet<Long> cancelledOrdersList) {
 //        this.cancelledOrdersList = cancelledOrdersList;
 //    }
+
+    public MikeOrder getMikeOrder(long orderId) {
+        return allOrdersMap.get(orderId);
+    }
 }

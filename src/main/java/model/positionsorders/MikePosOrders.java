@@ -12,17 +12,15 @@ public class MikePosOrders {
      * The name of this MikePosOrders:
      */
     private String name;
-
-    private int openPL = 0;
-    private int closedPL = 0;
-    private int totalPL = 0;
-    private double averagePrice = 0;
     /**
      * positive totalOpenAmount means the total position is long
      * negative means it is short
      */
     private int totalOpenAmount = 0;
-
+    private int openPL = 0;
+    private int closedPL = 0;
+    private int totalPL = 0;
+    private double averagePrice = 0;
 
     private Map<Integer, MikePosition> positionsMap = new HashMap<>();
     private SortedSet<Long> activeOrdersSet = new TreeSet<>();
@@ -30,7 +28,6 @@ public class MikePosOrders {
     public OrdersAtPrice ordersAtPrice;
     private OrderServer orderServer;
     private PriceServer priceServer; //we need this to calculate Profit/Loss (PL)
-
 
     public MikePosOrders(OrderServer orderServer, PriceServer priceServer) {
         this.orderServer = orderServer;
@@ -106,7 +103,7 @@ public class MikePosOrders {
         }
     }
 
-    public void recalcutlatePL(){
+    public synchronized void recalcutlatePL(){
         openPL = 0; closedPL = 0; totalPL = 0; totalOpenAmount = 0;
         averagePrice = 0;
         double averagePriceCalculator = 0;
@@ -266,4 +263,6 @@ public class MikePosOrders {
     public int getTotalOpenAmount() {
         return totalOpenAmount;
     }
+
+    public int getTickerId(){return priceServer.getTickerID();}
 }
