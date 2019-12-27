@@ -3,7 +3,7 @@ package main.java.model.mikealgos;
 import main.java.model.orderserver.MikeOrder;
 import main.java.model.positionsorders.MikePosOrders;
 
-public class ScalperAlgo1 extends BaseAlgo {
+public class ScalperAlgoUp1 extends BaseAlgo {
 
     private MikePosOrders posOrders;
     private int lowerTarget = 0;
@@ -23,7 +23,7 @@ public class ScalperAlgo1 extends BaseAlgo {
 
     private Status status;
 
-    public ScalperAlgo1(MikePosOrders posOrders, int lowerTarget, int upperTarget, int amount) {
+    public ScalperAlgoUp1(MikePosOrders posOrders, int lowerTarget, int upperTarget, int amount) {
         this.posOrders = posOrders;
         this.lowerTarget = lowerTarget;
         this.upperTarget = upperTarget;
@@ -47,8 +47,9 @@ public class ScalperAlgo1 extends BaseAlgo {
         }
         if (status == Status.RUNNING) {
             //if lowOrderId is filled, create the highOrder, change status to LOWERFILLED
+            //assigning order to lowerTarget position to avoid problems with incorrectly calculating openPL.
             if (posOrders.getOrderServer().getMikeOrder(lowOrderId).isFilled()) {
-                highOrderId = posOrders.placeNewOrder(MikeOrder.MikeOrderType.SELLLMT, upperTarget, upperTarget, amount);
+                highOrderId = posOrders.placeNewOrder(MikeOrder.MikeOrderType.SELLLMT, lowerTarget, upperTarget, amount);
                 status = Status.LOWERFILLED;
                 return;
             }

@@ -6,15 +6,11 @@ import javafx.collections.ObservableList;
 import main.java.controllerandview.MainGUIClass;
 import main.java.model.livemarketdata.InteractiveBrokersAPI;
 import main.java.model.livemarketdata.OutsideTradingSoftwareAPIConnection;
-import main.java.model.mikealgos.ScalperAlgo1;
-import main.java.model.mikealgos.MikeAlgo;
 import main.java.model.orderserver.OrderServer;
 import main.java.model.positionsorders.MikePosOrders;
 import main.java.model.priceserver.PriceServer;
 
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 
 public class MainModelThread extends Thread {

@@ -354,13 +354,22 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
         System.out.println("MikeButton clicked. column: " +button.getColOfButton());
         System.out.println("Price clicked: " + getPriceOfRow(button.getRowOfButton()));
 
-        //todo: testing:
-        if (button.getColOfButton() == 0) {
-            System.out.println("Testing. Creating ScalperAlgo1. LowTarget: " + getPriceOfRow(button.getRowOfButton())
-            + " HighTarget: LowTarget +5 (hardcoded now), amount: 100.");
-            int price = getPriceOfRow(button.getRowOfButton());
 
+        //todo: testing:
+        int price = getPriceOfRow(button.getRowOfButton());
+        if (button.getColOfButton() == 0) {
+            System.out.println("Testing. Creating ScalperAlgoUp1. LowTarget: " + getPriceOfRow(button.getRowOfButton())
+            + " HighTarget: LowTarget +5 (hardcoded now), amount: 100.");
             model.algoManager.createScalperAlgo1(mikePosOrders, price, price + 5, 100);
+        }
+        if (button.getColOfButton() == 1) {
+            System.out.println("Testing. Creating StepperAlgoUp1. ");
+            model.algoManager.createStepperAlgoUp1(mikePosOrders, price, 5, 100);
+        }
+        if (button.getColOfButton() == 2) {
+            System.out.println("Testing Creating ComplexScalperAlgoUp1");
+            model.algoManager.createComplexScalperAlgoUp1(mikePosOrders, price, 1, 10, 100);
+
         }
 
 
