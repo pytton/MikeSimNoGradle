@@ -8,7 +8,7 @@
     a. how many shares at what price
     b. Profit/Loss for each position for each price level and for the whole position
     c. Multiple independent 'postions' or 'accounts' to split up decisions - one for 'scalper' another for 'manual' another for 'soft stop' etc. Each of these - one for long positions and one for short positions. Have at least 10 for starters
-5. Display total aggregated position with its total amount, average price, open P/L, closed P/L, 'break even price' etc - make it expandable
+5. Display total aggregated position with its total orderAmount, average price, open P/L, closed P/L, 'break even price' etc - make it expandable
 6. Ability to place orders manually
 7. Ability to add new algos to this program - to test their behaviour.
 8. Ability for algos to make decisions based on positions and orders taken by other algos and manual postions/orders - implement something for every algo/manual positions that enables to lookup current open orders

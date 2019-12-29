@@ -1,6 +1,5 @@
 package main.java.controllerandview.positionswindow.controller;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -15,9 +14,9 @@ import main.java.model.orderserver.MikeOrder;
 import main.java.model.positionsorders.MikePosOrders;
 import main.java.model.positionsorders.MikePosition;
 import main.java.model.priceserver.PriceServer;
-import main.java.controllerandview.positionswindow.view.MikeGridPane;
+import main.java.controllerandview.MikeGridPane;
 
-public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler {
+public class ControllerConsolidatedPositionsWindow implements MikeGridPane.MikeButtonHandler {
 
     @FXML
     public BorderPane mainBorderPane;
@@ -39,7 +38,7 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
     @FXML
     private TextField weighedAveragePriceTextField;
     @FXML
-    private TextField zeroProfitPoint;
+    private TextField zeroProfitPointTextField;
     @FXML
     private TextField totalPLTextField;
     @FXML
@@ -78,8 +77,8 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
         //this handles changing the instrument PositionsWindow refers to based on what the user
         //selected in in ListView instrumentlist:
         class MyInstrumentChangeListener implements ChangeListener {
-            ControllerPositionsWindow controllerPositionsWindow;
-            MyInstrumentChangeListener(ControllerPositionsWindow controllerPositionsWindow){
+            ControllerConsolidatedPositionsWindow controllerPositionsWindow;
+            MyInstrumentChangeListener(ControllerConsolidatedPositionsWindow controllerPositionsWindow){
                 this.controllerPositionsWindow = controllerPositionsWindow;
             }
             @Override
@@ -102,8 +101,8 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
 
         //this handles changing the MikePosOrders this window controls/displays
         class MyPosOrdersChangeListener implements ChangeListener {
-            ControllerPositionsWindow controllerPositionsWindow;
-            MyPosOrdersChangeListener(ControllerPositionsWindow controllerPositionsWindow){
+            ControllerConsolidatedPositionsWindow controllerPositionsWindow;
+            MyPosOrdersChangeListener(ControllerConsolidatedPositionsWindow controllerPositionsWindow){
                 this.controllerPositionsWindow = controllerPositionsWindow;
             }
             @Override
@@ -140,7 +139,11 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
             totalOpenPosTextField.setText("" + (int)mikePosOrders.getTotalOpenAmount());
 
             //display the average price:
-            weighedAveragePriceTextField.setText("" + (double)mikePosOrders.getAveragePrice());
+            double averagePrice = (double)mikePosOrders.getAveragePrice();
+            weighedAveragePriceTextField.setText("" + averagePrice);
+            double zeroProfitPoint = mikePosOrders.getZeroProfitPoint();
+            zeroProfitPointTextField.setText(""+zeroProfitPoint);
+
 
             //display the PL:
             totalOpenPLTextField.setText("" + mikePosOrders.getOpenPL());
@@ -195,6 +198,15 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
                             "" + mikePosOrders.ordersAtPrice.getOpenSellOrdersAtPrice(priceToPrint));
                 } else {
                     setSpecificButtonInMikeGridPane(row, 5, "");
+                }
+
+                //print the total open amount in the row who's price equals to the average weighed position in seventh column.
+                //todo: print out the zeroprofit point
+                if( priceToPrint == (int)zeroProfitPoint){
+                    setSpecificButtonInMikeGridPane(row, 6,
+                            "" + (int)mikePosOrders.getTotalOpenAmount());
+                } else {
+                    setSpecificButtonInMikeGridPane(row, 6, "");
                 }
 
 
@@ -358,9 +370,9 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
         //todo: testing:
         int price = getPriceOfRow(button.getRowOfButton());
         if (button.getColOfButton() == 0) {
-            System.out.println("Testing. Creating ScalperAlgoUp1. LowTarget: " + getPriceOfRow(button.getRowOfButton())
+            System.out.println("Testing. Creating ScalperAlgo1. LowTarget: " + getPriceOfRow(button.getRowOfButton())
             + " HighTarget: LowTarget +5 (hardcoded now), amount: 100.");
-            model.algoManager.createScalperAlgo1(mikePosOrders, price, price + 5, 100);
+            model.algoManager.createScalperAlgo1(mikePosOrders, price, price + 5, 100, MikeOrder.MikeOrderType.BUYLMT);
         }
         if (button.getColOfButton() == 1) {
             System.out.println("Testing. Creating StepperAlgoUp1. ");
@@ -368,9 +380,35 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
         }
         if (button.getColOfButton() == 2) {
             System.out.println("Testing Creating ComplexScalperAlgoUp1");
-            model.algoManager.createComplexScalperAlgoUp1(mikePosOrders, price, 1, 10, 100);
+            model.algoManager.createComplexScalperAlgoUp1(mikePosOrders, price, 1, 10, 100, MikeOrder.MikeOrderType.BUYLMT);
 
         }
+        if (button.getColOfButton() == 3) {
+            System.out.println("Testing Creating ComplexScalperAlgoUp1");
+            model.algoManager.createComplexScalperAlgoUp1(mikePosOrders, price, 1, 10, 100, MikeOrder.MikeOrderType.BUYSTP);
+        }
+        if (button.getColOfButton() == 4) {
+            System.out.println("Testing Creating ComplexScalperAlgoUp1");
+            model.algoManager.createComplexScalperAlgoUp1(mikePosOrders, price, -1, 10, 100, MikeOrder.MikeOrderType.SELLLMT);
+        }
+//        if (button.getColOfButton() == 3) {
+//            System.out.println("Testing. Creating ScalperAlgo1. LowTarget: " + getPriceOfRow(button.getRowOfButton())
+//                    + " HighTarget: LowTarget +5 (hardcoded now), amount: 100.");
+//            model.algoManager.createScalperAlgo1(mikePosOrders, price, price + 5, 100, MikeOrder.MikeOrderType.BUYSTP);
+//        }
+//
+//        if (button.getColOfButton() == 4) {
+//            System.out.println("Testing. Creating ScalperAlgo1. LowTarget: " + getPriceOfRow(button.getRowOfButton())
+//                    + " HighTarget: LowTarget +5 (hardcoded now), amount: 100.");
+//            model.algoManager.createScalperAlgo1(mikePosOrders, price, price - 5, 100, MikeOrder.MikeOrderType.SELLLMT);
+//        }
+
+        if (button.getColOfButton() == 5) {
+            System.out.println("Testing. Creating ScalperAlgo1. LowTarget: " + getPriceOfRow(button.getRowOfButton())
+                    + " HighTarget: LowTarget +5 (hardcoded now), amount: 100.");
+            model.algoManager.createScalperAlgo1(mikePosOrders, price, price - 5, 100, MikeOrder.MikeOrderType.SELLSTP);
+        }
+
 
 
     }

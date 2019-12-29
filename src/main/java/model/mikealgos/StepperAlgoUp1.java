@@ -51,7 +51,7 @@ public class StepperAlgoUp1 extends BaseAlgo {
             //check if first order was filled. If it has, place the target order:
             //target order is half the amount of startOrder
             if (posOrders.getOrderServer().getMikeOrder(startOrderId).isFilled()) {
-                targetOrderId = posOrders.placeNewOrder(MikeOrder.MikeOrderType.SELLLMT, (startPrice + interval), (startPrice + interval), (amount / 2));
+                targetOrderId = posOrders.placeNewOrder(MikeOrder.MikeOrderType.SELLLMT, startPrice, (startPrice + interval), (amount / 2));
                 status = Status.STARTFILLED;
                 return;
             }
@@ -60,7 +60,7 @@ public class StepperAlgoUp1 extends BaseAlgo {
             //check if the target has been filled. If it has, create the exit order:
             //exit order half of firstOrder - should make position 0
             if (posOrders.getOrderServer().getMikeOrder(targetOrderId).isFilled()) {
-                exitOrderId = posOrders.placeNewOrder(MikeOrder.MikeOrderType.SELLSTP, (startPrice - interval), (startPrice - interval), (amount / 2));
+                exitOrderId = posOrders.placeNewOrder(MikeOrder.MikeOrderType.SELLSTP, startPrice, (startPrice - interval), (amount / 2));
                 status = Status.TARGETFILLED;
                 return;
             }

@@ -2,8 +2,9 @@ package main.java.model;
 
 import main.java.model.mikealgos.ComplexScalperAlgoUp1;
 import main.java.model.mikealgos.MikeAlgo;
-import main.java.model.mikealgos.ScalperAlgoUp1;
+import main.java.model.mikealgos.ScalperAlgo1;
 import main.java.model.mikealgos.StepperAlgoUp1;
+import main.java.model.orderserver.MikeOrder;
 import main.java.model.positionsorders.MikePosOrders;
 
 import java.util.HashSet;
@@ -22,9 +23,9 @@ public class AlgoManager{
         algoSet = new HashSet<>();
     }
 
-    public void createScalperAlgo1(MikePosOrders posOrders, int lowPrice, int highPrice, int amount){
-        System.out.println("Creating ScalperAlgoUp1 for MikePosOrders " + posOrders.getName());
-        ScalperAlgoUp1 algo = new ScalperAlgoUp1(posOrders, lowPrice, highPrice, amount );
+    public void createScalperAlgo1(MikePosOrders posOrders, int entryPrice, int targetPrice, int orderAmount, MikeOrder.MikeOrderType entry){
+        System.out.println("Creating ScalperAlgo1 for MikePosOrders " + posOrders.getName());
+        ScalperAlgo1 algo = new ScalperAlgo1(posOrders, entryPrice, targetPrice, orderAmount, entry );
         algoSet.add(algo);
     }
 
@@ -36,8 +37,8 @@ public class AlgoManager{
 
     }
 
-    public void createComplexScalperAlgoUp1(MikePosOrders posOrders, int lowerTarget, int interval, int howManyScalpers, int amount) {
-        ComplexScalperAlgoUp1 algo = new ComplexScalperAlgoUp1(posOrders, lowerTarget, interval, howManyScalpers, amount);
+    public void createComplexScalperAlgoUp1(MikePosOrders posOrders, int lowerTarget, int interval, int howManyScalpers, int amount, MikeOrder.MikeOrderType entry) {
+        ComplexScalperAlgoUp1 algo = new ComplexScalperAlgoUp1(posOrders, lowerTarget, interval, howManyScalpers, amount, entry);
         algoSet.add(algo);
     }
 

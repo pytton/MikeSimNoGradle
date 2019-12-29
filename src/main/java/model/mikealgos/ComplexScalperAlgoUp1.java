@@ -8,15 +8,43 @@ import java.util.Set;
 
 public class ComplexScalperAlgoUp1 extends BaseAlgo {
 
-    private Set<ScalperAlgoUp1> algoSet;
+    private Set<ScalperAlgo1> algoSet;
 
 
-
-    public ComplexScalperAlgoUp1(MikePosOrders posOrders, int lowerTarget, int interval, int howManyScalpers, int amount) {
+    /**
+     * If entry is BUYLMT or BUYSTP then interval has to be a positive value
+     * If entry is SELLLMT or SELLSTP then interval has to be negative.
+     * Otherwise this creates a neverending monster
+     * Interval cannot be zero
+     * Above enforced by constructor
+     * @param posOrders
+     * @param lowerTarget
+     * @param interval
+     * @param howManyScalpers
+     * @param amount
+     * @param entry
+     */
+    public ComplexScalperAlgoUp1(MikePosOrders posOrders, int lowerTarget, int interval, int howManyScalpers, int amount, MikeOrder.MikeOrderType entry) {
         algoSet = new HashSet<>();
 
+        //If entry is BUYLMT or BUYSTP then interval has to be a positive value
+        if (entry == MikeOrder.MikeOrderType.BUYLMT || entry == MikeOrder.MikeOrderType.BUYSTP){
+            if (interval < 0) {
+                interval = interval * -1;
+            }
+            if (interval == 0) interval = 1;
+        }
+
+        //If entry is SELLLMT or SELLSTP then interval has to be negative.
+        if (entry == MikeOrder.MikeOrderType.SELLLMT || entry == MikeOrder.MikeOrderType.SELLSTP){
+            if (interval > 0) {
+                interval = interval * -1;
+            }
+            if (interval == 0) interval = -1;
+        }
+
         for (int i = 0; i<howManyScalpers;i++ ) {
-            ScalperAlgoUp1 algo = new ScalperAlgoUp1(posOrders, lowerTarget, (lowerTarget +interval+(i*interval)), (amount / howManyScalpers));
+            ScalperAlgo1 algo = new ScalperAlgo1(posOrders, lowerTarget, (lowerTarget +interval+(i*interval)), (amount / howManyScalpers), entry);
             algoSet.add(algo);
         }
 
@@ -26,7 +54,7 @@ public class ComplexScalperAlgoUp1 extends BaseAlgo {
     public void process() {
         //todo: write this
 
-        for (ScalperAlgoUp1 algo :algoSet) {
+        for (ScalperAlgo1 algo :algoSet) {
             algo.process();
         }
     }
@@ -35,7 +63,7 @@ public class ComplexScalperAlgoUp1 extends BaseAlgo {
     public void cancel() {
         //todo: write this
 
-        for (ScalperAlgoUp1 algo :algoSet) {
+        for (ScalperAlgo1 algo :algoSet) {
             algo.cancel();
         }
     }

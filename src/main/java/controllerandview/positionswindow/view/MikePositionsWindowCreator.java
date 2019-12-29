@@ -1,10 +1,12 @@
 package main.java.controllerandview.positionswindow.view;
 
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
-import main.java.controllerandview.positionswindow.controller.ControllerPositionsWindow;
+import javafx.scene.layout.VBox;
+import main.java.controllerandview.MikeGridPane;
+import main.java.controllerandview.positionswindow.controller.ControllerConsolidatedPositionsWindow;
 import main.java.model.priceserver.PriceServer;
 
 import java.io.IOException;
@@ -13,7 +15,7 @@ public class MikePositionsWindowCreator {
 
     private FXMLLoader posWindowLoader;// = new FXMLLoader(getClass().getResource("PositionsWindow.fxml"));
     private Parent positionsWindowRoot;
-    public ControllerPositionsWindow positionsWindowController;
+    public ControllerConsolidatedPositionsWindow positionsWindowController;
     private MikeGridPane buttonTable;
 
 
@@ -26,20 +28,34 @@ public class MikePositionsWindowCreator {
         //this needed by JavaFX Scene constructor:
         positionsWindowRoot = posWindowLoader.load(); //this might throw IOException
         //this is used to access elements of MikePositionsWindowCreator:
-        positionsWindowController = (ControllerPositionsWindow)posWindowLoader.getController();
+        positionsWindowController = (ControllerConsolidatedPositionsWindow)posWindowLoader.getController();
         //this adds a custom table of buttons to the scene
         buttonTable = new MikeGridPane(100,7, positionsWindowController);
 
 
 
 
+        //todo: check this works:
         //experimenting with modifing this window:
+
+        VBox topVbox = new VBox();
+        MikeGridPane topGridPane = new MikeGridPane(1,7, new MikeGridPane.EmptyMikeButtonHandler());
+        MikeGridPane bottomGridPane = new MikeGridPane(1, 7, new MikeGridPane.EmptyMikeButtonHandler());
+
+
+        topGridPane.setPadding( new Insets(0, 15, 0, 0));
+        bottomGridPane.setPadding( new Insets(0, 15, 0, 0));
+        topVbox.getChildren().add(topGridPane);
+
         ScrollPane sp = new ScrollPane();
         sp.setContent(buttonTable);
         sp.setFitToWidth(true);
 //        sp.setMaxWidth(450);
+        topVbox.getChildren().add(sp);
+        topVbox.getChildren().add(bottomGridPane);
 
-        positionsWindowController.getMainBorderPane().setLeft(sp);
+        //todo: this changed. works?
+        positionsWindowController.getMainBorderPane().setLeft(topVbox);
 //        positionsWindowController.getMainBorderPane().setMinWidth(850);
 
 //        positionsWindowController.getMainBorderPane().setCenter(sp);
@@ -67,7 +83,7 @@ public class MikePositionsWindowCreator {
         return positionsWindowRoot;
     }
 
-    public ControllerPositionsWindow getPositionsWindowController() {
+    public ControllerConsolidatedPositionsWindow getPositionsWindowController() {
         return positionsWindowController;
     }
 }

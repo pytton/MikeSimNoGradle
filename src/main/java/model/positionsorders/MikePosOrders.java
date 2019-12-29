@@ -21,6 +21,7 @@ public class MikePosOrders {
     private int closedPL = 0;
     private int totalPL = 0;
     private double averagePrice = 0;
+    private double zeroProfitPoint = 0;
 
     private Map<Integer, MikePosition> positionsMap = new HashMap<>();
     private SortedSet<Long> activeOrdersSet = new TreeSet<>();
@@ -104,6 +105,7 @@ public class MikePosOrders {
     }
 
     public synchronized void recalcutlatePL(){
+        //todo: calculate the zero profit point
         openPL = 0; closedPL = 0; totalPL = 0; totalOpenAmount = 0;
         averagePrice = 0;
         double averagePriceCalculator = 0;
@@ -116,6 +118,8 @@ public class MikePosOrders {
             averagePriceCalculator += (position.getOpen_amount() * position.getPrice());
         }
         averagePrice = averagePriceCalculator / totalOpenAmount;
+        if (totalOpenAmount != 0) zeroProfitPoint = (averagePrice) - (closedPL / totalOpenAmount);
+        else zeroProfitPoint = averagePrice;
     }
 
     public MikePosition getMikePositionAtPrice(int price){
@@ -265,4 +269,8 @@ public class MikePosOrders {
     }
 
     public int getTickerId(){return priceServer.getTickerID();}
+
+    public double getZeroProfitPoint() {
+        return zeroProfitPoint;
+    }
 }

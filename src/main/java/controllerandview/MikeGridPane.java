@@ -1,6 +1,5 @@
-package main.java.controllerandview.positionswindow.view;
+package main.java.controllerandview;
 
-import com.ib.controller.Types;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -8,7 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Font;
-import main.java.controllerandview.positionswindow.controller.ControllerPositionsWindow;
+import main.java.controllerandview.positionswindow.controller.ControllerConsolidatedPositionsWindow;
 
 import java.util.ArrayList;
 
@@ -30,6 +29,14 @@ public class MikeGridPane extends GridPane {
 //        public ActionEvent handleMikeButtonClicked(ActionEvent event);
     }
 
+    public static class EmptyMikeButtonHandler implements MikeButtonHandler {
+        @Override
+        public void handleMikeButtonClicked(MikeButton event) {
+
+        }
+    }
+
+
     private int howManyRows = 20;
     private int howManyCols = 7;
 
@@ -39,7 +46,7 @@ public class MikeGridPane extends GridPane {
      */
     private  MikeButtonHandler handler;
 
-    private ControllerPositionsWindow positionsWindow;
+    private ControllerConsolidatedPositionsWindow positionsWindow;
     /**
      * Buttons in this GridPane. Access via getButton(row,column)
      */
