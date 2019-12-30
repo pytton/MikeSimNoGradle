@@ -16,7 +16,7 @@ import main.java.model.positionsorders.MikePosition;
 import main.java.model.priceserver.PriceServer;
 import main.java.controllerandview.MikeGridPane;
 
-public class ControllerConsolidatedPositionsWindow implements MikeGridPane.MikeButtonHandler {
+public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler {
 
     @FXML
     public BorderPane mainBorderPane;
@@ -77,8 +77,8 @@ public class ControllerConsolidatedPositionsWindow implements MikeGridPane.MikeB
         //this handles changing the instrument PositionsWindow refers to based on what the user
         //selected in in ListView instrumentlist:
         class MyInstrumentChangeListener implements ChangeListener {
-            ControllerConsolidatedPositionsWindow controllerPositionsWindow;
-            MyInstrumentChangeListener(ControllerConsolidatedPositionsWindow controllerPositionsWindow){
+            ControllerPositionsWindow controllerPositionsWindow;
+            MyInstrumentChangeListener(ControllerPositionsWindow controllerPositionsWindow){
                 this.controllerPositionsWindow = controllerPositionsWindow;
             }
             @Override
@@ -101,8 +101,8 @@ public class ControllerConsolidatedPositionsWindow implements MikeGridPane.MikeB
 
         //this handles changing the MikePosOrders this window controls/displays
         class MyPosOrdersChangeListener implements ChangeListener {
-            ControllerConsolidatedPositionsWindow controllerPositionsWindow;
-            MyPosOrdersChangeListener(ControllerConsolidatedPositionsWindow controllerPositionsWindow){
+            ControllerPositionsWindow controllerPositionsWindow;
+            MyPosOrdersChangeListener(ControllerPositionsWindow controllerPositionsWindow){
                 this.controllerPositionsWindow = controllerPositionsWindow;
             }
             @Override

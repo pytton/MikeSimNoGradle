@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Font;
-import main.java.controllerandview.positionswindow.controller.ControllerConsolidatedPositionsWindow;
+import main.java.controllerandview.positionswindow.controller.ControllerPositionsWindow;
 
 import java.util.ArrayList;
 
@@ -46,7 +46,7 @@ public class MikeGridPane extends GridPane {
      */
     private  MikeButtonHandler handler;
 
-    private ControllerConsolidatedPositionsWindow positionsWindow;
+    private ControllerPositionsWindow positionsWindow;
     /**
      * Buttons in this GridPane. Access via getButton(row,column)
      */
