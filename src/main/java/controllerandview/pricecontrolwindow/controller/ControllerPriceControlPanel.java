@@ -7,9 +7,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import main.java.controllerandview.MainGUIClass;
 import main.java.model.priceserver.PriceServer;
 
-public class ControllerPriceControlPanel {
+public class ControllerPriceControlPanel implements MainGUIClass.Updatable {
 
     private PriceServer priceServer;
     private PriceServer.PriceType priceType = PriceServer.PriceType.MANUAL;

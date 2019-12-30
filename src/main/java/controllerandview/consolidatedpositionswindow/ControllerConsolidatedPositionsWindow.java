@@ -1,4 +1,4 @@
-package main.java.controllerandview.positionswindow.controller;
+package main.java.controllerandview.consolidatedpositionswindow;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -10,14 +10,14 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import main.java.controllerandview.MainGUIClass;
+import main.java.controllerandview.MikeGridPane;
 import main.java.model.MainModelThread;
 import main.java.model.orderserver.MikeOrder;
 import main.java.model.positionsorders.MikePosOrders;
 import main.java.model.positionsorders.MikePosition;
 import main.java.model.priceserver.PriceServer;
-import main.java.controllerandview.MikeGridPane;
 
-public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler, MainGUIClass.Updatable {
+public class ControllerConsolidatedPositionsWindow implements MikeGridPane.MikeButtonHandler, MainGUIClass.Updatable {
 
     @FXML
     public BorderPane mainBorderPane;
@@ -78,8 +78,8 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
         //this handles changing the instrument PositionsWindow refers to based on what the user
         //selected in in ListView instrumentlist:
         class MyInstrumentChangeListener implements ChangeListener {
-            ControllerPositionsWindow controllerPositionsWindow;
-            MyInstrumentChangeListener(ControllerPositionsWindow controllerPositionsWindow){
+            ControllerConsolidatedPositionsWindow controllerPositionsWindow;
+            MyInstrumentChangeListener(ControllerConsolidatedPositionsWindow controllerPositionsWindow){
                 this.controllerPositionsWindow = controllerPositionsWindow;
             }
             @Override
@@ -102,8 +102,8 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
 
         //this handles changing the MikePosOrders this window controls/displays
         class MyPosOrdersChangeListener implements ChangeListener {
-            ControllerPositionsWindow controllerPositionsWindow;
-            MyPosOrdersChangeListener(ControllerPositionsWindow controllerPositionsWindow){
+            ControllerConsolidatedPositionsWindow controllerPositionsWindow;
+            MyPosOrdersChangeListener(ControllerConsolidatedPositionsWindow controllerPositionsWindow){
                 this.controllerPositionsWindow = controllerPositionsWindow;
             }
             @Override
