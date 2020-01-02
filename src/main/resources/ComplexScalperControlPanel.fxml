@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="200.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="650.0" prefWidth="200.0">
+         <children>
+            <Label text="Complex Scalper Control">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <VBox alignment="CENTER_LEFT" prefHeight="68.0" prefWidth="150.0" spacing="3.0">
+               <children>
+                  <Label fx:id="priceSourceLabel" text="Entry Order Type:" />
+                  <RadioButton mnemonicParsing="false" selected="true" text="Buy Limit">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="orderType" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton mnemonicParsing="false" text="Buy Stop" toggleGroup="$orderType" />
+                  <RadioButton mnemonicParsing="false" text="Sell Limit" toggleGroup="$orderType" />
+                  <RadioButton mnemonicParsing="false" text="Sell Stop" toggleGroup="$orderType" />
+               </children>
+            </VBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label text="Order Amount" />
+                  <TextField fx:id="orderAmount" prefHeight="25.0" prefWidth="70.0" text="100" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label text="Scalper Target Interval" />
+                  <TextField fx:id="targetInterval" prefHeight="25.0" prefWidth="70.0" text="1" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label text="Scalper Count" />
+                  <TextField fx:id="targetInterval1" prefHeight="25.0" prefWidth="70.0" text="10" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</fx:root>

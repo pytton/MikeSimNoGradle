@@ -5,10 +5,12 @@ import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import main.java.controllerandview.mainGUIwindow.controller.ControllerMainGUIWindow;
 import main.java.controllerandview.positionswindow.controller.ControllerPositionsWindow;
+import main.java.controllerandview.positionswindow.controller.ControllerSimpleScalperAlgo;
 import main.java.controllerandview.pricecontrolwindow.controller.ControllerPriceControlPanel;
 import main.java.model.MainModelThread;
 import main.java.model.priceserver.PriceServer;
@@ -113,10 +115,10 @@ public class MainGUIClass {
         //TODO: WORK IN PROGRESS:
         //create Positions Window:
         //we need to add custom MikeGridPane not defined in FXML:
-        MikePositionsWindowCreator creator = null;
+        ConsolidatedPositionsWindowCreator creator = null;
 
         try {
-            creator = new MikePositionsWindowCreator(getMainModelThread().posOrdersManager.getPriceServer(defaultTickerId));
+            creator = new ConsolidatedPositionsWindowCreator(getMainModelThread().posOrdersManager.getPriceServer(defaultTickerId));
         } catch (IOException e) {
             System.out.println("Exception in createPosWindow");
             e.printStackTrace();
@@ -134,7 +136,7 @@ public class MainGUIClass {
         stage.show();
 
         //name the window:
-        String name = ("PositionsWindow " + updatableWindowsList.size());
+        String name = ("ConsolidatedPositions " + updatableWindowsList.size());
         stage.setTitle(name);
     }
 
@@ -225,6 +227,83 @@ public class MainGUIClass {
         public MikePositionsWindowCreator(PriceServer priceServer) throws IOException {
             //load FXML file
             loader = new FXMLLoader(getClass().getResource("/PositionsWindow.fxml"));
+//            loader = new FXMLLoader(getClass().getResource("/ConsolidatedPositionsWindow.fxml"));
+            //this needed by JavaFX Scene constructor:
+            positionsWindowRoot = loader.load(); //this might throw IOException
+            //this is used to access elements of MikePositionsWindowCreator:
+            controller = (ControllerPositionsWindow) loader.getController();
+            //this adds a custom table of buttons to the scene
+            buttonTable = new MikeGridPane(100,7, controller);
+
+            VBox topVbox = new VBox();
+            MikeGridPane topGridPane = new MikeGridPane(1,7, new MikeGridPane.EmptyMikeButtonHandler());
+            MikeGridPane bottomGridPane = new MikeGridPane(1, 7, new MikeGridPane.EmptyMikeButtonHandler());
+
+            topGridPane.setPadding( new Insets(0, 15, 0, 0));
+            bottomGridPane.setPadding( new Insets(0, 15, 0, 0));
+            topVbox.getChildren().add(topGridPane);
+
+            ScrollPane sp = new ScrollPane();
+            sp.setContent(buttonTable);
+            sp.setFitToWidth(true);
+            topVbox.getChildren().add(sp);
+            topVbox.getChildren().add(bottomGridPane);
+
+//            //todo: experimenting:
+//
+////            ControllerSimpleScalperAlgo controllerSimpleScalperAlgo;
+//
+//            FXMLLoader loader2;
+//            loader2 = new FXMLLoader(getClass().getResource("/Scalper1ControlPanel.fxml"));
+////            loader2 = new FXMLLoader(getClass().getResource("/PositionsWindow.fxml"));
+////            controllerSimpleScalperAlgo = (ControllerSimpleScalperAlgo) loader2.getController();
+//
+//            Parent anchorPaneParent = loader2.load();
+//
+//
+//            System.out.println("Anchorpane load success");
+
+            controller.getMainBorderPane().setLeft(topVbox);
+
+            controller.setMikeGridPane(buttonTable);
+
+            controller.setModel(mainModelThread);
+
+            //set the default instrument
+            controller.setInstrumentList(mainModelThread.posOrdersManager.getPriceServerObservableList());
+
+            controller.setMikePosOrders(mainModelThread.posOrdersManager.getMikePosOrders(defaultTickerId, 0));
+
+            //populate the ListView that allows choosing PosOrders
+            controller.positionsList.setItems(mainModelThread.posOrdersManager.getPosOrdersObservableList(defaultTickerId));
+
+            //set the initial priceServer(this can later be changed by user in the window)
+            controller.setPriceServer(priceServer);
+        }
+
+
+
+        public Parent getPositionsWindowRoot() {
+            return positionsWindowRoot;
+        }
+
+        public ControllerPositionsWindow getController() {
+            return controller;
+        }
+    }
+
+    //Used to create and setup MikePositionsWindow.
+    class ConsolidatedPositionsWindowCreator {
+
+        private FXMLLoader loader;// = new FXMLLoader(getClass().getResource("PositionsWindow.fxml"));
+        private Parent positionsWindowRoot;
+        public ControllerPositionsWindow controller;
+        private MikeGridPane buttonTable;
+
+        public ConsolidatedPositionsWindowCreator(PriceServer priceServer) throws IOException {
+            //load FXML file
+//            loader = new FXMLLoader(getClass().getResource("/PositionsWindow.fxml"));
+            loader = new FXMLLoader(getClass().getResource("/ConsolidatedPositionsWindow.fxml"));
             //this needed by JavaFX Scene constructor:
             positionsWindowRoot = loader.load(); //this might throw IOException
             //this is used to access elements of MikePositionsWindowCreator:

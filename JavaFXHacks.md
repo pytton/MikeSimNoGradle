@@ -12,3 +12,9 @@ button.setPadding(new Insets(0, 0, 0, 0));
     //        buttonTable.getButton(4,1).setStyle("-fx-background-color: grey;-fx-border-color: black; -fx-border-width: 1px");
     //        buttonTable.getButton(5,1).setStyle("-fx-background-color: blue;-fx-border-color: black; -fx-border-width: 1px");
     //        buttonTable.getButton(5,1).setStyle("-fx-border-color: black; -fx-border-width: 1px;");
+    
+styles: https://docs.oracle.com/javafx/2/css_tutorial/jfxpub-css_tutorial.htm
+color reference: https://docs.oracle.com/javafx/2/api/javafx/scene/doc-files/cssref.html#introscenegraph
+https://stackoverflow.com/questions/24702542/how-to-change-the-color-of-text-in-javafx-textfield
+
+

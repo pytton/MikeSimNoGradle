@@ -33,9 +33,7 @@ public class MainModelThread extends Thread {
         marketConnection = new InteractiveBrokersAPI(tradedInstrumentMap);
         //this stores a priceserver, orderserver and a list of MikePosOrders for each traded instrument:
         posOrdersManager = new PosOrdersManager(tradedInstrumentMap);
-
         algoManager = new AlgoManager(this);
-
     }
 
     /**
@@ -211,7 +209,7 @@ public class MainModelThread extends Thread {
             return dataMap.get(tickerId).getPosOrdersObservableList();
         }
 
-        public AlgoManager getAlgoManager(){return algoManager;}
+//        public AlgoManager getAlgoManager(){return algoManager;}
     }
 
     /**

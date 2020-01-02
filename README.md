@@ -4,16 +4,15 @@ package com.ib.* is needed to connect to Interactive Brokers API.
 
 
 ###TODO:
-
-1. A copy of the 'Price control' window from C++ MikeSimulator. Pressing buttons prints messages in console.
-C++ MikeSimulator here: https://github.com/pytton/MikeSimulator/tree/experiment/Release file: TestingNewMikeSim.exe
-2. A copy of the 'Positions' window from C++ MikeSimulator.
-3. 'Priceserver' class which has three modules - manual prices, live Interactive Brokers prices, historical prices. Implement only manual prices now.
-4. Link 'Priceserver' class with UI. 
-
-5. Bug in PriceControlPanel - setting MinPrice higher than MaxPrice makes the slider disappear - fixed
-
+1. pressing buttons in PositionsWindow launches algos. This is currently hardcoded.
+Make something so that you can choose which algo is launched by column1, which by column2,
+etc. Use a JavaFX ChoiceBox to choose the column - selecting a column should
+change the contents of AnchorPane columnActionsAnchorPane in ControllerPositionsWindow.java
+columnActionsAnchorPane should have another ChoiceBox inside it with all the available
+algos listed. Choosing one of the Algos should change the contents of another Pane
+below the choicebox depending on the Algo selected. columnActionsAnchorPane does not 
+have to be an AnchorPane - it can be another kind of Pane. The Panes used should be
+defined in an .fxml file for easy use with SceneBuilder.
 
 #current commit:
-Working on GUI. Create all windows in MainGUIController.
-Create methods for making PositionsWindow and PriceController Window.
+Working on GUI. 

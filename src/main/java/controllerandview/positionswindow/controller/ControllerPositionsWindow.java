@@ -5,10 +5,15 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import main.java.controllerandview.MainGUIClass;
 import main.java.model.MainModelThread;
 import main.java.model.orderserver.MikeOrder;
@@ -17,12 +22,26 @@ import main.java.model.positionsorders.MikePosition;
 import main.java.model.priceserver.PriceServer;
 import main.java.controllerandview.MikeGridPane;
 
+import java.io.IOException;
+
 public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler, MainGUIClass.Updatable {
 
     @FXML
     public BorderPane mainBorderPane;
     public ListView positionsList;
     public ListView instrumentsList;
+
+
+    //todo: experimenting:
+    public ChoiceBox choiceBoxColSel;
+    public Pane algoChoicePane;
+    public AnchorPane columnActionsAnchorPane;
+    public VBox algoChoiceVbox;
+
+    private ControllerSimpleScalperAlgo controllerSimpleScalperAlgo;
+    //todo: erase this after experiment finished:
+    int selection = 0;
+
     @FXML
     private TextField TopRowPriceTextField;
     @FXML
@@ -119,6 +138,14 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
         }
         MyPosOrdersChangeListener posListener = new MyPosOrdersChangeListener(this);
         positionsList.getSelectionModel().selectedItemProperty().addListener(posListener);
+
+        //todo: learning choicebox
+
+        choiceBoxColSel.getItems().add("Column1");
+        choiceBoxColSel.getItems().add("Column2");
+        choiceBoxColSel.getItems().add("Column3");
+
+
     }
 
     public void mikeGridPaneButtonClicked(ActionEvent event) {
@@ -155,8 +182,6 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
                 int priceToPrint = topRowPrice - row;
                 MikePosition position = mikePosOrders.getMikePositionAtPrice(priceToPrint);
 
-
-
                 //print open positions in first column:
                 if (position == null) {
                     setSpecificButtonInMikeGridPane( row,0, "" );
@@ -173,12 +198,20 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
                 }
 
 
-
+                //todo: testing:
                 //print "BID" in the row of the bid price in third column:
+                //and experiment to play with the colors:
+                MikeGridPane.MikeButton button = mikeGridPane.getButton(row, 2);
                 if (topRowPrice - row == priceServer.getBidPrice()) {
                     setSpecificButtonInMikeGridPane(row, 2, "BID");
+                    button.setStyle("-fx-background-color: blue; -fx-text-fill: red; -fx-font-weight: bolder; -fx-border-color : black");
+                    button.setBorder(new Border(new BorderStroke(Color.BLACK,
+                            BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
                 }else{
                     setSpecificButtonInMikeGridPane(row, 2, "");
+                    button.setStyle("-fx-background-color: white");
+                    button.setBorder(new Border(new BorderStroke(Color.BLACK,
+                            BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
                 }
 
 
@@ -244,6 +277,77 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
     @FXML
     public void testTwoButtonClicked(ActionEvent actionEvent) {
 //        model.getOrderServer().printActiveOrdersToConsole();
+
+        //todo: testing:
+//        choiceBoxColSel.getSelectionModel().getSelectedItem();
+        System.out.println("Column Selected: " + choiceBoxColSel.getSelectionModel().getSelectedItem());
+
+
+        //experimenting:
+        //can I change the contents of the anchorpane?
+
+
+
+
+        if (selection == 0) {
+            try {
+
+                //todo: experimenting:
+
+//            ControllerSimpleScalperAlgo controllerSimpleScalperAlgo;
+
+                FXMLLoader loader2;
+                loader2 = new FXMLLoader(getClass().getResource("/Scalper1ControlPanel.fxml"));
+//            loader2 = new FXMLLoader(getClass().getResource("/PositionsWindow.fxml"));
+//            controllerSimpleScalperAlgo = (ControllerSimpleScalperAlgo) loader2.getController();
+
+                Parent anchorPaneParent = loader2.load();
+
+                AnchorPane myAPane = (AnchorPane) anchorPaneParent;
+
+                columnActionsAnchorPane = myAPane;
+
+//                algoChoicePane = (Pane) anchorPaneParent;
+
+                columnActionsAnchorPane = (AnchorPane) anchorPaneParent;
+
+
+//                algoChoiceVbox.getChildren().add(anchorPaneParent);
+
+
+//
+//                FXMLLoader loader;
+//                loader = new FXMLLoader(getClass().getResource("/Scalper1ControlPanel.fxml"));
+//
+//                AnchorPane aPane = loader.load();
+//
+//                algoChoiceVbox.getChildren().add(aPane);
+
+                System.out.println("Anchorpane loaded");
+
+//                loader = new FXMLLoader(getClass().getResource("/Scalper1ControlPanel.fxml"));
+//                algoChoicePane.getChildren().add(loader.load());
+//                columnActionsAnchorPane.getChildren().add(aPane);
+
+                System.out.println("Anchorpane set");
+
+
+            } catch (Exception e) {
+                System.out.println("Exception in test two");
+            }
+            selection = 1;
+        } else {
+//            loader = new FXMLLoader(getClass().getResource("/ComplexScalperControlPanel.fxml"));
+//            try {
+////                algoChoicePane = loader.load();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+
+            selection = 0;
+        }
+
+
     }
 
     @FXML
@@ -254,9 +358,6 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
         System.out.println("Clicked");
 //        String exper = priceServer.getExperimentalNumber().toString();
 //        askVolumeTextField.setText(exper);
-
-
-
 
         //display realtime bid ask priceserver:
 //        askPriceTextField.setText(((Double)priceServer.getRealTimeAskPrice()).toString());
