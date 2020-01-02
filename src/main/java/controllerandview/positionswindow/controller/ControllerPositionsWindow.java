@@ -279,7 +279,6 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
 //        model.getOrderServer().printActiveOrdersToConsole();
 
         //todo: testing:
-//        choiceBoxColSel.getSelectionModel().getSelectedItem();
         System.out.println("Column Selected: " + choiceBoxColSel.getSelectionModel().getSelectedItem());
 
 
@@ -287,9 +286,7 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
         //can I change the contents of the anchorpane?
 
 
-
-
-        if (selection == 0) {
+        if (selection == 0/*set to 0 at startup of program*/) {
             try {
 
                 //todo: experimenting:
@@ -298,38 +295,18 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
 
                 FXMLLoader loader2;
                 loader2 = new FXMLLoader(getClass().getResource("/Scalper1ControlPanel.fxml"));
-//            loader2 = new FXMLLoader(getClass().getResource("/PositionsWindow.fxml"));
-//            controllerSimpleScalperAlgo = (ControllerSimpleScalperAlgo) loader2.getController();
-
                 Parent anchorPaneParent = loader2.load();
-
-                AnchorPane myAPane = (AnchorPane) anchorPaneParent;
-
-                columnActionsAnchorPane = myAPane;
-
-//                algoChoicePane = (Pane) anchorPaneParent;
-
-                columnActionsAnchorPane = (AnchorPane) anchorPaneParent;
-
-
-//                algoChoiceVbox.getChildren().add(anchorPaneParent);
-
-
-//
-//                FXMLLoader loader;
-//                loader = new FXMLLoader(getClass().getResource("/Scalper1ControlPanel.fxml"));
-//
-//                AnchorPane aPane = loader.load();
-//
-//                algoChoiceVbox.getChildren().add(aPane);
-
                 System.out.println("Anchorpane loaded");
 
-//                loader = new FXMLLoader(getClass().getResource("/Scalper1ControlPanel.fxml"));
-//                algoChoicePane.getChildren().add(loader.load());
-//                columnActionsAnchorPane.getChildren().add(aPane);
+                //this works:
+                algoChoiceVbox.getChildren().add(anchorPaneParent);
 
-                System.out.println("Anchorpane set");
+                //this does not work. why?
+//                AnchorPane myAPane = (AnchorPane) anchorPaneParent;
+//                columnActionsAnchorPane = myAPane;
+
+
+                System.out.println("Anchorpane set?");
 
 
             } catch (Exception e) {
@@ -337,12 +314,19 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
             }
             selection = 1;
         } else {
-//            loader = new FXMLLoader(getClass().getResource("/ComplexScalperControlPanel.fxml"));
-//            try {
-////                algoChoicePane = loader.load();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
+            try {
+
+                FXMLLoader loader2;
+
+                //try a different FXML file:
+                loader2 = new FXMLLoader(getClass().getResource("/ComplexScalperControlPanel.fxml"));
+                Parent anchorPaneParent = loader2.load();
+                System.out.println(" Second Anchorpane loaded");
+                algoChoiceVbox.getChildren().add(anchorPaneParent);
+                System.out.println("Second Anchorpane set");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
             selection = 0;
         }
