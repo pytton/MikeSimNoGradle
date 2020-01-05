@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="mainBorderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pickOnBounds="false" prefHeight="1000.0" prefWidth="600.0" scaleShape="false" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllerandview.positionswindow.controller.ControllerPositionsWindow">
+<BorderPane fx:id="mainBorderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pickOnBounds="false" prefHeight="1000.0" prefWidth="640.0" scaleShape="false" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllerandview.positionswindow.controller.ControllerPositionsWindow">
    <center>
       <!--<TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">-->
         <!--<columns>-->
@@ -134,62 +134,100 @@
                   </HBox>
                </children>
             </VBox>
-            <ScrollPane prefHeight="450.0" prefWidth="200.0">
-               <content>
-                  <Accordion prefHeight="750.0" prefWidth="200.0">
-                    <panes>
-                      <TitledPane animated="false" text="Choose Instrument + PosOrders">
-                           <content>
-                              <TabPane prefHeight="252.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
-                                <tabs>
-                                  <Tab text="Instruments">
-                                       <content>
-                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <Accordion prefHeight="750.0" prefWidth="200.0">
+              <panes>
+                <TitledPane animated="false" text="Choose Instrument + PosOrders">
+                     <content>
+                        <TabPane prefHeight="252.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+                          <tabs>
+                            <Tab text="Instruments">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0">
-                                                   <children>
-                                                      <Label alignment="CENTER" contentDisplay="CENTER" text="Instruments" />
-                                                      <ListView fx:id="instrumentsList" prefHeight="180.0" prefWidth="200.0" />
-                                                   </children>
-                                                </VBox>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" text="Instruments" />
+                                                <ListView fx:id="instrumentsList" prefHeight="180.0" prefWidth="200.0" />
                                              </children>
-                                          </AnchorPane>
-                                       </content>
-                                  </Tab>
-                                  <Tab text="Positions">
-                                    <content>
-                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                          </VBox>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                            </Tab>
+                            <Tab text="Positions">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0">
-                                                   <children>
-                                                      <Label alignment="CENTER" contentDisplay="CENTER" text="Positions" />
-                                                      <ListView fx:id="positionsList" prefHeight="180.0" prefWidth="200.0" />
-                                                   </children>
-                                                </VBox>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" text="Positions" />
+                                                <ListView fx:id="positionsList" prefHeight="180.0" prefWidth="200.0" />
                                              </children>
-                                          </AnchorPane>
-                                    </content>
-                                  </Tab>
-                                </tabs>
-                              </TabPane>
-                           </content>
-                      </TitledPane>
-                        <TitledPane animated="false" text="Column Actions Setup">
-                           <content>
-                              <VBox fx:id="algoChoiceVbox" prefHeight="700.0" prefWidth="200.0">
-                                 <children>
-                                    <ChoiceBox fx:id="choiceBoxColSel" prefWidth="150.0" />
-                                    <ChoiceBox prefWidth="150.0" />
-                                    <Pane fx:id="algoChoicePane" prefHeight="200.0" prefWidth="200.0" />
-                                    <AnchorPane fx:id="columnActionsAnchorPane" prefHeight="200.0" prefWidth="200.0" />
-                                 </children>
-                              </VBox>
-                           </content>
-                        </TitledPane>
-                    </panes>
-                  </Accordion>
-               </content>
-            </ScrollPane>
+                                          </VBox>
+                                       </children>
+                                    </AnchorPane>
+                              </content>
+                            </Tab>
+                          </tabs>
+                        </TabPane>
+                     </content>
+                </TitledPane>
+                  <TitledPane animated="false" text="Column Actions Setup">
+                     <content>
+                        <VBox fx:id="algoChoiceVbox" prefHeight="700.0" prefWidth="200.0">
+                           <children>
+                              <ChoiceBox fx:id="choiceBoxColSel" prefWidth="150.0" />
+                              <Pane fx:id="algoChoicePane" prefHeight="200.0" prefWidth="200.0" />
+                              <AnchorPane fx:id="columnActionsAnchorPane" prefHeight="200.0" prefWidth="200.0" />
+                           </children>
+                        </VBox>
+                     </content>
+                  </TitledPane>
+                  <TitledPane prefHeight="200.0" prefWidth="200.0" text="Col Actions Tabs">
+                     <content>
+                        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+                          <tabs>
+                            <Tab text="  1">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                              </content>
+                            </Tab>
+                            <Tab text="  2">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                              </content>
+                            </Tab>
+                              <Tab text="  3">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                 </content>
+                              </Tab>
+                              <Tab text="  4">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                 </content>
+                              </Tab>
+                              <Tab text="  5">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                 </content>
+                              </Tab>
+                              <Tab text="  6">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                 </content>
+                              </Tab>
+                              <Tab text="  7">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                 </content>
+                              </Tab>
+                          </tabs>
+                        </TabPane>
+                     </content>
+                  </TitledPane>
+              </panes>
+            </Accordion>
          </children>
       </VBox>
    </right>

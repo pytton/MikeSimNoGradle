@@ -13,8 +13,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import main.java.controllerandview.MainGUIClass;
+import main.java.controllerandview.algocontrollers.AlgoController;
+import main.java.controllerandview.algocontrollers.ControllerComplexScalperAlgo;
+import main.java.controllerandview.algocontrollers.ControllerSimpleScalperAlgo;
 import main.java.model.MainModelThread;
 import main.java.model.orderserver.MikeOrder;
 import main.java.model.positionsorders.MikePosOrders;
@@ -38,7 +40,14 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
     public AnchorPane columnActionsAnchorPane;
     public VBox algoChoiceVbox;
 
+    public AlgoController algoController;
+
+
+    private ControllerComplexScalperAlgo controllerComplexScalperAlgo;
+
     private ControllerSimpleScalperAlgo controllerSimpleScalperAlgo;
+
+
     //todo: erase this after experiment finished:
     int selection = 0;
 
@@ -291,26 +300,26 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
 
                 //todo: experimenting:
 
-//            ControllerSimpleScalperAlgo controllerSimpleScalperAlgo;
+//            ControllerComplexScalperAlgo controllerComplexScalperAlgo;
 
                 FXMLLoader loader2;
-                loader2 = new FXMLLoader(getClass().getResource("/Scalper1ControlPanel.fxml"));
+                loader2 = new FXMLLoader(getClass().getResource("/algoControllers/SimpleScalperAlgoControlPanel.fxml"));
+
                 Parent anchorPaneParent = loader2.load();
                 System.out.println("Anchorpane loaded");
 
-                //this works:
-                algoChoiceVbox.getChildren().add(anchorPaneParent);
+                columnActionsAnchorPane.getChildren().setAll(anchorPaneParent);
 
-                //this does not work. why?
-//                AnchorPane myAPane = (AnchorPane) anchorPaneParent;
-//                columnActionsAnchorPane = myAPane;
+                ControllerSimpleScalperAlgo controllerSimpleScalperAlgo = loader2.getController();
+
+                algoController = controllerSimpleScalperAlgo;
 
 
-                System.out.println("Anchorpane set?");
+                System.out.println("Test two part 1 OK");
 
 
             } catch (Exception e) {
-                System.out.println("Exception in test two");
+                System.out.println("Exception in test two part 1");
             }
             selection = 1;
         } else {
@@ -319,12 +328,20 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
                 FXMLLoader loader2;
 
                 //try a different FXML file:
-                loader2 = new FXMLLoader(getClass().getResource("/ComplexScalperControlPanel.fxml"));
+                loader2 = new FXMLLoader(getClass().getResource("/algoControllers/ComplexScalperControlPanel.fxml"));
                 Parent anchorPaneParent = loader2.load();
                 System.out.println(" Second Anchorpane loaded");
-                algoChoiceVbox.getChildren().add(anchorPaneParent);
+
+                columnActionsAnchorPane.getChildren().setAll(anchorPaneParent);
+
+                controllerComplexScalperAlgo = loader2.getController();
+
+                algoController = controllerComplexScalperAlgo;
+
+
                 System.out.println("Second Anchorpane set");
             } catch (IOException e) {
+                System.out.println("Exception in part 2");
                 e.printStackTrace();
             }
 
@@ -337,18 +354,9 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
     @FXML
     private void testThreeButtonClicked(){
 
-        model.marketConnection.consolePrintRealTimeData();
 
-        System.out.println("Clicked");
-//        String exper = priceServer.getExperimentalNumber().toString();
-//        askVolumeTextField.setText(exper);
+        System.out.println("Amount: " + algoController.getAmount());
 
-        //display realtime bid ask priceserver:
-//        askPriceTextField.setText(((Double)priceServer.getRealTimeAskPrice()).toString());
-//        bidPriceTextField.setText(((Double)priceServer.getRealTimeBidPrice()).toString());
-
-        //experiment:
-//        mikeGridPane.getButton(3,7).setPrefWidth(120);
 
     }
 

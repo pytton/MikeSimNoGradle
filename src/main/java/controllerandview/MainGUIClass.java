@@ -5,12 +5,10 @@ import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import main.java.controllerandview.mainGUIwindow.controller.ControllerMainGUIWindow;
 import main.java.controllerandview.positionswindow.controller.ControllerPositionsWindow;
-import main.java.controllerandview.positionswindow.controller.ControllerSimpleScalperAlgo;
 import main.java.controllerandview.pricecontrolwindow.controller.ControllerPriceControlPanel;
 import main.java.model.MainModelThread;
 import main.java.model.priceserver.PriceServer;
@@ -248,20 +246,6 @@ public class MainGUIClass {
             sp.setFitToWidth(true);
             topVbox.getChildren().add(sp);
             topVbox.getChildren().add(bottomGridPane);
-
-//            //todo: experimenting:
-//
-////            ControllerSimpleScalperAlgo controllerSimpleScalperAlgo;
-//
-//            FXMLLoader loader2;
-//            loader2 = new FXMLLoader(getClass().getResource("/Scalper1ControlPanel.fxml"));
-////            loader2 = new FXMLLoader(getClass().getResource("/PositionsWindow.fxml"));
-////            controllerSimpleScalperAlgo = (ControllerSimpleScalperAlgo) loader2.getController();
-//
-//            Parent anchorPaneParent = loader2.load();
-//
-//
-//            System.out.println("Anchorpane load success");
 
             controller.getMainBorderPane().setLeft(topVbox);
 
