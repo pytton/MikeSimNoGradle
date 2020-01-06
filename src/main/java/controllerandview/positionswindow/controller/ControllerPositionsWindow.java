@@ -533,16 +533,16 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
 
             controllerCol3.mikeGridPaneButtonPressed(price, model, mikePosOrders);
 
-//            System.out.println("Testing Creating ComplexScalperAlgoUp1");
+//            System.out.println("Testing Creating ComplexScalperAlgo1");
 //            model.algoManager.createComplexScalperAlgoUp1(mikePosOrders, price, 1, 10, 100, MikeOrder.MikeOrderType.BUYLMT);
 
         }
         if (button.getColOfButton() == 3) {
-            System.out.println("Testing Creating ComplexScalperAlgoUp1");
+            System.out.println("Testing Creating ComplexScalperAlgo1");
             model.algoManager.createComplexScalperAlgoUp1(mikePosOrders, price, 1, 10, 100, MikeOrder.MikeOrderType.BUYSTP);
         }
         if (button.getColOfButton() == 4) {
-            System.out.println("Testing Creating ComplexScalperAlgoUp1");
+            System.out.println("Testing Creating ComplexScalperAlgo1");
             model.algoManager.createComplexScalperAlgoUp1(mikePosOrders, price, -1, 10, 100, MikeOrder.MikeOrderType.SELLLMT);
         }
 //        if (button.getColOfButton() == 3) {

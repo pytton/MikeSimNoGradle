@@ -50,7 +50,7 @@ public class StepperAlgoUp1 extends BaseAlgo {
         if (status == Status.RUNNING) {
             //check if first order was filled. If it has, place the target order:
             //target order is half the amount of startOrder
-            if (posOrders.getOrderServer().getMikeOrder(startOrderId).isFilled()) {
+            if (posOrders.checkIfOrderFilled(startOrderId)) {
                 targetOrderId = posOrders.placeNewOrder(MikeOrder.MikeOrderType.SELLLMT, startPrice, (startPrice + interval), (amount / 2));
                 status = Status.STARTFILLED;
                 return;
@@ -59,7 +59,7 @@ public class StepperAlgoUp1 extends BaseAlgo {
         if (status == Status.STARTFILLED) {
             //check if the target has been filled. If it has, create the exit order:
             //exit order half of firstOrder - should make position 0
-            if (posOrders.getOrderServer().getMikeOrder(targetOrderId).isFilled()) {
+            if (posOrders.checkIfOrderFilled(targetOrderId)) {
                 exitOrderId = posOrders.placeNewOrder(MikeOrder.MikeOrderType.SELLSTP, startPrice, (startPrice - interval), (amount / 2));
                 status = Status.TARGETFILLED;
                 return;
@@ -69,7 +69,7 @@ public class StepperAlgoUp1 extends BaseAlgo {
             //if target was filled then exit order was placed.
             //check if it was filled. If it has, then the poosition should be flat now,
             // so make a STOP BUY order back at the initial entry price:
-            if (posOrders.getOrderServer().getMikeOrder(exitOrderId).isFilled()) {
+            if (posOrders.checkIfOrderFilled(exitOrderId)) {
                 startOrderId = posOrders.placeNewOrder(MikeOrder.MikeOrderType.BUYSTP, startPrice, startPrice, amount);
                 status = Status.RUNNING;
                 return;

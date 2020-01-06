@@ -77,7 +77,7 @@ public class SimpleScalperAlgo extends BaseAlgo {
         if (status == Status.RUNNING) {
             //if lowOrderId is filled, create the highOrder, change status to LOWERFILLED
             //assigning order to entryTargetPrice position to avoid problems with incorrectly calculating openPL.
-            if (posOrders.getOrderServer().getMikeOrder(lowOrderId).isFilled()) {
+            if (posOrders.checkIfOrderFilled(lowOrderId)) {
                 highOrderId = posOrders.placeNewOrder(exitOrderType, entryTargetPrice, exitTargetPrice, orderAmount);
                 status = Status.LOWERFILLED;
                 return;
@@ -85,7 +85,7 @@ public class SimpleScalperAlgo extends BaseAlgo {
         }
         if (status == Status.LOWERFILLED) {
             //check if exitTargetPrice has been filled:
-            if (posOrders.getOrderServer().getMikeOrder(highOrderId).isFilled()) {
+            if (posOrders.checkIfOrderFilled(highOrderId)) {
                 lowOrderId = posOrders.placeNewOrder(returnOrderType, entryTargetPrice, entryTargetPrice, orderAmount);
                 status = Status.RUNNING;
                 return;
@@ -102,10 +102,13 @@ public class SimpleScalperAlgo extends BaseAlgo {
     @Override
     public void cancel() {
         //1. Cancel all orders
-        posOrders.getOrderServer().cancelOrder(lowOrderId);
-        posOrders.getOrderServer().cancelOrder(highOrderId);
+        posOrders.cancelOrder(lowOrderId);
+        posOrders.cancelOrder(highOrderId);
         //2. Set status to CANCELLED
         status = Status.CANCELLED;
     }
 
+    public int getEntryTargetPrice() {
+        return entryTargetPrice;
+    }
 }

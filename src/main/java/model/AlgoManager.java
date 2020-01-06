@@ -1,6 +1,7 @@
 package main.java.model;
 
-import main.java.model.mikealgos.ComplexScalperAlgoUp1;
+import javafx.collections.FXCollections;
+import main.java.model.mikealgos.ComplexScalperAlgo1;
 import main.java.model.mikealgos.MikeAlgo;
 import main.java.model.mikealgos.SimpleScalperAlgo;
 import main.java.model.mikealgos.StepperAlgoUp1;
@@ -17,33 +18,53 @@ public class AlgoManager{
 
     MainModelThread model;
     Set<MikeAlgo> algoSet;
+    Set<MikeAlgo> cancelledAlgoSet;
+    //we need this if we want to cancel algos of specific type:
     Set<SimpleScalperAlgo> simpleScalperAlgoSet;
+    Set<ComplexScalperAlgo1> complexScalperAlgo1Set;
 
     public AlgoManager(MainModelThread model) {
         this.model = model;
-        algoSet = new HashSet<>();
-        simpleScalperAlgoSet = new HashSet<>();
+        //todo: does this work?
+        algoSet = FXCollections.observableSet();
+        cancelledAlgoSet = FXCollections.observableSet();
+        simpleScalperAlgoSet = FXCollections.observableSet();
+        complexScalperAlgo1Set = FXCollections.observableSet();
     }
 
-    public void createScalperAlgo1(MikePosOrders posOrders, int entryPrice, int targetPrice, int orderAmount, MikeOrder.MikeOrderType entry){
+    synchronized public void createScalperAlgo1(MikePosOrders posOrders, int entryPrice, int targetPrice, int orderAmount, MikeOrder.MikeOrderType entry){
         System.out.println("Creating SimpleScalperAlgo for MikePosOrders " + posOrders.getName());
         SimpleScalperAlgo algo = new SimpleScalperAlgo(posOrders, entryPrice, targetPrice, orderAmount, entry );
         algoSet.add(algo);
         simpleScalperAlgoSet.add(algo);
     }
 
-//    public void cancelAllScalperAlgo
+    /**
+     * This will cancel all SimpleScalperAlgos that have been initialized with entryPrice
+     * @param entryPrice
+     */
+    synchronized public void cancelAllSimpleScalperAlgosAtPrice(int entryPrice) {
+        Set<MikeAlgo> algosToCancel = new HashSet<>();
+        //find all algos initialized with entryPrice and cancel them:
+        for (SimpleScalperAlgo algo : simpleScalperAlgoSet) {
+            if (algo.getEntryTargetPrice() == entryPrice) {
+                algo.cancel();
+                algosToCancel.add(algo);
+            }
+        }
 
-    public void createStepperAlgoUp1(MikePosOrders posOrders, int startPrice, int interval, int amount) {
+        //housekeeping - remove cancelled algos from active algos and add them to the set of cancelled algos:
+        algoSet.removeAll(algosToCancel);
+        cancelledAlgoSet.addAll(algosToCancel);
+    }
 
-
+    synchronized public void createStepperAlgoUp1(MikePosOrders posOrders, int startPrice, int interval, int amount) {
         StepperAlgoUp1 algo = new StepperAlgoUp1(posOrders, startPrice, interval, amount);
         algoSet.add(algo);
-
     }
 
     public void createComplexScalperAlgoUp1(MikePosOrders posOrders, int lowerTarget, int interval, int howManyScalpers, int amount, MikeOrder.MikeOrderType entry) {
-        ComplexScalperAlgoUp1 algo = new ComplexScalperAlgoUp1(posOrders, lowerTarget, interval, howManyScalpers, amount, entry);
+        ComplexScalperAlgo1 algo = new ComplexScalperAlgo1(posOrders, lowerTarget, interval, howManyScalpers, amount, entry);
         algoSet.add(algo);
     }
 

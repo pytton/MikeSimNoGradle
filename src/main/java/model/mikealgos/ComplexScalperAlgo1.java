@@ -6,9 +6,10 @@ import main.java.model.positionsorders.MikePosOrders;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ComplexScalperAlgoUp1 extends BaseAlgo {
+public class ComplexScalperAlgo1 extends BaseAlgo {
 
     private Set<SimpleScalperAlgo> algoSet;
+    private int entryTarget;
 
 
     /**
@@ -18,14 +19,16 @@ public class ComplexScalperAlgoUp1 extends BaseAlgo {
      * Interval cannot be zero
      * Above enforced by constructor
      * @param posOrders
-     * @param lowerTarget
+     * @param entryTarget
      * @param interval
      * @param howManyScalpers
      * @param amount
      * @param entry
      */
-    public ComplexScalperAlgoUp1(MikePosOrders posOrders, int lowerTarget, int interval, int howManyScalpers, int amount, MikeOrder.MikeOrderType entry) {
+    public ComplexScalperAlgo1(MikePosOrders posOrders, int entryTarget, int interval, int howManyScalpers, int amount, MikeOrder.MikeOrderType entry) {
         algoSet = new HashSet<>();
+        this.entryTarget = entryTarget;
+
 
         //If entry is BUYLMT or BUYSTP then interval has to be a positive value
         if (entry == MikeOrder.MikeOrderType.BUYLMT || entry == MikeOrder.MikeOrderType.BUYSTP){
@@ -44,10 +47,9 @@ public class ComplexScalperAlgoUp1 extends BaseAlgo {
         }
 
         for (int i = 0; i<howManyScalpers;i++ ) {
-            SimpleScalperAlgo algo = new SimpleScalperAlgo(posOrders, lowerTarget, (lowerTarget +interval+(i*interval)), (amount / howManyScalpers), entry);
+            SimpleScalperAlgo algo = new SimpleScalperAlgo(posOrders, entryTarget, (entryTarget +interval+(i*interval)), (amount / howManyScalpers), entry);
             algoSet.add(algo);
         }
-
     }
 
     @Override
@@ -68,4 +70,7 @@ public class ComplexScalperAlgoUp1 extends BaseAlgo {
         }
     }
 
+    public int getEntryTarget() {
+        return entryTarget;
+    }
 }

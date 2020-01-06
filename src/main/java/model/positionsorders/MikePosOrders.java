@@ -232,7 +232,7 @@ public class MikePosOrders {
         }
     }
 
-    public OrderServer getOrderServer() {
+    private OrderServer getOrderServer() {
         return orderServer;
     }
 
@@ -272,5 +272,9 @@ public class MikePosOrders {
 
     public double getZeroProfitPoint() {
         return zeroProfitPoint;
+    }
+
+    public boolean checkIfOrderFilled(long orderId) {
+        return getOrderServer().getMikeOrder(orderId).isFilled();
     }
 }
