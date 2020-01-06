@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class ComplexScalperAlgoUp1 extends BaseAlgo {
 
-    private Set<ScalperAlgo1> algoSet;
+    private Set<SimpleScalperAlgo> algoSet;
 
 
     /**
@@ -44,7 +44,7 @@ public class ComplexScalperAlgoUp1 extends BaseAlgo {
         }
 
         for (int i = 0; i<howManyScalpers;i++ ) {
-            ScalperAlgo1 algo = new ScalperAlgo1(posOrders, lowerTarget, (lowerTarget +interval+(i*interval)), (amount / howManyScalpers), entry);
+            SimpleScalperAlgo algo = new SimpleScalperAlgo(posOrders, lowerTarget, (lowerTarget +interval+(i*interval)), (amount / howManyScalpers), entry);
             algoSet.add(algo);
         }
 
@@ -54,7 +54,7 @@ public class ComplexScalperAlgoUp1 extends BaseAlgo {
     public void process() {
         //todo: write this
 
-        for (ScalperAlgo1 algo :algoSet) {
+        for (SimpleScalperAlgo algo :algoSet) {
             algo.process();
         }
     }
@@ -63,7 +63,7 @@ public class ComplexScalperAlgoUp1 extends BaseAlgo {
     public void cancel() {
         //todo: write this
 
-        for (ScalperAlgo1 algo :algoSet) {
+        for (SimpleScalperAlgo algo :algoSet) {
             algo.cancel();
         }
     }

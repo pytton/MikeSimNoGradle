@@ -81,13 +81,6 @@ public class ControllerPriceControlPanel implements MainGUIClass.Updatable {
         MyChangeListener listener = new MyChangeListener(this);
         instrumentsList.getSelectionModel().selectedItemProperty().addListener( listener );
 
-        //instrumentsList.getItems().addAll(instrumentNamesList);
-
-//        System.out.println("ControllerPriceControlPanel created");
-//        System.out.println(priceSlider.getMax());
-//        System.out.println(priceSlider.getValue());
-//        System.out.println(""+ priceSlider.getValue());
-
         //assign a listener to the radiobuttons. pressing the radiobutton selects the price source for the priceserver:
         priceSourceToggleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
                 @Override

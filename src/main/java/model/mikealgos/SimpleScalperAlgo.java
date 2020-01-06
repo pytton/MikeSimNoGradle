@@ -3,7 +3,7 @@ package main.java.model.mikealgos;
 import main.java.model.orderserver.MikeOrder;
 import main.java.model.positionsorders.MikePosOrders;
 
-public class ScalperAlgo1 extends BaseAlgo {
+public class SimpleScalperAlgo extends BaseAlgo {
 
     private MikePosOrders posOrders;
     private int entryTargetPrice = 0;
@@ -21,7 +21,8 @@ public class ScalperAlgo1 extends BaseAlgo {
         CREATED,
         RUNNING,
         LOWERFILLED,
-        HIGHERFILLED
+        HIGHERFILLED,
+        CANCELLED
     }
 
     private Status status;
@@ -35,7 +36,7 @@ public class ScalperAlgo1 extends BaseAlgo {
      * @param orderAmount
      * @param entry
      */
-    public ScalperAlgo1(MikePosOrders posOrders, int entryTargetPrice, int exitTargetPrice, int orderAmount, MikeOrder.MikeOrderType entry) {
+    public SimpleScalperAlgo(MikePosOrders posOrders, int entryTargetPrice, int exitTargetPrice, int orderAmount, MikeOrder.MikeOrderType entry) {
         this.posOrders = posOrders;
         this.entryTargetPrice = entryTargetPrice;
         this.exitTargetPrice = exitTargetPrice;
@@ -91,11 +92,20 @@ public class ScalperAlgo1 extends BaseAlgo {
             }
         }
 
+        if (status == Status.CANCELLED) {
+            //algo has been cancelled, do nothing and return
+            return;
+        }
+
     }
 
     @Override
     public void cancel() {
-        //todo: write this
+        //1. Cancel all orders
+        posOrders.getOrderServer().cancelOrder(lowOrderId);
+        posOrders.getOrderServer().cancelOrder(highOrderId);
+        //2. Set status to CANCELLED
+        status = Status.CANCELLED;
     }
 
 }

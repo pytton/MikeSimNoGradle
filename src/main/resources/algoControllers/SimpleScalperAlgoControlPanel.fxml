@@ -17,14 +17,15 @@
             <VBox alignment="CENTER_LEFT" prefHeight="68.0" prefWidth="150.0" spacing="3.0">
                <children>
                   <Label fx:id="priceSourceLabel" text="Entry Order Type:" />
-                  <RadioButton mnemonicParsing="false" selected="true" text="Buy Limit">
+                  <RadioButton fx:id="buyLimit" mnemonicParsing="false" selected="true" text="Buy Limit">
                      <toggleGroup>
-                        <ToggleGroup fx:id="orderType" />
+                        <ToggleGroup fx:id="orderTypeToggleGroup" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" text="Buy Stop" toggleGroup="$orderType" />
-                  <RadioButton mnemonicParsing="false" text="Sell Limit" toggleGroup="$orderType" />
-                  <RadioButton mnemonicParsing="false" text="Sell Stop" toggleGroup="$orderType" />
+                  <RadioButton fx:id="buyStop" mnemonicParsing="false" text="Buy Stop" toggleGroup="$orderTypeToggleGroup" />
+                  <RadioButton fx:id="sellLimit" mnemonicParsing="false" text="Sell Limit" toggleGroup="$orderTypeToggleGroup" />
+                  <RadioButton fx:id="sellStop" mnemonicParsing="false" text="Sell Stop" toggleGroup="$orderTypeToggleGroup" />
+                  <RadioButton fx:id="cancel" mnemonicParsing="false" text="Cancel" toggleGroup="$orderTypeToggleGroup" />
                </children>
             </VBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0">
@@ -36,7 +37,7 @@
             <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0">
                <children>
                   <Label text="Scalper Target Interval" />
-                  <TextField fx:id="targetInterval" prefHeight="25.0" prefWidth="70.0" text="1" />
+                  <TextField fx:id="targetInterval" prefHeight="25.0" prefWidth="70.0" text="5" />
                </children>
             </HBox>
          </children>

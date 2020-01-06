@@ -2,7 +2,7 @@ package main.java.model;
 
 import main.java.model.mikealgos.ComplexScalperAlgoUp1;
 import main.java.model.mikealgos.MikeAlgo;
-import main.java.model.mikealgos.ScalperAlgo1;
+import main.java.model.mikealgos.SimpleScalperAlgo;
 import main.java.model.mikealgos.StepperAlgoUp1;
 import main.java.model.orderserver.MikeOrder;
 import main.java.model.positionsorders.MikePosOrders;
@@ -17,17 +17,22 @@ public class AlgoManager{
 
     MainModelThread model;
     Set<MikeAlgo> algoSet;
+    Set<SimpleScalperAlgo> simpleScalperAlgoSet;
 
     public AlgoManager(MainModelThread model) {
         this.model = model;
         algoSet = new HashSet<>();
+        simpleScalperAlgoSet = new HashSet<>();
     }
 
     public void createScalperAlgo1(MikePosOrders posOrders, int entryPrice, int targetPrice, int orderAmount, MikeOrder.MikeOrderType entry){
-        System.out.println("Creating ScalperAlgo1 for MikePosOrders " + posOrders.getName());
-        ScalperAlgo1 algo = new ScalperAlgo1(posOrders, entryPrice, targetPrice, orderAmount, entry );
+        System.out.println("Creating SimpleScalperAlgo for MikePosOrders " + posOrders.getName());
+        SimpleScalperAlgo algo = new SimpleScalperAlgo(posOrders, entryPrice, targetPrice, orderAmount, entry );
         algoSet.add(algo);
+        simpleScalperAlgoSet.add(algo);
     }
+
+//    public void cancelAllScalperAlgo
 
     public void createStepperAlgoUp1(MikePosOrders posOrders, int startPrice, int interval, int amount) {
 

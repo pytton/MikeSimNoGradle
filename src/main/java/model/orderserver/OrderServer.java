@@ -134,6 +134,12 @@ public class OrderServer {
         return mikeSimOrderNumber++;
     }
 
+    /**
+     * This only works with simulated orders!
+     * If order was sent to outside trading software it will not be cancelled
+     * todo: think of a way to cancel the order if it was sent to outside trading software
+     * @param orderID
+     */
     synchronized public void cancelOrder(long orderID){
         try {
             MikeOrder order = getAllOrdersMap().get(orderID);

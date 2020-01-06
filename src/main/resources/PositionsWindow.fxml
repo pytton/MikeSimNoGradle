@@ -187,39 +187,74 @@
                      <content>
                         <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
                           <tabs>
-                            <Tab text="  1">
-                              <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                              </content>
+                            <Tab text=" 1">
+                                 <content>
+                                    <VBox prefHeight="700.0" prefWidth="200.0">
+                                       <children>
+                                          <ChoiceBox fx:id="choiceBoxCol1" prefHeight="20.0" prefWidth="200.0" />
+                                      <AnchorPane fx:id="anPaneCol1" minHeight="0.0" minWidth="0.0" prefHeight="680.0" prefWidth="200.0" />
+                                       </children>
+                                    </VBox>
+                                 </content>
                             </Tab>
-                            <Tab text="  2">
-                              <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                              </content>
-                            </Tab>
-                              <Tab text="  3">
+                              <Tab text=" 2">
                                  <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                    <VBox prefHeight="700.0" prefWidth="200.0">
+                                       <children>
+                                          <ChoiceBox fx:id="choiceBoxCol2" prefHeight="20.0" prefWidth="200.0" />
+                                          <AnchorPane fx:id="anPaneCol2" minHeight="0.0" minWidth="0.0" prefHeight="680.0" prefWidth="200.0" />
+                                       </children>
+                                    </VBox>
                                  </content>
                               </Tab>
-                              <Tab text="  4">
+                              <Tab text=" 3">
                                  <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                    <VBox prefHeight="700.0" prefWidth="200.0">
+                                       <children>
+                                          <ChoiceBox fx:id="choiceBoxCol3" prefHeight="20.0" prefWidth="200.0" />
+                                          <AnchorPane fx:id="anPaneCol3" minHeight="0.0" minWidth="0.0" prefHeight="680.0" prefWidth="200.0" />
+                                       </children>
+                                    </VBox>
                                  </content>
                               </Tab>
-                              <Tab text="  5">
+                              <Tab text=" 4">
                                  <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                    <VBox prefHeight="700.0" prefWidth="200.0">
+                                       <children>
+                                          <ChoiceBox fx:id="choiceBoxCol4" prefHeight="20.0" prefWidth="200.0" />
+                                          <AnchorPane fx:id="anPaneCol4" minHeight="0.0" minWidth="0.0" prefHeight="680.0" prefWidth="200.0" />
+                                       </children>
+                                    </VBox>
                                  </content>
                               </Tab>
-                              <Tab text="  6">
+                              <Tab text=" 5">
                                  <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                    <VBox prefHeight="700.0" prefWidth="200.0">
+                                       <children>
+                                          <ChoiceBox fx:id="choiceBoxCol5" prefHeight="20.0" prefWidth="200.0" />
+                                          <AnchorPane fx:id="anPaneCol5" minHeight="0.0" minWidth="0.0" prefHeight="680.0" prefWidth="200.0" />
+                                       </children>
+                                    </VBox>
                                  </content>
                               </Tab>
-                              <Tab text="  7">
+                              <Tab text=" 6">
                                  <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                    <VBox prefHeight="700.0" prefWidth="200.0">
+                                       <children>
+                                          <ChoiceBox fx:id="choiceBoxCol6" prefHeight="20.0" prefWidth="200.0" />
+                                          <AnchorPane fx:id="anPaneCol6" minHeight="0.0" minWidth="0.0" prefHeight="680.0" prefWidth="200.0" />
+                                       </children>
+                                    </VBox>
+                                 </content>
+                              </Tab>
+                              <Tab text=" 7">
+                                 <content>
+                                    <VBox prefHeight="700.0" prefWidth="200.0">
+                                       <children>
+                                          <ChoiceBox fx:id="choiceBoxCol7" prefHeight="20.0" prefWidth="200.0" />
+                                          <AnchorPane fx:id="anPaneCol7" minHeight="0.0" minWidth="0.0" prefHeight="680.0" prefWidth="200.0" />
+                                       </children>
+                                    </VBox>
                                  </content>
                               </Tab>
                           </tabs>

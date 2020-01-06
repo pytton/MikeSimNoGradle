@@ -10,11 +10,14 @@ public abstract class AlgoController {
      * @param entryPrice
      * @return
      */
-    public abstract boolean launch(int entryPrice, MainModelThread model, MikePosOrders posOrders);
+//    public abstract boolean launch(int entryPrice, MainModelThread model, MikePosOrders posOrders);
 
     public abstract boolean cancel(int entryPrice, MainModelThread model, MikePosOrders posOrders);
 
     public abstract void mikeGridPaneButtonPressed(int pricePressed, MainModelThread model, MikePosOrders posOrders);
 
-    public abstract int getAmount();
+    public abstract String getSimpleDescriptionRow1();
+    public abstract String getSimpleDescriptionRow2();
+
+//    public abstract int getAmount();
 }

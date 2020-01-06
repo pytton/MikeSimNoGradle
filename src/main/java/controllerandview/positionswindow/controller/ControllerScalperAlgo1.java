@@ -15,7 +15,6 @@ public class ControllerScalperAlgo1 extends AlgoController {
     @FXML
     TextField orderAmount;
 
-    @Override
     public boolean launch(int entryPrice, MainModelThread model, MikePosOrders posOrders) {
 
         model.algoManager.createScalperAlgo1(posOrders, entryPrice, entryPrice + 5, 100, MikeOrder.MikeOrderType.BUYLMT);
@@ -34,10 +33,19 @@ public class ControllerScalperAlgo1 extends AlgoController {
 
     @Override
     public void mikeGridPaneButtonPressed(int pricePressed, MainModelThread model, MikePosOrders posOrders) {
-        System.out.println("ScalperAlgo1: mikeGridPaneButtonPressed. Price: " + pricePressed);
+        System.out.println("SimpleScalperAlgo: mikeGridPaneButtonPressed. Price: " + pricePressed);
     }
 
     @Override
+    public String getSimpleDescriptionRow1() {
+        return null;
+    }
+
+    @Override
+    public String getSimpleDescriptionRow2() {
+        return null;
+    }
+
     public int getAmount() {
         Integer amount = Integer.parseInt(orderAmount.getText());
 

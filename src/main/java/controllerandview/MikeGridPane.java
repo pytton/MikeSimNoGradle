@@ -104,6 +104,9 @@ public class MikeGridPane extends GridPane {
 //                System.out.println(button.getLabelPadding());
 //                System.out.println(button.getLayoutBounds());
 
+
+
+                //add the button to the GridPane. Yes col, row is the correct order
                 this.add(button, col, row);
             }
 

@@ -371,7 +371,7 @@ public class ControllerConsolidatedPositionsWindow implements MikeGridPane.MikeB
         //todo: testing:
         int price = getPriceOfRow(button.getRowOfButton());
         if (button.getColOfButton() == 0) {
-            System.out.println("Testing. Creating ScalperAlgo1. LowTarget: " + getPriceOfRow(button.getRowOfButton())
+            System.out.println("Testing. Creating SimpleScalperAlgo. LowTarget: " + getPriceOfRow(button.getRowOfButton())
             + " HighTarget: LowTarget +5 (hardcoded now), amount: 100.");
             model.algoManager.createScalperAlgo1(mikePosOrders, price, price + 5, 100, MikeOrder.MikeOrderType.BUYLMT);
         }
@@ -393,19 +393,19 @@ public class ControllerConsolidatedPositionsWindow implements MikeGridPane.MikeB
             model.algoManager.createComplexScalperAlgoUp1(mikePosOrders, price, -1, 10, 100, MikeOrder.MikeOrderType.SELLLMT);
         }
 //        if (button.getColOfButton() == 3) {
-//            System.out.println("Testing. Creating ScalperAlgo1. LowTarget: " + getPriceOfRow(button.getRowOfButton())
+//            System.out.println("Testing. Creating SimpleScalperAlgo. LowTarget: " + getPriceOfRow(button.getRowOfButton())
 //                    + " HighTarget: LowTarget +5 (hardcoded now), amount: 100.");
 //            model.algoManager.createScalperAlgo1(mikePosOrders, price, price + 5, 100, MikeOrder.MikeOrderType.BUYSTP);
 //        }
 //
 //        if (button.getColOfButton() == 4) {
-//            System.out.println("Testing. Creating ScalperAlgo1. LowTarget: " + getPriceOfRow(button.getRowOfButton())
+//            System.out.println("Testing. Creating SimpleScalperAlgo. LowTarget: " + getPriceOfRow(button.getRowOfButton())
 //                    + " HighTarget: LowTarget +5 (hardcoded now), amount: 100.");
 //            model.algoManager.createScalperAlgo1(mikePosOrders, price, price - 5, 100, MikeOrder.MikeOrderType.SELLLMT);
 //        }
 
         if (button.getColOfButton() == 5) {
-            System.out.println("Testing. Creating ScalperAlgo1. LowTarget: " + getPriceOfRow(button.getRowOfButton())
+            System.out.println("Testing. Creating SimpleScalperAlgo. LowTarget: " + getPriceOfRow(button.getRowOfButton())
                     + " HighTarget: LowTarget +5 (hardcoded now), amount: 100.");
             model.algoManager.createScalperAlgo1(mikePosOrders, price, price - 5, 100, MikeOrder.MikeOrderType.SELLSTP);
         }

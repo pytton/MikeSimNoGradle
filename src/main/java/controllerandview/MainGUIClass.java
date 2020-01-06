@@ -234,7 +234,7 @@ public class MainGUIClass {
             buttonTable = new MikeGridPane(100,7, controller);
 
             VBox topVbox = new VBox();
-            MikeGridPane topGridPane = new MikeGridPane(1,7, new MikeGridPane.EmptyMikeButtonHandler());
+            MikeGridPane topGridPane = new MikeGridPane(2,7, new MikeGridPane.EmptyMikeButtonHandler());
             MikeGridPane bottomGridPane = new MikeGridPane(1, 7, new MikeGridPane.EmptyMikeButtonHandler());
 
             topGridPane.setPadding( new Insets(0, 15, 0, 0));
@@ -250,9 +250,13 @@ public class MainGUIClass {
             controller.getMainBorderPane().setLeft(topVbox);
 
             controller.setMikeGridPane(buttonTable);
+            controller.topMikeGridPane = topGridPane;
+            controller.bottomMikeGridPane = bottomGridPane;
 
             controller.setModel(mainModelThread);
 
+
+            //setup the initial traded instrument and posOrders this window refers to:
             //set the default instrument
             controller.setInstrumentList(mainModelThread.posOrdersManager.getPriceServerObservableList());
 
