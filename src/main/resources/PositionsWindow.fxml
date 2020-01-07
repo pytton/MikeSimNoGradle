@@ -172,18 +172,7 @@
                         </TabPane>
                      </content>
                 </TitledPane>
-                  <TitledPane animated="false" text="Column Actions Setup">
-                     <content>
-                        <VBox fx:id="algoChoiceVbox" prefHeight="700.0" prefWidth="200.0">
-                           <children>
-                              <ChoiceBox fx:id="choiceBoxColSel" prefWidth="150.0" />
-                              <Pane fx:id="algoChoicePane" prefHeight="200.0" prefWidth="200.0" />
-                              <AnchorPane fx:id="columnActionsAnchorPane" prefHeight="200.0" prefWidth="200.0" />
-                           </children>
-                        </VBox>
-                     </content>
-                  </TitledPane>
-                  <TitledPane prefHeight="200.0" prefWidth="200.0" text="Col Actions Tabs">
+                  <TitledPane prefHeight="200.0" prefWidth="200.0" text="Column Actions Setup">
                      <content>
                         <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
                           <tabs>

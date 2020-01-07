@@ -5,7 +5,6 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllerandview.algocontrollers.ControllerComplexScalperAlgo">
    <children>
       <VBox prefHeight="650.0" prefWidth="200.0">
@@ -18,32 +17,62 @@
             <VBox alignment="CENTER_LEFT" prefHeight="68.0" prefWidth="150.0" spacing="3.0">
                <children>
                   <Label fx:id="priceSourceLabel" text="Entry Order Type:" />
-                  <RadioButton mnemonicParsing="false" selected="true" text="Buy Limit">
+                  <RadioButton fx:id="buyLimit" mnemonicParsing="false" selected="true" text="Buy Limit">
                      <toggleGroup>
-                        <ToggleGroup fx:id="orderType" />
+                        <ToggleGroup fx:id="orderTypeToggleGroup" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" text="Buy Stop" toggleGroup="$orderType" />
-                  <RadioButton mnemonicParsing="false" text="Sell Limit" toggleGroup="$orderType" />
-                  <RadioButton mnemonicParsing="false" text="Sell Stop" toggleGroup="$orderType" />
+                  <RadioButton fx:id="buyStop" mnemonicParsing="false" text="Buy Stop" toggleGroup="$orderTypeToggleGroup" />
+                  <RadioButton fx:id="sellLimit" mnemonicParsing="false" text="Sell Limit" toggleGroup="$orderTypeToggleGroup" />
+                  <RadioButton fx:id="sellStop" mnemonicParsing="false" text="Sell Stop" toggleGroup="$orderTypeToggleGroup" />
+                  <RadioButton fx:id="cancel" mnemonicParsing="false" text="Cancel" toggleGroup="$orderTypeToggleGroup" />
                </children>
             </VBox>
-            <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0">
+            <VBox prefWidth="100.0" style="-fx-border-color: black;">
                <children>
-                  <Label text="Order Amount" />
-                  <TextField fx:id="orderAmount" prefHeight="25.0" prefWidth="70.0" text="100" />
+                  <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Order Amount" />
+                        <TextField fx:id="orderAmount" prefHeight="25.0" prefWidth="70.0" text="100" />
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Button fx:id="oAmtBtn10" mnemonicParsing="false" onAction="#oAmtBtnPressed" text="10" />
+                        <Button fx:id="oAmtBt20" mnemonicParsing="false" onAction="#oAmtBtnPressed" text="20" />
+                        <Button fx:id="oAmtBtn50" mnemonicParsing="false" onAction="#oAmtBtnPressed" text="50" />
+                        <Button fx:id="oAmtBtn100" mnemonicParsing="false" onAction="#oAmtBtnPressed" text="100" />
+                        <Button fx:id="oAmtBtn200" mnemonicParsing="false" onAction="#oAmtBtnPressed" text="200" />
+                        <Button fx:id="oAmtBtn500" mnemonicParsing="false" onAction="#oAmtBtnPressed" text="500" />
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
-            <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0">
+            </VBox>
+            <VBox prefWidth="100.0" style="-fx-border-color: black;">
                <children>
-                  <Label text="Scalper Target Interval" />
-                  <TextField fx:id="targetInterval" prefHeight="25.0" prefWidth="70.0" text="1" />
+                  <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Scalper Target Interval" />
+                        <TextField fx:id="targetInterval" prefHeight="25.0" prefWidth="70.0" text="1" />
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Button fx:id="intervalBtn1" mnemonicParsing="false" onAction="#intervalBtnPressed" text="1" />
+                        <Button fx:id="intervalBtn2" mnemonicParsing="false" onAction="#intervalBtnPressed" text="2" />
+                        <Button fx:id="intervalBtn3" mnemonicParsing="false" onAction="#intervalBtnPressed" text="3" />
+                        <Button fx:id="intervalBtn4" mnemonicParsing="false" onAction="#intervalBtnPressed" text="4" />
+                        <Button fx:id="intervalBtn5" mnemonicParsing="false" onAction="#intervalBtnPressed" text="5" />
+                        <Button fx:id="intervalBtn10" mnemonicParsing="false" onAction="#intervalBtnPressed" text="10" />
+                        <Button fx:id="intervalBtn15" mnemonicParsing="false" onAction="#intervalBtnPressed" text="15" />
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
-            <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0">
+            </VBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0" style="-fx-border-color: black;">
                <children>
                   <Label text="Scalper Count" />
-                  <TextField fx:id="targetInterval1" prefHeight="25.0" prefWidth="70.0" text="10" />
+                  <TextField fx:id="scalperCount" prefHeight="25.0" prefWidth="70.0" text="5" />
                </children>
             </HBox>
          </children>

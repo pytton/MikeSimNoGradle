@@ -4,6 +4,11 @@ package com.ib.* is needed to connect to Interactive Brokers API.
 
 
 ###TODO:
+
+Bug in Scalper algo - negative intervals not protected. fix it.
+Create control for simple order placement
+Create control for stepper algo
+
 1. pressing buttons in PositionsWindow launches algos. This is currently hardcoded.
 Make something so that you can choose which algo is launched by column1, which by column2,
 etc. Use a JavaFX ChoiceBox to choose the column - selecting a column should

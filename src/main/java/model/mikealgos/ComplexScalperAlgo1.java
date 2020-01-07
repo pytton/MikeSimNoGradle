@@ -9,7 +9,7 @@ import java.util.Set;
 public class ComplexScalperAlgo1 extends BaseAlgo {
 
     private Set<SimpleScalperAlgo> algoSet;
-    private int entryTarget;
+    private int entryTargetPrice;
 
 
     /**
@@ -27,7 +27,7 @@ public class ComplexScalperAlgo1 extends BaseAlgo {
      */
     public ComplexScalperAlgo1(MikePosOrders posOrders, int entryTarget, int interval, int howManyScalpers, int amount, MikeOrder.MikeOrderType entry) {
         algoSet = new HashSet<>();
-        this.entryTarget = entryTarget;
+        this.entryTargetPrice = entryTarget;
 
 
         //If entry is BUYLMT or BUYSTP then interval has to be a positive value
@@ -53,7 +53,7 @@ public class ComplexScalperAlgo1 extends BaseAlgo {
     }
 
     @Override
-    public void process() {
+    public synchronized void process() {
         //todo: write this
 
         for (SimpleScalperAlgo algo :algoSet) {
@@ -62,7 +62,7 @@ public class ComplexScalperAlgo1 extends BaseAlgo {
     }
 
     @Override
-    public void cancel() {
+    public synchronized void cancel() {
         //todo: write this
 
         for (SimpleScalperAlgo algo :algoSet) {
@@ -70,7 +70,7 @@ public class ComplexScalperAlgo1 extends BaseAlgo {
         }
     }
 
-    public int getEntryTarget() {
-        return entryTarget;
+    public int getEntryTargetPrice() {
+        return entryTargetPrice;
     }
 }

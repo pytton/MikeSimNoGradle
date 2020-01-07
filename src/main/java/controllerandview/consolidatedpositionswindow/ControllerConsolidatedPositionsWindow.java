@@ -363,52 +363,52 @@ public class ControllerConsolidatedPositionsWindow implements MikeGridPane.MikeB
 
     @Override
     public void handleMikeButtonClicked(MikeGridPane.MikeButton button) {
-
-        System.out.println("MikeButton clicked. column: " +button.getColOfButton());
-        System.out.println("Price clicked: " + getPriceOfRow(button.getRowOfButton()));
-
-
-        //todo: testing:
-        int price = getPriceOfRow(button.getRowOfButton());
-        if (button.getColOfButton() == 0) {
-            System.out.println("Testing. Creating SimpleScalperAlgo. LowTarget: " + getPriceOfRow(button.getRowOfButton())
-            + " HighTarget: LowTarget +5 (hardcoded now), amount: 100.");
-            model.algoManager.createScalperAlgo1(mikePosOrders, price, price + 5, 100, MikeOrder.MikeOrderType.BUYLMT);
-        }
-        if (button.getColOfButton() == 1) {
-            System.out.println("Testing. Creating StepperAlgoUp1. ");
-            model.algoManager.createStepperAlgoUp1(mikePosOrders, price, 5, 100);
-        }
-        if (button.getColOfButton() == 2) {
-            System.out.println("Testing Creating ComplexScalperAlgo1");
-            model.algoManager.createComplexScalperAlgoUp1(mikePosOrders, price, 1, 10, 100, MikeOrder.MikeOrderType.BUYLMT);
-
-        }
-        if (button.getColOfButton() == 3) {
-            System.out.println("Testing Creating ComplexScalperAlgo1");
-            model.algoManager.createComplexScalperAlgoUp1(mikePosOrders, price, 1, 10, 100, MikeOrder.MikeOrderType.BUYSTP);
-        }
-        if (button.getColOfButton() == 4) {
-            System.out.println("Testing Creating ComplexScalperAlgo1");
-            model.algoManager.createComplexScalperAlgoUp1(mikePosOrders, price, -1, 10, 100, MikeOrder.MikeOrderType.SELLLMT);
-        }
-//        if (button.getColOfButton() == 3) {
-//            System.out.println("Testing. Creating SimpleScalperAlgo. LowTarget: " + getPriceOfRow(button.getRowOfButton())
-//                    + " HighTarget: LowTarget +5 (hardcoded now), amount: 100.");
-//            model.algoManager.createScalperAlgo1(mikePosOrders, price, price + 5, 100, MikeOrder.MikeOrderType.BUYSTP);
-//        }
 //
+//        System.out.println("MikeButton clicked. column: " +button.getColOfButton());
+//        System.out.println("Price clicked: " + getPriceOfRow(button.getRowOfButton()));
+//
+//
+//        //todo: testing:
+//        int price = getPriceOfRow(button.getRowOfButton());
+//        if (button.getColOfButton() == 0) {
+//            System.out.println("Testing. Creating SimpleScalperAlgo. LowTarget: " + getPriceOfRow(button.getRowOfButton())
+//            + " HighTarget: LowTarget +5 (hardcoded now), amount: 100.");
+//            model.algoManager.createScalperAlgo1(mikePosOrders, price, price + 5, 100, MikeOrder.MikeOrderType.BUYLMT);
+//        }
+//        if (button.getColOfButton() == 1) {
+//            System.out.println("Testing. Creating StepperAlgoUp1. ");
+//            model.algoManager.createStepperAlgoUp1(mikePosOrders, price, 5, 100);
+//        }
+//        if (button.getColOfButton() == 2) {
+//            System.out.println("Testing Creating ComplexScalperAlgo1");
+//            model.algoManager.createComplexScalperAlgoUp1(mikePosOrders, price, 1, 10, 100, MikeOrder.MikeOrderType.BUYLMT);
+//
+//        }
+//        if (button.getColOfButton() == 3) {
+//            System.out.println("Testing Creating ComplexScalperAlgo1");
+//            model.algoManager.createComplexScalperAlgoUp1(mikePosOrders, price, 1, 10, 100, MikeOrder.MikeOrderType.BUYSTP);
+//        }
 //        if (button.getColOfButton() == 4) {
+//            System.out.println("Testing Creating ComplexScalperAlgo1");
+//            model.algoManager.createComplexScalperAlgoUp1(mikePosOrders, price, -1, 10, 100, MikeOrder.MikeOrderType.SELLLMT);
+//        }
+////        if (button.getColOfButton() == 3) {
+////            System.out.println("Testing. Creating SimpleScalperAlgo. LowTarget: " + getPriceOfRow(button.getRowOfButton())
+////                    + " HighTarget: LowTarget +5 (hardcoded now), amount: 100.");
+////            model.algoManager.createScalperAlgo1(mikePosOrders, price, price + 5, 100, MikeOrder.MikeOrderType.BUYSTP);
+////        }
+////
+////        if (button.getColOfButton() == 4) {
+////            System.out.println("Testing. Creating SimpleScalperAlgo. LowTarget: " + getPriceOfRow(button.getRowOfButton())
+////                    + " HighTarget: LowTarget +5 (hardcoded now), amount: 100.");
+////            model.algoManager.createScalperAlgo1(mikePosOrders, price, price - 5, 100, MikeOrder.MikeOrderType.SELLLMT);
+////        }
+//
+//        if (button.getColOfButton() == 5) {
 //            System.out.println("Testing. Creating SimpleScalperAlgo. LowTarget: " + getPriceOfRow(button.getRowOfButton())
 //                    + " HighTarget: LowTarget +5 (hardcoded now), amount: 100.");
-//            model.algoManager.createScalperAlgo1(mikePosOrders, price, price - 5, 100, MikeOrder.MikeOrderType.SELLLMT);
+//            model.algoManager.createScalperAlgo1(mikePosOrders, price, price - 5, 100, MikeOrder.MikeOrderType.SELLSTP);
 //        }
-
-        if (button.getColOfButton() == 5) {
-            System.out.println("Testing. Creating SimpleScalperAlgo. LowTarget: " + getPriceOfRow(button.getRowOfButton())
-                    + " HighTarget: LowTarget +5 (hardcoded now), amount: 100.");
-            model.algoManager.createScalperAlgo1(mikePosOrders, price, price - 5, 100, MikeOrder.MikeOrderType.SELLSTP);
-        }
 
 
 

@@ -5,6 +5,11 @@ import main.java.model.positionsorders.MikePosOrders;
 
 public class StepperAlgoUp1 extends BaseAlgo {
 
+    private MikeOrder.MikeOrderType entryOrderType;
+    private MikeOrder.MikeOrderType firstExitOrderType;
+    private MikeOrder.MikeOrderType secondExitOrderType;
+    private MikeOrder.MikeOrderType returnOrderType;
+
     private MikePosOrders posOrders;
     private int startPrice = 0;
     private int interval = 1;
@@ -13,7 +18,7 @@ public class StepperAlgoUp1 extends BaseAlgo {
     private long startOrderId;
     private long targetOrderId;
     private long exitOrderId;
-    private long reEntryOrderId;
+//    private long reEntryOrderId;
 
 
     private enum Status{
@@ -21,29 +26,60 @@ public class StepperAlgoUp1 extends BaseAlgo {
         RUNNING,
         STARTFILLED,
         TARGETFILLED,
-        EXITFILLED
+        EXITFILLED,
+        CANCELLED
     }
 
     private Status status;
 
-    public StepperAlgoUp1(MikePosOrders posOrders, int startPrice, int interval, int amount) {
+    public StepperAlgoUp1(MikePosOrders posOrders, int startPrice, int interval, int amount, MikeOrder.MikeOrderType entryOrderType) {
+
+        status = Status.CREATED;
+
+        if (entryOrderType == MikeOrder.MikeOrderType.BUYLMT || entryOrderType == MikeOrder.MikeOrderType.BUYSTP) {
+            firstExitOrderType = MikeOrder.MikeOrderType.SELLLMT;
+            secondExitOrderType = MikeOrder.MikeOrderType.SELLSTP;
+            returnOrderType = MikeOrder.MikeOrderType.BUYSTP;
+        } else if (entryOrderType == MikeOrder.MikeOrderType.SELLLMT || entryOrderType == MikeOrder.MikeOrderType.SELLSTP) {
+            firstExitOrderType = MikeOrder.MikeOrderType.BUYLMT;
+            secondExitOrderType = MikeOrder.MikeOrderType.BUYSTP;
+            returnOrderType = MikeOrder.MikeOrderType.SELLSTP;
+        } else {
+            System.out.println("ERROR CREATING STEPPERALGO1");
+            status = Status.CANCELLED;
+        }
+
+        //If entry is BUYLMT or BUYSTP then interval has to be a positive value
+        if (entryOrderType == MikeOrder.MikeOrderType.BUYLMT || entryOrderType == MikeOrder.MikeOrderType.BUYSTP){
+            if (interval < 0) {
+                interval = interval * -1;
+            }
+            if (interval == 0) interval = 1;
+        }
+
+        //If entry is SELLLMT or SELLSTP then interval has to be negative.
+        if (entryOrderType == MikeOrder.MikeOrderType.SELLLMT || entryOrderType == MikeOrder.MikeOrderType.SELLSTP){
+            if (interval > 0) {
+                interval = interval * -1;
+            }
+            if (interval == 0) interval = -1;
+        }
+
         this.posOrders = posOrders;
         this.startPrice = startPrice;
         this.interval = interval;
         this.amount = amount;
-
-        status = Status.CREATED;
     }
 
     @Override
-    public void process() {
+    public synchronized void process() {
         //todo: write this
 
         //PSEUDOCODE:
 
         if (status == Status.CREATED) {
             //create the first buy order:
-            startOrderId = posOrders.placeNewOrder(MikeOrder.MikeOrderType.BUYLMT, startPrice, startPrice, amount);
+            startOrderId = posOrders.placeNewOrder(MikeOrder.MikeOrderType.BUYLMT, startPrice, startPrice, (amount /2)*2);
             status = Status.RUNNING;
             return;
         }
@@ -70,7 +106,7 @@ public class StepperAlgoUp1 extends BaseAlgo {
             //check if it was filled. If it has, then the poosition should be flat now,
             // so make a STOP BUY order back at the initial entry price:
             if (posOrders.checkIfOrderFilled(exitOrderId)) {
-                startOrderId = posOrders.placeNewOrder(MikeOrder.MikeOrderType.BUYSTP, startPrice, startPrice, amount);
+                startOrderId = posOrders.placeNewOrder(MikeOrder.MikeOrderType.BUYSTP, startPrice, startPrice, (amount /2)*2);
                 status = Status.RUNNING;
                 return;
             }
@@ -78,8 +114,11 @@ public class StepperAlgoUp1 extends BaseAlgo {
     }
 
     @Override
-    public void cancel() {
-        //todo: write this
+    public synchronized void cancel() {
+        posOrders.cancelOrder(startOrderId);
+        posOrders.cancelOrder(targetOrderId);
+        posOrders.cancelOrder(exitOrderId);
+        status = Status.CANCELLED;
     }
 
 }

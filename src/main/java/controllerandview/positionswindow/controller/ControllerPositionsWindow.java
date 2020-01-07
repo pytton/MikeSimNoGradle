@@ -26,6 +26,9 @@ import main.java.model.priceserver.PriceServer;
 import main.java.controllerandview.MikeGridPane;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler, MainGUIClass.Updatable {
 
@@ -33,46 +36,7 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
     public BorderPane mainBorderPane;
     public ListView positionsList;
     public ListView instrumentsList;
-
-
-    //todo: experimenting:
-//    public ChoiceBox choiceBoxColSel;
-//    public Pane algoChoicePane;
-//    public AnchorPane columnActionsAnchorPane;
-//    public VBox algoChoiceVbox;
-
-    public AlgoController algoController;
-    public ChoiceBox choiceBoxCol1;
-    public ChoiceBox choiceBoxCol2;
-    public ChoiceBox choiceBoxCol3;
-    public AnchorPane anPaneCol1;
-    public AnchorPane anPaneCol2;
-    public AnchorPane anPaneCol3;
-    public ChoiceBox choiceBoxCol4;
-    public AnchorPane anPaneCol4;
-    public ChoiceBox choiceBoxCol5;
-    public AnchorPane anPaneCol5;
-    public ChoiceBox choiceBoxCol6;
-    public AnchorPane anPaneCol6;
-    public ChoiceBox choiceBoxCol7;
-    public AnchorPane anPaneCol7;
-
-    public AlgoController controllerCol1 = null;
-    public AlgoController controllerCol2 = null;
-    public AlgoController controllerCol3= null;
-    public AlgoController controllerCol4= null;
-    public AlgoController controllerCol5= null;
-    public AlgoController controllerCol6= null;
-    public AlgoController controllerCol7= null;
-
-
-    private ControllerComplexScalperAlgo controllerComplexScalperAlgo;
-
-    private ControllerSimpleScalperAlgo controllerSimpleScalperAlgo;
-
-
-    //todo: erase this after experiment finished:
-    int selection = 0;
+//    public AlgoController algoController;
 
     @FXML
     private TextField TopRowPriceTextField;
@@ -108,13 +72,33 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
     @FXML
     private Button buyStopButton;
 
-
+    public ChoiceBox choiceBoxCol1;
+    public ChoiceBox choiceBoxCol2;
+    public ChoiceBox choiceBoxCol3;
+    public AnchorPane anPaneCol1;
+    public AnchorPane anPaneCol2;
+    public AnchorPane anPaneCol3;
+    public ChoiceBox choiceBoxCol4;
+    public AnchorPane anPaneCol4;
+    public ChoiceBox choiceBoxCol5;
+    public AnchorPane anPaneCol5;
+    public ChoiceBox choiceBoxCol6;
+    public AnchorPane anPaneCol6;
+    public ChoiceBox choiceBoxCol7;
+    public AnchorPane anPaneCol7;
+    public AlgoController controllerCol1 = null;
+    public AlgoController controllerCol2 = null;
+    public AlgoController controllerCol3= null;
+    public AlgoController controllerCol4= null;
+    public AlgoController controllerCol5= null;
+    public AlgoController controllerCol6= null;
+    public AlgoController controllerCol7= null;
 
     private int topRowPrice = 27150; //used with MikeGridPane and UpdateGUI
-
+    private int bottomRowPrice = 27100;
     private int tickerId = 0;
-    private MikeGridPane mikeGridPane = null;
 
+    private MikeGridPane mikeGridPane = null;
     public MikeGridPane topMikeGridPane = null;
     public MikeGridPane bottomMikeGridPane = null;
 
@@ -122,32 +106,13 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
     private MainModelThread model;
     private MikePosOrders mikePosOrders;
 
-    //private ObservableList<List<Integer>> pricelist;
-
     public void setInstrumentList(ObservableList<PriceServer> instrumentNamesList) {
         instrumentsList.setItems(instrumentNamesList);
     }
 
     @FXML
     public void initialize(){
-
         setUpChangeListeners();
-
-
-//        instrumentsList.getSelectionModel().selectFirst();
-//        positionsList.getSelectionModel().selectFirst();
-
-//        if (!instrumentsList.getItems().isEmpty()) {
-//            instrumentsList.getSelectionModel().select(0);
-//        }
-//
-//
-//        if (!positionsList.getItems().isEmpty()) {
-//            positionsList.getSelectionModel().select(0);
-//        }
-
-
-
     }
 
     /**
@@ -173,14 +138,9 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
             break;
             case 6: if (controllerCol7 != null) {return controllerCol7;}
             break;
-
-//            default: return null;
         }
         return null;
     }
-
-
-
 
     /**
      * This sets up the controllers for each of the columns in MikeGridPane
@@ -212,9 +172,6 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
                 controllerCol7 = algoContr;
                 break;
         }
-
-
-
     }
 
     /**
@@ -222,7 +179,6 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
      * and what pressing buttons in MikeGridPane does
      */
     private void setUpChangeListeners(){
-
 
         //this handles changing the instrument PositionsWindow refers to based on what the user
         //selected in in ListView instrumentlist:
@@ -270,8 +226,7 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
         MyPosOrdersChangeListener posListener = new MyPosOrdersChangeListener(this);
         positionsList.getSelectionModel().selectedItemProperty().addListener(posListener);
 
-
-        //setup the column action tabs:
+        //setup the column action tabs. :
         class ChoiceBoxChangeListener implements ChangeListener {
             ControllerPositionsWindow controllerPositionsWindow;
             ChoiceBox cb;
@@ -329,10 +284,7 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
             }
         }
 
-//        choiceBoxColSel.getItems().addAll("Column1", "Column2", "Column3");
-
-
-        String[] algosAvailable = {"SimpleScalper1", "ComplexScalper1", "New One!"};
+        List<String> algosAvailable = Arrays.asList("SimpleScalper1", "ComplexScalper1", "New One!");
 
         choiceBoxCol1.getItems().addAll(algosAvailable);
         choiceBoxCol2.getItems().addAll(algosAvailable);
@@ -376,21 +328,18 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
             //display realtime bid ask priceserver:
             askPriceTextField.setText("" + (int)priceServer.getAskPrice());
             bidPriceTextField.setText("" + (int)priceServer.getBidPrice());
-
             //display the open amount:
             totalOpenPosTextField.setText("" + (int)mikePosOrders.getTotalOpenAmount());
-
             //display the average price:
             double averagePrice = (double)mikePosOrders.getAveragePrice();
             weighedAveragePriceTextField.setText("" + averagePrice);
             double zeroProfitPoint = mikePosOrders.getZeroProfitPoint();
             zeroProfitPointTextField.setText(""+zeroProfitPoint);
-
-
             //display the PL:
             totalOpenPLTextField.setText("" + mikePosOrders.getOpenPL());
             totalClosedPLTextField.setText("" + mikePosOrders.getClosedPL());
             totalPLTextField.setText("" + mikePosOrders.getTotalPL());
+            int totalOpenAmount = mikePosOrders.getTotalOpenAmount();
 
             //update the top column description depending on what has been set:
             for (int col = 0; col < 7; col++) {
@@ -399,37 +348,31 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
 
                     if (null != controller) {
                         //Display short description on top:
-
                         topMikeGridPane.getButton(0, (col)).setText(getAlgoControllerOfColumn((col)).getSimpleDescriptionRow1());
                         topMikeGridPane.getButton(1, (col)).setText(getAlgoControllerOfColumn((col)).getSimpleDescriptionRow2());
-
-////                        System.out.println(" testing: " + getAlgoControllerOfColumn(col).getSimpleDescriptionRow1());
-//
-//                        String toPrint = controller.getSimpleDescriptionRow1();
-//
                         MikeGridPane.MikeButton buttonToPrint = topMikeGridPane.getButton(0, col);
                         buttonToPrint.setFont(Font.font(11));
-
-//                        System.out.println("" + buttonToPrint.getColOfButton());
-//                        buttonToPrint.setText("Hello!");
-
-//                        topMikeGridPane.getButton(0, col).setText(toPrint);
-
                     }
-
-
             }
 
             //printout data in MikeGridPane:
+            int openPositionsCol = 0;
+            int zeroProfitPointCol = 3;
+
+
+
+
+
             for(int row = 0 ; row < mikeGridPane.getHowManyRows() ; row++){
                 int priceToPrint = topRowPrice - row;
                 MikePosition position = mikePosOrders.getMikePositionAtPrice(priceToPrint);
 
                 //print open positions in first column:
                 if (position == null) {
-                    setSpecificButtonInMikeGridPane( row,0, "" );
+                    setSpecificButtonInMikeGridPane( row,openPositionsCol, "" );
+                    mikeGridPane.getButton(row, openPositionsCol).setStyle("-fx-background-color: lightyellow  ; -fx-border-color : black");
                 } else {
-                    setSpecificButtonInMikeGridPane(row, 0, ""+ position.getOpen_amount());
+                    setSpecificButtonInMikeGridPane(row, openPositionsCol, ""+ position.getOpen_amount());
                 }
 
                 //print active buy orders for the given price in the second column:
@@ -438,6 +381,7 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
                             "" + mikePosOrders.ordersAtPrice.getOpenBuyOrdersAtPrice(priceToPrint));
                 } else {
                     setSpecificButtonInMikeGridPane(row, 1, "");
+                    mikeGridPane.getButton(row, 1).setStyle("-fx-background-color: lightyellow  ; -fx-border-color : black");
                 }
 
 
@@ -447,26 +391,32 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
                 MikeGridPane.MikeButton button = mikeGridPane.getButton(row, 2);
                 if (topRowPrice - row == priceServer.getBidPrice()) {
                     setSpecificButtonInMikeGridPane(row, 2, "BID");
-                    button.setStyle("-fx-background-color: blue; -fx-text-fill: red; -fx-font-weight: bolder; -fx-border-color : black");
-                    button.setBorder(new Border(new BorderStroke(Color.BLACK,
-                            BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+                    button.setStyle("-fx-background-color: yellow; -fx-text-fill: blue; -fx-font-weight: bolder; -fx-border-color : black");
+//                    button.setBorder(new Border(new BorderStroke(Color.BLACK,
+//                            BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
                 }else{
                     setSpecificButtonInMikeGridPane(row, 2, "");
-                    button.setStyle("-fx-background-color: white");
-                    button.setBorder(new Border(new BorderStroke(Color.BLACK,
-                            BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+//                    button.setStyle("-fx-background-color: white");
+                    mikeGridPane.getButton(row, 2).setStyle("-fx-background-color: lightyellow  ; -fx-border-color : black");
+//                    button.setBorder(new Border(new BorderStroke(Color.BLACK,
+//                            BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
                 }
 
 
                 //print prices in the fourth column of mikeGridPane:
+                button = mikeGridPane.getButton(row, 3);
                 setSpecificButtonInMikeGridPane( row,3, "" +(topRowPrice - row)
                 );
+                button.setStyle("-fx-background-color: grey; -fx-text-fill: black; -fx-font-weight: bold");
 
                 //print "ASK" in the row of the ask price in fifth column:
+                button = mikeGridPane.getButton(row, 4);
                 if (topRowPrice - row == priceServer.getAskPrice()) {
                     setSpecificButtonInMikeGridPane(row, 4, "ASK");
+                    button.setStyle("-fx-background-color: yellow; -fx-text-fill: red; -fx-font-weight: bolder; -fx-border-color : black");
                 }else{
                     setSpecificButtonInMikeGridPane(row, 4, "");
+                    mikeGridPane.getButton(row, 4).setStyle("-fx-background-color: lightyellow  ; -fx-border-color : black");
                 }
 
                 //print active sell orders for the given price in the sixth column:
@@ -475,15 +425,42 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
                             "" + mikePosOrders.ordersAtPrice.getOpenSellOrdersAtPrice(priceToPrint));
                 } else {
                     setSpecificButtonInMikeGridPane(row, 5, "");
+                    mikeGridPane.getButton(row, 5).setStyle("-fx-background-color: lightyellow  ; -fx-border-color : black");
                 }
 
-                //print the total open amount in the row who's price equals to the average weighed position in seventh column.
-                //todo: print out the zeroprofit point
+                //print the zero profit point in the row who's price equals to the average weighed position in seventh column.
                 if( priceToPrint == (int)zeroProfitPoint){
-                    setSpecificButtonInMikeGridPane(row, 6,
-                            "" + (int)mikePosOrders.getTotalOpenAmount());
+
+
+                    setSpecificButtonInMikeGridPane(row, zeroProfitPointCol,"" + totalOpenAmount);
+                    //color the button according to the position being long/short:
+                    if(totalOpenAmount>0) mikeGridPane.getButton(row, zeroProfitPointCol).setStyle("-fx-text-fill: blue; -fx-font-weight: bolder");
+                    if(totalOpenAmount<0) mikeGridPane.getButton(row, zeroProfitPointCol).setStyle("-fx-text-fill: red; -fx-font-weight: bolder");
+                    if(totalOpenAmount==0) mikeGridPane.getButton(row, zeroProfitPointCol).setStyle("-fx-background-color: white");
+
                 } else {
-                    setSpecificButtonInMikeGridPane(row, 6, "");
+
+                    //todo: this is not working, commented out:
+/*                    //if it is outside mikeGridPane, print it in the top or bottom gridPanes:
+                    if (zeroProfitPoint>topRowPrice) {
+                        topMikeGridPane.getButton(0, zeroProfitPointCol).setText("" + totalOpenAmount);
+//                        setSpecificButtonInMikeGridPane(row, zeroProfitPointCol,"" + totalOpenAmount);
+                        //color the button according to the position being long/short:
+                        if(totalOpenAmount>0) topMikeGridPane.getButton(0, zeroProfitPointCol).setStyle("-fx-text-fill: blue; -fx-font-weight: bolder");
+                        if(totalOpenAmount<0) topMikeGridPane.getButton(0, zeroProfitPointCol).setStyle("-fx-text-fill: red; -fx-font-weight: bolder");
+                        if(totalOpenAmount==0) topMikeGridPane.getButton(0, zeroProfitPointCol).setStyle("-fx-background-color: white");
+                    }
+
+                    if (zeroProfitPoint<bottomRowPrice) {
+                        bottomMikeGridPane.getButton(0, zeroProfitPointCol).setText("" + totalOpenAmount);
+//                        setSpecificButtonInMikeGridPane(row, zeroProfitPointCol,"" + totalOpenAmount);
+                        //color the button according to the position being long/short:
+                        if(totalOpenAmount>0) bottomMikeGridPane.getButton(0, zeroProfitPointCol).setStyle("-fx-text-fill: blue; -fx-font-weight: bolder");
+                        if(totalOpenAmount<0) bottomMikeGridPane.getButton(0, zeroProfitPointCol).setStyle("-fx-text-fill: red; -fx-font-weight: bolder");
+                        if(totalOpenAmount==0) bottomMikeGridPane.getButton(0, zeroProfitPointCol).setStyle("-fx-background-color: white");
+                    }*/
+//                    setSpecificButtonInMikeGridPane(row, zeroProfitPointCol, "");
+//                    mikeGridPane.getButton(row, zeroProfitPointCol).setStyle("-fx-background-color: lightyellow  ; -fx-border-color : black");
                 }
 
 
@@ -499,72 +476,22 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
     }
 
     @Override
+    /**
+     * This is called whenever a button in MikeGridPane is clicked
+     */
     public void handleMikeButtonClicked(MikeGridPane.MikeButton button) {
 
-        System.out.println("MikeButton clicked. column: " +button.getColOfButton());
-        System.out.println("Price clicked: " + getPriceOfRow(button.getRowOfButton()));
-
-
-        //todo: testing:
         int price = getPriceOfRow(button.getRowOfButton());
-        if (button.getColOfButton() == 0) {
 
-            //todo: testing:
-            System.out.println("Testing algoController. ");
-
-            controllerCol1.mikeGridPaneButtonPressed(price, model, mikePosOrders);
-//            algoController.mikeGridPaneButtonPressed(price, model, mikePosOrders);
-
-
-
-//            System.out.println("Testing. Creating SimpleScalperAlgo. LowTarget: " + getPriceOfRow(button.getRowOfButton())
-//            + " HighTarget: LowTarget +5 (hardcoded now), amount: 100.");
-//            model.algoManager.createScalperAlgo1(mikePosOrders, price, price + 5, 100, MikeOrder.MikeOrderType.BUYLMT);
+        switch (button.getColOfButton()) {
+            case 0: controllerCol1.mikeGridPaneButtonPressed(price, model, mikePosOrders); break;
+            case 1: controllerCol2.mikeGridPaneButtonPressed(price, model, mikePosOrders); break;
+            case 2: controllerCol3.mikeGridPaneButtonPressed(price, model, mikePosOrders); break;
+            case 3: controllerCol4.mikeGridPaneButtonPressed(price, model, mikePosOrders); break;
+            case 4: controllerCol5.mikeGridPaneButtonPressed(price, model, mikePosOrders); break;
+            case 5: controllerCol6.mikeGridPaneButtonPressed(price, model, mikePosOrders); break;
+            case 6: controllerCol7.mikeGridPaneButtonPressed(price, model, mikePosOrders); break;
         }
-        if (button.getColOfButton() == 1) {
-
-
-            controllerCol2.mikeGridPaneButtonPressed(price, model, mikePosOrders);
-
-//            System.out.println("Testing. Creating StepperAlgoUp1. ");
-//            model.algoManager.createStepperAlgoUp1(mikePosOrders, price, 5, 100);
-        }
-        if (button.getColOfButton() == 2) {
-
-            controllerCol3.mikeGridPaneButtonPressed(price, model, mikePosOrders);
-
-//            System.out.println("Testing Creating ComplexScalperAlgo1");
-//            model.algoManager.createComplexScalperAlgoUp1(mikePosOrders, price, 1, 10, 100, MikeOrder.MikeOrderType.BUYLMT);
-
-        }
-        if (button.getColOfButton() == 3) {
-            System.out.println("Testing Creating ComplexScalperAlgo1");
-            model.algoManager.createComplexScalperAlgoUp1(mikePosOrders, price, 1, 10, 100, MikeOrder.MikeOrderType.BUYSTP);
-        }
-        if (button.getColOfButton() == 4) {
-            System.out.println("Testing Creating ComplexScalperAlgo1");
-            model.algoManager.createComplexScalperAlgoUp1(mikePosOrders, price, -1, 10, 100, MikeOrder.MikeOrderType.SELLLMT);
-        }
-//        if (button.getColOfButton() == 3) {
-//            System.out.println("Testing. Creating SimpleScalperAlgo. LowTarget: " + getPriceOfRow(button.getRowOfButton())
-//                    + " HighTarget: LowTarget +5 (hardcoded now), amount: 100.");
-//            model.algoManager.createScalperAlgo1(mikePosOrders, price, price + 5, 100, MikeOrder.MikeOrderType.BUYSTP);
-//        }
-//
-//        if (button.getColOfButton() == 4) {
-//            System.out.println("Testing. Creating SimpleScalperAlgo. LowTarget: " + getPriceOfRow(button.getRowOfButton())
-//                    + " HighTarget: LowTarget +5 (hardcoded now), amount: 100.");
-//            model.algoManager.createScalperAlgo1(mikePosOrders, price, price - 5, 100, MikeOrder.MikeOrderType.SELLLMT);
-//        }
-
-        if (button.getColOfButton() == 5) {
-            System.out.println("Testing. Creating SimpleScalperAlgo. LowTarget: " + getPriceOfRow(button.getRowOfButton())
-                    + " HighTarget: LowTarget +5 (hardcoded now), amount: 100.");
-            model.algoManager.createScalperAlgo1(mikePosOrders, price, price - 5, 100, MikeOrder.MikeOrderType.SELLSTP);
-        }
-
-
-
     }
 
     public void setSpecificButtonInMikeGridPane(int row, int col, String text) {
@@ -583,58 +510,6 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
 
     @FXML
     public void testTwoButtonClicked(ActionEvent actionEvent) {
-//        model.getOrderServer().printActiveOrdersToConsole();
-
-//        //todo: testing:
-//        System.out.println("Column Selected: " + choiceBoxColSel.getSelectionModel().getSelectedItem());
-//
-//
-//        //experimenting:
-//        //can I change the contents of the anchorpane?
-//
-//
-//        if (selection == 0/*set to 0 at startup of program*/) {
-//            try {
-//
-//                //todo: experimenting:
-//
-//                FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/algoControllers/SimpleScalperAlgoControlPanel.fxml"));
-//                Parent anchorPaneParent = loader2.load();
-//                columnActionsAnchorPane.getChildren().setAll(anchorPaneParent);
-//                ControllerSimpleScalperAlgo controllerSimpleScalperAlgo = loader2.getController();
-//                algoController = controllerSimpleScalperAlgo;
-//
-//                System.out.println("Test two part 1 OK");
-//            } catch (Exception e) {
-//                System.out.println("Exception in test two part 1");
-//            }
-//            selection = 1;
-//        } else {
-//            try {
-//
-//                FXMLLoader loader2;
-//
-//                //try a different FXML file:
-//                loader2 = new FXMLLoader(getClass().getResource("/algoControllers/ComplexScalperControlPanel.fxml"));
-//                Parent anchorPaneParent = loader2.load();
-//                System.out.println(" Second Anchorpane loaded");
-//
-//                columnActionsAnchorPane.getChildren().setAll(anchorPaneParent);
-//
-//                controllerComplexScalperAlgo = loader2.getController();
-//
-//                algoController = controllerComplexScalperAlgo;
-//
-//
-//                System.out.println("Second Anchorpane set");
-//            } catch (IOException e) {
-//                System.out.println("Exception in part 2");
-//                e.printStackTrace();
-//            }
-//
-//            selection = 0;
-//        }
-
 
     }
 
@@ -648,19 +523,28 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
     }
 
     /**
-     * This used for choosing what price range is displayed in MikeGridPane.
+     * Used for choosing what price range is displayed in MikeGridPane.
      * @param actionEvent
      */
     public void setTopRowPriceBtnClicked(ActionEvent actionEvent) {
         Integer topRowPriceToBeSet = Integer.parseInt(TopRowPriceTextField.getText());
-        topRowPrice = topRowPriceToBeSet;
+//        topRowPrice = topRowPriceToBeSet;
+        setTopRowPrice(topRowPriceToBeSet);
     }
+
 
     /**
      * set the current top row price to ask price + 50
      */
     public void ask50Clicked(ActionEvent event) {
-        topRowPrice = priceServer.getAskPrice() + 50;
+//        topRowPrice = priceServer.getAskPrice() + 50;
+//        bottomRowPrice = topRowPrice - mikeGridPane.getHowManyRows();
+        setTopRowPrice(priceServer.getAskPrice() + 50);
+    }
+
+    private void setTopRowPrice(int topRowPrice) {
+        this.topRowPrice = topRowPrice;
+        this.bottomRowPrice = topRowPrice - mikeGridPane.getHowManyRows();
     }
 
     public void buyLimitButtonClicked(ActionEvent actionEvent) {

@@ -34,14 +34,25 @@ public class SimpleScalperAlgo extends BaseAlgo {
      * @param entryTargetPrice
      * @param exitTargetPrice
      * @param orderAmount
-     * @param entry
+     * @param entryOrderType
      */
-    public SimpleScalperAlgo(MikePosOrders posOrders, int entryTargetPrice, int exitTargetPrice, int orderAmount, MikeOrder.MikeOrderType entry) {
-        this.posOrders = posOrders;
-        this.entryTargetPrice = entryTargetPrice;
-        this.exitTargetPrice = exitTargetPrice;
-        this.orderAmount = orderAmount;
-        this.entryOrderType = entry;
+    public SimpleScalperAlgo(MikePosOrders posOrders, int entryTargetPrice, int exitTargetPrice, int orderAmount, MikeOrder.MikeOrderType entryOrderType) {
+
+//        //If entry is BUYLMT or BUYSTP then entryTargetPrice has to lower than exitTargetPrice
+//        if (entry == MikeOrder.MikeOrderType.BUYLMT || entry == MikeOrder.MikeOrderType.BUYSTP){
+//            if (exitTargetPrice <= entryTargetPrice) {
+//                exitTargetPrice = entryTargetPrice + 1;
+//            }
+//            }
+//
+//        //If entry is SELLLMT or SELLSTP then entryTargetPrice has to higher than exitTargetPrice
+//        if (entry == MikeOrder.MikeOrderType.SELLLMT || entry == MikeOrder.MikeOrderType.SELLSTP) {
+//            if (exitTargetPrice >= entryTargetPrice) {
+//                exitTargetPrice = entryTargetPrice - 1;
+//            }
+//        }
+
+        status = Status.CREATED;
 
         if (entryOrderType == MikeOrder.MikeOrderType.BUYLMT || entryOrderType == MikeOrder.MikeOrderType.BUYSTP) {
             exitOrderType = MikeOrder.MikeOrderType.SELLLMT;
@@ -54,15 +65,19 @@ public class SimpleScalperAlgo extends BaseAlgo {
             //make sure the scalper sells at a higher price than it buys:
             if(entryTargetPrice <= exitTargetPrice) exitTargetPrice = entryTargetPrice -1;
         } else {
-
+            System.out.println("ERROR CREATING SIMPLESCALPERALGO");
+            status = Status.CANCELLED;
         }
 
-
-        status = Status.CREATED;
+        this.posOrders = posOrders;
+        this.entryTargetPrice = entryTargetPrice;
+        this.exitTargetPrice = exitTargetPrice;
+        this.orderAmount = orderAmount;
+        this.entryOrderType = entryOrderType;
     }
 
     @Override
-    public void process() {
+    public synchronized void process() {
         //todo: write this
 
         //PSEUDOCODE:
@@ -100,7 +115,7 @@ public class SimpleScalperAlgo extends BaseAlgo {
     }
 
     @Override
-    public void cancel() {
+    public synchronized void cancel() {
         //1. Cancel all orders
         posOrders.cancelOrder(lowOrderId);
         posOrders.cancelOrder(highOrderId);

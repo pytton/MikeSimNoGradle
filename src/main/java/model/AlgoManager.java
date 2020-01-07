@@ -58,14 +58,30 @@ public class AlgoManager{
         cancelledAlgoSet.addAll(algosToCancel);
     }
 
-    synchronized public void createStepperAlgoUp1(MikePosOrders posOrders, int startPrice, int interval, int amount) {
-        StepperAlgoUp1 algo = new StepperAlgoUp1(posOrders, startPrice, interval, amount);
+    synchronized public void cancelAllComplexScalperAlgo1sAtPrice(int entryPrice) {
+        Set<MikeAlgo> algosToCancel = new HashSet<>();
+        //find all algos initialized with entryPrice and cancel them:
+        for (ComplexScalperAlgo1 algo : complexScalperAlgo1Set) {
+            if (algo.getEntryTargetPrice() == entryPrice) {
+                algo.cancel();
+                algosToCancel.add(algo);
+            }
+        }
+
+        //housekeeping - remove cancelled algos from active algos and add them to the set of cancelled algos:
+        algoSet.removeAll(algosToCancel);
+        cancelledAlgoSet.addAll(algosToCancel);
+    }
+
+    synchronized public void createStepperAlgoUp1(MikePosOrders posOrders, int startPrice, int interval, int amount, MikeOrder.MikeOrderType orderType) {
+        StepperAlgoUp1 algo = new StepperAlgoUp1(posOrders, startPrice, interval, amount, orderType);
         algoSet.add(algo);
     }
 
     public void createComplexScalperAlgoUp1(MikePosOrders posOrders, int lowerTarget, int interval, int howManyScalpers, int amount, MikeOrder.MikeOrderType entry) {
         ComplexScalperAlgo1 algo = new ComplexScalperAlgo1(posOrders, lowerTarget, interval, howManyScalpers, amount, entry);
         algoSet.add(algo);
+        complexScalperAlgo1Set.add(algo);
     }
 
     public void processAllAlgos(){
