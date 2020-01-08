@@ -156,7 +156,7 @@ public class MikeGridPane extends GridPane {
 
 
                 if (event.getButton() == MouseButton.SECONDARY) {
-                    System.out.println("MikeGridPane MikeButton clicked with RIGHT MOUNSE BUTTON. This message" +
+                    System.out.println("MikeGridPane MikeButton clicked with RIGHT MOUSE BUTTON. This message" +
                             " generated in MikeButton class");
                 }
             }

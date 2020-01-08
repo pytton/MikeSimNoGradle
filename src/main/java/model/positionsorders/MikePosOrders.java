@@ -64,7 +64,7 @@ public class MikePosOrders {
          * When an order is placed, filled, modified or cancelled, this needs to be called
          * Goes through all the open orders and updates buyOrdersAtPrice and sellOrdersAtPrice
          */
-        synchronized public void recalculate() {
+        synchronized private void recalculate() {
             buyOrdersAtPrice.clear();
             sellOrdersAtPrice.clear();
 
@@ -161,8 +161,6 @@ public class MikePosOrders {
      */
     synchronized public void processFilledOrders(){
 
-//        System.out.println("Processing orders");
-
         //if there are no orders to process then do nothing:
         if(filledOrdersToBeProcessed.isEmpty()) return;
 
@@ -200,7 +198,7 @@ public class MikePosOrders {
      * Cancel an order if you know its orderId
      * @param orderId
      */
-    public void cancelOrder(long orderId) {
+    public synchronized void cancelOrder(long orderId) {
         orderServer.cancelOrder(orderId);
         activeOrdersSet.remove(orderId);
         //RECALCULATE ACTIVE ORDERS BY PRICE
