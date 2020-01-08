@@ -4,6 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Font;
@@ -139,7 +141,28 @@ public class MikeGridPane extends GridPane {
                 //pass the MikeButton which was pressed to the interface which handles it:
                 getButtonClickHandler().handleMikeButtonClicked((MikeButton)event.getSource());
             }
+
         };
+
+        EventHandler<MouseEvent> mouseEventEventHandler = new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                //todo: experimenting:
+
+                //pass the MikeButton which was pressed to the interface which handles it:
+                if (event.getButton() == MouseButton.PRIMARY) {
+                    getButtonClickHandler().handleMikeButtonClicked((MikeButton)event.getSource());
+                }
+
+
+                if (event.getButton() == MouseButton.SECONDARY) {
+                    System.out.println("MikeGridPane MikeButton clicked with RIGHT MOUNSE BUTTON. This message" +
+                            " generated in MikeButton class");
+                }
+            }
+        };
+
+
 
         public MikeButton(int rowPosition, int colPosition, MikeButtonHandler handler){
             rowOfButton = rowPosition;
@@ -147,7 +170,8 @@ public class MikeGridPane extends GridPane {
             //set where will an event be sent once the button is clicked
             this.setButtonClickHandler(handler);
             //add the handler method to the button. this is what is called when the button is pressed
-            this.setOnAction(buttonHandler);
+//            this.setOnAction(buttonHandler);
+            this.setOnMouseClicked(mouseEventEventHandler);
         }
 
         public int getRowOfButton() {

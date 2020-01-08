@@ -260,7 +260,7 @@
          <children>
             <Button fx:id="testOneButton" mnemonicParsing="false" onAction="#testOneButtonClicked" text="Test One" />
             <Button fx:id="testTwoButton" mnemonicParsing="false" onAction="#testTwoButtonClicked" text="Test Two" />
-            <Button fx:id="testTwoButton" mnemonicParsing="false" onAction="#testThreeButtonClicked" text="Test Three" />
+            <Button fx:id="testThreeButton" mnemonicParsing="false" onAction="#testThreeButtonClicked" onMouseClicked="#testThreeMouseClicked" text="Test Three" />
             <HBox alignment="CENTER" prefHeight="30.0" prefWidth="250.0">
                <children>
                   <Button fx:id="setTopRowPriceButton" mnemonicParsing="false" onAction="#setTopRowPriceBtnClicked" prefHeight="24.0" prefWidth="123.0" text="Set Top Row Price -&gt;">

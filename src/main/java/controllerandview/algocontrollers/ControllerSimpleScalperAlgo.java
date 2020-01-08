@@ -77,8 +77,6 @@ public class ControllerSimpleScalperAlgo extends AlgoController {
         if (orderType != MikeOrder.MikeOrderType.CANCEL) {
             model.algoManager.createScalperAlgo1(posOrders, pricePressed, pricePressed + getInterval(), getAmount(), orderType);
         } else {
-//            System.out.println("Cancelling all SimpleScalperAlgos at price: " + pricePressed + " NOT IMPLEMENTED!");
-            //todo: cancel all algos at pricePressed
             model.algoManager.cancelAllSimpleScalperAlgosAtPrice(pricePressed);
         }
     }
