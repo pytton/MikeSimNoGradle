@@ -3,7 +3,7 @@ package main.java.model.mikealgos;
 import main.java.model.orderserver.MikeOrder;
 import main.java.model.positionsorders.MikePosOrders;
 
-public class StepperAlgoUp1 extends BaseAlgo {
+public class SimpleStepperAlgo extends BaseAlgo {
 
     private MikeOrder.MikeOrderType entryOrderType;
     private MikeOrder.MikeOrderType firstExitOrderType;
@@ -11,7 +11,7 @@ public class StepperAlgoUp1 extends BaseAlgo {
     private MikeOrder.MikeOrderType returnOrderType;
 
     private MikePosOrders posOrders;
-    private int startPrice = 0;
+    private int entryTargetPrice = 0;
     private int interval = 1;
     private int amount = 0;
 
@@ -32,7 +32,7 @@ public class StepperAlgoUp1 extends BaseAlgo {
 
     private Status status;
 
-    public StepperAlgoUp1(MikePosOrders posOrders, int startPrice, int interval, int amount, MikeOrder.MikeOrderType entryOrderType) {
+    public SimpleStepperAlgo(MikePosOrders posOrders, int entryTargetPrice, int interval, int amount, MikeOrder.MikeOrderType entryOrderType) {
 
         status = Status.CREATED;
 
@@ -66,9 +66,10 @@ public class StepperAlgoUp1 extends BaseAlgo {
         }
 
         this.posOrders = posOrders;
-        this.startPrice = startPrice;
+        this.entryTargetPrice = entryTargetPrice;
         this.interval = interval;
         this.amount = amount;
+        this.entryOrderType = entryOrderType;
     }
 
     @Override
@@ -79,7 +80,7 @@ public class StepperAlgoUp1 extends BaseAlgo {
 
         if (status == Status.CREATED) {
             //create the first buy order:
-            startOrderId = posOrders.placeNewOrder(MikeOrder.MikeOrderType.BUYLMT, startPrice, startPrice, (amount /2)*2);
+            startOrderId = posOrders.placeNewOrder(entryOrderType, entryTargetPrice, entryTargetPrice, (amount /2)*2);
             status = Status.RUNNING;
             return;
         }
@@ -87,7 +88,7 @@ public class StepperAlgoUp1 extends BaseAlgo {
             //check if first order was filled. If it has, place the target order:
             //target order is half the amount of startOrder
             if (posOrders.checkIfOrderFilled(startOrderId)) {
-                targetOrderId = posOrders.placeNewOrder(MikeOrder.MikeOrderType.SELLLMT, startPrice, (startPrice + interval), (amount / 2));
+                targetOrderId = posOrders.placeNewOrder(firstExitOrderType, entryTargetPrice, (entryTargetPrice + interval), (amount / 2));
                 status = Status.STARTFILLED;
                 return;
             }
@@ -96,7 +97,7 @@ public class StepperAlgoUp1 extends BaseAlgo {
             //check if the target has been filled. If it has, create the exit order:
             //exit order half of firstOrder - should make position 0
             if (posOrders.checkIfOrderFilled(targetOrderId)) {
-                exitOrderId = posOrders.placeNewOrder(MikeOrder.MikeOrderType.SELLSTP, startPrice, (startPrice - interval), (amount / 2));
+                exitOrderId = posOrders.placeNewOrder(secondExitOrderType, entryTargetPrice, (entryTargetPrice - interval), (amount / 2));
                 status = Status.TARGETFILLED;
                 return;
             }
@@ -106,7 +107,7 @@ public class StepperAlgoUp1 extends BaseAlgo {
             //check if it was filled. If it has, then the poosition should be flat now,
             // so make a STOP BUY order back at the initial entry price:
             if (posOrders.checkIfOrderFilled(exitOrderId)) {
-                startOrderId = posOrders.placeNewOrder(MikeOrder.MikeOrderType.BUYSTP, startPrice, startPrice, (amount /2)*2);
+                startOrderId = posOrders.placeNewOrder(returnOrderType, entryTargetPrice, entryTargetPrice, (amount /2)*2);
                 status = Status.RUNNING;
                 return;
             }
@@ -120,5 +121,15 @@ public class StepperAlgoUp1 extends BaseAlgo {
         posOrders.cancelOrder(exitOrderId);
         status = Status.CANCELLED;
     }
+
+    @Override
+    public MikePosOrders getMikePosOrders() {
+        return posOrders;
+    }
+
+    public int getEntryTargetPrice() {
+        return entryTargetPrice;
+    }
+
 
 }

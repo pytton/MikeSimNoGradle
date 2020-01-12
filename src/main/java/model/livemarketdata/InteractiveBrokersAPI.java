@@ -265,11 +265,16 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
             return true;
         }
 
-        try {for(TradedInstrument instrument : tradedInstrumentMap.values()){
+        try {
 
-                //Procedure for setting up a new contract:
-                // Create a new contract
-                Contract contract = new Contract();
+            //Procedure for setting up a new contract:
+            // Create a new contract
+            Contract contract = new Contract();
+
+            for(TradedInstrument instrument : tradedInstrumentMap.values())
+            {
+
+
                 contract.m_symbol = instrument.getSymbol();
                 contract.m_exchange = instrument.getExchange();
                 contract.m_secType = instrument.getSecType();
@@ -295,8 +300,7 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
                 //set up remaining contracts with respective TickerIDs:
             }
 
-/*
-            contract = new Contract();
+//            contract = new Contract();
             contract.m_symbol = "DIA";
             contract.m_exchange = "SMART";
             contract.m_secType = "STK";
@@ -304,7 +308,7 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
             client.reqMktData(1, contract, null, false);
             priceDataMap.put(1, new PriceData()); //priceDataMap stores market data for each tickerId
 
-            contract = new Contract();
+//            contract = new Contract();
             contract.m_symbol = "IWM";
             contract.m_exchange = "SMART";
             contract.m_secType = "STK";
@@ -312,7 +316,7 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
             client.reqMktData(2, contract, null, false);
             priceDataMap.put(2, new PriceData()); //priceDataMap stores market data for each tickerId
 
-            contract = new Contract();
+//            contract = new Contract();
             contract.m_symbol = "QQQ";
             contract.m_exchange = "SMART";
             contract.m_secType = "STK";
@@ -320,16 +324,16 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
             client.reqMktData(3, contract, null, false);
             priceDataMap.put(3, new PriceData()); //priceDataMap stores market data for each tickerId
 
-            contract = new Contract();
+//            contract = new Contract();
             contract.m_symbol = "EUR";
             contract.m_exchange = "IDEALPRO";
             contract.m_secType = "CASH";
             contract.m_currency = "USD";
             client.reqMktData(4, contract, null, false);
             priceDataMap.put(4, new PriceData()); //priceDataMap stores market data for each tickerId
-*/
 
         } catch (Exception e) {
+            System.out.println("Exception in InterActiveBrokersAPI setUpContracts!");
             e.printStackTrace();
             contractsAlreadySetupFlag = false;
             return false;

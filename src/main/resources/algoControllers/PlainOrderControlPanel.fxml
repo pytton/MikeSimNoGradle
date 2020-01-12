@@ -5,11 +5,11 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllerandview.algocontrollers.ControllerSimpleScalperAlgo">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllerandview.algocontrollers.ControllerPlainOrder">
    <children>
       <VBox prefHeight="650.0" prefWidth="200.0">
          <children>
-            <Label text="Simple Scalper Algo">
+            <Label text="Plain Order Control">
                <font>
                   <Font size="18.0" />
                </font>
@@ -32,12 +32,6 @@
                <children>
                   <Label text="Order Amount" />
                   <TextField fx:id="orderAmount" prefHeight="25.0" prefWidth="70.0" text="100" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0">
-               <children>
-                  <Label text="Scalper Target Interval" />
-                  <TextField fx:id="targetInterval" prefHeight="25.0" prefWidth="70.0" text="5" />
                </children>
             </HBox>
          </children>

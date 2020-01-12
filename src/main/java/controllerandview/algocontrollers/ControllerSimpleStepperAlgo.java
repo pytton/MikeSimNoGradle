@@ -9,7 +9,7 @@ import main.java.model.MainModelThread;
 import main.java.model.orderserver.MikeOrder;
 import main.java.model.positionsorders.MikePosOrders;
 
-public class ControllerComplexScalperAlgo extends AlgoController {
+public class ControllerSimpleStepperAlgo extends AlgoController {
 
     public ToggleGroup orderTypeToggleGroup;
     public RadioButton buyLimit;
@@ -23,7 +23,7 @@ public class ControllerComplexScalperAlgo extends AlgoController {
     public TextField scalperCount;
     private MikeOrder.MikeOrderType orderType = MikeOrder.MikeOrderType.BUYLMT;
 
-    private String descriptionRow1 = "CPLX SCP1";
+    private String descriptionRow1 = "STEPPER1";
     private String descriptionRow2 = "B LMT";
 
     public TextField getOrderAmount() {
@@ -32,8 +32,6 @@ public class ControllerComplexScalperAlgo extends AlgoController {
 
     @FXML
     public void initialize() {
-//        System.out.println("ControllerSimpleScalperAlgo created.");
-
 
         //setup the kind of order passed to algoManager depending on which radiobutton is pressed:
         orderTypeToggleGroup.selectedToggleProperty().addListener(
@@ -49,12 +47,6 @@ public class ControllerComplexScalperAlgo extends AlgoController {
 
     }
 
-
-//    @Override
-//    public boolean launch(int entryPrice, MainModelThread model, MikePosOrders posOrders) {
-//        return false;
-//    }
-
     @Override
     public boolean cancel(int entryPrice, MainModelThread model, MikePosOrders posOrders) {
         return false;
@@ -62,15 +54,12 @@ public class ControllerComplexScalperAlgo extends AlgoController {
 
     @Override
     public void mikeGridPaneButtonPressed(int pricePressed, MainModelThread model, MikePosOrders posOrders) {
-
-
         if (orderType != MikeOrder.MikeOrderType.CANCEL) {
-            model.algoManager.createComplexScalperAlgoUp1(posOrders, pricePressed, getInterval(), getScCount(), getAmount(), orderType);
+            model.algoManager.createSimpleStepperAlgo(posOrders, pricePressed, getInterval(), getAmount(), orderType);
         } else {
-            model.algoManager.cancelAllComplexScalperAlgo1sAtPrice(pricePressed, posOrders);
+            model.algoManager.cancelAllSimpleStepperAlgosAtPrice(pricePressed, posOrders);
         }
-
-        System.out.println("ControllerComplexScalperAlgo. Price clicked: " + pricePressed);
+        System.out.println("ControllerSimpleStepperAlgo. Price clicked: " + pricePressed);
     }
 
     @Override
@@ -85,7 +74,6 @@ public class ControllerComplexScalperAlgo extends AlgoController {
 
     private int getAmount() {
         Integer amount = Integer.parseInt(orderAmount.getText());
-
         return amount;
     }
 
@@ -101,7 +89,6 @@ public class ControllerComplexScalperAlgo extends AlgoController {
 
     public void oAmtBtnPressed(ActionEvent actionEvent) {
         Button button = (Button) actionEvent.getSource();
-//        System.out.println("Pressed: " + button.getText());
         orderAmount.setText(button.getText());
     }
 

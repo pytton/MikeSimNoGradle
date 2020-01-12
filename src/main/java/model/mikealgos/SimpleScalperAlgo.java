@@ -123,6 +123,11 @@ public class SimpleScalperAlgo extends BaseAlgo {
         status = Status.CANCELLED;
     }
 
+    @Override
+    public MikePosOrders getMikePosOrders() {
+        return posOrders;
+    }
+
     public int getEntryTargetPrice() {
         return entryTargetPrice;
     }

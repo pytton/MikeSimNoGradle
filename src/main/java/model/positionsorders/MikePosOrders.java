@@ -16,12 +16,12 @@ public class MikePosOrders {
      * positive totalOpenAmount means the total position is long
      * negative means it is short
      */
-    private int totalOpenAmount = 0;
-    private int openPL = 0;
-    private int closedPL = 0;
-    private int totalPL = 0;
-    private double averagePrice = 0;
-    private double zeroProfitPoint = 0;
+    protected int totalOpenAmount = 0;
+    protected int openPL = 0;
+    protected int closedPL = 0;
+    protected int totalPL = 0;
+    protected double averagePrice = 0;
+    protected double zeroProfitPoint = 0;
 
     private Map<Integer, MikePosition> positionsMap = new HashMap<>();
     private SortedSet<Long> activeOrdersSet = new TreeSet<>();
@@ -30,16 +30,43 @@ public class MikePosOrders {
     private OrderServer orderServer;
     private PriceServer priceServer; //we need this to calculate Profit/Loss (PL)
 
+    public MikePosOrders() {
+
+    }
+
     public MikePosOrders(OrderServer orderServer, PriceServer priceServer) {
         this.orderServer = orderServer;
         this.priceServer = priceServer;
         ordersAtPrice = new OrdersAtPrice();
     }
 
+    public int getOpenBuyOrdersAtPrice(int price) {
+        if(ordersAtPrice.buyOrdersAtPrice.containsKey(price)) return ordersAtPrice.buyOrdersAtPrice.get(price);
+        else return 0;
+    }
+
+    public int getOpenSellOrdersAtPrice(int price) {
+        if(ordersAtPrice.sellOrdersAtPrice.containsKey(price)) return ordersAtPrice.sellOrdersAtPrice.get(price);
+        else return 0;
+    }
+
+    /**
+     * Returns the size of the open position at a given price. Positive value means position is long.
+     * Negative value means position is short. Returns 0 if there is no MikePosition at given price.
+     * @param price the price of the individual MikePosition
+     * @return
+     */
+    public int getOpenAmountAtPrice(int price) {
+        if (positionsMap.get(price) != null)
+        {return positionsMap.get(price).getOpen_amount();}
+        else return 0;
+    }
+
+
     /**
      * ask this class for the amount of open buy and sell orders at a given price
      */
-    public class OrdersAtPrice{
+    private class OrdersAtPrice{
 
         private Map <Integer, Integer> buyOrdersAtPrice = new TreeMap<>();
         private Map <Integer, Integer> sellOrdersAtPrice = new TreeMap<>();
@@ -105,7 +132,6 @@ public class MikePosOrders {
     }
 
     public synchronized void recalcutlatePL(){
-        //todo: calculate the zero profit point
         openPL = 0; closedPL = 0; totalPL = 0; totalOpenAmount = 0;
         averagePrice = 0;
         double averagePriceCalculator = 0;
@@ -122,7 +148,7 @@ public class MikePosOrders {
         else zeroProfitPoint = averagePrice;
     }
 
-    public MikePosition getMikePositionAtPrice(int price){
+    private MikePosition getMikePositionAtPrice(int price){
         return positionsMap.get(price);
     }
 
@@ -203,6 +229,23 @@ public class MikePosOrders {
         activeOrdersSet.remove(orderId);
         //RECALCULATE ACTIVE ORDERS BY PRICE
         ordersAtPrice.recalculate();
+    }
+
+    public synchronized void cancelAllOrdersAtPrice(int price) {
+        Set<Long> orderIdToCancelSet = new HashSet<>();
+
+        for (Long orderId : activeOrdersSet) {
+            if (orderServer.getMikeOrder(orderId).getPrice() == price) {
+                orderIdToCancelSet.add(orderId);
+            }
+        }
+        for (Long orderId : orderIdToCancelSet) {
+            orderServer.cancelOrder(orderId);
+            activeOrdersSet.remove(orderId);
+        }
+        ordersAtPrice.recalculate();
+
+        System.out.println("Cancelling all orders at price " + price + " in " + getName());
     }
 
     /**

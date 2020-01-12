@@ -44,7 +44,6 @@ public class ControllerPriceControlPanel implements MainGUIClass.Updatable {
     @FXML
     public TextField askPriceTextField;
 
-
     @FXML
     public ToggleGroup priceSourceToggleGroup;
     public RadioButton historicalRadioButton;

@@ -10,6 +10,7 @@ public class ComplexScalperAlgo1 extends BaseAlgo {
 
     private Set<SimpleScalperAlgo> algoSet;
     private int entryTargetPrice;
+    private MikePosOrders posOrders;
 
 
     /**
@@ -28,6 +29,7 @@ public class ComplexScalperAlgo1 extends BaseAlgo {
     public ComplexScalperAlgo1(MikePosOrders posOrders, int entryTarget, int interval, int howManyScalpers, int amount, MikeOrder.MikeOrderType entry) {
         algoSet = new HashSet<>();
         this.entryTargetPrice = entryTarget;
+        this.posOrders = posOrders;
 
 
         //If entry is BUYLMT or BUYSTP then interval has to be a positive value
@@ -54,8 +56,6 @@ public class ComplexScalperAlgo1 extends BaseAlgo {
 
     @Override
     public synchronized void process() {
-        //todo: write this
-
         for (SimpleScalperAlgo algo :algoSet) {
             algo.process();
         }
@@ -63,11 +63,16 @@ public class ComplexScalperAlgo1 extends BaseAlgo {
 
     @Override
     public synchronized void cancel() {
-        //todo: write this
-
         for (SimpleScalperAlgo algo :algoSet) {
             algo.cancel();
         }
+        //we can do this because everything in algoSet has been cancelled anyway and no need to process it anymore:
+        algoSet.clear();
+    }
+
+    @Override
+    public MikePosOrders getMikePosOrders() {
+        return posOrders;
     }
 
     public int getEntryTargetPrice() {

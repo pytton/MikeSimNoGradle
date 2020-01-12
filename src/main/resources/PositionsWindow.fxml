@@ -102,10 +102,10 @@
                   <TextField fx:id="totalPLTextField" prefWidth="90.0" />
                </children>
             </HBox>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="150.0" text="Cancel All Orders" />
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="150.0" text="Clear All Positions" />
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="150.0" text="Print All Orders" />
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="150.0" text="Print All Positions" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="195.0" text="Cancel All Orders This Book" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="195.0" text="Clear All Positions" />
+            <Button fx:id="cancelAlgosThisBookBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#cancelAlgosThisBookBtnPressed" prefWidth="195.0" text="Cancel Algos this Book" />
+            <Button fx:id="cancelAlgosGloballyBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#cancelAlgosGloballyBtnPressed" prefHeight="25.0" prefWidth="195.0" text="Cancell All Algos Globally" />
             <VBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
@@ -258,6 +258,7 @@
    <top>
       <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
+            <CheckBox fx:id="aggregatedCheckBox" mnemonicParsing="false" text="Aggregated" />
             <Button fx:id="testOneButton" mnemonicParsing="false" onAction="#testOneButtonClicked" text="Test One" />
             <Button fx:id="testTwoButton" mnemonicParsing="false" onAction="#testTwoButtonClicked" text="Test Two" />
             <Button fx:id="testThreeButton" mnemonicParsing="false" onAction="#testThreeButtonClicked" onMouseClicked="#testThreeMouseClicked" text="Test Three" />

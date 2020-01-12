@@ -267,6 +267,8 @@ public class MainGUIClass {
 
             //set the initial priceServer(this can later be changed by user in the window)
             controller.setPriceServer(priceServer);
+
+
         }
 
 
