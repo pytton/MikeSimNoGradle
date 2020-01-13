@@ -26,6 +26,7 @@
                   <RadioButton fx:id="sellLimit" mnemonicParsing="false" text="Sell Limit" toggleGroup="$orderTypeToggleGroup" />
                   <RadioButton fx:id="sellStop" mnemonicParsing="false" text="Sell Stop" toggleGroup="$orderTypeToggleGroup" />
                   <RadioButton fx:id="cancel" mnemonicParsing="false" text="Cancel" toggleGroup="$orderTypeToggleGroup" />
+                  <RadioButton fx:id="transfer" mnemonicParsing="false" text="Transfer to target PosOrders" toggleGroup="$orderTypeToggleGroup" />
                </children>
             </VBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0">

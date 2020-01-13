@@ -52,8 +52,8 @@
                <children>
                   <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0">
                      <children>
-                        <Label text="Scalper Target Interval" />
-                        <TextField fx:id="targetInterval" prefHeight="25.0" prefWidth="70.0" text="2" />
+                        <Label text="Stepper Target Interval" />
+                        <TextField fx:id="targetInterval" prefHeight="25.0" prefWidth="70.0" text="5" />
                      </children>
                   </HBox>
                   <HBox>
@@ -67,14 +67,10 @@
                         <Button fx:id="intervalBtn15" mnemonicParsing="false" onAction="#intervalBtnPressed" text="15" />
                      </children>
                   </HBox>
+                  <CheckBox fx:id="smTrailingStopCheckBox" mnemonicParsing="false" text="Smart Trailing Stop" />
+                  <CheckBox fx:id="fixedTrailingStopCheckBox" mnemonicParsing="false" text="Fixed Trailing Stop" />
                </children>
             </VBox>
-            <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0" style="-fx-border-color: black;">
-               <children>
-                  <Label text="Scalper Count" />
-                  <TextField fx:id="scalperCount" prefHeight="25.0" prefWidth="70.0" text="5" />
-               </children>
-            </HBox>
          </children>
       </VBox>
    </children>

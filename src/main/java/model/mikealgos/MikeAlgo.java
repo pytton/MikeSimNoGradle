@@ -8,6 +8,7 @@ public interface MikeAlgo {
      */
     public void process();
     public void cancel();
+    public int getEntryPrice();
 
     /**
      * Returns the MikePosOrders on which the algo is operating(submitting orders)

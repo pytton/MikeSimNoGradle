@@ -18,7 +18,8 @@ public class MikeOrder {
         SELLLMT,
         BUYSTP,
         SELLSTP,
-        CANCEL
+        CANCEL,
+        TRANSFER
     };
 
     private MikePosOrders posOrders;

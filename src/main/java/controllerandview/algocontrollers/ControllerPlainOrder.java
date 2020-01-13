@@ -7,6 +7,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
+import main.java.controllerandview.positionswindow.controller.ControllerPositionsWindow;
 import main.java.model.MainModelThread;
 import main.java.model.orderserver.MikeOrder;
 import main.java.model.positionsorders.MikePosOrders;
@@ -16,15 +17,18 @@ import main.java.model.positionsorders.MikePosOrders;
  */
 public class ControllerPlainOrder extends AlgoController {
 
+    @FXML
     public ToggleGroup orderTypeToggleGroup;
     public RadioButton buyLimit;
     public RadioButton buyStop;
     public RadioButton sellLimit;
     public RadioButton sellStop;
     public RadioButton cancel;
+    public RadioButton transfer;
 
     public TextField orderAmount;
     private MikeOrder.MikeOrderType orderType = MikeOrder.MikeOrderType.BUYLMT;
+    private ControllerPositionsWindow controllerPositionsWindow;
 
     private String descriptionRow1 = "ORDER:";
     private String descriptionRow2 = "B LMT";
@@ -41,6 +45,7 @@ public class ControllerPlainOrder extends AlgoController {
                 if (orderTypeToggleGroup.getSelectedToggle() == sellLimit) {orderType = MikeOrder.MikeOrderType.SELLLMT; descriptionRow2 = "S LMT";}
                 if (orderTypeToggleGroup.getSelectedToggle() == sellStop) {orderType = MikeOrder.MikeOrderType.SELLSTP; descriptionRow2 = "S STP";}
                 if (orderTypeToggleGroup.getSelectedToggle() == cancel) {orderType = MikeOrder.MikeOrderType.CANCEL; descriptionRow2 = "CANCEL";}
+                if (orderTypeToggleGroup.getSelectedToggle() == transfer) {orderType = MikeOrder.MikeOrderType.TRANSFER; descriptionRow2 = "TRANSFER";}
              } } );
     }
 
@@ -56,9 +61,18 @@ public class ControllerPlainOrder extends AlgoController {
 
     @Override
     public void mikeGridPaneButtonPressed(int pricePressed, MainModelThread model, MikePosOrders posOrders) {
+        if (orderType == MikeOrder.MikeOrderType.TRANSFER && controllerPositionsWindow.targetPositionsList.getSelectionModel().getSelectedItem() != null){
+            System.out.println("Attempting transfer");
+            posOrders.movePositionToDifferentMikePosOrders(pricePressed, (MikePosOrders) controllerPositionsWindow.targetPositionsList.getSelectionModel().getSelectedItem());
+            return;
+        }
+
         if (orderType != MikeOrder.MikeOrderType.CANCEL) {
             posOrders.placeNewOrder(orderType, pricePressed, pricePressed, getAmount());
-        } else {
+            return;
+        }
+
+        if (orderType == MikeOrder.MikeOrderType.CANCEL) {
             posOrders.cancelAllOrdersAtPrice(pricePressed);
         }
     }
@@ -71,5 +85,9 @@ public class ControllerPlainOrder extends AlgoController {
     @Override
     public boolean cancel(int entryPrice, MainModelThread model, MikePosOrders posOrders) {
         return false;
+    }
+
+    public void setControllerPositionsWindow(ControllerPositionsWindow controllerPositionsWindow) {
+        this.controllerPositionsWindow = controllerPositionsWindow;
     }
 }

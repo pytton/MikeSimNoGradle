@@ -1,5 +1,6 @@
 package main.java.controllerandview;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
@@ -7,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import main.java.controllerandview.algomanagerwindow.ControllerAlgoManagerPanel;
 import main.java.controllerandview.mainGUIwindow.controller.ControllerMainGUIWindow;
 import main.java.controllerandview.positionswindow.controller.ControllerPositionsWindow;
 import main.java.controllerandview.pricecontrolwindow.controller.ControllerPriceControlPanel;
@@ -43,18 +45,6 @@ public class MainGUIClass {
                 controller.updateGUI();
             }
         }
-
-//        for(ControllerPositionsWindow controller :posWindowControllerList){
-//            if (controller != null) {
-//                controller.updateGUI();
-//            }
-//        }
-//
-//        for(ControllerPriceControlPanel controller :priceControlPanelControllerList){
-//            if (controller != null) {
-//                controller.updateGUI();
-//            }
-//        }
 
         count++;
     }
@@ -109,73 +99,30 @@ public class MainGUIClass {
         stage.setTitle(name);
     }
 
-    public void createConsolidatedPosWindow() {
-//        //TODO: WORK IN PROGRESS:
-//        //create Positions Window:
-//        //we need to add custom MikeGridPane not defined in FXML:
-//        ConsolidatedPositionsWindowCreator creator = null;
-//
-//        try {
-//            creator = new ConsolidatedPositionsWindowCreator(getMainModelThread().posOrdersManager.getPriceServer(defaultTickerId));
-//        } catch (IOException e) {
-//            System.out.println("Exception in createPosWindow");
-//            e.printStackTrace();
-//        }
-//
-//        //add the controller to the list of controllers (for updateGUI):
-//        updatableWindowsList.add(creator.getController());
-//
-//        //create the window:
-//        Stage stage = new Stage();
-//        stage.setX(0);
-//        stage.setY(0);
-//        stage.setScene(new Scene(creator.getPositionsWindowRoot()));
-//        //display the window:
-//        stage.show();
-//
-//        //name the window:
-//        String name = ("ConsolidatedPositions " + updatableWindowsList.size());
-//        stage.setTitle(name);
-    }
+    public void createAlgoManagerWindow() {
 
-//    public void createConsolidatedPosWindow(){
-//        //create Positions Window:
-//        //we need to add custom MikeGridPane not defined in FXML:
-//        MikePositionsWindowCreator consolidatedPosWindow = null;
-//
-//        try {
-//            consolidatedPosWindow = new MikePositionsWindowCreator(getMainModelThread().posOrdersManager.getPriceServer(defaultTickerId));
-//        } catch (IOException e) {
-//            System.out.println("Exception in createPosWindow");
-//            e.printStackTrace();
-//        }
-//        ControllerPositionsWindow posWindowController = consolidatedPosWindow.getPositionsWindowController();
-//        posWindowController.setModel(mainModelThread);
-//
-//        //set the default instrument
-//        posWindowController.setInstrumentList(mainModelThread.posOrdersManager.getPriceServerObservableList());
-////        posWindowController.instrumentsList.setItems(mainModelThread.posOrdersManager.getPriceServer(defaultTickerId));
-//
-//        posWindowController.setMikePosOrders(mainModelThread.posOrdersManager.getMikePosOrders(defaultTickerId, 0));
-//
-//        //add the controller to the list of controllers (for updateGUI):
-//        posWindowControllerList.add(posWindowController);
-//
-//        //populate the ListView that allows choosing PosOrders
-//        posWindowController.positionsList.setItems(mainModelThread.posOrdersManager.getPosOrdersObservableList(defaultTickerId));
-//
-//        //create the window:
-//        Stage secondStage = new Stage();
-//        secondStage.setX(0);
-//        secondStage.setY(0);
-//        secondStage.setScene(new Scene(consolidatedPosWindow.getPositionsWindowRoot()));
-//        //display the window:
-//        secondStage.show();
-//
-//        //name the window:
-//        String name = ("PositionsWindow " + posWindowControllerList.size());
-//        secondStage.setTitle(name);
-//    }
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AlgoManagerPanel.fxml"));
+        Parent root = null;
+
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            System.out.println("Exception in createAlgoManagerWindow");
+            e.printStackTrace();
+        }
+
+        ControllerAlgoManagerPanel controller = (ControllerAlgoManagerPanel) loader.getController();
+
+        controller.setModel(mainModelThread);
+        controller.setAlgoList(mainModelThread.algoManager.getAlgoSet());
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setX(0);
+        stage.setY(0);
+        stage.show();
+
+    }
 
     public void createPriceControlWindow() {
         //create Price Control window:

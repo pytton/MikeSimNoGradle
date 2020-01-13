@@ -15,19 +15,13 @@ public class MikePosition {
         this.price = price;
     }
 
-
-/*    //this is for indexing purposes - set to TRUE if position was ever
-    //accessed or changed. Mainly to avoid iterating through tens of thousands
-    //of positionswindow
-    private boolean isActive = false;
-    public boolean checkifActive() { if (isActive == true) return true; else  return false; }
-    private void setActive() { isActive = true; }
-    private void setInactive() { isActive = false; }
-    public boolean isActive() {
-        return isActive;
-    }*/
-
-
+    public MikePosition(int price, int open_amount, int open_pl, int closed_pl, int total_pl) {
+        this.price = price;
+        this.open_amount = open_amount;
+        this.open_pl = open_pl;
+        this.closed_pl = closed_pl;
+        this.total_pl = total_pl;
+    }
 
     //positive amount for buy orders, negative amount for sell orders!
     void fill(int fillprice, int filledamount)

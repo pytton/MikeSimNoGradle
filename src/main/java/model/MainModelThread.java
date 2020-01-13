@@ -8,6 +8,7 @@ import main.java.model.livemarketdata.InteractiveBrokersAPI;
 import main.java.model.livemarketdata.OutsideTradingSoftwareAPIConnection;
 import main.java.model.orderserver.OrderServer;
 import main.java.model.positionsorders.MikePosOrders;
+import main.java.model.positionsorders.MikePosition;
 import main.java.model.priceserver.PriceServer;
 
 import java.util.Map;
@@ -163,6 +164,22 @@ public class MainModelThread extends Thread {
                 posOrders.setName("" + tradedInstrumentName + " " + mikePosOrdersNumber++);
                 posOrdersObservableList.add(posOrders);
                 return posOrders;
+            }
+
+            /**
+             * Transfers a single position from one MikePosOrders to another one.
+             * Erases it from the source and adds it to the target
+             * @param singlePosition
+             * @param sourcePosOrders
+             * @param targetPosOrders
+             */
+            public synchronized void transferMikePosition(MikePosition singlePosition, MikePosOrders sourcePosOrders, MikePosOrders targetPosOrders) {
+                //add the position to the target MikePosOrders:
+                targetPosOrders.addToMikePosition(singlePosition);
+                //and remove it from the source:
+                //todo: write this
+                System.out.println("Not implemented!");
+
             }
 
             public int getTickerId() {

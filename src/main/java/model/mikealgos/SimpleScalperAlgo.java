@@ -124,6 +124,11 @@ public class SimpleScalperAlgo extends BaseAlgo {
     }
 
     @Override
+    public int getEntryPrice() {
+        return entryTargetPrice;
+    }
+
+    @Override
     public MikePosOrders getMikePosOrders() {
         return posOrders;
     }

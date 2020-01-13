@@ -58,4 +58,8 @@ public class ControllerMainGUIWindow {
 
         model.posOrdersManager.createMikePosorders(tickerId);
     }
+
+    public void createAlgoManagerWindow(ActionEvent actionEvent) {
+        mainGUIClass.createAlgoManagerWindow();
+    }
 }

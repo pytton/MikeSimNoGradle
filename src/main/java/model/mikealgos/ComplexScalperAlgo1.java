@@ -11,6 +11,7 @@ public class ComplexScalperAlgo1 extends BaseAlgo {
     private Set<SimpleScalperAlgo> algoSet;
     private int entryTargetPrice;
     private MikePosOrders posOrders;
+    private MikeOrder.MikeOrderType entryOrderType;
 
 
     /**
@@ -30,6 +31,7 @@ public class ComplexScalperAlgo1 extends BaseAlgo {
         algoSet = new HashSet<>();
         this.entryTargetPrice = entryTarget;
         this.posOrders = posOrders;
+        this.entryOrderType = entry;
 
 
         //If entry is BUYLMT or BUYSTP then interval has to be a positive value
@@ -71,11 +73,23 @@ public class ComplexScalperAlgo1 extends BaseAlgo {
     }
 
     @Override
+    public int getEntryPrice() {
+        return entryTargetPrice;
+    }
+
+    @Override
     public MikePosOrders getMikePosOrders() {
         return posOrders;
     }
 
     public int getEntryTargetPrice() {
         return entryTargetPrice;
+    }
+
+    @Override
+    public String toString() {
+        String description = "ComplexSclprAlgo1" + entryOrderType + " at price: ";
+        description = description + ("" + entryTargetPrice + " on: " + posOrders.toString());
+        return description;
     }
 }

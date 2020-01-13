@@ -20,7 +20,9 @@ public class ControllerSimpleStepperAlgo extends AlgoController {
 
     public TextField orderAmount;
     public TextField targetInterval;
-    public TextField scalperCount;
+    public CheckBox smTrailingStopCheckBox;
+    public CheckBox fixedTrailingStopCheckBox;
+    //    public TextField scalperCount;
     private MikeOrder.MikeOrderType orderType = MikeOrder.MikeOrderType.BUYLMT;
 
     private String descriptionRow1 = "STEPPER1";
@@ -55,7 +57,7 @@ public class ControllerSimpleStepperAlgo extends AlgoController {
     @Override
     public void mikeGridPaneButtonPressed(int pricePressed, MainModelThread model, MikePosOrders posOrders) {
         if (orderType != MikeOrder.MikeOrderType.CANCEL) {
-            model.algoManager.createSimpleStepperAlgo(posOrders, pricePressed, getInterval(), getAmount(), orderType);
+            model.algoManager.createSimpleStepperAlgo(posOrders, pricePressed, getInterval(), getAmount(), orderType, smTrailingStopCheckBox.isSelected(), fixedTrailingStopCheckBox.isSelected());
         } else {
             model.algoManager.cancelAllSimpleStepperAlgosAtPrice(pricePressed, posOrders);
         }
@@ -82,10 +84,10 @@ public class ControllerSimpleStepperAlgo extends AlgoController {
         return interval;
     }
 
-    private int getScCount() {
-        Integer scCount = Integer.parseInt(scalperCount.getText());
-        return scCount;
-    }
+//    private int getScCount() {
+//        Integer scCount = Integer.parseInt(scalperCount.getText());
+//        return scCount;
+//    }
 
     public void oAmtBtnPressed(ActionEvent actionEvent) {
         Button button = (Button) actionEvent.getSource();

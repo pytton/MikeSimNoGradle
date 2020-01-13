@@ -1,6 +1,8 @@
 package main.java.model;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
 import main.java.model.mikealgos.ComplexScalperAlgo1;
 import main.java.model.mikealgos.MikeAlgo;
 import main.java.model.mikealgos.SimpleScalperAlgo;
@@ -8,6 +10,7 @@ import main.java.model.mikealgos.SimpleStepperAlgo;
 import main.java.model.orderserver.MikeOrder;
 import main.java.model.positionsorders.MikePosOrders;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,7 +20,13 @@ import java.util.Set;
 public class AlgoManager{
 
     MainModelThread model;
-    Set<MikeAlgo> algoSet;
+
+
+//    public ObservableSet<MikeAlgo> algoSet;
+
+    public ObservableList<MikeAlgo> algoSet;
+
+//    public Set<MikeAlgo> algoSet;
     Set<MikeAlgo> cancelledAlgoSet;
     //we need this if we want to cancel algos of specific type:
     Set<SimpleScalperAlgo> simpleScalperAlgoSet;
@@ -27,7 +36,7 @@ public class AlgoManager{
 
     public AlgoManager(MainModelThread model) {
         this.model = model;
-        algoSet = FXCollections.observableSet();
+        algoSet = FXCollections.observableArrayList();
         cancelledAlgoSet = FXCollections.observableSet();
         simpleScalperAlgoSet = FXCollections.observableSet();
         complexScalperAlgo1Set = FXCollections.observableSet();
@@ -109,8 +118,10 @@ public class AlgoManager{
         cancelledAlgoSet.addAll(algosToCancel);
     }
 
-    synchronized public void createSimpleStepperAlgo(MikePosOrders posOrders, int startPrice, int interval, int amount, MikeOrder.MikeOrderType orderType) {
-        SimpleStepperAlgo algo = new SimpleStepperAlgo(posOrders, startPrice, interval, amount, orderType);
+    synchronized public void createSimpleStepperAlgo(MikePosOrders posOrders, int startPrice, int interval, int amount,
+                                                     MikeOrder.MikeOrderType orderType, boolean smTrailingStop,
+                                                     boolean fixedTrailingStop) {
+        SimpleStepperAlgo algo = new SimpleStepperAlgo(posOrders, startPrice, interval, amount, orderType, smTrailingStop, fixedTrailingStop);
         algoSet.add(algo);
         simpleStepperAlgoSet.add(algo);
     }
@@ -138,8 +149,29 @@ public class AlgoManager{
         }
     }
 
-    public void cancelAlgo(MikeAlgo algo) {
+    public synchronized void cancelAlgo(MikeAlgo algoToCancel) {
+
+        algoToCancel.cancel();
+        algoSet.remove(algoToCancel);
+        cancelledAlgoSet.add(algoToCancel);
 
     }
 
+    public synchronized void sortAlgosbyPrice() {
+
+        //explanation here:
+        //https://stackoverflow.com/questions/36228664/sorting-observablelistclass-by-value-in-ascending-and-descending-order-javaf
+        // assuming there is a instance method Class.getScore that returns int
+        // (other implementations for comparator could be used too, of course)
+        Comparator<MikeAlgo> comparator = Comparator.comparingInt(MikeAlgo::getEntryPrice);
+
+        comparator = comparator.reversed();
+        FXCollections.sort(algoSet, comparator);
+
+    }
+
+
+    public ObservableList<MikeAlgo> getAlgoSet() {
+        return algoSet;
+    }
 }

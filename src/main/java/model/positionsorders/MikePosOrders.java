@@ -20,15 +20,15 @@ public class MikePosOrders {
     protected int openPL = 0;
     protected int closedPL = 0;
     protected int totalPL = 0;
-    protected double averagePrice = 0;
-    protected double zeroProfitPoint = 0;
+    protected Double averagePrice = null;
+    protected Double zeroProfitPoint = null;
 
     private Map<Integer, MikePosition> positionsMap = new HashMap<>();
     private SortedSet<Long> activeOrdersSet = new TreeSet<>();
     private Set<Long> filledOrdersToBeProcessed = new HashSet<>();
     public OrdersAtPrice ordersAtPrice;
     private OrderServer orderServer;
-    private PriceServer priceServer; //we need this to calculate Profit/Loss (PL)
+    public PriceServer priceServer; //we need this to calculate Profit/Loss (PL)
 
     public MikePosOrders() {
 
@@ -133,7 +133,7 @@ public class MikePosOrders {
 
     public synchronized void recalcutlatePL(){
         openPL = 0; closedPL = 0; totalPL = 0; totalOpenAmount = 0;
-        averagePrice = 0;
+        averagePrice = 0.0;
         double averagePriceCalculator = 0;
         for (MikePosition position : positionsMap.values()) {
             position.calculatePL(priceServer.getBidPrice(), priceServer.getAskPrice());
@@ -143,13 +143,84 @@ public class MikePosOrders {
             totalOpenAmount += position.getOpen_amount();
             averagePriceCalculator += (position.getOpen_amount() * position.getPrice());
         }
-        averagePrice = averagePriceCalculator / totalOpenAmount;
+
+
+        if (totalOpenAmount == 0) {
+            openPL = 0;
+            closedPL = totalPL;
+        }
+
+
+
+        //todo: this creates issues. consider making averagePrice a Double instead of double and setting it to null
+        if (totalOpenAmount != 0) {
+            averagePrice = averagePriceCalculator / totalOpenAmount;
+        }else averagePrice = null;
         if (totalOpenAmount != 0) zeroProfitPoint = (averagePrice) - (closedPL / totalOpenAmount);
-        else zeroProfitPoint = averagePrice;
+        else if (averagePrice != null) zeroProfitPoint = averagePrice;
+        else zeroProfitPoint = null;
     }
 
     private MikePosition getMikePositionAtPrice(int price){
         return positionsMap.get(price);
+    }
+
+    /**
+     * Takes a position from this MikePosOrders and moves it to a different one:
+     * @param price price of position to be moved
+     * @param targetPosOrders
+     */
+    public synchronized void movePositionToDifferentMikePosOrders(int price, MikePosOrders targetPosOrders) {
+        //if there is no position at the price, do nothing:
+        if(positionsMap.get(price) == null) return;
+
+        //if target doesn't exist, do nothing:
+        if(targetPosOrders == null) return;
+
+        //get the position to move:
+        MikePosition positionToMove =  positionsMap.get(price);
+
+        //add it to the target MikePosOrders:
+        targetPosOrders.addToMikePosition(positionToMove);
+
+        //remove it from this MikePosOrders:
+        positionsMap.remove(price);
+
+        //recalculate the PL:
+        recalcutlatePL();
+        targetPosOrders.recalcutlatePL();
+
+    }
+
+    /**
+     * Use this for transferring a single position from one MikePosOrders to a different one
+     * @param positionToAdd
+     */
+    public synchronized void addToMikePosition(MikePosition positionToAdd) {
+        if(positionToAdd == null) return;
+
+        //Create a new empty position at the price of the position to add:
+        MikePosition existingPosition = new MikePosition(positionToAdd.getPrice());
+
+        //check if there is already a MikePosition at that price in this book.
+        //if there is, use the data in that position instead of the empty position\
+        if (getMikePositionAtPrice(positionToAdd.getPrice()) != null) {
+            existingPosition = getMikePositionAtPrice(positionToAdd.getPrice());
+        }
+
+        //Combine the two positions in one new one:
+        MikePosition newPosition = new MikePosition(
+                (positionToAdd.getPrice()),
+                (existingPosition.getOpen_amount() + positionToAdd.getOpen_amount()),
+                (existingPosition.getOpen_pl() + positionToAdd.getOpen_pl()),
+                (existingPosition.getClosed_pl() + positionToAdd.getClosed_pl()),
+                (existingPosition.getTotal_pl() + positionToAdd.getTotal_pl()));
+
+        //remove the old position from this book and replace it with the new one:
+        positionsMap.put(newPosition.getPrice(), newPosition);
+
+        //recalculate the profit/loss:
+        recalcutlatePL();
     }
 
     @Override
@@ -273,6 +344,10 @@ public class MikePosOrders {
         }
     }
 
+    public Set<Integer> getPositionPricesSet() {
+        return positionsMap.keySet();
+    }
+
     private OrderServer getOrderServer() {
         return orderServer;
     }
@@ -301,7 +376,7 @@ public class MikePosOrders {
         return totalPL;
     }
 
-    public double getAveragePrice() {
+    public Double getAveragePrice() {
         return averagePrice;
     }
 
@@ -311,7 +386,7 @@ public class MikePosOrders {
 
     public int getTickerId(){return priceServer.getTickerID();}
 
-    public double getZeroProfitPoint() {
+    public Double getZeroProfitPoint() {
         return zeroProfitPoint;
     }
 

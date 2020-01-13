@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class AggregatedPosOrders extends MikePosOrders {
 
-    List<MikePosOrders> posOrdersList = new LinkedList<>();
+    public List<MikePosOrders> posOrdersList = new LinkedList<>();
 
     public AggregatedPosOrders() {
         super();
@@ -59,18 +59,39 @@ public class AggregatedPosOrders extends MikePosOrders {
 
     @Override
     public synchronized void recalcutlatePL() {
-        openPL = 0; closedPL = 0; totalPL = 0; totalOpenAmount = 0;
-        averagePrice = 0;
-        for (MikePosOrders positions : posOrdersList) {
-            openPL += positions.getOpenPL();
-            closedPL += positions.getClosedPL();
-            totalPL += positions.getTotalPL();
-            totalOpenAmount += positions.getTotalOpenAmount();
-            averagePrice += positions.getAveragePrice();
+
+        try {
+            if(posOrdersList.size() ==0) return;
+            openPL = 0;
+            closedPL = 0;
+            totalPL = 0;
+            totalOpenAmount = 0;
+            averagePrice = 0.0;
+            zeroProfitPoint = 0.0;
+            double averagePriceCalculator = 0;
+            for (MikePosOrders positions : posOrdersList) {
+                openPL += positions.getOpenPL();
+                closedPL += positions.getClosedPL();
+                totalPL += positions.getTotalPL();
+                totalOpenAmount += positions.getTotalOpenAmount();
+                if (positions.getAveragePrice() != null) {
+    //                averagePrice += positions.getAveragePrice();
+                    averagePriceCalculator += (positions.getTotalOpenAmount() * positions.getAveragePrice());
+                }
+
+            }
+            if (totalOpenAmount != 0) {
+                averagePrice = averagePriceCalculator / totalOpenAmount;
+                //todo: finish this:
+                zeroProfitPoint = averagePrice - ( closedPL / totalOpenAmount   );
+            } else averagePrice = null;
+
+//        System.out.println("PosOrders size: " +posOrdersList.size() + " Average Price: " + averagePrice + " zeroProfit: " + zeroProfitPoint);
+        } catch (Exception e) {
+            System.out.println("Exception in AggregatePosOrders recalculatePL");
+            e.printStackTrace();
         }
-        averagePrice = averagePrice/posOrdersList.size();
-        if (totalOpenAmount != 0) zeroProfitPoint = (averagePrice) - (closedPL / totalOpenAmount);
-        else zeroProfitPoint = averagePrice;
+
     }
 
     @Override
@@ -104,7 +125,7 @@ public class AggregatedPosOrders extends MikePosOrders {
     }
 
     @Override
-    public double getAveragePrice() {
+    public Double getAveragePrice() {
         return super.getAveragePrice();
     }
 
@@ -119,7 +140,7 @@ public class AggregatedPosOrders extends MikePosOrders {
     }
 
     @Override
-    public double getZeroProfitPoint() {
+    public Double getZeroProfitPoint() {
         return super.getZeroProfitPoint();
     }
 
