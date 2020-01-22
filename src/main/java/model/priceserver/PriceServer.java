@@ -1,7 +1,10 @@
 package main.java.model.priceserver;
 
 
+import main.java.model.livemarketdata.InteractiveBrokersAPI;
 import main.java.model.livemarketdata.OutsideTradingSoftwareAPIConnection;
+
+import java.util.List;
 
 /**
  * Provides priceserver bid/ask prices and volumes for a single instrument.
@@ -27,6 +30,58 @@ public class PriceServer {
         this.TradedInstrumentName = TradedInstrumentName;
         setRealTimeDataSource(marketConnection);
     }
+
+
+    //used by processHistoricalData:
+    long histDataLastUpdateTimeInMilisecs = System.currentTimeMillis();
+    int lastHistoricalPos = 0;
+//    double histDataUpadateSpeedPercentage = 1.00;
+
+    /**
+     * This called in a loop from MainModelThread:
+     */
+    public void processHistoricalData() {
+            //check if it is time to update the data:
+            if (System.currentTimeMillis() > (histDataLastUpdateTimeInMilisecs + 1000)) {
+
+                //if historical prices not selected, do nothing:
+                if(priceType != PriceType.HISTORICAL) return;
+
+                histDataLastUpdateTimeInMilisecs = System.currentTimeMillis();
+                //if historical data is available, update it in this priceserver.
+                // tickerID used to access the correct intrument:
+                if (!outsideTradingSoftwareAPIConnection.getHistoricalPriceDataMap().get(tickerID).isEmpty()
+                && lastHistoricalPos < outsideTradingSoftwareAPIConnection.getHistoricalPriceDataMap().get(tickerID).size()) {
+                    try {
+                        System.out.println("Inside processHistoricalData");
+                        List<InteractiveBrokersAPI.PriceData> historicalPriceDataList = outsideTradingSoftwareAPIConnection.getHistoricalPriceDataMap().get(tickerID);
+                        historicalBidPrice = ((int)(historicalPriceDataList.get(lastHistoricalPos).getBidPrice() * 100));
+                        historicalAskPrice = ((int)(historicalPriceDataList.get(lastHistoricalPos).getAskPrice() * 100));
+                        lastHistoricalPos++;
+
+                    } catch (Exception e) {
+                        System.out.println("Exception in historical Data");
+                        e.printStackTrace();
+                    }
+                }
+
+
+            }
+    }
+
+    public String getHistoricalPriceDate(){
+
+        try {
+            if (!outsideTradingSoftwareAPIConnection.getHistoricalPriceDataMap().get(tickerID).isEmpty()) return outsideTradingSoftwareAPIConnection.getHistoricalPriceDataMap().get(tickerID).get(lastHistoricalPos).getDate();
+            return "No data";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "No data";
+        }
+
+
+    }
+
     public enum PriceType{
         MANUAL,
         LIVEMARKET,
@@ -100,7 +155,7 @@ public class PriceServer {
 
     //Use below methods to get real market data from outside trading software API:
 
-    public void setRealTimeDataSource(OutsideTradingSoftwareAPIConnection outsideTradingSoftwareAPIConnection) {
+    public void setRealTimeDataSource (OutsideTradingSoftwareAPIConnection outsideTradingSoftwareAPIConnection) {
         this.outsideTradingSoftwareAPIConnection = outsideTradingSoftwareAPIConnection;
     }
 

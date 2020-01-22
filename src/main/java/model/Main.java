@@ -15,7 +15,7 @@ public class Main extends Application {
     //This class handles the GUI part:
     public MainGUIClass mainGUIClass;
 
-    //TODO: this not currently used. change everything so that it is used by the rest of the program
+    //TODO: this not currently used to set traded contracts in InterActiveBrokers API
     //Instruments available for trading defined here:
     private Map<Integer /*tickerID*/, TradedInstrument> tradedInstrumentMap = new HashMap<>();
 

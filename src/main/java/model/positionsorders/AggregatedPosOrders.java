@@ -82,11 +82,8 @@ public class AggregatedPosOrders extends MikePosOrders {
             }
             if (totalOpenAmount != 0) {
                 averagePrice = averagePriceCalculator / totalOpenAmount;
-                //todo: finish this:
                 zeroProfitPoint = averagePrice - ( closedPL / totalOpenAmount   );
             } else averagePrice = null;
-
-//        System.out.println("PosOrders size: " +posOrdersList.size() + " Average Price: " + averagePrice + " zeroProfit: " + zeroProfitPoint);
         } catch (Exception e) {
             System.out.println("Exception in AggregatePosOrders recalculatePL");
             e.printStackTrace();

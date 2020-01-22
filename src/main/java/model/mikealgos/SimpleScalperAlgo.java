@@ -78,12 +78,7 @@ public class SimpleScalperAlgo extends BaseAlgo {
 
     @Override
     public synchronized void process() {
-        //todo: write this
-
-        //PSEUDOCODE:
-
         //1. it status is 'CREATED' then create first orders
-
         if (status == Status.CREATED) {
             lowOrderId = posOrders.placeNewOrder(entryOrderType, entryTargetPrice, entryTargetPrice, orderAmount);
             status = Status.RUNNING;
@@ -135,5 +130,14 @@ public class SimpleScalperAlgo extends BaseAlgo {
 
     public int getEntryTargetPrice() {
         return entryTargetPrice;
+    }
+
+
+    @Override
+    public String toString() {
+        String description = "SimpleScalperAlgo" + entryOrderType + " at price: ";
+        description = description + ("" + entryTargetPrice + " on: " + posOrders.toString());
+        description = description + (" status: " + status);
+        return description;
     }
 }

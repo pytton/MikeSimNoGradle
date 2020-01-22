@@ -150,9 +150,6 @@ public class MikePosOrders {
             closedPL = totalPL;
         }
 
-
-
-        //todo: this creates issues. consider making averagePrice a Double instead of double and setting it to null
         if (totalOpenAmount != 0) {
             averagePrice = averagePriceCalculator / totalOpenAmount;
         }else averagePrice = null;
@@ -167,8 +164,8 @@ public class MikePosOrders {
 
     /**
      * Takes a position from this MikePosOrders and moves it to a different one:
-     * @param price price of position to be moved
-     * @param targetPosOrders
+     * @param price price of the MikePosition to be moved
+     * @param targetPosOrders the place where the MikePosition should be moved to
      */
     public synchronized void movePositionToDifferentMikePosOrders(int price, MikePosOrders targetPosOrders) {
         //if there is no position at the price, do nothing:
@@ -196,7 +193,7 @@ public class MikePosOrders {
      * Use this for transferring a single position from one MikePosOrders to a different one
      * @param positionToAdd
      */
-    public synchronized void addToMikePosition(MikePosition positionToAdd) {
+    private synchronized void addToMikePosition(MikePosition positionToAdd) {
         if(positionToAdd == null) return;
 
         //Create a new empty position at the price of the position to add:

@@ -18,9 +18,11 @@ public class MainModelThread extends Thread {
 
     public MainGUIClass mainGUIClass;
     public PosOrdersManager posOrdersManager;
+
+    //todo: temporarily replacing interface with implementation:
     //set up connection to outside trading software for market data, orders, etc:
     public OutsideTradingSoftwareAPIConnection marketConnection;
-
+//    public InteractiveBrokersAPI marketConnection;
     public AlgoManager algoManager;
     private GUIUpdateDispatcher myGUIUpdateDispatcher;
     private long count = 0; //used for printing program 'heartbeat'
@@ -89,6 +91,9 @@ public class MainModelThread extends Thread {
                 positions.processFilledOrders();
                 positions.recalcutlatePL();
             }
+
+            //process historical data:
+            data.priceServer.processHistoricalData();
         }
     }
 
@@ -160,7 +165,6 @@ public class MainModelThread extends Thread {
              */
             synchronized public MikePosOrders createMikePosorders() {
                 MikePosOrders posOrders = new MikePosOrders(orderServer, priceServer);
-                //TODO: finish this so that you set the correct orderServer based on the instrument
                 posOrders.setName("" + tradedInstrumentName + " " + mikePosOrdersNumber++);
                 posOrdersObservableList.add(posOrders);
                 return posOrders;
@@ -174,12 +178,9 @@ public class MainModelThread extends Thread {
              * @param targetPosOrders
              */
             public synchronized void transferMikePosition(MikePosition singlePosition, MikePosOrders sourcePosOrders, MikePosOrders targetPosOrders) {
-                //add the position to the target MikePosOrders:
-                targetPosOrders.addToMikePosition(singlePosition);
-                //and remove it from the source:
-                //todo: write this
-                System.out.println("Not implemented!");
-
+                sourcePosOrders.movePositionToDifferentMikePosOrders(singlePosition.getPrice(), targetPosOrders);
+                System.out.println("Moving positon at price " + singlePosition.getPrice() + " from " + sourcePosOrders.getName() +
+                        " to " + targetPosOrders.getName());
             }
 
             public int getTickerId() {

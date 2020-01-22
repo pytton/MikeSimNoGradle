@@ -223,4 +223,13 @@ public class SimpleStepperAlgo extends BaseAlgo {
     }
 
 
+    @Override
+    public String toString() {
+        String description = "SimpleStepperAlgo" + entryOrderType + " at price: ";
+        description = description + ("" + entryTargetPrice + " on: " + posOrders.toString());
+        description = description + (" status: " + status);
+        return description;
+    }
+
+
 }

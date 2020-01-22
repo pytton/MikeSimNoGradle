@@ -135,7 +135,6 @@ public class OrderServer {
     }
 
 
-    //TODO: BUG HERE! MAKE SURE THIS CAN ONLY BE USED BY MIKEPOSORDERS!
     /**
      * This only works with simulated orders!
      * If order was sent to outside trading software it will not be cancelled

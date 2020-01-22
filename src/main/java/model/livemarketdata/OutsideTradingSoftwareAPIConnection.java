@@ -1,6 +1,12 @@
 package main.java.model.livemarketdata;
 
 
+import com.ib.client.EClientSocket;
+import com.ib.client.EWrapper;
+
+import java.util.List;
+import java.util.Map;
+
 /**
  * This allows connecting to an API of a trading software to get realtime market data,
  * send orders etc.
@@ -35,4 +41,6 @@ public interface OutsideTradingSoftwareAPIConnection {
 
     public double getAskSize(int tickerID);
     public void consolePrintRealTimeData();
+    public EClientSocket getEClientSocket();
+    public Map<Integer, List<InteractiveBrokersAPI.PriceData>> getHistoricalPriceDataMap();
 }

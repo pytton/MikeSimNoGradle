@@ -20,7 +20,9 @@ import com.ib.client.CommissionReport;
 import com.ib.client.UnderComp;
 import main.java.model.TradedInstrument;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,7 +33,15 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
     // Keep track of the next Order ID
     private int nextOrderID = 0;
     // The IB API Client Socket object
-    private EClientSocket client = null;
+
+    //todo: make this private:
+    public EClientSocket client = null;
+
+    @Override
+    public EClientSocket getEClientSocket() {
+        return client;
+    }
+
     private boolean connectedToTWS = false;
     private boolean contractsAlreadySetupFlag = false;
 
@@ -56,10 +66,20 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
     //Instruments available for trading defined here:
     private Map<Integer /*tickerID*/, TradedInstrument> tradedInstrumentMap;// = new HashMap<>();
 
+    public List<PriceData> historicalPriceData = new ArrayList();
+
+    public Map<Integer/*tickerID*/, List<PriceData>> historicalPriceDataMap = new HashMap<>();
+
+    public Map<Integer, List<PriceData>> getHistoricalPriceDataMap() {
+        return historicalPriceDataMap;
+    }
+
     public InteractiveBrokersAPI(Map<Integer, TradedInstrument> tradedInstrumentMap) {
         this.tradedInstrumentMap= tradedInstrumentMap;
 
         for(TradedInstrument instrument : tradedInstrumentMap.values()){
+
+            //setup realtime data:
             priceDataMap.put(instrument.getTickerId(), new PriceData(
                     instrument.getTickerId(),
                     instrument.getSymbol(),
@@ -67,6 +87,11 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
                     instrument.getSecType(),
                     instrument.getCurrency()
             ));
+
+            //setup historical data:
+            List<PriceData> historicalPriceData = new ArrayList();
+            historicalPriceDataMap.put(instrument.getTickerId(), historicalPriceData);
+
         }
 
 
@@ -75,7 +100,10 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
 //        }
     }
 
-    private class PriceData {
+
+
+
+    public class PriceData {
 
         int tickerId = 0;
         private String symbol = "SPY";
@@ -83,6 +111,7 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
         private String secType = "STK";
         private String currency = "USD";
 
+        public String date = "20200121 10:00:00";
         public double bidPrice = -5;
         public double askPrice = -5;
         public double bidSize = -5;
@@ -150,6 +179,10 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
         public String getCurrency() {
             return currency;
         }
+
+        public String getDate() { return date;}
+
+        public void setDate(String date) { this.date = date;}
     }
 
     @Override
@@ -288,8 +321,8 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
                 // Snapshot - false give us streaming data, true gives one data snapshot
                 // MarketDataOptions - tagValue list of additional options (API 9.71 and newer)
 
-                client.reqMktData(0, contract, null, false);
-                //priceDataMap.put(0, new PriceData()); //priceDataMap stores market data for each tickerId
+                client.reqMktData(instrument.getTickerId(), contract, null, false);
+                priceDataMap.put(instrument.getTickerId(), new PriceData()); //priceDataMap stores market data for each tickerId
 
                 // For API Version 9.73 and higher, add one more parameter: regulatory snapshot
                 // client.reqMktData(0, contract, null, false, false, mktDataOptions);
@@ -299,38 +332,38 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
 
                 //set up remaining contracts with respective TickerIDs:
             }
-
-//            contract = new Contract();
-            contract.m_symbol = "DIA";
-            contract.m_exchange = "SMART";
-            contract.m_secType = "STK";
-            contract.m_currency = "USD";
-            client.reqMktData(1, contract, null, false);
-            priceDataMap.put(1, new PriceData()); //priceDataMap stores market data for each tickerId
-
-//            contract = new Contract();
-            contract.m_symbol = "IWM";
-            contract.m_exchange = "SMART";
-            contract.m_secType = "STK";
-            contract.m_currency = "USD";
-            client.reqMktData(2, contract, null, false);
-            priceDataMap.put(2, new PriceData()); //priceDataMap stores market data for each tickerId
-
-//            contract = new Contract();
-            contract.m_symbol = "QQQ";
-            contract.m_exchange = "SMART";
-            contract.m_secType = "STK";
-            contract.m_currency = "USD";
-            client.reqMktData(3, contract, null, false);
-            priceDataMap.put(3, new PriceData()); //priceDataMap stores market data for each tickerId
-
-//            contract = new Contract();
-            contract.m_symbol = "EUR";
-            contract.m_exchange = "IDEALPRO";
-            contract.m_secType = "CASH";
-            contract.m_currency = "USD";
-            client.reqMktData(4, contract, null, false);
-            priceDataMap.put(4, new PriceData()); //priceDataMap stores market data for each tickerId
+//
+////            contract = new Contract();
+//            contract.m_symbol = "DIA";
+//            contract.m_exchange = "SMART";
+//            contract.m_secType = "STK";
+//            contract.m_currency = "USD";
+//            client.reqMktData(1, contract, null, false);
+//            priceDataMap.put(1, new PriceData()); //priceDataMap stores market data for each tickerId
+//
+////            contract = new Contract();
+//            contract.m_symbol = "IWM";
+//            contract.m_exchange = "SMART";
+//            contract.m_secType = "STK";
+//            contract.m_currency = "USD";
+//            client.reqMktData(2, contract, null, false);
+//            priceDataMap.put(2, new PriceData()); //priceDataMap stores market data for each tickerId
+//
+////            contract = new Contract();
+//            contract.m_symbol = "QQQ";
+//            contract.m_exchange = "SMART";
+//            contract.m_secType = "STK";
+//            contract.m_currency = "USD";
+//            client.reqMktData(3, contract, null, false);
+//            priceDataMap.put(3, new PriceData()); //priceDataMap stores market data for each tickerId
+//
+////            contract = new Contract();
+//            contract.m_symbol = "EUR";
+//            contract.m_exchange = "IDEALPRO";
+//            contract.m_secType = "CASH";
+//            contract.m_currency = "USD";
+//            client.reqMktData(4, contract, null, false);
+//            priceDataMap.put(4, new PriceData()); //priceDataMap stores market data for each tickerId
 
         } catch (Exception e) {
             System.out.println("Exception in InterActiveBrokersAPI setUpContracts!");
@@ -412,6 +445,33 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void historicalData(int reqId, String date, double open, double high, double low, double close, int volume, int count, double WAP, boolean hasGaps) {
+
+        // Display Historical data
+        try {
+            System.out.println("historicalData: " + reqId + ", date: " + date + ", open: " +
+                    open + " ,high: " + high + ", low: " + low + ", close: " + close + ", vol: " +
+                    volume);
+
+
+            //IB returns -1.0 at the end of data:
+            if(open == -1.0) return;
+            List<PriceData> list = historicalPriceDataMap.get(reqId);
+            PriceData priceData = new PriceData();
+            priceData.setBidPrice(open);
+            priceData.setAskPrice(open + 0.01);
+            priceData.setDate(date);
+            list.add(priceData);
+
+            System.out.println("Setting historical price: " + open);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @Override
     public void tickOptionComputation(int tickerId, int field, double impliedVol, double delta, double optPrice, double pvDividend, double gamma, double vega, double theta, double undPrice) {
@@ -522,19 +582,6 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
     @Override
     public void receiveFA(int faDataType, String xml) {
 
-    }
-
-    @Override
-    public void historicalData(int reqId, String date, double open, double high, double low, double close, int volume, int count, double WAP, boolean hasGaps) {
-
-        // Display Historical data
-        try {
-            System.out.println("historicalData: " + reqId + "," + date + "," +
-                    open + "," + high + "," + low + "," + close + "," +
-                    volume);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Override

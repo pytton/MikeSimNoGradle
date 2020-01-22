@@ -422,7 +422,7 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
     @FXML
     public void testTwoButtonClicked(ActionEvent actionEvent) {
 
-        //todo: generate new MikeGridPane with more columns:
+        //testing: generate new MikeGridPane with more columns:
 
         mikeGridPane = new MikeGridPane(30, 12, this);
 

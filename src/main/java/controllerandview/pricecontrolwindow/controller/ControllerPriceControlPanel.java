@@ -12,6 +12,7 @@ import main.java.model.priceserver.PriceServer;
 
 public class ControllerPriceControlPanel implements MainGUIClass.Updatable {
 
+    public TextField histPrcDate;
     private PriceServer priceServer;
     private PriceServer.PriceType priceType = PriceServer.PriceType.MANUAL;
 //    private ObservableList<String> instrumentNamesList;
@@ -96,7 +97,7 @@ public class ControllerPriceControlPanel implements MainGUIClass.Updatable {
                         System.out.println("Live ask price: " + getPriceServer().getRealTimeAskPrice());
                     }
                     if (priceSourceToggleGroup.getSelectedToggle() == historicalRadioButton) {
-                        experimentalTextField1.setText("Live");
+                        experimentalTextField1.setText("Historical");
                         getPriceServer().setPriceType(PriceServer.PriceType.HISTORICAL);
                                                                             }
                                                                         }
@@ -107,6 +108,7 @@ public class ControllerPriceControlPanel implements MainGUIClass.Updatable {
     public void updateGUI(){
         askPriceTextField.setText(""+priceServer.getAskPrice());
         bidPriceTextField.setText(""+priceServer.getBidPrice());
+        histPrcDate.setText("" + priceServer.getHistoricalPriceDate());
     }
     @FXML
     /**
@@ -118,11 +120,6 @@ public class ControllerPriceControlPanel implements MainGUIClass.Updatable {
         try {
             priceServer.setBidPrice((int) priceSlider.getValue());
             priceServer.setAskPrice((int) (priceSlider.getValue() + bidAskSpread));
-
-            //TODO: finish this
-
-            //get bid price from Priceserver and update bid price textfield
-
         } catch (NumberFormatException e) {
             e.printStackTrace();
             System.out.println("Exception in onMouseDragged");

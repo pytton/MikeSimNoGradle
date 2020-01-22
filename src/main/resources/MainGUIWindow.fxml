@@ -19,6 +19,14 @@
                   <Label alignment="CENTER" contentDisplay="CENTER" text="INSTRUMENT" />
                   <ListView fx:id="instrumentsList" prefHeight="109.0" prefWidth="232.0" />
                   <Button fx:id="createPositionOrdersButton" mnemonicParsing="false" onAction="#createPositionOrdersClicked" text="Create PositionOrders" />
+                  <HBox prefHeight="33.0" prefWidth="232.0">
+                     <children>
+                        <TextField fx:id="histDataDate" prefHeight="25.0" prefWidth="90.0" text="20200121" />
+                        <TextField fx:id="histDataTime" prefHeight="25.0" prefWidth="90.0" text="20:00:00" />
+                        <TextField fx:id="histDataDuration" prefHeight="25.0" prefWidth="90.0" text="1800" />
+                     </children>
+                  </HBox>
+                  <Button fx:id="requestHistoricalData" mnemonicParsing="false" onAction="#reqHistDataClicked" text="Request Historical Data" />
                </children>
             </VBox>
          </children>

@@ -5,9 +5,31 @@ package com.ib.* is needed to connect to Interactive Brokers API.
 
 ###TODO:
 
-Bug in Scalper algo - negative intervals not protected. fix it.
-Create control for simple order placement
-Create control for stepper algo
+historical data for instruments other that SPY
+
+multiple stepper algo buttton - one button - many simple stepper algos every 1 cent price move
+multiple trailing stop algo button
+
+open long pos above ask
+open long orders abobe ask
+open short pos below bid
+open short orders below bid
+
+Make trailing stop algo
+
+Make button "Flatten position" in PositionsWindow
+Make button "Cancel algos and flatten position
+
+PositionsWindow - short positions on grey background in red - make long positions on grey background in blue
+
+bug in transferring single position from MikePosOrders to another MikePosOrders: -50 turns into -40?
+display order amount in third row of topMikeGridPane in MikePosWindow - the bug is in update function
+inside MikePosWindow - switching displayed MikePosOrders clears the error
+
+Create control for 'multiple stepper algo'
+
+craete something in MikePosOrders that takes multiple positions and make one new one - preserving the closed PL
+
 
 Controller for simpleStepperAlgo done. review it and add to ControllerPositionsWindow.
 need to update fxml file so it points to correct controller
