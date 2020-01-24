@@ -19,7 +19,6 @@ public class PriceServer {
     final public String TradedInstrumentName;
     private OutsideTradingSoftwareAPIConnection outsideTradingSoftwareAPIConnection = null;
 
-
     @Override
     public String toString() {
         return TradedInstrumentName;
@@ -31,67 +30,15 @@ public class PriceServer {
         setRealTimeDataSource(marketConnection);
     }
 
-
-    //used by processHistoricalData:
-    long histDataLastUpdateTimeInMilisecs = System.currentTimeMillis();
-    int lastHistoricalPos = 0;
-//    double histDataUpadateSpeedPercentage = 1.00;
-
-    /**
-     * This called in a loop from MainModelThread:
-     */
-    public void processHistoricalData() {
-            //check if it is time to update the data:
-            if (System.currentTimeMillis() > (histDataLastUpdateTimeInMilisecs + 1000)) {
-
-                //if historical prices not selected, do nothing:
-                if(priceType != PriceType.HISTORICAL) return;
-
-                histDataLastUpdateTimeInMilisecs = System.currentTimeMillis();
-                //if historical data is available, update it in this priceserver.
-                // tickerID used to access the correct intrument:
-                if (!outsideTradingSoftwareAPIConnection.getHistoricalPriceDataMap().get(tickerID).isEmpty()
-                && lastHistoricalPos < outsideTradingSoftwareAPIConnection.getHistoricalPriceDataMap().get(tickerID).size()) {
-                    try {
-                        System.out.println("Inside processHistoricalData");
-                        List<InteractiveBrokersAPI.PriceData> historicalPriceDataList = outsideTradingSoftwareAPIConnection.getHistoricalPriceDataMap().get(tickerID);
-                        historicalBidPrice = ((int)(historicalPriceDataList.get(lastHistoricalPos).getBidPrice() * 100));
-                        historicalAskPrice = ((int)(historicalPriceDataList.get(lastHistoricalPos).getAskPrice() * 100));
-                        lastHistoricalPos++;
-
-                    } catch (Exception e) {
-                        System.out.println("Exception in historical Data");
-                        e.printStackTrace();
-                    }
-                }
-
-
-            }
-    }
-
-    public String getHistoricalPriceDate(){
-
-        try {
-            if (!outsideTradingSoftwareAPIConnection.getHistoricalPriceDataMap().get(tickerID).isEmpty()) return outsideTradingSoftwareAPIConnection.getHistoricalPriceDataMap().get(tickerID).get(lastHistoricalPos).getDate();
-            return "No data";
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "No data";
-        }
-
-
-    }
-
     public enum PriceType{
         MANUAL,
         LIVEMARKET,
         HISTORICAL
-
     }
 
     //simulatad manual prices and volumes:
-    private int bidPrice = 27100;
-    private int askPrice = 27101;
+    private int bidPrice = 33100;
+    private int askPrice = 33101;
     private int bidVolume = -5;
     private int askVolume = -5;
 
@@ -135,6 +82,70 @@ public class PriceServer {
     synchronized public void setAskPrice(int askPrice) {
         this.askPrice = askPrice;
 //        System.out.println("Ask price set to: " + askPrice);
+    }
+
+    //used by processHistoricalData:
+    long histDataLastUpdateTimeInMilisecs = System.currentTimeMillis();
+    private int lastHistoricalPos = 0;
+    private double histDataTempoSetting = 1.0;
+
+    /**
+     * This called in a loop from MainModelThread:
+     */
+    synchronized public void processHistoricalData() {
+        //check if it is time to update the data:
+        if (System.currentTimeMillis() > (histDataLastUpdateTimeInMilisecs + (1000 / histDataTempoSetting))) {
+
+            //if historical prices not selected, do nothing:
+            if(priceType != PriceType.HISTORICAL) return;
+
+            histDataLastUpdateTimeInMilisecs = System.currentTimeMillis();
+            //if historical data is available, update it in this priceserver.
+            // tickerID used to access the correct intrument:
+            if (!outsideTradingSoftwareAPIConnection.getHistoricalPriceDataMap().get(tickerID).isEmpty()
+                    && lastHistoricalPos < outsideTradingSoftwareAPIConnection.getHistoricalPriceDataMap().get(tickerID).size()) {
+                try {
+//                        System.out.println("Inside processHistoricalData");
+                    List<InteractiveBrokersAPI.PriceData> historicalPriceDataList = outsideTradingSoftwareAPIConnection.getHistoricalPriceDataMap().get(tickerID);
+                    historicalBidPrice = ((int)(historicalPriceDataList.get(lastHistoricalPos).getBidPrice() * 100));
+                    historicalAskPrice = ((int)(historicalPriceDataList.get(lastHistoricalPos).getAskPrice() * 100));
+                    lastHistoricalPos++;
+
+                } catch (Exception e) {
+                    System.out.println("Exception in historical Data");
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private String historicalPriceDate = "No data";
+    synchronized public String getHistoricalPriceDate(){
+        try {
+            if (!outsideTradingSoftwareAPIConnection.getHistoricalPriceDataMap().get(tickerID).isEmpty()
+                    && outsideTradingSoftwareAPIConnection.getHistoricalPriceDataMap().get(tickerID).size() > lastHistoricalPos)
+
+                historicalPriceDate = outsideTradingSoftwareAPIConnection.getHistoricalPriceDataMap().get(tickerID).get(lastHistoricalPos).getDate();
+
+            return historicalPriceDate;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return historicalPriceDate;
+        }
+    }
+
+    /**
+     * Sets the speed at which historical data is replayed. 1.0 is normal speed. 5.0 is 5 times as fast
+     * @param tempo has to be bigger than 0
+     */
+    public void setHistoricalTempo(double tempo) {
+        if (tempo > 0) {
+            histDataTempoSetting = tempo;
+        }
+    }
+
+    public void startHistoricalDataFromBeginning() {
+        lastHistoricalPos = 0;
     }
 
     public int getBidVolume() {

@@ -13,6 +13,7 @@ import main.java.model.priceserver.PriceServer;
 public class ControllerPriceControlPanel implements MainGUIClass.Updatable {
 
     public TextField histPrcDate;
+    public TextField tempoTextField;
     private PriceServer priceServer;
     private PriceServer.PriceType priceType = PriceServer.PriceType.MANUAL;
 //    private ObservableList<String> instrumentNamesList;
@@ -189,5 +190,30 @@ public class ControllerPriceControlPanel implements MainGUIClass.Updatable {
 
     public void setPriceServer(PriceServer priceServer) {
         this.priceServer = priceServer;
+    }
+
+    public void tempoNaturalBtnClicked(ActionEvent actionEvent) {
+        priceServer.setHistoricalTempo(1.0);
+    }
+
+
+    public void startFromBeginningBtnClicked(ActionEvent actionEvent) {
+        priceServer.startHistoricalDataFromBeginning();
+    }
+
+
+    public void setTempoBtnClicked(ActionEvent actionEvent) {
+
+        Double tempo = 1.0;
+
+        try {
+            String tempoText = tempoTextField.getText();
+            tempo = Double.parseDouble(tempoText);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            tempo = 1.0;
+        }
+
+        priceServer.setHistoricalTempo(tempo);
     }
 }

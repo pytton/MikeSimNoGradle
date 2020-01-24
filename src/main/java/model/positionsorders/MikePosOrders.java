@@ -27,8 +27,24 @@ public class MikePosOrders {
     private SortedSet<Long> activeOrdersSet = new TreeSet<>();
     private Set<Long> filledOrdersToBeProcessed = new HashSet<>();
     public OrdersAtPrice ordersAtPrice;
+    private Set<MikePosOrders> childPosOrders = new HashSet<>();
     private OrderServer orderServer;
     public PriceServer priceServer; //we need this to calculate Profit/Loss (PL)
+
+    /**
+     * For use by algos
+     * @return
+     */
+    public MikePosOrders createChildPosOrders(){
+        MikePosOrders child = new MikePosOrders(orderServer, priceServer);
+        childPosOrders.add(child);
+        return child;
+
+
+        //TODO:
+        //
+
+    }
 
     public MikePosOrders() {
 
@@ -60,6 +76,7 @@ public class MikePosOrders {
         if (positionsMap.get(price) != null)
         {return positionsMap.get(price).getOpen_amount();}
         else return 0;
+        //Todo: add handling of child PosOrders
     }
 
 
@@ -91,7 +108,7 @@ public class MikePosOrders {
          * When an order is placed, filled, modified or cancelled, this needs to be called
          * Goes through all the open orders and updates buyOrdersAtPrice and sellOrdersAtPrice
          */
-        synchronized private void recalculate() {
+        synchronized private void recalculateOpenOrdersAtPrice() {
             buyOrdersAtPrice.clear();
             sellOrdersAtPrice.clear();
 
@@ -129,9 +146,13 @@ public class MikePosOrders {
                 }
             }
         }
+
+        //Todo: add handling of child PosOrders
     }
 
     public synchronized void recalcutlatePL(){
+
+        //calculate values for this MikePosOrders:
         openPL = 0; closedPL = 0; totalPL = 0; totalOpenAmount = 0;
         averagePrice = 0.0;
         double averagePriceCalculator = 0;
@@ -142,6 +163,16 @@ public class MikePosOrders {
             totalPL += position.getTotal_pl();
             totalOpenAmount += position.getOpen_amount();
             averagePriceCalculator += (position.getOpen_amount() * position.getPrice());
+        }
+
+        //caclulate values for all children and add to this MikePosOrders values:
+        for (MikePosOrders child : childPosOrders) {
+            child.recalcutlatePL();
+            openPL += child.getOpenPL();
+            closedPL += child.getClosedPL();
+            totalPL += child.getTotalPL();
+            totalOpenAmount += child.getTotalOpenAmount();
+            averagePriceCalculator += (child.getTotalOpenAmount() * child.getAveragePrice());
         }
 
 
@@ -187,6 +218,8 @@ public class MikePosOrders {
         recalcutlatePL();
         targetPosOrders.recalcutlatePL();
 
+        //todo: currently not moving children
+
     }
 
     /**
@@ -218,6 +251,8 @@ public class MikePosOrders {
 
         //recalculate the profit/loss:
         recalcutlatePL();
+
+        //todo: currently not moving children
     }
 
     @Override
@@ -237,7 +272,7 @@ public class MikePosOrders {
         //add the order number to the list of active orders:
         activeOrdersSet.add(orderNumber);
         //UPDATE OPEN ORDERS BY PRICE
-        ordersAtPrice.recalculate();
+        ordersAtPrice.recalculateOpenOrdersAtPrice();
         return orderNumber;
     }
 
@@ -254,6 +289,11 @@ public class MikePosOrders {
      * the amounts that have been filled
      */
     synchronized public void processFilledOrders(){
+
+        //process filled orders for all the child MikePosOrders:
+        for (MikePosOrders child : childPosOrders) {
+            child.processFilledOrders();
+        }
 
         //if there are no orders to process then do nothing:
         if(filledOrdersToBeProcessed.isEmpty()) return;
@@ -279,13 +319,15 @@ public class MikePosOrders {
             activeOrdersSet.remove(orderId);
         }
 
+
+
         //TODO: anything else I need to do? Recalculate PL? Recalculate average position? OrdersAtPrice? etc?
 
         //make sure filled orders are only processed once:
         filledOrdersToBeProcessed.clear();
 
         //RECALCULATE ORDERS AT PRICE
-        ordersAtPrice.recalculate();
+        ordersAtPrice.recalculateOpenOrdersAtPrice();
     }
 
     /**
@@ -296,7 +338,7 @@ public class MikePosOrders {
         orderServer.cancelOrder(orderId);
         activeOrdersSet.remove(orderId);
         //RECALCULATE ACTIVE ORDERS BY PRICE
-        ordersAtPrice.recalculate();
+        ordersAtPrice.recalculateOpenOrdersAtPrice();
     }
 
     public synchronized void cancelAllOrdersAtPrice(int price) {
@@ -311,7 +353,7 @@ public class MikePosOrders {
             orderServer.cancelOrder(orderId);
             activeOrdersSet.remove(orderId);
         }
-        ordersAtPrice.recalculate();
+        ordersAtPrice.recalculateOpenOrdersAtPrice();
 
         System.out.println("Cancelling all orders at price " + price + " in " + getName());
     }

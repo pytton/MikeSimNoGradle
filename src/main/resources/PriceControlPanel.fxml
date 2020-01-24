@@ -80,13 +80,9 @@
                   </HBox>
                   <VBox alignment="CENTER_LEFT" prefHeight="68.0" prefWidth="150.0" spacing="3.0">
                      <children>
-                        <VBox prefHeight="200.0" prefWidth="100.0">
-                           <children>
-                              <Label text="Historical Price Date:" />
-                              <TextField fx:id="histPrcDate" />
-                           </children>
-                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="100.0" />
                         <Label fx:id="priceSourceLabel" text="Current Price source:" />
+                        <TextField fx:id="experimentalTextField1" prefWidth="70.0" />
                         <RadioButton fx:id="historicalRadioButton" mnemonicParsing="false" text="Historical">
                            <toggleGroup>
                               <ToggleGroup fx:id="priceSourceToggleGroup" />
@@ -96,18 +92,35 @@
                         <RadioButton fx:id="liveRadioButton" mnemonicParsing="false" text="Live" toggleGroup="$priceSourceToggleGroup" />
                      </children>
                   </VBox>
-                  <HBox alignment="CENTER" prefHeight="30.0" prefWidth="140.0">
-                     <children>
-                        <Label prefWidth="70.0" text="experimental" />
-                        <TextField fx:id="experimentalTextField1" prefWidth="70.0" />
-                     </children>
-                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="30.0" prefWidth="140.0" />
                   <VBox alignment="CENTER" prefHeight="184.0" prefWidth="150.0">
                      <children>
                         <Label alignment="CENTER" contentDisplay="CENTER" text="INSTRUMENT" />
                         <ListView fx:id="instrumentsList" prefHeight="140.0" prefWidth="150.0" />
                      </children>
                   </VBox>
+                  <Accordion>
+                    <panes>
+                      <TitledPane animated="false" text="Historical Data">
+                           <content>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Label text="Historical Price Date:" />
+                                    <TextField fx:id="histPrcDate" />
+                                    <HBox alignment="CENTER" prefHeight="30.0" prefWidth="150.0">
+                                       <children>
+                                          <TextField fx:id="tempoTextField" prefHeight="25.0" prefWidth="35.0" text="5" />
+                                          <Button mnemonicParsing="false" onAction="#setTempoBtnClicked" text="Set tempo" />
+                                       </children>
+                                    </HBox>
+                                    <Button mnemonicParsing="false" onAction="#tempoNaturalBtnClicked" text="Tempo Natural" />
+                                    <Button mnemonicParsing="false" onAction="#startFromBeginningBtnClicked" text="Start From Beginning" />
+                                 </children>
+                              </VBox>
+                           </content>
+                        </TitledPane>
+                    </panes>
+                  </Accordion>
                </children>
             </VBox>
          </children>
