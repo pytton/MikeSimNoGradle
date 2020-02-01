@@ -473,6 +473,10 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
     }
 
 
+    ScrollPane sp = null;
+    public void setSp(ScrollPane sp) {
+        this.sp = sp;
+    }
     /**
      * set the current top row price to ask price + 50
      */
@@ -480,6 +484,7 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
 //        topRowPrice = priceServer.getAskPrice() + 50;
 //        bottomRowPrice = topRowPrice - mikeGridPane.getHowManyRows();
         setTopRowPrice(priceServer.getAskPrice() + 50);
+        sp.setVvalue(0.5);
     }
 
     private void setTopRowPrice(int topRowPrice) {

@@ -196,7 +196,9 @@ public class MainGUIClass {
 
             controller.getMainBorderPane().setLeft(topVbox);
 
+
             controller.setMikeGridPane(buttonTable);
+            controller.setSp(sp); //enables the scrollpane of buttonTable to be accessed from the controller
             controller.topMikeGridPane = topGridPane;
             controller.bottomMikeGridPane = bottomGridPane;
 

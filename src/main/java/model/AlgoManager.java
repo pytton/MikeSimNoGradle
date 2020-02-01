@@ -71,8 +71,17 @@ public class AlgoManager{
     }
 
     synchronized public void createScalperAlgo1(MikePosOrders posOrders, int entryPrice, int targetPrice, int orderAmount, MikeOrder.MikeOrderType entry){
-        System.out.println("Creating SimpleScalperAlgo for MikePosOrders " + posOrders.getName());
-        SimpleScalperAlgo algo = new SimpleScalperAlgo(posOrders, entryPrice, targetPrice, orderAmount, entry );
+
+        //todo: experimenting
+        System.out.println("Experimenting. Creating Simple Scalper Algo in child of MikePosOrders:");
+
+        MikePosOrders child = posOrders.createChildPosOrders();
+        SimpleScalperAlgo algo = new SimpleScalperAlgo(child, entryPrice, targetPrice, orderAmount, entry );
+
+
+//        System.out.println("Creating SimpleScalperAlgo for MikePosOrders " + posOrders.getName());
+//        SimpleScalperAlgo algo = new SimpleScalperAlgo(posOrders, entryPrice, targetPrice, orderAmount, entry );
+
         algoSet.add(algo);
         simpleScalperAlgoSet.add(algo);
     }
