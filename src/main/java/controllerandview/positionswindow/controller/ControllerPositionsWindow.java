@@ -28,6 +28,20 @@ import java.util.*;
 
 public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler, MainGUIClass.Updatable {
 
+
+    private int topRowPrice = 27150; //used with MikeGridPane and UpdateGUI
+    private int bottomRowPrice = 27100;
+    private int tickerId = 0;
+
+    private MikeGridPane mikeGridPane = null;
+    public MikeGridPane topMikeGridPane = null;
+    public MikeGridPane bottomMikeGridPane = null;
+
+    private PriceServer priceServer;
+    private MainModelThread model;
+    protected MikePosOrders mikePosOrders;
+    private AggregatedPosOrders aggregatedPosOrders = new AggregatedPosOrders();
+
     @FXML
     public BorderPane mainBorderPane;
     public ListView positionsList;
@@ -72,17 +86,19 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
     public ChoiceBox choiceBoxCol1;
     public ChoiceBox choiceBoxCol2;
     public ChoiceBox choiceBoxCol3;
+    public ChoiceBox choiceBoxCol4;
+    public ChoiceBox choiceBoxCol5;
+    public ChoiceBox choiceBoxCol6;
+    public ChoiceBox choiceBoxCol7;
+
     public AnchorPane anPaneCol1;
     public AnchorPane anPaneCol2;
     public AnchorPane anPaneCol3;
-    public ChoiceBox choiceBoxCol4;
     public AnchorPane anPaneCol4;
-    public ChoiceBox choiceBoxCol5;
     public AnchorPane anPaneCol5;
-    public ChoiceBox choiceBoxCol6;
     public AnchorPane anPaneCol6;
-    public ChoiceBox choiceBoxCol7;
     public AnchorPane anPaneCol7;
+
     public AlgoController controllerCol1 = null;
     public AlgoController controllerCol2 = null;
     public AlgoController controllerCol3= null;
@@ -90,19 +106,6 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
     public AlgoController controllerCol5= null;
     public AlgoController controllerCol6= null;
     public AlgoController controllerCol7= null;
-
-    private int topRowPrice = 27150; //used with MikeGridPane and UpdateGUI
-    private int bottomRowPrice = 27100;
-    private int tickerId = 0;
-
-    private MikeGridPane mikeGridPane = null;
-    public MikeGridPane topMikeGridPane = null;
-    public MikeGridPane bottomMikeGridPane = null;
-
-    private PriceServer priceServer;
-    private MainModelThread model;
-    protected MikePosOrders mikePosOrders;
-    private AggregatedPosOrders aggregatedPosOrders = new AggregatedPosOrders();
 
     public void setInstrumentList(ObservableList<PriceServer> instrumentNamesList) {
         instrumentsList.setItems(instrumentNamesList);

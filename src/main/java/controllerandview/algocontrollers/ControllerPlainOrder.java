@@ -67,13 +67,15 @@ public class ControllerPlainOrder extends AlgoController {
             return;
         }
 
+        //cancel orders at price if CANCEL selected
+        if (orderType == MikeOrder.MikeOrderType.CANCEL) {
+            posOrders.cancelAllOrdersAtPrice(pricePressed);
+        }
+
+        //place new order if CANCEL not selected
         if (orderType != MikeOrder.MikeOrderType.CANCEL) {
             posOrders.placeNewOrder(orderType, pricePressed, pricePressed, getAmount());
             return;
-        }
-
-        if (orderType == MikeOrder.MikeOrderType.CANCEL) {
-            posOrders.cancelAllOrdersAtPrice(pricePressed);
         }
     }
 

@@ -97,6 +97,9 @@ public class MainGUIClass {
         //name the window:
         String name = ("PositionsWindow " + updatableWindowsList.size());
         stage.setTitle(name);
+
+
+
     }
 
     public void createAlgoManagerWindow() {
