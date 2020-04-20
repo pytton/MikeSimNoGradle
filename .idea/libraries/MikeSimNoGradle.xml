@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="MikeSimNoGradle">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/out/artifacts/MikeSimNoGradle_jar/MikeSimNoGradle.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
