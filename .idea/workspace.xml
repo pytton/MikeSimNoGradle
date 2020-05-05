@@ -1,7 +1,358 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0212a54c-a94c-4dfe-9eec-4ace680f76bc" name="Default Changelist" comment="" />
+    <list default="true" id="0212a54c-a94c-4dfe-9eec-4ace680f76bc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/MikeSimDevelopingExperiments.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/client/AnyWrapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/client/AnyWrapperMsgGenerator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/client/Builder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/client/ComboLeg.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/client/CommissionReport.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/client/Contract.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/client/ContractDetails.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/client/EClientErrors.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/client/EClientSocket.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/client/EReader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/client/EWrapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/client/EWrapperMsgGenerator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/client/Execution.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/client/ExecutionFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/client/IApiEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/client/MarketDataType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/client/Order.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/client/OrderComboLeg.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/client/OrderState.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/client/ScannerSubscription.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/client/TagValue.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/client/TickType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/client/UnderComp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/client/Util.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/contracts/ComboContract.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/contracts/FutContract.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/contracts/OptContract.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/contracts/StkContract.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/controller/AccountSummaryTag.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/controller/AdvisorUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/controller/Alias.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/controller/ApiConnection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/controller/ApiController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/controller/Bar.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/controller/ConcurrentHashSet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/controller/DeltaNeutralContract.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/controller/Formats.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/controller/Group.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/controller/Instrument.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/controller/MarketValueTag.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/controller/NewComboLeg.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/controller/NewContract.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/controller/NewContractDetails.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/controller/NewOrder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/controller/NewOrderState.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/controller/NewTickType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/controller/OrderStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/controller/OrderType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/controller/Position.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/controller/Profile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/controller/ScanCode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/controller/TradeId.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/com/ib/controller/Types.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/java/controllerandview/MainGUIClass.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/java/controllerandview/MikeGridPane.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/java/controllerandview/algocontrollers/AlgoController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/java/controllerandview/algocontrollers/ControllerComplexScalperAlgo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/java/controllerandview/algocontrollers/ControllerPlainOrder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/java/controllerandview/algocontrollers/ControllerSimpleScalperAlgo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/java/controllerandview/algocontrollers/ControllerSimpleStepperAlgo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/java/controllerandview/algomanagerwindow/ControllerAlgoManagerPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/java/controllerandview/mainGUIwindow/controller/ControllerMainGUIWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/java/controllerandview/positionswindow/controller/ControllerPositionsWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/java/controllerandview/positionswindow/controller/ControllerScalperAlgo1.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/java/controllerandview/pricecontrolwindow/controller/ControllerPriceControlPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/java/model/AlgoManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/java/model/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/java/model/MainModelThread.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/java/model/TradedInstrument.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/java/model/livemarketdata/InteractiveBrokersAPI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/java/model/livemarketdata/OutsideTradingSoftwareAPIConnection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/java/model/mikealgos/BaseAlgo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/java/model/mikealgos/ComplexScalperAlgo1.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/java/model/mikealgos/MikeAlgo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/java/model/mikealgos/SimpleScalperAlgo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/java/model/mikealgos/SimpleStepperAlgo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/java/model/orderserver/MikeOrder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/java/model/orderserver/OrderServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/java/model/positionsorders/AggregatedPosOrders.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/java/model/positionsorders/MikePosOrders.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/java/model/positionsorders/MikePosition.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/java/model/priceserver/PriceServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/java/model/priceserver/PriceServerManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/resources/AlgoManagerPanel.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/resources/MainGUIWindow.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/resources/PositionsWindow.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/resources/PriceControlPanel.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/resources/Stepper1ControlPanel.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/resources/algoControllers/ComplexScalperControlPanel.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/resources/algoControllers/PlainOrderControlPanel.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/resources/algoControllers/SimpleScalperAlgoControlPanel.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/resources/algoControllers/SimpleStepperControlPanel.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/ListDemo.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/Main.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/allclasses-frame.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/allclasses-noframe.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/client/AnyWrapper.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/client/AnyWrapperMsgGenerator.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/client/Builder.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/client/ComboLeg.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/client/CommissionReport.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/client/Contract.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/client/ContractDetails.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/client/EClientErrors.CodeMsgPair.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/client/EClientErrors.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/client/EClientSocket.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/client/EReader.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/client/EWrapper.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/client/EWrapperMsgGenerator.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/client/Execution.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/client/ExecutionFilter.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/client/IApiEnum.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/client/MarketDataType.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/client/Order.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/client/OrderComboLeg.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/client/OrderState.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/client/ScannerSubscription.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/client/TagValue.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/client/TickType.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/client/UnderComp.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/client/Util.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/client/package-frame.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/client/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/client/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/contracts/ComboContract.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/contracts/FutContract.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/contracts/OptContract.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/contracts/StkContract.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/contracts/package-frame.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/contracts/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/contracts/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/AccountSummaryTag.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/AdvisorUtil.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/Alias.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/ApiConnection.ILogger.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/ApiConnection.MyIS.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/ApiConnection.MyOS.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/ApiConnection.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/ApiController.IAccountHandler.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/ApiController.IAccountSummaryHandler.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/ApiController.IAdvisorHandler.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/ApiController.IBulletinHandler.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/ApiController.IConnectionHandler.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/ApiController.IContractDetailsHandler.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/ApiController.IDeepMktDataHandler.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/ApiController.IEfpHandler.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/ApiController.IFundamentalsHandler.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/ApiController.IHistoricalDataHandler.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/ApiController.IInternalHandler.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/ApiController.ILiveOrderHandler.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/ApiController.IMarketValueSummaryHandler.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/ApiController.IOptHandler.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/ApiController.IOrderHandler.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/ApiController.IPositionHandler.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/ApiController.IRealTimeBarHandler.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/ApiController.IScannerHandler.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/ApiController.ITimeHandler.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/ApiController.ITopMktDataHandler.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/ApiController.ITradeReportHandler.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/ApiController.TopMktDataAdapter.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/ApiController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/Bar.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/ConcurrentHashSet.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/DeltaNeutralContract.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/Formats.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/Group.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/Instrument.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/MarketValueTag.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/NewComboLeg.OpenClose.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/NewComboLeg.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/NewContract.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/NewContractDetails.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/NewOrder.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/NewOrderState.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/NewTickType.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/OrderStatus.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/OrderType.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/Position.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/Profile.Allocation.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/Profile.Type.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/Profile.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/ScanCode.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/TradeId.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/Types.Action.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/Types.AlgoParam.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/Types.AlgoStrategy.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/Types.BarSize.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/Types.ComboParam.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/Types.DeepSide.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/Types.DeepType.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/Types.DurationUnit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/Types.ExerciseType.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/Types.FADataType.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/Types.FundamentalType.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/Types.HedgeType.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/Types.Method.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/Types.MktDataType.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/Types.NewsType.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/Types.OcaType.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/Types.ReferencePriceType.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/Types.Right.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/Types.Rule80A.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/Types.SecIdType.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/Types.SecType.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/Types.TimeInForce.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/Types.TriggerMethod.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/Types.VolatilityType.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/Types.WhatToShow.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/Types.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/package-frame.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/com/ib/controller/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/constant-values.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/deprecated-list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/help-doc.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/index-files/index-1.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/index-files/index-10.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/index-files/index-11.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/index-files/index-12.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/index-files/index-13.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/index-files/index-14.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/index-files/index-15.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/index-files/index-16.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/index-files/index-17.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/index-files/index-18.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/index-files/index-19.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/index-files/index-2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/index-files/index-20.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/index-files/index-21.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/index-files/index-22.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/index-files/index-3.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/index-files/index-4.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/index-files/index-5.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/index-files/index-6.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/index-files/index-7.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/index-files/index-8.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/index-files/index-9.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/MainGUIClass.MikePositionsWindowCreator.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/MainGUIClass.Updatable.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/MainGUIClass.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/MikeGridPane.EmptyMikeButtonHandler.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/MikeGridPane.MikeButton.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/MikeGridPane.MikeButtonHandler.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/MikeGridPane.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/algocontrollers/AlgoController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/algocontrollers/ControllerComplexScalperAlgo.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/algocontrollers/ControllerPlainOrder.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/algocontrollers/ControllerSimpleScalperAlgo.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/algocontrollers/ControllerSimpleStepperAlgo.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/algocontrollers/package-frame.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/algocontrollers/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/algocontrollers/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/algomanagerwindow/ControllerAlgoManagerPanel.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/algomanagerwindow/package-frame.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/algomanagerwindow/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/algomanagerwindow/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/mainGUIwindow/controller/ControllerMainGUIWindow.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/mainGUIwindow/controller/package-frame.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/mainGUIwindow/controller/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/mainGUIwindow/controller/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/package-frame.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/positionswindow/controller/ControllerPositionsWindow.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/positionswindow/controller/ControllerScalperAlgo1.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/positionswindow/controller/package-frame.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/positionswindow/controller/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/positionswindow/controller/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/pricecontrolwindow/controller/ControllerPriceControlPanel.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/pricecontrolwindow/controller/package-frame.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/pricecontrolwindow/controller/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/pricecontrolwindow/controller/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/AlgoManager.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/Main.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/MainModelThread.GUIUpdateDispatcher.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/MainModelThread.PosOrdersManager.Data.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/MainModelThread.PosOrdersManager.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/MainModelThread.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/TradedInstrument.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/livemarketdata/InteractiveBrokersAPI.PriceData.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/livemarketdata/InteractiveBrokersAPI.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/livemarketdata/InteractiveBrokersAPITestDrive.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/livemarketdata/OutsideTradingSoftwareAPIConnection.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/livemarketdata/package-frame.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/livemarketdata/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/livemarketdata/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/mikealgos/BaseAlgo.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/mikealgos/BaseAlgo.status.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/mikealgos/ComplexScalperAlgo1.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/mikealgos/MikeAlgo.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/mikealgos/SimpleScalperAlgo.Status.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/mikealgos/SimpleScalperAlgo.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/mikealgos/SimpleStepperAlgo.Status.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/mikealgos/SimpleStepperAlgo.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/mikealgos/package-frame.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/mikealgos/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/mikealgos/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/orderserver/MikeOrder.MikeOrderType.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/orderserver/MikeOrder.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/orderserver/OrderServer.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/orderserver/package-frame.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/orderserver/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/orderserver/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/package-frame.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/positionsorders/AggregatedPosOrders.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/positionsorders/MikePosOrders.OrdersAtPrice.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/positionsorders/MikePosOrders.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/positionsorders/MikePosition.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/positionsorders/package-frame.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/positionsorders/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/positionsorders/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/priceserver/PriceServer.PriceType.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/priceserver/PriceServer.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/priceserver/PriceServerManager.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/priceserver/package-frame.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/priceserver/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/main/java/model/priceserver/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/overview-frame.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/overview-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/overview-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/package-frame.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/package-list" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/script.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation/stylesheet.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollers/AlgoController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollers/AlgoController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollers/ControllerComplexScalperAlgo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollers/ControllerComplexScalperAlgo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollers/ControllerPlainOrder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollers/ControllerPlainOrder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/positionswindow/controller/ControllerPositionsWindow$1ChoiceBoxChangeListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/positionswindow/controller/ControllerPositionsWindow$1ChoiceBoxChangeListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/positionswindow/controller/ControllerPositionsWindow$1MyInstrumentChangeListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/positionswindow/controller/ControllerPositionsWindow$1MyInstrumentChangeListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/positionswindow/controller/ControllerPositionsWindow$1MyPosOrdersChangeListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/positionswindow/controller/ControllerPositionsWindow$1MyPosOrdersChangeListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/positionswindow/controller/ControllerPositionsWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/positionswindow/controller/ControllerPositionsWindow.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/positionswindow/controller/ControllerScalperAlgo1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/positionswindow/controller/ControllerScalperAlgo1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/positionsorders/MikePosOrders.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/positionsorders/MikePosOrders.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollers/AlgoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollers/AlgoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollers/ControllerComplexScalperAlgo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollers/ControllerComplexScalperAlgo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollers/ControllerPlainOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollers/ControllerPlainOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollers/ControllerSimpleScalperAlgo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollers/ControllerSimpleScalperAlgo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollers/ControllerSimpleStepperAlgo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollers/ControllerSimpleStepperAlgo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/positionswindow/controller/ControllerScalperAlgo1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/positionswindow/controller/ControllerScalperAlgo1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/positionsorders/MikePosOrders.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/positionsorders/MikePosOrders.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,7 +361,15 @@
   <component name="CodeStyleSettingsInfer">
     <option name="done" value="true" />
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="MikeSimNoGradle" />
+  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="refactoring" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectCodeStyleSettingsMigration">
@@ -24,12 +383,39 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/MikeSimDevelopingExperiments" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.25876662" />
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/MikeSimDevelopingExperiments" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Main (1)">
+    <configuration name="ListDemo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ListDemo" />
+      <module name="PrototypesAndExperiments" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="main.java.model.Main" />
+      <module name="MikeSimDevelopingExperiments" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main.java.model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -47,6 +433,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main (1)" />
+        <item itemvalue="Application.ListDemo" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -77,10 +466,11 @@
     <option name="LAST_COMMIT_MESSAGE" value="a little clean-up" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="159" y="117" width="974" height="666" key="#Project_Structure" timestamp="1583902137169">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state x="2132" y="140" width="974" height="666" key="#Project_Structure" timestamp="1588693440083">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="159" y="117" width="974" height="666" key="#Project_Structure/0.0.1440.900@0.0.1440.900" timestamp="1583902137169" />
+    <state x="2132" y="140" key="#Project_Structure/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1588693440083" />
     <state x="184" y="113" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1583901829885">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -89,62 +479,79 @@
       <screen x="1440" y="-180" width="1920" height="1080" />
     </state>
     <state x="2114" y="170" key="#com.intellij.fileTypes.FileTypeChooser/-960.196.960.704/0.0.1440.900/1440.-180.1920.1080@1440.-180.1920.1080" timestamp="1584992791548" />
-    <state x="2463" y="225" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog" timestamp="1586443265193">
-      <screen x="1920" y="23" width="1920" height="1057" />
+    <state x="2463" y="206" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog" timestamp="1587822200563">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
+    <state x="2463" y="206" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587822200563" />
     <state x="2463" y="225" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog/2376.1103.1024.745/3840.203.1440.877/0.23.1920.1057/1920.23.1920.1057@1920.23.1920.1057" timestamp="1586443265193" />
+    <state x="461" y="170" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1587650209855">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="461" y="170" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1440.900@0.0.1440.900" timestamp="1587650209855" />
     <state x="2427" y="212" key="CommitChangelistDialog2" timestamp="1586785651923">
       <screen x="1920" y="169" width="1440" height="877" />
     </state>
     <state x="2427" y="212" key="CommitChangelistDialog2/1920.169.1440.877/-1920.23.1920.1057/0.23.1920.1057@1920.169.1440.877" timestamp="1586785651923" />
-    <state width="1878" height="262" key="GridCell.Tab.0.bottom" timestamp="1585764356710">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="1878" height="261" key="GridCell.Tab.0.bottom" timestamp="1588693579557">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state width="1878" height="262" key="GridCell.Tab.0.bottom/-1440.0.1440.900/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1585764356710" />
     <state width="1878" height="375" key="GridCell.Tab.0.bottom/-1440.0.1440.900/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1585319342338" />
     <state width="1398" height="375" key="GridCell.Tab.0.bottom/-1440.23.1440.877/0.23.1920.992/1920.23.1920.1057@1920.23.1920.1057" timestamp="1585753515672" />
     <state width="591" height="375" key="GridCell.Tab.0.bottom/-1440.23.1440.877/0.23.1920.994/1920.23.1920.1057@1920.23.1920.1057" timestamp="1585753782525" />
     <state width="1398" height="375" key="GridCell.Tab.0.bottom/-1440.23.1440.877/1920.23.1920.1057/0.23.1920.991@1920.23.1920.1057" timestamp="1585337397073" />
-    <state width="1398" height="245" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1583902143397" />
+    <state width="1398" height="210" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1587651307580" />
+    <state width="1878" height="261" key="GridCell.Tab.0.bottom/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1588693579557" />
     <state width="1398" height="245" key="GridCell.Tab.0.bottom/0.23.1440.821@0.23.1440.821" timestamp="1583902182116" />
+    <state width="1398" height="210" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1588008169411" />
     <state width="1398" height="304" key="GridCell.Tab.0.bottom/0.23.1920.982@0.23.1920.982" timestamp="1584381449137" />
     <state width="1398" height="295" key="GridCell.Tab.0.bottom/0.23.3840.2057@0.23.3840.2057" timestamp="1584382008250" />
-    <state width="1878" height="262" key="GridCell.Tab.0.center" timestamp="1585764356707">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="1878" height="261" key="GridCell.Tab.0.center" timestamp="1588693579555">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state width="1878" height="262" key="GridCell.Tab.0.center/-1440.0.1440.900/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1585764356707" />
     <state width="1878" height="375" key="GridCell.Tab.0.center/-1440.0.1440.900/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1585319342336" />
     <state width="1398" height="375" key="GridCell.Tab.0.center/-1440.23.1440.877/0.23.1920.992/1920.23.1920.1057@1920.23.1920.1057" timestamp="1585753515671" />
     <state width="591" height="375" key="GridCell.Tab.0.center/-1440.23.1440.877/0.23.1920.994/1920.23.1920.1057@1920.23.1920.1057" timestamp="1585753782524" />
     <state width="1398" height="375" key="GridCell.Tab.0.center/-1440.23.1440.877/1920.23.1920.1057/0.23.1920.991@1920.23.1920.1057" timestamp="1585337397072" />
-    <state width="1398" height="245" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1583902143396" />
+    <state width="1398" height="210" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1587651307579" />
+    <state width="1878" height="261" key="GridCell.Tab.0.center/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1588693579555" />
     <state width="1398" height="245" key="GridCell.Tab.0.center/0.23.1440.821@0.23.1440.821" timestamp="1583902182115" />
+    <state width="1398" height="210" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1588008169410" />
     <state width="1398" height="304" key="GridCell.Tab.0.center/0.23.1920.982@0.23.1920.982" timestamp="1584381449136" />
     <state width="1398" height="295" key="GridCell.Tab.0.center/0.23.3840.2057@0.23.3840.2057" timestamp="1584382008249" />
-    <state width="1878" height="262" key="GridCell.Tab.0.left" timestamp="1585764356706">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="1878" height="261" key="GridCell.Tab.0.left" timestamp="1588693579553">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state width="1878" height="262" key="GridCell.Tab.0.left/-1440.0.1440.900/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1585764356706" />
     <state width="1878" height="375" key="GridCell.Tab.0.left/-1440.0.1440.900/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1585319342335" />
     <state width="1398" height="375" key="GridCell.Tab.0.left/-1440.23.1440.877/0.23.1920.992/1920.23.1920.1057@1920.23.1920.1057" timestamp="1585753515671" />
     <state width="591" height="375" key="GridCell.Tab.0.left/-1440.23.1440.877/0.23.1920.994/1920.23.1920.1057@1920.23.1920.1057" timestamp="1585753782524" />
     <state width="1398" height="375" key="GridCell.Tab.0.left/-1440.23.1440.877/1920.23.1920.1057/0.23.1920.991@1920.23.1920.1057" timestamp="1585337397072" />
-    <state width="1398" height="245" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1583902143395" />
+    <state width="1398" height="210" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1587651307579" />
+    <state width="1878" height="261" key="GridCell.Tab.0.left/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1588693579553" />
     <state width="1398" height="245" key="GridCell.Tab.0.left/0.23.1440.821@0.23.1440.821" timestamp="1583902182115" />
+    <state width="1398" height="210" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1588008169410" />
     <state width="1398" height="304" key="GridCell.Tab.0.left/0.23.1920.982@0.23.1920.982" timestamp="1584381449135" />
     <state width="1398" height="295" key="GridCell.Tab.0.left/0.23.3840.2057@0.23.3840.2057" timestamp="1584382008249" />
-    <state width="1878" height="262" key="GridCell.Tab.0.right" timestamp="1585764356709">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="1878" height="261" key="GridCell.Tab.0.right" timestamp="1588693579556">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state width="1878" height="262" key="GridCell.Tab.0.right/-1440.0.1440.900/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1585764356709" />
     <state width="1878" height="375" key="GridCell.Tab.0.right/-1440.0.1440.900/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1585319342337" />
     <state width="1398" height="375" key="GridCell.Tab.0.right/-1440.23.1440.877/0.23.1920.992/1920.23.1920.1057@1920.23.1920.1057" timestamp="1585753515672" />
     <state width="591" height="375" key="GridCell.Tab.0.right/-1440.23.1440.877/0.23.1920.994/1920.23.1920.1057@1920.23.1920.1057" timestamp="1585753782525" />
     <state width="1398" height="375" key="GridCell.Tab.0.right/-1440.23.1440.877/1920.23.1920.1057/0.23.1920.991@1920.23.1920.1057" timestamp="1585337397073" />
-    <state width="1398" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1583902143396" />
+    <state width="1398" height="210" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1587651307580" />
+    <state width="1878" height="261" key="GridCell.Tab.0.right/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1588693579556" />
     <state width="1398" height="245" key="GridCell.Tab.0.right/0.23.1440.821@0.23.1440.821" timestamp="1583902182116" />
+    <state width="1398" height="210" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1588008169411" />
     <state width="1398" height="304" key="GridCell.Tab.0.right/0.23.1920.982@0.23.1920.982" timestamp="1584381449136" />
     <state width="1398" height="295" key="GridCell.Tab.0.right/0.23.3840.2057@0.23.3840.2057" timestamp="1584382008249" />
+    <state x="2530" y="244" key="NewModule_or_Project.wizard" timestamp="1588692549638">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2530" y="244" key="NewModule_or_Project.wizard/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1588692549638" />
     <state x="221" y="89" key="SettingsEditor" timestamp="1583901761922">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -153,23 +560,38 @@
       <screen x="1920" y="169" width="1440" height="877" />
     </state>
     <state x="2405" y="349" key="Vcs.Push.Dialog.v2/1920.169.1440.877/-1920.23.1920.1057/0.23.1920.1057@1920.169.1440.877" timestamp="1586785672733" />
-    <state x="375" y="463" key="com.intellij.ide.util.TipDialog" timestamp="1587404115715">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="100" y="100" width="1240" height="700" key="com.intellij.dvcs.ui.CompareBranchesDialog" timestamp="1587470159911">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="100" y="100" width="1240" height="700" key="com.intellij.dvcs.ui.CompareBranchesDialog/0.0.1440.900@0.0.1440.900" timestamp="1587470159911" />
+    <state x="375" y="476" key="com.intellij.ide.util.TipDialog" timestamp="1588692374898">
+      <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="375" y="450" key="com.intellij.ide.util.TipDialog/-1440.0.1440.900/1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1585847415979" />
     <state x="2295" y="463" key="com.intellij.ide.util.TipDialog/-1440.23.1440.877/0.23.1920.991/1920.23.1920.1057@1920.23.1920.1057" timestamp="1585753466930" />
     <state x="375" y="450" key="com.intellij.ide.util.TipDialog/-1920.0.1920.1080/1920.146.1440.900/0.0.1920.1080@0.0.1920.1080" timestamp="1586435774256" />
     <state x="1939" y="158" key="com.intellij.ide.util.TipDialog/-960.219.960.681/0.23.1440.828/1440.-157.1920.1057@1440.-157.1920.1057" timestamp="1584992765296" />
     <state x="281" y="375" key="com.intellij.ide.util.TipDialog/-960.900.960.704/-1920.-180.1920.1080/0.0.1440.900/1440.-180.1920.1080@0.0.1440.900" timestamp="1585226782954" />
+    <state x="281" y="386" key="com.intellij.ide.util.TipDialog/0.0.1440.900@0.0.1440.900" timestamp="1588078697618" />
     <state x="499" y="322" key="com.intellij.ide.util.TipDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1584381360969" />
     <state x="374" y="268" key="com.intellij.ide.util.TipDialog/0.23.1440.821@0.23.1440.821" timestamp="1583901156169" />
+    <state x="375" y="476" key="com.intellij.ide.util.TipDialog/0.23.1920.1057/1920.23.1920.1057@0.23.1920.1057" timestamp="1588692374898" />
     <state x="374" y="435" key="com.intellij.ide.util.TipDialog/0.23.1920.989@0.23.1920.989" timestamp="1585048873584" />
     <state x="374" y="253" key="com.intellij.ide.util.TipDialog/1440.0.1920.1080/0.0.1440.900@0.0.1440.900" timestamp="1585015872244" />
     <state x="-1545" y="450" key="com.intellij.ide.util.TipDialog/1920.146.1440.900/-1920.0.1920.1080/0.0.1920.1080@-1920.0.1920.1080" timestamp="1586506867140" />
     <state x="375" y="463" key="com.intellij.ide.util.TipDialog/1920.146.1440.900/-1920.0.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1587404115715" />
-    <state x="625" y="241" width="670" height="58" key="search.everywhere.popup" timestamp="1585753887483">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="600" height="424" key="javadoc.popup" timestamp="1587652494524">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="600" height="424" key="javadoc.popup/0.0.1440.900@0.0.1440.900" timestamp="1587652494524" />
+    <state x="2309" y="143" key="new project wizard" timestamp="1588693333179">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2309" y="143" key="new project wizard/0.0.1920.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1588693333179" />
+    <state x="2545" y="241" width="918" height="615" key="search.everywhere.popup" timestamp="1587821055961">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="625" y="241" width="670" height="58" key="search.everywhere.popup/-1440.0.1440.900/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1585753887483" />
+    <state x="2545" y="241" width="918" height="615" key="search.everywhere.popup/0.23.1920.1057/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587821055961" />
   </component>
 </project>

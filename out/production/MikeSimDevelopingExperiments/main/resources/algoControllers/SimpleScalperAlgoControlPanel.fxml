@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllerandview.algocontrollers.ControllerSimpleScalperAlgo">
+   <children>
+      <VBox prefHeight="650.0" prefWidth="200.0">
+         <children>
+            <Label text="Simple Scalper Algo">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <VBox alignment="CENTER_LEFT" prefHeight="68.0" prefWidth="150.0" spacing="3.0">
+               <children>
+                  <Label fx:id="priceSourceLabel" text="Entry Order Type:" />
+                  <RadioButton fx:id="buyLimit" mnemonicParsing="false" selected="true" text="Buy Limit">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="orderTypeToggleGroup" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="buyStop" mnemonicParsing="false" text="Buy Stop" toggleGroup="$orderTypeToggleGroup" />
+                  <RadioButton fx:id="sellLimit" mnemonicParsing="false" text="Sell Limit" toggleGroup="$orderTypeToggleGroup" />
+                  <RadioButton fx:id="sellStop" mnemonicParsing="false" text="Sell Stop" toggleGroup="$orderTypeToggleGroup" />
+                  <RadioButton fx:id="cancel" mnemonicParsing="false" text="Cancel" toggleGroup="$orderTypeToggleGroup" />
+               </children>
+            </VBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label text="Order Amount" />
+                  <TextField fx:id="orderAmount" prefHeight="25.0" prefWidth="70.0" text="100" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label text="Scalper Target Interval" />
+                  <TextField fx:id="targetInterval" prefHeight="25.0" prefWidth="70.0" text="5" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
