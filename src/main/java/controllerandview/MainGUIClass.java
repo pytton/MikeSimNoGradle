@@ -32,6 +32,7 @@ public class MainGUIClass {
     private long count = 0;
     public MainModelThread mainModelThread;
 
+    //this stores windows which will be called by updateGUI method:
     private List<Updatable> updatableWindowsList = new ArrayList<>();
 
     //   private List<ControllerPriceControlPanel> priceControlPanelControllerList = new ArrayList<>();
@@ -79,8 +80,9 @@ public class MainGUIClass {
         try {
             creator = new MikePositionsWindowCreator(getMainModelThread().posOrdersManager.getPriceServer(defaultTickerId));
         } catch (IOException e) {
-            System.out.println("Exception in createPosWindow");
+            System.out.println("Exception in createPosWindow\nPoswindow not created!");
             e.printStackTrace();
+            return;
         }
 
         //add the controller to the list of controllers (for updateGUI):

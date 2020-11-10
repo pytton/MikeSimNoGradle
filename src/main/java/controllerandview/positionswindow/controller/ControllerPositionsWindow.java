@@ -389,10 +389,6 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
         }
     }
 
-    public void setSpecificButtonInMikeGridPane(int row, int col, String text) {
-        mikeGridPane.getButton(row, col).setText(text);
-    }
-
     @FXML
     public void testOneButtonClicked(ActionEvent actionEvent) {
 //        model.getOrderServer().checkSimulatedFills(model.getPriceServer());
@@ -452,15 +448,45 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
     @FXML
     private void testThreeButtonClicked(){
 
-        System.out.println("Size: " + aggregatedPosOrders.posOrdersList.size());
+        System.out.println("Test three clicked");
 
-        Set<MikePosOrders> posOrders = new HashSet<>();
+        List<PriceServer> dialogData;
 
-        posOrders.addAll( positionsList.getSelectionModel().getSelectedItems());
+        dialogData = model.posOrdersManager.getPriceServerObservableList();
 
-        for (MikePosOrders positions : posOrders) {
-            System.out.println("Selected: " + positions.getName());
+                //Arrays.asList(arrayData);
+
+        ChoiceDialog dialog = new ChoiceDialog(dialogData.get(0), dialogData);
+        dialog.setTitle("Trading Instrument Selection");
+        dialog.setHeaderText("Select your choice");
+
+        Optional<PriceServer> result = dialog.showAndWait();
+        PriceServer selected = null;// = "cancelled.";
+
+        if (result.isPresent()) {
+
+            selected = result.get();
+            System.out.println("Selection: " + selected.toString() + " Current bid price: " + selected.getBidPrice());
+
+
+
+
         }
+
+
+
+
+
+
+//        System.out.println("Size: " + aggregatedPosOrders.posOrdersList.size());
+//
+//        Set<MikePosOrders> posOrders = new HashSet<>();
+//
+//        posOrders.addAll( positionsList.getSelectionModel().getSelectedItems());
+//
+//        for (MikePosOrders positions : posOrders) {
+//            System.out.println("Selected: " + positions.getName());
+//        }
 
 
     }
@@ -505,9 +531,6 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
 //        model.getOrderServer().placeNewOrder(MikeOrder.MikeOrderType.BUYLMT, price, price, amount);
     }
 
-    private int getPriceOfRow(int rowClicked) {
-        return topRowPrice - rowClicked;
-    }
 
     public void setPriceServer(PriceServer priceServer) {
         this.priceServer = priceServer;
@@ -554,15 +577,6 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
 //        model.getOrderServer().placeNewOrder(MikeOrder.MikeOrderType.BUYSTP, price, price, amount);
     }
 
-    public void sellStopButtonClicked(ActionEvent actionEvent) {
-        Integer price = Integer.parseInt(orderPriceTextField.getText());
-        Integer amount = Integer.parseInt(orderSizeTextField.getText());
-
-        System.out.println("Sell stop pressed. Order price: " + price + " Order size: " + amount);
-
-        mikePosOrders.placeNewOrder(MikeOrder.MikeOrderType.SELLSTP, price, price, amount);
-//        model.getOrderServer().placeNewOrder(MikeOrder.MikeOrderType.SELLSTP, price, price, amount);
-    }
 
     public void testThreeMouseClicked(MouseEvent mouseEvent) {
         if (mouseEvent.getButton() == MouseButton.SECONDARY) {
@@ -785,8 +799,23 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
         }
     }
 
+    private void setSpecificButtonInMikeGridPane(int row, int col, String text) {
+        mikeGridPane.getButton(row, col).setText(text);
+    }
 
+    public void sellStopButtonClicked(ActionEvent actionEvent) {
+        Integer price = Integer.parseInt(orderPriceTextField.getText());
+        Integer amount = Integer.parseInt(orderSizeTextField.getText());
 
+        System.out.println("Sell stop pressed. Order price: " + price + " Order size: " + amount);
+
+        mikePosOrders.placeNewOrder(MikeOrder.MikeOrderType.SELLSTP, price, price, amount);
+//        model.getOrderServer().placeNewOrder(MikeOrder.MikeOrderType.SELLSTP, price, price, amount);
+    }
+
+    private int getPriceOfRow(int rowClicked) {
+        return topRowPrice - rowClicked;
+    }
 
 //    public void mikeGridPaneButtonClicked(ActionEvent event) {
 //

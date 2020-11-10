@@ -1,3 +1,5 @@
+Currently working on ChooserPosOrdersController
+
 In PositionsWindow:
     create simple order entry pane in PositionsWindow: DONE
     buttons: buylmt, selllmt, buy stop, sell stop

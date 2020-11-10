@@ -557,4 +557,8 @@ public class MikePosOrders {
     public boolean checkIfOrderFilled(long orderId) {
         return getOrderServer().getMikeOrder(orderId).isFilled();
     }
+
+    public int getBidPrice(){
+        return priceServer.getBidPrice();
+    }
 }

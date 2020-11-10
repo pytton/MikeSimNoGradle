@@ -52,7 +52,6 @@ public class SimpleScalperAlgo extends BaseAlgo {
 //            }
 //        }
 
-        status = Status.CREATED;
 
         if (entryOrderType == MikeOrder.MikeOrderType.BUYLMT || entryOrderType == MikeOrder.MikeOrderType.BUYSTP) {
             exitOrderType = MikeOrder.MikeOrderType.SELLLMT;
@@ -74,11 +73,13 @@ public class SimpleScalperAlgo extends BaseAlgo {
         this.exitTargetPrice = exitTargetPrice;
         this.orderAmount = orderAmount;
         this.entryOrderType = entryOrderType;
+        status = Status.CREATED;
+
     }
 
     @Override
     public synchronized void process() {
-        //1. it status is 'CREATED' then create first orders
+        //1. if status is 'CREATED' then create first orders
         if (status == Status.CREATED) {
             lowOrderId = posOrders.placeNewOrder(entryOrderType, entryTargetPrice, entryTargetPrice, orderAmount);
             status = Status.RUNNING;

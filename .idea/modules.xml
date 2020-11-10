@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MikeSimDevelopingExperiments/MikeSimDevelopingExperiments.iml" filepath="$PROJECT_DIR$/MikeSimDevelopingExperiments/MikeSimDevelopingExperiments.iml" />
       <module fileurl="file://$PROJECT_DIR$/MikeSimNoGradle.iml" filepath="$PROJECT_DIR$/MikeSimNoGradle.iml" />
       <module fileurl="file://$PROJECT_DIR$/PrototypesAndExperiments/PrototypesAndExperiments.iml" filepath="$PROJECT_DIR$/PrototypesAndExperiments/PrototypesAndExperiments.iml" />
     </modules>

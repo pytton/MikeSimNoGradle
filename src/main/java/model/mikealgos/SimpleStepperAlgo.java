@@ -46,7 +46,6 @@ public class SimpleStepperAlgo extends BaseAlgo {
     public SimpleStepperAlgo(MikePosOrders posOrders, int entryTargetPrice, int interval, int amount,
                              MikeOrder.MikeOrderType entryOrderType, boolean smTrailingStop, boolean fixedTrailingStop) {
 
-        status = Status.CREATED;
         //set the order amount depending on whether trailing stop option selected:
         if(smTrailingStop == true){
             startOrderAmount = (amount/4) *4;
@@ -106,6 +105,7 @@ public class SimpleStepperAlgo extends BaseAlgo {
         this.amount = amount;
         this.entryOrderType = entryOrderType;
         this.fixedTrailingStop = fixedTrailingStop;
+        status = Status.CREATED;
     }
 
     @Override
