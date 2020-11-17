@@ -3,6 +3,8 @@ package main.java.model;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import main.java.controllerandview.MainGUIClass;
 import main.java.model.livemarketdata.InteractiveBrokersAPI;
 import main.java.model.livemarketdata.OutsideTradingSoftwareAPIConnection;
@@ -10,8 +12,11 @@ import main.java.model.orderserver.OrderServer;
 import main.java.model.positionsorders.MikePosOrders;
 import main.java.model.positionsorders.MikePosition;
 import main.java.model.priceserver.PriceServer;
+import main.java.prototypes.CommonGUI;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.TreeMap;
 
 public class MainModelThread extends Thread {
@@ -19,10 +24,8 @@ public class MainModelThread extends Thread {
     public MainGUIClass mainGUIClass;
     public PosOrdersManager posOrdersManager;
 
-    //todo: temporarily replacing interface with implementation:
     //set up connection to outside trading software for market data, orders, etc:
     public OutsideTradingSoftwareAPIConnection marketConnection;
-//    public InteractiveBrokersAPI marketConnection;
     public AlgoManager algoManager;
     private GUIUpdateDispatcher myGUIUpdateDispatcher;
     private long count = 0; //used for printing program 'heartbeat'
@@ -33,7 +36,9 @@ public class MainModelThread extends Thread {
     public MainModelThread(MainGUIClass mainGUIClass, Map<Integer, TradedInstrument> tradedInstrumentMap){
         this.mainGUIClass = mainGUIClass;
         //set up connection to outside trading software for market data, orders, etc:
-        marketConnection = new InteractiveBrokersAPI(tradedInstrumentMap);
+//        marketConnection = new InteractiveBrokersAPI(tradedInstrumentMap);
+
+        marketConnection = InteractiveBrokersAPI.getInstance(tradedInstrumentMap);
         //this stores a priceserver, orderserver and a list of MikePosOrders for each traded instrument:
         posOrdersManager = new PosOrdersManager(tradedInstrumentMap);
         algoManager = new AlgoManager(this);
@@ -73,8 +78,18 @@ public class MainModelThread extends Thread {
         }
     }
 
+    /**
+     * This is called if all JavaFX windows are closed
+     */
     public void shutDownMikeSim(){
+
+        //stop the main loop:
         interrupted = true;
+        //disconnect from OutSideTradingSoftware if connected:
+        try{
+            marketConnection.disconnect();
+        }
+        catch (Exception e){}
     }
 
     private void processAlgos(){
@@ -104,9 +119,10 @@ public class MainModelThread extends Thread {
     /**
      * This class is responsible for creating and managing new PosOrders and assigning them the correct
      * PriceServer and OrderServer depending on which instrument the PosOrders is supposed to trade.
-     * PosOrders needs a PriceServer and OrderServer. There is only one PriceServer and one OrderServer
-     * for every instrument traded. The traded instruments are identified by their tickerId,
-     * just like in the InterActive Brokers API.
+     * PosOrders needs a PriceServer and OrderServer.
+     *
+     * There is only one PriceServer and one OrderServer for every instrument traded.
+     * The traded instruments are identified by their tickerId, just like in the InterActive Brokers API.
      * There can be many PosOrders for one traded instrument.
      * Once a PosOrders is created, it can only be used to trade the instrument it was
      * created for trading initially
@@ -200,6 +216,13 @@ public class MainModelThread extends Thread {
             }
         }
 
+
+        /**
+         * returns a single MikePosOrders. tickerID defines the instrument.
+         * @param tickerId
+         * @param mikePosOrdersNumber
+         * @return
+         */
         public MikePosOrders getMikePosOrders(int tickerId,  int mikePosOrdersNumber) {
             return dataMap.get(tickerId).getPosOrdersObservableList().get(mikePosOrdersNumber);
         }
@@ -221,6 +244,15 @@ public class MainModelThread extends Thread {
 
         public ObservableList<PriceServer> getPriceServerObservableList() {
             return priceServerObservableList;
+        }
+
+        /**
+         * returns the list of all MikePosOrders for the instrument defined by TickerID
+         * @param tickerID
+         * @return
+         */
+        public ObservableList<MikePosOrders> getMikePosOrdersList(int tickerID){
+            return dataMap.get(tickerID).getPosOrdersObservableList();
         }
 
         public ObservableList<MikePosOrders> getPosOrdersObservableList(int tickerId) {
@@ -252,7 +284,10 @@ public class MainModelThread extends Thread {
                 count++;
 //                Thread.sleep(refreshGUIInMiliseconds);
                 isReady = true;
-                if (count%10 == 0) System.out.println("Mainloop count: " + count + " MainLoop turnaround in miliseconds: " + mainLoopTurnaroundTime);
+                if (count%10 == 0) MikeSimLogger.addLogEvent("Mainloop count: " + count + " MainLoop turnaround in miliseconds: " + mainLoopTurnaroundTime);
+
+
+//                    System.out.println("Mainloop count: " + count + " MainLoop turnaround in miliseconds: " + mainLoopTurnaroundTime);
             } catch (Exception e) {
                 e.printStackTrace();
             }

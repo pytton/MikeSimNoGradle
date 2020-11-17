@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Main extends Application {
-
     //All logic handled here:
     public MainModelThread mainModelThread;
 
@@ -44,8 +43,15 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        //create the logger:
+        MikeSimLogger logger = MikeSimLogger.getInstance();
+
         //JavaFX application reguires this line. It does JavaFX stuff and then calls start(Stage primaryStage)
         launch(args);
+
+        System.out.println("Ending program and writing to MikeSimLog.txt");
+        MikeSimLogger.printLogToFile();
+
     }
 
     //this defines which instruments (contracts) will be available for trading

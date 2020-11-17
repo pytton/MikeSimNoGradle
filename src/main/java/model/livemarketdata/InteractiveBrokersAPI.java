@@ -30,51 +30,20 @@ import java.util.Map;
  */
 public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAPIConnection {
 
-    // Keep track of the next Order ID
-    private int nextOrderID = 0;
-    // The IB API Client Socket object
+    private static InteractiveBrokersAPI instance = null;
 
-    //todo: make this private:
-    public EClientSocket client = null;
-
-    @Override
-    public EClientSocket getEClientSocket() {
-        return client;
+    public static InteractiveBrokersAPI getInstance(Map<Integer, TradedInstrument> tradedInstrumentMap) {
+        if(instance == null){
+            synchronized (InteractiveBrokersAPI.class) {
+                if(instance == null){
+                    instance = new InteractiveBrokersAPI(tradedInstrumentMap);
+                }
+            }
+        }
+        return instance;
     }
 
-    private boolean connectedToTWS = false;
-    private boolean contractsAlreadySetupFlag = false;
-
-
-    //TickerID for development experiments set here:
-    private final int defaulTickerID = 0;
-    //for default contract (without need for tickerID):
-    private double bidPrice = -5;
-    private double askPrice = -5;
-    private double bidSize = -5;
-    private double askSize = -5;
-
-//    this stores all the live market data for each tickerID
-//     * Currently(defined in tradedInstrumentsMap):
-//     * TickerID 0 = SPY
-//     * TickerID 1 = DIA
-//     * TickerID 2 = IWM
-//     * TickerID 3 = QQQ
-//     * TickerID 4 = EUR (FOREX)
-    private Map<Integer /*tickerID*/, PriceData /*TradedInstrument*/> priceDataMap = new HashMap<>();
-
-    //Instruments available for trading defined here:
-    private Map<Integer /*tickerID*/, TradedInstrument> tradedInstrumentMap;// = new HashMap<>();
-
-    public List<PriceData> historicalPriceData = new ArrayList();
-
-    public Map<Integer/*tickerID*/, List<PriceData>> historicalPriceDataMap = new HashMap<>();
-
-    public Map<Integer, List<PriceData>> getHistoricalPriceDataMap() {
-        return historicalPriceDataMap;
-    }
-
-    public InteractiveBrokersAPI(Map<Integer, TradedInstrument> tradedInstrumentMap) {
+    private InteractiveBrokersAPI(Map<Integer, TradedInstrument> tradedInstrumentMap) {
         this.tradedInstrumentMap= tradedInstrumentMap;
 
         for(TradedInstrument instrument : tradedInstrumentMap.values()){
@@ -100,8 +69,45 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
 //        }
     }
 
+    // Keep track of the next Order ID
+    private int nextOrderID = 0;
+    // The IB API Client Socket object
+    private EClientSocket client = null;
+    @Override
+    public EClientSocket getEClientSocket() {
+        return client;
+    }
 
+    private boolean connectedToTWS = false;
+    private boolean contractsAlreadySetupFlag = false;
 
+    //TickerID for development experiments set here:
+    private final int defaulTickerID = 0;
+    //for default contract (without need for tickerID):
+    private double bidPrice = -5;
+    private double askPrice = -5;
+    private double bidSize = -5;
+    private double askSize = -5;
+
+//    this stores all the live market data for each tickerID
+//     * Currently(defined in tradedInstrumentsMap):
+//     * TickerID 0 = SPY
+//     * TickerID 1 = DIA
+//     * TickerID 2 = IWM
+//     * TickerID 3 = QQQ
+//     * TickerID 4 = EUR (FOREX)
+    private Map<Integer /*tickerID*/, PriceData /*TradedInstrument*/> priceDataMap = new HashMap<>();
+
+    //Instruments available for trading defined here:
+    private Map<Integer /*tickerID*/, TradedInstrument> tradedInstrumentMap;
+
+    public List<PriceData> historicalPriceData = new ArrayList();
+
+    public Map<Integer/*tickerID*/, List<PriceData>> historicalPriceDataMap = new HashMap<>();
+
+    public Map<Integer, List<PriceData>> getHistoricalPriceDataMap() {
+        return historicalPriceDataMap;
+    }
 
     public class PriceData {
 
@@ -243,6 +249,21 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
         return false;
     }
 
+    @Override
+    public void disconnect() {
+        System.out.println("Attempting to disconnect from Outside Trading Software API");
+        if(client != null){
+            try {
+                client.eDisconnect();
+            } catch (Exception e) {
+                System.out.println("Error while attempting to disconnect");
+                e.printStackTrace();
+            }
+            System.out.println("Disconnected from Outside Trading API");
+        }
+
+    }
+
 
     private boolean connectToTWS() {
         //check if already connected:
@@ -259,12 +280,15 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
                 // Port Number (should match TWS/IB Gateway configuration
                 client.eConnect(null, 7496, 0);
                 int connectionAttempts = 5;
+                System.out.println("Attempting to connect to InterActiveBrokers TWS API");
 
                 for (int i = 0; i < connectionAttempts; i++) {
                     if (client.isConnected()) {
                         connectedToTWS = true;
+                        System.out.println("Connection attempt successful!");
                         return true;
                     }
+                    System.out.println("Failed to connect. Retrying in 1000 ms");
                     // Pause here for connection to complete
                     Thread.sleep(1000);
                 }
@@ -306,8 +330,6 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
 
             for(TradedInstrument instrument : tradedInstrumentMap.values())
             {
-
-
                 contract.m_symbol = instrument.getSymbol();
                 contract.m_exchange = instrument.getExchange();
                 contract.m_secType = instrument.getSecType();
@@ -392,8 +414,22 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
         }
     }
 
+    /**
+     * This is called by InterActiveBrokers TWS API periodically whenever the API wants to communicated changes in price
+     * @param tickerId
+     * @param field
+     * @param price
+     * @param canAutoExecute
+     */
     @Override
     public void tickPrice(int tickerId, int field, double price, int canAutoExecute) {
+
+        //if TWS API passes price as -1.00 or 0 - it means price is not available:
+        if(price == -1.00 || price == 0) {
+            System.out.println("EMPTY PRICE sent by TWS API");
+            return;
+        }
+
         try {
             // Print out the current price.
             // field will provide the price type:

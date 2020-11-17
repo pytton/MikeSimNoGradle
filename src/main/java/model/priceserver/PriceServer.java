@@ -19,6 +19,10 @@ public class PriceServer {
     final public String TradedInstrumentName;
     private OutsideTradingSoftwareAPIConnection outsideTradingSoftwareAPIConnection = null;
 
+    /**
+     * Returns the name of the instrument traded by this PriceServer
+     * @return
+     */
     @Override
     public String toString() {
         return TradedInstrumentName;

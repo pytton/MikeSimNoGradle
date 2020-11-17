@@ -1,7 +1,3 @@
-
-com.ib.client
-com.ib.contracts
-com.ib.controller
 main.java.controllerandview
 main.java.controllerandview.algocontrollers
 main.java.controllerandview.algomanagerwindow
@@ -14,3 +10,4 @@ main.java.model.mikealgos
 main.java.model.orderserver
 main.java.model.positionsorders
 main.java.model.priceserver
+main.java.prototypes

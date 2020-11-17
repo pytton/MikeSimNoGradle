@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MikeSimNoGradle:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/MikeSimNoGradle_jar</output-path>
+    <root id="archive" name="MikeSimNoGradle.jar">
+      <element id="module-output" name="MikeSimNoGradle" />
+    </root>
+  </artifact>
+</component>

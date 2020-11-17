@@ -26,6 +26,8 @@ public interface OutsideTradingSoftwareAPIConnection {
      */
     boolean connect();
 
+    void disconnect();
+
     /**
      * returns bid price of default contract
      */

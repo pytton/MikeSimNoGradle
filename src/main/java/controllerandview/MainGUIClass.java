@@ -14,6 +14,7 @@ import main.java.controllerandview.positionswindow.controller.ControllerPosition
 import main.java.controllerandview.pricecontrolwindow.controller.ControllerPriceControlPanel;
 import main.java.model.MainModelThread;
 import main.java.model.priceserver.PriceServer;
+import main.java.prototypes.CommonGUI;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,13 +24,16 @@ public class MainGUIClass {
 
     //this used so MainModelThread can periodically send signals to windows to update their data from the model
     public interface Updatable {
+        /**
+         * called by Mainloop. Updates all GUI windows
+         */
         public void updateGUI();
     }
 
 
     //Windows can choose which instrument they refer to. this sets the default instrument set at startup
     int defaultTickerId = 0;
-    private long count = 0;
+//    private long count = 0;
     public MainModelThread mainModelThread;
 
     //this stores windows which will be called by updateGUI method:
@@ -47,16 +51,12 @@ public class MainGUIClass {
             }
         }
 
-        count++;
+//        count++;
     }
 
     public void initializeGUI(Stage initialStage, /*PriceServer priceServer,*/ MainModelThread mainModelThread) throws Exception {
-
-
         this.mainModelThread = mainModelThread;
-
         //create PrimaryGUIWindow
-
         FXMLLoader primaryGUIWindowLoader = new FXMLLoader(getClass().getResource("/MainGUIWindow.fxml"));
         Parent primaryGUIRoot = primaryGUIWindowLoader.load();
         ControllerMainGUIWindow primaryGUIWindow = (ControllerMainGUIWindow) primaryGUIWindowLoader.getController();
@@ -67,11 +67,14 @@ public class MainGUIClass {
         initialStage.setScene(new Scene(primaryGUIRoot));
         initialStage.setTitle("MikeSimulator prototype 0.1");
 
+        //display the initial window:
         initialStage.show();
-
 
     }
 
+    /**
+     * Creates a new PositionsWindow
+     */
     public void createPosWindow() {
         //create Positions Window:
         //we need to add custom MikeGridPane not defined in FXML:
@@ -85,9 +88,6 @@ public class MainGUIClass {
             return;
         }
 
-        //add the controller to the list of controllers (for updateGUI):
-        updatableWindowsList.add(creator.getController());
-
         //create the window:
         Stage stage = new Stage();
         stage.setX(0);
@@ -100,7 +100,8 @@ public class MainGUIClass {
         String name = ("PositionsWindow " + updatableWindowsList.size());
         stage.setTitle(name);
 
-
+        //add the controller to the list of controllers (for updateGUI):
+        updatableWindowsList.add(creator.getController());
 
     }
 
@@ -217,11 +218,12 @@ public class MainGUIClass {
             controller.setMikePosOrders(mainModelThread.posOrdersManager.getMikePosOrders(defaultTickerId, 0));
 
             //populate the ListView that allows choosing PosOrders
-            controller.positionsList.setItems(mainModelThread.posOrdersManager.getPosOrdersObservableList(defaultTickerId));
+//            controller.positionsList.setItems(mainModelThread.posOrdersManager.getPosOrdersObservableList(defaultTickerId));
+
+            controller.setPositionsList(mainModelThread.posOrdersManager.getPosOrdersObservableList(defaultTickerId));
 
             //set the initial priceServer(this can later be changed by user in the window)
             controller.setPriceServer(priceServer);
-
 
         }
 

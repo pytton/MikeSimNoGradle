@@ -6,7 +6,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
@@ -20,13 +19,19 @@ import main.java.model.MainModelThread;
 import main.java.model.orderserver.MikeOrder;
 import main.java.model.positionsorders.AggregatedPosOrders;
 import main.java.model.positionsorders.MikePosOrders;
-import main.java.model.positionsorders.MikePosition;
 import main.java.model.priceserver.PriceServer;
 import main.java.controllerandview.MikeGridPane;
+import main.java.prototypes.CommonGUI;
 
 import java.util.*;
 
-public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler, MainGUIClass.Updatable {
+/**
+ * To create this window, you need to call createPosWindow() in MainGUIClass.java
+ */
+public class ControllerPositionsWindow
+        implements MikeGridPane.MikeButtonHandler,
+        MainGUIClass.Updatable,
+        CommonGUI.ICommonGUI {
 
 
     private int topRowPrice = 27150; //used with MikeGridPane and UpdateGUI
@@ -41,12 +46,15 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
     private MainModelThread model;
     protected MikePosOrders mikePosOrders;
     private AggregatedPosOrders aggregatedPosOrders = new AggregatedPosOrders();
-
     @FXML
     public BorderPane mainBorderPane;
-    public ListView positionsList;
-    public ListView instrumentsList;
-    public CheckBox aggregatedCheckBox;
+    @FXML //this is where all the orders are routed to
+    private ListView positionsList;
+    @FXML //this holds the instruments available for trading
+    private ListView instrumentsList;
+    @FXML
+    private CheckBox aggregatedCheckBox;
+    @FXML //this is where secondary actions are routed to
     public ListView targetPositionsList;
 
     @FXML
@@ -421,25 +429,35 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
     @FXML
     public void testTwoButtonClicked(ActionEvent actionEvent) {
 
-        //testing: generate new MikeGridPane with more columns:
+        //testing: set mikePosOrders using dialog:
 
-        mikeGridPane = new MikeGridPane(30, 12, this);
 
-        VBox topVbox = new VBox();
-        topMikeGridPane = new MikeGridPane(3, 12, new MikeGridPane.EmptyMikeButtonHandler());
-        bottomMikeGridPane = new MikeGridPane(1, 12, new MikeGridPane.EmptyMikeButtonHandler());
+        System.out.println("PriceServer before change: " + priceServer.toString());
 
-        topMikeGridPane.setPadding(new Insets(0, 15, 0, 0));
-        bottomMikeGridPane.setPadding(new Insets(0, 15, 0, 0));
-        topVbox.getChildren().add(topMikeGridPane);
+        CommonGUI.setPriceServer(this, model);
 
-        ScrollPane sp = new ScrollPane();
-        sp.setContent(mikeGridPane);
-        sp.setFitToWidth(true);
-        topVbox.getChildren().add(sp);
-        topVbox.getChildren().add(bottomMikeGridPane);
 
-        getMainBorderPane().setLeft(topVbox);
+        System.out.println("PriceServer after change: " + priceServer.toString());
+
+//        //testing: generate new MikeGridPane with more columns:
+//
+//        mikeGridPane = new MikeGridPane(30, 12, this);
+//
+//        VBox topVbox = new VBox();
+//        topMikeGridPane = new MikeGridPane(3, 12, new MikeGridPane.EmptyMikeButtonHandler());
+//        bottomMikeGridPane = new MikeGridPane(1, 12, new MikeGridPane.EmptyMikeButtonHandler());
+//
+//        topMikeGridPane.setPadding(new Insets(0, 15, 0, 0));
+//        bottomMikeGridPane.setPadding(new Insets(0, 15, 0, 0));
+//        topVbox.getChildren().add(topMikeGridPane);
+//
+//        ScrollPane sp = new ScrollPane();
+//        sp.setContent(mikeGridPane);
+//        sp.setFitToWidth(true);
+//        topVbox.getChildren().add(sp);
+//        topVbox.getChildren().add(bottomMikeGridPane);
+//
+//        getMainBorderPane().setLeft(topVbox);
 
 
 
@@ -536,6 +554,11 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
         this.priceServer = priceServer;
     }
 
+    @Override
+    public PriceServer getPriceServer() {
+        return priceServer;
+    }
+
     public BorderPane getMainBorderPane() {
         return mainBorderPane;
     }
@@ -552,9 +575,21 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
         return mikePosOrders;
     }
 
+    /**
+     * Sets the primary MikePosOrders that this Window is operating on
+     * @param mikePosOrders
+     */
+    @Override
     public void setMikePosOrders(MikePosOrders mikePosOrders) {
         this.mikePosOrders = mikePosOrders;
     }
+
+    /**
+     * Defines MikePosOrders available to be selected in this window.
+     * This needs to be called when changing the instrument traded
+     * @param positionsList
+     */
+    public void setPositionsList(ObservableList positionsList) { this.positionsList.setItems(positionsList); }
 
     public void sellLimitButtonClicked(ActionEvent actionEvent) {
         Integer price = Integer.parseInt(orderPriceTextField.getText());
@@ -600,7 +635,7 @@ public class ControllerPositionsWindow implements MikeGridPane.MikeButtonHandler
      * If you want to print aggregated data from multiple positions, pass in aggregatedPosOrders as argument;
      * For a single MikePosOrders, pass in mikePosOrders
      */
-    private void printout(MikePosOrders mikePosOrders) {
+    private synchronized void printout(MikePosOrders mikePosOrders) {
         try {
 
             int totalOpenAmount = mikePosOrders.getTotalOpenAmount();
