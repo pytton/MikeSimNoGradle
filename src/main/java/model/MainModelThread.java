@@ -7,6 +7,8 @@ import main.java.controllerandview.MainGUIClass;
 import main.java.model.livemarketdata.InteractiveBrokersAPI;
 import main.java.model.livemarketdata.OutsideTradingSoftwareAPIConnection;
 import main.java.model.orderserver.OrderServer;
+import main.java.model.orderserver.OrderServerRealExternal;
+import main.java.model.orderserver.OrderServerSimulatedInternal;
 import main.java.model.positionsorders.MikePosOrders;
 import main.java.model.positionsorders.MikePosition;
 import main.java.model.priceserver.PriceServer;
@@ -96,7 +98,7 @@ public class MainModelThread extends Thread {
     private void processOrdersAndCalculatePL(){
         for(PosOrdersManager.Data data: posOrdersManager.dataMap.values()){
             //check for fills in orderserver of every traded instrument:
-            data.getOrderServer().checkSimulatedFills(data.getPriceServer());
+            data.getOrderServer().checkFills(data.getPriceServer());
 
             //go through all the MikePosOrders, process filled orders and recalculate the PL for each of them:
             for(MikePosOrders positions : data.getPosOrdersObservableList()){
@@ -165,7 +167,9 @@ public class MainModelThread extends Thread {
                 this.tickerId = tickerId;
                 this.tradedInstrumentName = tradedInstrumentName;
                 posOrdersObservableList = FXCollections.observableArrayList();
-                orderServer = new OrderServer();
+                MikeSimLogger.addLogEvent("Creating simulated OrderServer - implement OrderServerRealExternal to send orders to real market");
+                orderServer = new OrderServerSimulatedInternal();
+//                orderServer = new OrderServerRealExternal();
                 //marketConnection taken from outer class:
                 priceServer = new PriceServer(tickerId, tradedInstrumentName, marketConnection);
 

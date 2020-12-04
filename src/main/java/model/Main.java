@@ -40,9 +40,6 @@ public class Main extends Application {
     @Override
     public void stop(){
         System.out.println("Shutting down.");
-
-
-
         mainModelThread.shutDownMikeSim();
 //        MainModelThread.interrupted = true;
     }
