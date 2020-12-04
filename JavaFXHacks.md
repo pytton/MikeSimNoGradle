@@ -38,3 +38,10 @@ public static ThreadSafeSingleton getInstanceUsingDoubleLocking(){
     return instance;
 }
 
+Custom components in SceneBuilder:
+https://rterp.wordpress.com/2014/05/21/adding-custom-javafx-components-to-scene-builder-2-0/
+
+https://rterp.wordpress.com/2013/09/13/creating-custom-javafx-components-with-scene-builder-and-fxml/
+
+https://rterp.wordpress.com/2014/07/28/adding-custom-javafx-component-to-scene-builder-2-0-part-2/
+

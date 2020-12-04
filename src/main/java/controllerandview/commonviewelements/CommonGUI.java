@@ -1,4 +1,4 @@
-package main.java.prototypes;
+package main.java.controllerandview.commonviewelements;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;

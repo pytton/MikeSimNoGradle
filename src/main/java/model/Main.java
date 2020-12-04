@@ -3,6 +3,7 @@ package main.java.model;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import main.java.controllerandview.MainGUIClass;
+import main.java.model.orderserver.OrderServer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,7 +40,11 @@ public class Main extends Application {
     @Override
     public void stop(){
         System.out.println("Shutting down.");
-        MainModelThread.interrupted = true;
+
+
+
+        mainModelThread.shutDownMikeSim();
+//        MainModelThread.interrupted = true;
     }
 
     public static void main(String[] args) {

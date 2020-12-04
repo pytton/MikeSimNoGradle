@@ -6,3 +6,7 @@ Made EClientSocket in InterActiveBrokersAPI private
 Added getPosOrdersObservableList to  MainModelThread.PosOrdersManager
 changed ControllerPositionsWindow.printout() to synchronized
 Added MikeSimLogger and updated .gitignore
+
+2020/11/17
+Moved CommonGUI.java from prototypes to commonviewelements
+

@@ -1,6 +1,5 @@
 package main.java.controllerandview;
 
-import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
@@ -14,7 +13,6 @@ import main.java.controllerandview.positionswindow.controller.ControllerPosition
 import main.java.controllerandview.pricecontrolwindow.controller.ControllerPriceControlPanel;
 import main.java.model.MainModelThread;
 import main.java.model.priceserver.PriceServer;
-import main.java.prototypes.CommonGUI;
 
 import java.io.IOException;
 import java.util.ArrayList;

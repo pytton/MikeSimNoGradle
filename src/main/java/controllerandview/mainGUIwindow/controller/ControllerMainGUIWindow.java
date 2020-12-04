@@ -68,8 +68,16 @@ public class ControllerMainGUIWindow {
         mainGUIClass.createAlgoManagerWindow();
     }
 
+    /**
+     * Requests historical data from TWS API. TWS limits "duraion" parameter to no more than 3000.
+     * duration is currently hardcoded as expressed in number of seconds.
+     * Look into docs for reqHistoricalData() in TWS API for details
+     * @param actionEvent
+     */
     public void reqHistDataClicked(ActionEvent actionEvent) {
-        //todo: experimenting:
+        //todo:
+        //TWS limits "duration" to 3000. think of a way to split requests over 3000 to smaller
+        //consecutive ones of 3000 each
 
         Contract contract = new Contract();
 

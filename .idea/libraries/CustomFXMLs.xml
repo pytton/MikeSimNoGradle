@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="CustomFXMLs">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/out/artifacts/CustomFXMLs_jar/CustomFXMLs.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/CustomFXMLs/src" />
+    </SOURCES>
+  </library>
+</component>

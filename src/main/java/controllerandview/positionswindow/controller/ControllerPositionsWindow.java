@@ -21,7 +21,7 @@ import main.java.model.positionsorders.AggregatedPosOrders;
 import main.java.model.positionsorders.MikePosOrders;
 import main.java.model.priceserver.PriceServer;
 import main.java.controllerandview.MikeGridPane;
-import main.java.prototypes.CommonGUI;
+import main.java.controllerandview.commonviewelements.CommonGUI;
 
 import java.util.*;
 

@@ -3,8 +3,6 @@ package main.java.model;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import main.java.controllerandview.MainGUIClass;
 import main.java.model.livemarketdata.InteractiveBrokersAPI;
 import main.java.model.livemarketdata.OutsideTradingSoftwareAPIConnection;
@@ -12,11 +10,8 @@ import main.java.model.orderserver.OrderServer;
 import main.java.model.positionsorders.MikePosOrders;
 import main.java.model.positionsorders.MikePosition;
 import main.java.model.priceserver.PriceServer;
-import main.java.prototypes.CommonGUI;
 
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.TreeMap;
 
 public class MainModelThread extends Thread {
@@ -83,13 +78,15 @@ public class MainModelThread extends Thread {
      */
     public void shutDownMikeSim(){
 
-        //stop the main loop:
-        interrupted = true;
         //disconnect from OutSideTradingSoftware if connected:
         try{
+            MikeSimLogger.addLogEvent("shutDownMikeSim called. Attempting to disconnect from TWS API");
             marketConnection.disconnect();
         }
-        catch (Exception e){}
+        catch (Exception e){MikeSimLogger.addLogEvent("Exception while disconnecting from TWS API");}
+
+        //stop the main loop:
+        interrupted = true;
     }
 
     private void processAlgos(){
