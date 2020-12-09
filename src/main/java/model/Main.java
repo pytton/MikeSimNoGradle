@@ -8,6 +8,30 @@ import main.java.model.orderserver.OrderServer;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Main classes and their responsibilities:
+ *
+ * MainGUIclass - this runs in its own thread and is responsible for creating and managing
+ * all of the GUI windows
+ *
+ * MainModelThread - runs in a seperate thread than MainGUIClass and is responsible for all
+ * of the logic
+ *
+ * MikePosOrders - a single "book" used for trading. One MikePosOrders
+ * holds a Map<Integer, MikePosition> - MikePosition stores the open amount,
+ * open, closed Profit/Loss for a single price level in cents. MikePosOrders then sums
+ * all the single MikePositions up for a total of open amount and profit/loss for all the MikePositions.
+ * All orders have to be placed/cancelled from MikePosOrders.
+ *
+ * AlgoManager - all algos have to be created and cancelled using this. Keeps a tally of all active algos
+ *
+ * MainModelThread.PosOrdersManager - this is responsible for creating new MikePosOrders and linking them
+ * with the correct OrderServer and PriceServer
+ *
+ * InteractiveBrokersAPI implements OutsideTradingSoftwareAPIConnection - this is a link to an API
+ * of a trading software from a broker. Currently using Interactive Brokers but write everything so
+ * that it is easy to replace this class with a different one from a different broker
+ */
 public class Main extends Application {
     //All logic handled here:
     public MainModelThread mainModelThread;

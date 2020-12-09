@@ -21,12 +21,8 @@ public class AlgoManager{
 
     MainModelThread model;
 
-
-//    public ObservableSet<MikeAlgo> algoSet;
-
     public ObservableList<MikeAlgo> algoSet;
 
-//    public Set<MikeAlgo> algoSet;
     Set<MikeAlgo> cancelledAlgoSet;
     //we need this if we want to cancel algos of specific type:
     Set<SimpleScalperAlgo> simpleScalperAlgoSet;
@@ -72,15 +68,15 @@ public class AlgoManager{
 
     synchronized public void createScalperAlgo1(MikePosOrders posOrders, int entryPrice, int targetPrice, int orderAmount, MikeOrder.MikeOrderType entry){
 
-        //todo: experimenting
-        System.out.println("Experimenting. Creating Simple Scalper Algo in child of MikePosOrders:");
+//       // experimenting
+//        System.out.println("Experimenting. Creating Simple Scalper Algo in child of MikePosOrders:");
+//
+//        MikePosOrders child = posOrders.createChildPosOrders();
+//        SimpleScalperAlgo algo = new SimpleScalperAlgo(child, entryPrice, targetPrice, orderAmount, entry );
 
-        MikePosOrders child = posOrders.createChildPosOrders();
-        SimpleScalperAlgo algo = new SimpleScalperAlgo(child, entryPrice, targetPrice, orderAmount, entry );
 
-
-//        System.out.println("Creating SimpleScalperAlgo for MikePosOrders " + posOrders.getName());
-//        SimpleScalperAlgo algo = new SimpleScalperAlgo(posOrders, entryPrice, targetPrice, orderAmount, entry );
+        MikeSimLogger.addLogEvent("Creating SimpleScalperAlgo for MikePosOrders " + posOrders.getName());
+        SimpleScalperAlgo algo = new SimpleScalperAlgo(posOrders, entryPrice, targetPrice, orderAmount, entry );
 
         algoSet.add(algo);
         simpleScalperAlgoSet.add(algo);
@@ -104,7 +100,6 @@ public class AlgoManager{
         algoSet.removeAll(algosToCancel);
         cancelledAlgoSet.addAll(algosToCancel);
     }
-
 
     synchronized public void createComplexScalperAlgoUp1(MikePosOrders posOrders, int lowerTarget, int interval, int howManyScalpers, int amount, MikeOrder.MikeOrderType entry) {
         ComplexScalperAlgo1 algo = new ComplexScalperAlgo1(posOrders, lowerTarget, interval, howManyScalpers, amount, entry);
@@ -158,6 +153,8 @@ public class AlgoManager{
         }
     }
 
+    //todo: this doesn't look right. eg if algo is a SimpleStepperAlgo it will not get removed
+    //from     Set<SimpleScalperAlgo> simpleScalperAlgoSet; - is this supposed to be that way?
     public synchronized void cancelAlgo(MikeAlgo algoToCancel) {
 
         algoToCancel.cancel();

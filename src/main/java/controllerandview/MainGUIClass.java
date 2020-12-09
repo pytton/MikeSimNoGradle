@@ -18,6 +18,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * All windows created here.
+ * At start of program, creates and displays the first window.
+ * updateGUI has to be called by the main loop all the time to update windows with new data
+ * from model
+ */
 public class MainGUIClass {
 
     //this used so MainModelThread can periodically send signals to windows to update their data from the model
@@ -40,7 +46,10 @@ public class MainGUIClass {
     //   private List<ControllerPriceControlPanel> priceControlPanelControllerList = new ArrayList<>();
     //   private List<ControllerPositionsWindow> posWindowControllerList = new ArrayList<>();
 
-    //called by Mainloop. Updates all GUI windows
+
+    /**
+     * called by Mainloop. Updates all GUI windows
+     */
     public void updateGUI() {
 
         for (Updatable controller : updatableWindowsList) {
@@ -52,6 +61,13 @@ public class MainGUIClass {
 //        count++;
     }
 
+    /**
+     * This called at start of program to set things up and create and
+     * display the first GUI window
+     * @param initialStage
+     * @param mainModelThread
+     * @throws Exception
+     */
     public void initializeGUI(Stage initialStage, /*PriceServer priceServer,*/ MainModelThread mainModelThread) throws Exception {
         this.mainModelThread = mainModelThread;
         //create PrimaryGUIWindow
@@ -71,7 +87,7 @@ public class MainGUIClass {
     }
 
     /**
-     * Creates a new PositionsWindow
+     * Creates and displays a new PositionsWindow
      */
     public void createPosWindow() {
         //create Positions Window:
@@ -103,6 +119,9 @@ public class MainGUIClass {
 
     }
 
+    /**
+     * Creates and displays a new AlgoManagerWindow
+     */
     public void createAlgoManagerWindow() {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/AlgoManagerPanel.fxml"));
@@ -128,6 +147,9 @@ public class MainGUIClass {
 
     }
 
+    /**
+     * Creates and displays a new Price Control Window
+     */
     public void createPriceControlWindow() {
         //create Price Control window:
         FXMLLoader priceControlPanelLoader = new FXMLLoader(getClass().getResource("/PriceControlPanel.fxml"));
@@ -165,8 +187,10 @@ public class MainGUIClass {
         return mainModelThread;
     }
 
-    //Used to create and setup MikePositionsWindow.
-    class MikePositionsWindowCreator {
+    /**
+     * Used to create and setup MikePositionsWindow.
+     */
+    private class MikePositionsWindowCreator {
 
         private FXMLLoader loader;// = new FXMLLoader(getClass().getResource("PositionsWindow.fxml"));
         private Parent positionsWindowRoot;
@@ -235,68 +259,3 @@ public class MainGUIClass {
         }
     }
 }
-
-
-
-    //Used to create and setup MikePositionsWindow.
-//    class ConsolidatedPositionsWindowCreator {
-
-//        private FXMLLoader loader;// = new FXMLLoader(getClass().getResource("PositionsWindow.fxml"));
-//        private Parent positionsWindowRoot;
-//        public ControllerPositionsWindow controller;
-//        private MikeGridPane buttonTable;
-//
-//        public ConsolidatedPositionsWindowCreator(PriceServer priceServer) throws IOException {
-//            //load FXML file
-////            loader = new FXMLLoader(getClass().getResource("/PositionsWindow.fxml"));
-//            loader = new FXMLLoader(getClass().getResource("/ConsolidatedPositionsWindow.fxml"));
-//            //this needed by JavaFX Scene constructor:
-//            positionsWindowRoot = loader.load(); //this might throw IOException
-//            //this is used to access elements of MikePositionsWindowCreator:
-//            controller = (ControllerPositionsWindow) loader.getController();
-//            //this adds a custom table of buttons to the scene
-//            buttonTable = new MikeGridPane(100,7, controller);
-//
-//            VBox topVbox = new VBox();
-//            MikeGridPane topGridPane = new MikeGridPane(1,7, new MikeGridPane.EmptyMikeButtonHandler());
-//            MikeGridPane bottomGridPane = new MikeGridPane(1, 7, new MikeGridPane.EmptyMikeButtonHandler());
-//
-//            topGridPane.setPadding( new Insets(0, 15, 0, 0));
-//            bottomGridPane.setPadding( new Insets(0, 15, 0, 0));
-//            topVbox.getChildren().add(topGridPane);
-//
-//            ScrollPane sp = new ScrollPane();
-//            sp.setContent(buttonTable);
-//            sp.setFitToWidth(true);
-//            topVbox.getChildren().add(sp);
-//            topVbox.getChildren().add(bottomGridPane);
-//
-//            controller.getMainBorderPane().setLeft(topVbox);
-//
-//            controller.setMikeGridPane(buttonTable);
-//
-//            controller.setModel(mainModelThread);
-//
-//            //set the default instrument
-//            controller.setInstrumentList(mainModelThread.posOrdersManager.getPriceServerObservableList());
-//
-//            controller.setMikePosOrders(mainModelThread.posOrdersManager.getMikePosOrders(defaultTickerId, 0));
-//
-//            //populate the ListView that allows choosing PosOrders
-//            controller.positionsList.setItems(mainModelThread.posOrdersManager.getPosOrdersObservableList(defaultTickerId));
-//
-//            //set the initial priceServer(this can later be changed by user in the window)
-//            controller.setPriceServer(priceServer);
-//        }
-//
-//        public Parent getPositionsWindowRoot() {
-//            return positionsWindowRoot;
-//        }
-//
-//        public ControllerPositionsWindow getController() {
-//            return controller;
-//        }
-//    }
-
-
-//}

@@ -1,0 +1,13 @@
+main.java.controllerandview
+main.java.controllerandview.algocontrollers
+main.java.controllerandview.algomanagerwindow
+main.java.controllerandview.commonviewelements
+main.java.controllerandview.mainGUIwindow.controller
+main.java.controllerandview.positionswindow.controller
+main.java.controllerandview.pricecontrolwindow.controller
+main.java.model
+main.java.model.livemarketdata
+main.java.model.mikealgos
+main.java.model.orderserver
+main.java.model.positionsorders
+main.java.model.priceserver

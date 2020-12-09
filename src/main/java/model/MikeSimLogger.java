@@ -4,7 +4,8 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
 /**
- * Used for debugging
+ * Created at program start and used for logging and displaying messages in the console
+ * use IJ IDEA "soum" + tab shortcut instead of "sout" to log all messages
  */
 public class MikeSimLogger {
     private static StringBuilder log;

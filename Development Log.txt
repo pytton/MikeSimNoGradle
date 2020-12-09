@@ -10,3 +10,8 @@ Added MikeSimLogger and updated .gitignore
 2020/11/17
 Moved CommonGUI.java from prototypes to commonviewelements
 
+202/11/30
+Issue tracking now handled in Youtrack:
+https://mstawowy.myjetbrains.com/youtrack/projects/7358e1c5-857c-47dd-b351-b4a3817454cc
+
+

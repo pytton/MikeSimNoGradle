@@ -7,7 +7,75 @@ import main.java.model.priceserver.PriceServer;
 
 import java.util.*;
 
+/**
+ *
+ */
 public class MikePosOrders {
+
+    public MikePosOrders(OrderServer orderServer, PriceServer priceServer) {
+        this.orderServer = orderServer;
+        this.priceServer = priceServer;
+        ordersAtPrice = new OrdersAtPrice();
+    }
+
+    /**
+     * Use this to place a new order. Passes the order to the OrderServer.
+     * returns the orderID obtained from orderServer
+     * @return
+     */
+    synchronized public long placeNewOrder(MikeOrder.MikeOrderType orderType, int assignedToPos, int price, int amount) {
+
+        System.out.println("Placing new order in " + getName());
+        //send the order to orderserver and get the order number:
+        long orderNumber = orderServer.placeNewOrder(this, orderType, assignedToPos, price, amount);
+        //add the order number to the list of active orders:
+        activeOrdersSet.add(orderNumber);
+        //UPDATE OPEN ORDERS BY PRICE
+        ordersAtPrice.recalculateOpenOrdersAtPrice();
+        return orderNumber;
+    }
+
+    /**
+     * Once order gets filled in OrderServer, OrderServer uses this method to notify MikePosOrders about it, so that
+     * MikePosOrders can process the filled order
+     */
+    synchronized public void notifyAboutFill(long OrderId) {
+        filledOrdersToBeProcessed.add(OrderId);
+    }
+
+    /**
+     * Cancel an order if you know its orderId
+     *
+     * @param orderId
+     */
+    public synchronized void cancelOrder(long orderId) {
+        orderServer.cancelOrder(orderId);
+        activeOrdersSet.remove(orderId);
+        //RECALCULATE ACTIVE ORDERS BY PRICE
+        ordersAtPrice.recalculateOpenOrdersAtPrice();
+    }
+
+    //todo: this doesn't cancel the orders at this price in child MikePosOrders
+    public synchronized void cancelAllOrdersAtPrice(int price) {
+        Set<Long> orderIdToCancelSet = new HashSet<>();
+
+        for (Long orderId : activeOrdersSet) {
+            if (orderServer.getMikeOrder(orderId).getPrice() == price) {
+                orderIdToCancelSet.add(orderId);
+            }
+        }
+        for (Long orderId : orderIdToCancelSet) {
+            orderServer.cancelOrder(orderId);
+            activeOrdersSet.remove(orderId);
+        }
+        ordersAtPrice.recalculateOpenOrdersAtPrice();
+
+        System.out.println("Cancelling all orders at price. NOT CANCELLING IN CHILDREN! " + price + " in " + getName());
+    }
+
+    protected MikePosOrders() {
+
+    }
 
     /**
      * The name of this MikePosOrders:
@@ -38,37 +106,6 @@ public class MikePosOrders {
     private Set<MikePosOrders> childPosOrders = new HashSet<>();
     private OrderServer orderServer;
     public PriceServer priceServer; //we need this to calculate Profit/Loss (PL)
-
-    private boolean recalculateChildren = true;
-
-    public void setRecalculateChildren(boolean setting) {
-        recalculateChildren = setting;
-    }
-
-
-    public MikePosOrders() {
-
-    }
-
-    public MikePosOrders(OrderServer orderServer, PriceServer priceServer) {
-        this.orderServer = orderServer;
-        this.priceServer = priceServer;
-        ordersAtPrice = new OrdersAtPrice();
-    }
-
-    /**
-     * For use by algos
-     *
-     * @return
-     */
-    public MikePosOrders createChildPosOrders() {
-        MikePosOrders child = new MikePosOrders(orderServer, priceServer);
-        child.setName("" + name + " child" + (childPosOrders.size() + 1));
-        //this is needed for recalcualteOrdersAtPrice methond:
-        child.setParent(this);
-        childPosOrders.add(child);
-        return child;
-    }
 
     /**
      * Returns the total amount of all open BUY orders in this MikePosOrders.
@@ -264,6 +301,10 @@ public class MikePosOrders {
     }
 
 
+    /**
+     * This calculates: openPL, closedPL, totalPL, totalOpenAmount, averagePrice
+     * and zeroProfitPoint
+     */
     public synchronized void recalcutlatePL() {
 
         //calculate values for this MikePosOrders:
@@ -382,31 +423,6 @@ public class MikePosOrders {
     }
 
     /**
-     * Use this to place a new order. Passes the order to the OrderServer
-     *
-     * @return
-     */
-    synchronized public long placeNewOrder(MikeOrder.MikeOrderType orderType, int assignedToPos, int price, int amount) {
-
-        System.out.println("Placing new order in " + getName());
-        //send the order to orderserver and get the order number:
-        long orderNumber = orderServer.placeNewOrder(this, orderType, assignedToPos, price, amount);
-        //add the order number to the list of active orders:
-        activeOrdersSet.add(orderNumber);
-        //UPDATE OPEN ORDERS BY PRICE
-        ordersAtPrice.recalculateOpenOrdersAtPrice();
-        return orderNumber;
-    }
-
-    /**
-     * Once order gets filled in OrderServer, OrderServer uses this method to notify MikePosOrders about it, so that
-     * MikePosOrders can process the filled order
-     */
-    synchronized public void notifyAboutFill(long OrderId) {
-        filledOrdersToBeProcessed.add(OrderId);
-    }
-
-    /**
      * This needs to be called in a loop. This processes all the filled orders and updates the positions with
      * the amounts that have been filled
      */
@@ -451,35 +467,7 @@ public class MikePosOrders {
         ordersAtPrice.recalculateOpenOrdersAtPrice();
     }
 
-    /**
-     * Cancel an order if you know its orderId
-     *
-     * @param orderId
-     */
-    public synchronized void cancelOrder(long orderId) {
-        orderServer.cancelOrder(orderId);
-        activeOrdersSet.remove(orderId);
-        //RECALCULATE ACTIVE ORDERS BY PRICE
-        ordersAtPrice.recalculateOpenOrdersAtPrice();
-    }
 
-    //todo: this doesn't cancel the orders at this price in child MikePosOrders
-    public synchronized void cancelAllOrdersAtPrice(int price) {
-        Set<Long> orderIdToCancelSet = new HashSet<>();
-
-        for (Long orderId : activeOrdersSet) {
-            if (orderServer.getMikeOrder(orderId).getPrice() == price) {
-                orderIdToCancelSet.add(orderId);
-            }
-        }
-        for (Long orderId : orderIdToCancelSet) {
-            orderServer.cancelOrder(orderId);
-            activeOrdersSet.remove(orderId);
-        }
-        ordersAtPrice.recalculateOpenOrdersAtPrice();
-
-        System.out.println("Cancelling all orders at price. NOT CANCELLING IN CHILDREN! " + price + " in " + getName());
-    }
 
     /**
      * For testing purposes
@@ -561,4 +549,29 @@ public class MikePosOrders {
     public int getBidPrice(){
         return priceServer.getBidPrice();
     }
+
+
+    private boolean recalculateChildren = true;
+
+    /**
+     * old failed experiment
+     * @param setting
+     */
+    private void setRecalculateChildren(boolean setting) {
+        recalculateChildren = setting;
+    }
+
+    /**
+     * Old failed experiment
+     * @return
+     */
+    private MikePosOrders createChildPosOrders() {
+        MikePosOrders child = new MikePosOrders(orderServer, priceServer);
+        child.setName("" + name + " child" + (childPosOrders.size() + 1));
+        //this is needed for recalcualteOrdersAtPrice methond:
+        child.setParent(this);
+        childPosOrders.add(child);
+        return child;
+    }
+
 }

@@ -442,9 +442,15 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
             //priceDataMap contains prices for all tickerIds
             PriceData priceData = priceDataMap.get(tickerId);
 
+            //todo:
+            //make sure that Bid price is always at least 1 cent lower than ask price
+            //before updating prices in priceData
+
             switch (field) {
                 case 1: priceData.setBidPrice(price);
+                break;
                 case 2: priceData.setAskPrice(price);
+                break;
             }
 
             if (tickerId == defaulTickerID) {
