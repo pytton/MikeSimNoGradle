@@ -14,64 +14,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0212a54c-a94c-4dfe-9eec-4ace680f76bc" name="Default Changelist" comment="MSim-16 - fix bid price = ask price done. Created model.helpers.DoubleCompare class for comparing double values in the future.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/helpers/DoubleCompare.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/prototypes/DoubleEqualTest.java" afterDir="false" />
+    <list default="true" id="0212a54c-a94c-4dfe-9eec-4ace680f76bc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaDoc/index-files/index-16.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/index-files/index-16.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaDoc/main/java/controllerandview/algocontrollers/ControllerPlainOrder.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/main/java/controllerandview/algocontrollers/ControllerPlainOrder.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaDoc/main/java/controllerandview/algomanagerwindow/ControllerAlgoManagerPanel.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/main/java/controllerandview/algomanagerwindow/ControllerAlgoManagerPanel.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaDoc/main/java/controllerandview/commonviewelements/CommonGUI.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/main/java/controllerandview/commonviewelements/CommonGUI.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaDoc/main/java/controllerandview/mainGUIwindow/controller/ControllerMainGUIWindow.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/main/java/controllerandview/mainGUIwindow/controller/ControllerMainGUIWindow.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaDoc/main/java/controllerandview/positionswindow/controller/ControllerPositionsWindow.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/main/java/controllerandview/positionswindow/controller/ControllerPositionsWindow.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaDoc/main/java/controllerandview/positionswindow/controller/ControllerScalperAlgo1.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/main/java/controllerandview/positionswindow/controller/ControllerScalperAlgo1.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaDoc/main/java/controllerandview/pricecontrolwindow/controller/ControllerPriceControlPanel.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/main/java/controllerandview/pricecontrolwindow/controller/ControllerPriceControlPanel.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaDoc/main/java/prototypes/CommonGUI.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/main/java/prototypes/CommonGUI.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MikeSimulator.xmind" beforeDir="false" afterPath="$PROJECT_DIR$/MikeSimulator.xmind" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/AlgoManagerPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/AlgoManagerPanel.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/MainGUIWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/MainGUIWindow.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/PositionsWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/PositionsWindow.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/PriceControlPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/PriceControlPanel.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MainGUIClass$MikePositionsWindowCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MainGUIClass$MikePositionsWindowCreator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MainGUIClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MainGUIClass.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MikeGridPane.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MikeGridPane.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollers/ControllerPlainOrder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollers/ControllerPlainOrder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algomanagerwindow/ControllerAlgoManagerPanel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/mainGUIwindow/controller/ControllerMainGUIWindow.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/positionswindow/controller/ControllerPositionsWindow$1ChoiceBoxChangeListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/positionswindow/controller/ControllerPositionsWindow$1MyInstrumentChangeListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/positionswindow/controller/ControllerPositionsWindow$1MyPosOrdersChangeListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/positionswindow/controller/ControllerPositionsWindow.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/positionswindow/controller/ControllerScalperAlgo1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/pricecontrolwindow/controller/ControllerPriceControlPanel$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/pricecontrolwindow/controller/ControllerPriceControlPanel$1MyChangeListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/pricecontrolwindow/controller/ControllerPriceControlPanel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/AlgoManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/AlgoManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/livemarketdata/InteractiveBrokersAPI$PriceData.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/livemarketdata/InteractiveBrokersAPI$PriceData.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/livemarketdata/InteractiveBrokersAPI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/livemarketdata/InteractiveBrokersAPI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/livemarketdata/InteractiveBrokersAPITestDrive.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/livemarketdata/InteractiveBrokersAPITestDrive.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/orderserver/OrderServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/orderserver/OrderServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/AlgoManagerPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/AlgoManagerPanel.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/MainGUIWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/MainGUIWindow.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/PositionsWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/PositionsWindow.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/PriceControlPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/PriceControlPanel.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/MainGUIClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/MainGUIClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/MikeGridPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/MikeGridPane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollers/ControllerPlainOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollers/ControllerPlainOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/algomanagerwindow/ControllerAlgoManagerPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerAlgoManagerPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/commonviewelements/CommonGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/CommonGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/mainGUIwindow/controller/ControllerMainGUIWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerMainGUIWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/positionswindow/controller/ControllerPositionsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/positionswindow/controller/ControllerScalperAlgo1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollers/ControllerScalperAlgo1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/pricecontrolwindow/controller/ControllerPriceControlPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerPriceControlWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/livemarketdata/InteractiveBrokersAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/livemarketdata/InteractiveBrokersAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/orderserver/OrderServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/orderserver/OrderServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/AlgoManagerPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AlgoManagerPanel.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/MainGUIWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/MainGUIWindow.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/PositionsWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PositionsWindow.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/PriceControlPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PriceControlPanel.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -247,7 +191,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607526293210</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Moved javafx window controllers to single package called windowcontrollers.&#10;MSim-15 - review MikeSimNoGradle - still working on that.&#10;Started working on MikeSimulator.xmind.&#10;&#10;MSim-16 - fix bid price = ask price done. Created model.helpers.DoubleCompare class for comparing double values in the future.&#10;MSim-3 - done. OrderServerRealExternal still not implemented.">
+      <created>1607948877216</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1607948877216</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -324,7 +275,8 @@
     <MESSAGE value="Made OrderServer abstract and created two new classes that extend from it: OrderServerSimulatedInternal and OrderServerRealExternal&#10;OrderServerRealExternal not implemented yet - has empty methods" />
     <MESSAGE value="Starting work on MSim-14 and MSim-15.&#10;Cleaned up MikePosOrders a little bit.&#10;Starting to create comments for main classes.&#10;Updated gitignore to exclude JavaDoc files from diff view." />
     <MESSAGE value="Changed gitignore to exclude JavaDoc. Working on MSim-15. Added some comments to code. Updating MikeSimulator.xmind &#10;Before changing package structure in controllerandview.algocontrollers" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed gitignore to exclude JavaDoc. Working on MSim-15. Added some comments to code. Updating MikeSimulator.xmind &#10;Before changing package structure in controllerandview.algocontrollers" />
+    <MESSAGE value="Moved javafx window controllers to single package called windowcontrollers.&#10;MSim-15 - review MikeSimNoGradle - still working on that.&#10;Started working on MikeSimulator.xmind.&#10;&#10;MSim-16 - fix bid price = ask price done. Created model.helpers.DoubleCompare class for comparing double values in the future.&#10;MSim-3 - done. OrderServerRealExternal still not implemented." />
+    <option name="LAST_COMMIT_MESSAGE" value="Moved javafx window controllers to single package called windowcontrollers.&#10;MSim-15 - review MikeSimNoGradle - still working on that.&#10;Started working on MikeSimulator.xmind.&#10;&#10;MSim-16 - fix bid price = ask price done. Created model.helpers.DoubleCompare class for comparing double values in the future.&#10;MSim-3 - done. OrderServerRealExternal still not implemented." />
   </component>
   <component name="WindowStateProjectService">
     <state x="854" y="1074" width="889" height="635" key="#Inspections" timestamp="1607102790698">
@@ -369,12 +321,12 @@
     </state>
     <state x="1948" y="1306" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/-1920.1105.1920.1055/3840.1350.1280.775/0.25.3840.2135@0.25.3840.2135" timestamp="1605611820297" />
     <state x="1948" y="1306" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1607352678440" />
-    <state x="593" y="578" width="1440" height="875" key="CommitChangelistDialog2" timestamp="1607948322143">
+    <state x="0" y="25" width="1920" height="1067" key="CommitChangelistDialog2" timestamp="1607948876838">
       <screen x="0" y="25" width="3840" height="2135" />
     </state>
     <state x="1378" y="926" width="845" height="1117" key="CommitChangelistDialog2/-1920.1105.1920.1055/3840.1350.1280.775/0.25.3840.2135@0.25.3840.2135" timestamp="1605616631015" />
     <state x="0" y="25" width="1440" height="875" key="CommitChangelistDialog2/0.25.1440.875@0.25.1440.875" timestamp="1607684669008" />
-    <state x="593" y="578" width="1722" height="1360" key="CommitChangelistDialog2/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1607948322143" />
+    <state x="0" y="25" width="1920" height="1067" key="CommitChangelistDialog2/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1607948876838" />
     <state x="388" y="724" width="1664" height="1336" key="DiffContextDialog" timestamp="1607097342489">
       <screen x="0" y="25" width="3840" height="2135" />
     </state>
