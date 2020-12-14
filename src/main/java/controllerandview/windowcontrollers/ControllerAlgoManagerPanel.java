@@ -1,4 +1,4 @@
-package main.java.controllerandview.algomanagerwindow;
+package main.java.controllerandview.windowcontrollers;
 
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;

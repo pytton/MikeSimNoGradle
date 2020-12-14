@@ -1,8 +1,7 @@
-package main.java.controllerandview.pricecontrolwindow.controller;
+package main.java.controllerandview.windowcontrollers;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,7 +9,7 @@ import javafx.scene.control.*;
 import main.java.controllerandview.MainGUIClass;
 import main.java.model.priceserver.PriceServer;
 
-public class ControllerPriceControlPanel implements MainGUIClass.Updatable {
+public class ControllerPriceControlWindow implements MainGUIClass.Updatable {
 
     public TextField histPrcDate;
     public TextField tempoTextField;
@@ -68,8 +67,8 @@ public class ControllerPriceControlPanel implements MainGUIClass.Updatable {
         //this handles changing the instrument PriceControlPanel refers to based on what the user
         //selected in in ListView instrumentlist:
         class MyChangeListener implements ChangeListener{
-            ControllerPriceControlPanel controllerPriceControlPanel;
-            MyChangeListener(ControllerPriceControlPanel controllerPriceControlPanel){
+            ControllerPriceControlWindow controllerPriceControlPanel;
+            MyChangeListener(ControllerPriceControlWindow controllerPriceControlPanel){
                 this.controllerPriceControlPanel = controllerPriceControlPanel;
             }
 

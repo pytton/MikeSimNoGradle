@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<Pane minHeight="-Infinity" prefHeight="800.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllerandview.pricecontrolwindow.controller.ControllerPriceControlPanel">
+<Pane minHeight="-Infinity" prefHeight="800.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllerandview.windowcontrollers.ControllerPriceControlWindow">
    <children>
       <HBox alignment="CENTER" prefHeight="800.0" prefWidth="300.0">
          <children>

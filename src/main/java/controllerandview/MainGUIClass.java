@@ -7,10 +7,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import main.java.controllerandview.algomanagerwindow.ControllerAlgoManagerPanel;
-import main.java.controllerandview.mainGUIwindow.controller.ControllerMainGUIWindow;
-import main.java.controllerandview.positionswindow.controller.ControllerPositionsWindow;
-import main.java.controllerandview.pricecontrolwindow.controller.ControllerPriceControlPanel;
+import main.java.controllerandview.windowcontrollers.ControllerAlgoManagerPanel;
+import main.java.controllerandview.windowcontrollers.ControllerMainGUIWindow;
+import main.java.controllerandview.windowcontrollers.ControllerPositionsWindow;
+import main.java.controllerandview.windowcontrollers.ControllerPriceControlWindow;
 import main.java.model.MainModelThread;
 import main.java.model.priceserver.PriceServer;
 
@@ -43,7 +43,7 @@ public class MainGUIClass {
     //this stores windows which will be called by updateGUI method:
     private List<Updatable> updatableWindowsList = new ArrayList<>();
 
-    //   private List<ControllerPriceControlPanel> priceControlPanelControllerList = new ArrayList<>();
+    //   private List<ControllerPriceControlWindow> priceControlPanelControllerList = new ArrayList<>();
     //   private List<ControllerPositionsWindow> posWindowControllerList = new ArrayList<>();
 
 
@@ -162,7 +162,7 @@ public class MainGUIClass {
         }
 
         //get the controller class:
-        ControllerPriceControlPanel priceControlPanel = (ControllerPriceControlPanel) priceControlPanelLoader.getController();
+        ControllerPriceControlWindow priceControlPanel = (ControllerPriceControlWindow) priceControlPanelLoader.getController();
         //set the priceserver chosen at the beginning:
         priceControlPanel.setPriceServer(getMainModelThread().posOrdersManager.getPriceServer(defaultTickerId));
         //adding list of priceservers:

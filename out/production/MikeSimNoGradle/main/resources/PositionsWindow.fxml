@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="mainBorderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pickOnBounds="false" prefHeight="1000.0" prefWidth="640.0" scaleShape="false" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllerandview.positionswindow.controller.ControllerPositionsWindow">
+<BorderPane fx:id="mainBorderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pickOnBounds="false" prefHeight="1000.0" prefWidth="640.0" scaleShape="false" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllerandview.windowcontrollers.ControllerPositionsWindow">
    <center>
       <!--<TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">-->
         <!--<columns>-->

@@ -19,6 +19,7 @@ import com.ib.client.OrderState;
 import com.ib.client.CommissionReport;
 import com.ib.client.UnderComp;
 import main.java.model.TradedInstrument;
+import main.java.model.helpers.DoubleCompare;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,6 +33,11 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
 
     private static InteractiveBrokersAPI instance = null;
 
+    /**
+     * Make sure only one instance of this class exists
+     * @param tradedInstrumentMap
+     * @return
+     */
     public static InteractiveBrokersAPI getInstance(Map<Integer, TradedInstrument> tradedInstrumentMap) {
         if(instance == null){
             synchronized (InteractiveBrokersAPI.class) {
@@ -62,11 +68,6 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
             historicalPriceDataMap.put(instrument.getTickerId(), historicalPriceData);
 
         }
-
-
-//        for (int tickerID = 0; tickerID < 5; tickerID++) {
-//            this.priceDataMap.put(tickerID, new PriceData());
-//        }
     }
 
     // Keep track of the next Order ID
@@ -123,10 +124,10 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
         public double bidSize = -5;
         public double askSize = -5;
 
-        public PriceData() {
+        private PriceData() {
         }
 
-        public PriceData(int tickerId, String symbol, String exchange, String secType, String currency) {
+        private PriceData(int tickerId, String symbol, String exchange, String secType, String currency) {
             this.tickerId = tickerId;
             this.symbol = symbol;
             this.exchange = exchange;
@@ -415,7 +416,9 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
     }
 
     /**
-     * This is called by InterActiveBrokers TWS API periodically whenever the API wants to communicated changes in price
+     * This is called by InterActiveBrokers TWS API periodically whenever the API wants to communicate changes in price
+     * Since this is used for filling simulated orders, if bid price passed by API would be equal to or higher than ask price,
+     * this ensures ask price is always at least minBidAskSpread cent higher than bid price
      * @param tickerId
      * @param field
      * @param price
@@ -442,14 +445,27 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
             //priceDataMap contains prices for all tickerIds
             PriceData priceData = priceDataMap.get(tickerId);
 
-            //todo:
-            //make sure that Bid price is always at least 1 cent lower than ask price
+            //make sure that Bid price is always at least minBidAskSpread lower than ask price
             //before updating prices in priceData
 
+            //The minimum enforced difference between the bid price and ask price:
+            final double minBidAskSpread = 0.01d;
+
             switch (field) {
-                case 1: priceData.setBidPrice(price);
+                case 1: //"field" defines what "price" is - if price provided by API is BID price this happens
+                    //if bid price will be higher or equal to ask price, make sure ask price is
+                    //at least minBidAskSpread cent higher than bid price
+                    if(DoubleCompare.equals(price , priceData.getAskPrice()) || DoubleCompare.greaterThan(price , priceData.getAskPrice())
+                    ) priceData.setAskPrice(price + minBidAskSpread);
+                    //set the current bid price:
+                    priceData.setBidPrice(price);
                 break;
-                case 2: priceData.setAskPrice(price);
+                case 2: //if price provided by API is ASK price this happens
+                    //ensure ask price is always higher than bid price:
+                    if(DoubleCompare.equals(price , priceData.getAskPrice()) || DoubleCompare.lessThan(price , priceData.getAskPrice())
+                    ) priceData.setBidPrice(price - minBidAskSpread);
+                    //set the current ask price:
+                    priceData.setAskPrice(price);
                 break;
             }
 

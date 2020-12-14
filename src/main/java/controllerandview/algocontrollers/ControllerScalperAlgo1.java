@@ -1,4 +1,4 @@
-package main.java.controllerandview.positionswindow.controller;
+package main.java.controllerandview.algocontrollers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;

@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import main.java.controllerandview.MainGUIClass;
 import main.java.model.orderserver.OrderServer;
+import main.java.prototypes.DoubleEqualTest;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -69,8 +70,14 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+
         //create the logger:
         MikeSimLogger logger = MikeSimLogger.getInstance();
+
+        //testing:
+        DoubleEqualTest test = new DoubleEqualTest();
+
+        test.runTest();
 
         //JavaFX application reguires this line. It does JavaFX stuff and then calls start(Stage primaryStage)
         launch(args);

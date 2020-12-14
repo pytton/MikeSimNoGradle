@@ -9,7 +9,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Font;
-import main.java.controllerandview.positionswindow.controller.ControllerPositionsWindow;
+import main.java.controllerandview.windowcontrollers.ControllerPositionsWindow;
 
 import java.util.ArrayList;
 

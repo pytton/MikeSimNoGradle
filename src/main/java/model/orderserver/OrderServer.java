@@ -8,6 +8,12 @@ import java.util.*;
 
 /**
  * One OrderServer for one instrument type traded.
+ * OrderServer can be implemented as:
+ * OrderServerRealExternal - sends oreder to OutsideTradingSoftwareAPIConnection to be executed
+ * by the real market through a broker; or:
+ * OrderServerSimulatedInternal - this checks prices continuously to simulate fills internally
+ *
+ * Decision has to be made at start of trading and cannot be changed while program is running
  *
  */
 abstract public class OrderServer {

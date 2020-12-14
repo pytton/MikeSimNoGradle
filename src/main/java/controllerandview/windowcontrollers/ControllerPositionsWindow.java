@@ -1,4 +1,4 @@
-package main.java.controllerandview.positionswindow.controller;
+package main.java.controllerandview.windowcontrollers;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -21,7 +21,7 @@ import main.java.model.positionsorders.AggregatedPosOrders;
 import main.java.model.positionsorders.MikePosOrders;
 import main.java.model.priceserver.PriceServer;
 import main.java.controllerandview.MikeGridPane;
-import main.java.controllerandview.commonviewelements.CommonGUI;
+import main.java.controllerandview.CommonGUI;
 
 import java.util.*;
 

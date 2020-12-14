@@ -1,4 +1,4 @@
-package main.java.controllerandview.mainGUIwindow.controller;
+package main.java.controllerandview.windowcontrollers;
 
 import com.ib.client.Contract;
 import javafx.event.ActionEvent;

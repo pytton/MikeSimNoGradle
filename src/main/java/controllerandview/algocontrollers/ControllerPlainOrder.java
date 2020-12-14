@@ -7,7 +7,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
-import main.java.controllerandview.positionswindow.controller.ControllerPositionsWindow;
+import main.java.controllerandview.windowcontrollers.ControllerPositionsWindow;
 import main.java.model.MainModelThread;
 import main.java.model.orderserver.MikeOrder;
 import main.java.model.positionsorders.MikePosOrders;
