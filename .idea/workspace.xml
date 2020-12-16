@@ -10,12 +10,34 @@
     </artifacts-to-build>
   </component>
   <component name="BranchesTreeState">
-    <expand />
-    <select />
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:refactoring" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0212a54c-a94c-4dfe-9eec-4ace680f76bc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollers/ControllerGuardAlgoPane1.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/algoControllers/GuardAlgoPane1.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Development Log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Development Log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MikeSimNoGradle.iml" beforeDir="false" afterPath="$PROJECT_DIR$/MikeSimNoGradle.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/livemarketdata/InteractiveBrokersAPI$PriceData.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/livemarketdata/InteractiveBrokersAPI$PriceData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/livemarketdata/InteractiveBrokersAPI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/livemarketdata/InteractiveBrokersAPI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/livemarketdata/InteractiveBrokersAPITestDrive.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/livemarketdata/InteractiveBrokersAPITestDrive.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerMainGUIWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerMainGUIWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/livemarketdata/InteractiveBrokersAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/livemarketdata/InteractiveBrokersAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/MainGUIWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/MainGUIWindow.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +85,7 @@
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.25876662" />
-    <property name="settings.editor.selected.configurable" value="editing.templates" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -302,15 +324,20 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="416" y="261" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1440.900@0.0.1440.900" timestamp="1605193834193" />
-    <state x="2447" y="1297" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog" timestamp="1605115016367">
-      <screen x="0" y="23" width="3840" height="2137" />
+    <state x="2068" y="1108" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog" timestamp="1608117657764">
+      <screen x="0" y="25" width="3840" height="2135" />
     </state>
     <state x="2447" y="1297" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog/-1920.1103.1920.1057/3840.1348.1280.777/0.23.3840.2137@0.23.3840.2137" timestamp="1605115016367" />
+    <state x="2068" y="1108" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1608117657764" />
     <state x="243" y="373" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1606404117841">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="243" y="373" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1440.900@0.0.1440.900" timestamp="1606404117841" />
     <state x="243" y="386" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.23.1440.877@0.23.1440.877" timestamp="1605104891623" />
+    <state x="2390" y="1555" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1608120639588">
+      <screen x="0" y="25" width="3840" height="2135" />
+    </state>
+    <state x="2390" y="1555" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1608120639588" />
     <state x="687" y="323" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1606405465908">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -387,17 +414,19 @@
     <state width="1102" height="712" key="GridCell.Tab.0.right/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1607699254062" />
     <state width="799" height="410" key="GridCell.Tab.0.right/3840.1348.1280.777/0.23.3840.2137/-1920.1103.1920.1057@0.23.3840.2137" timestamp="1603482233511" />
     <state width="1498" height="652" key="GridCell.Tab.0.right/3840.1350.1280.775/0.25.3840.2135/-1920.1105.1920.1055@0.25.3840.2135" timestamp="1605567264807" />
-    <state x="704" y="356" key="SettingsEditor" timestamp="1605563931887">
+    <state x="704" y="356" key="SettingsEditor" timestamp="1608117498551">
       <screen x="0" y="25" width="3840" height="2135" />
     </state>
     <state x="446" y="129" key="SettingsEditor/-1920.1103.1920.1057/3840.1348.1280.777/0.23.3840.2137@0.23.3840.2137" timestamp="1605113108709" />
     <state x="167" y="45" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1605193867571" />
     <state x="264" y="159" key="SettingsEditor/0.23.1440.877@0.23.1440.877" timestamp="1605473829724" />
+    <state x="704" y="356" key="SettingsEditor/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1608117498551" />
     <state x="704" y="356" key="SettingsEditor/3840.1350.1280.775/0.25.3840.2135/-1920.1105.1920.1055@0.25.3840.2135" timestamp="1605563931887" />
-    <state x="853" y="469" width="919" height="756" key="Vcs.Push.Dialog.v2" timestamp="1607365210206">
-      <screen x="0" y="25" width="3840" height="2135" />
+    <state x="320" y="207" width="770" height="466" key="Vcs.Push.Dialog.v2" timestamp="1608115716253">
+      <screen x="0" y="25" width="1440" height="875" />
     </state>
     <state x="320" y="187" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1606405545449" />
+    <state x="320" y="207" width="770" height="466" key="Vcs.Push.Dialog.v2/0.25.1440.875@0.25.1440.875" timestamp="1608115716253" />
     <state x="853" y="469" width="919" height="756" key="Vcs.Push.Dialog.v2/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1607365210206" />
     <state x="764" y="218" width="1341" height="821" key="dock-window-1" timestamp="1607948544656">
       <screen x="0" y="25" width="3840" height="2135" />

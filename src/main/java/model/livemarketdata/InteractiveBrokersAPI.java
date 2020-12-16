@@ -18,6 +18,7 @@ import com.ib.client.Order;
 import com.ib.client.OrderState;
 import com.ib.client.CommissionReport;
 import com.ib.client.UnderComp;
+import main.java.model.MikeSimLogger;
 import main.java.model.TradedInstrument;
 import main.java.model.helpers.DoubleCompare;
 
@@ -252,15 +253,15 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
 
     @Override
     public void disconnect() {
-        System.out.println("Attempting to disconnect from Outside Trading Software API");
+        MikeSimLogger.addLogEvent("Attempting to disconnect from Outside Trading Software API");
         if(client != null){
             try {
                 client.eDisconnect();
             } catch (Exception e) {
-                System.out.println("Error while attempting to disconnect");
+                MikeSimLogger.addLogEvent("Error while attempting to disconnect");
                 e.printStackTrace();
             }
-            System.out.println("Disconnected from Outside Trading API");
+            MikeSimLogger.addLogEvent("Disconnected from Outside Trading API");
         }
 
     }

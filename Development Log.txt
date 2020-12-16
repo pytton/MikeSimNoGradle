@@ -10,8 +10,13 @@ Added MikeSimLogger and updated .gitignore
 2020/11/17
 Moved CommonGUI.java from prototypes to commonviewelements
 
-202/11/30
+2020/11/30
 Issue tracking now handled in Youtrack:
 https://mstawowy.myjetbrains.com/youtrack/projects/7358e1c5-857c-47dd-b351-b4a3817454cc
 
-
+current commit:
+updated InterActiveBrokersAPI.disconnect() to print to log
+created GuardAlgoPane1
+created ControllerGuardAlgoPane1
+added "Create GuardAlgo Window" button to MainGUIWindow
+added createGueardAlgoClicked() method do ControllerMainGUIWindow

@@ -1,13 +1,17 @@
+# https://git-scm.com/docs/gitignore - info on how to use gitignore
+
 #.idea/
 #MikeSimNoGradle.iml
 
+# DS_Store is an apple finder file that is irratating and not needed for anything here:
 .DS_Store
-
+**/.DS_Store
 .idea/.DS_Store
+
 .idea/workspace.xml
 
 
-/.DS_Store
+
 /JavaDoc
 /out/production
 

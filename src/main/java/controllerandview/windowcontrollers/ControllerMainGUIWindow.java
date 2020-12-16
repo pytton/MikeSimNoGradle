@@ -99,4 +99,10 @@ public class ControllerMainGUIWindow {
 
 
     }
+
+    public void createGueardAlgoClicked(ActionEvent actionEvent) {//todo: implement this
+
+
+
+    }
 }
