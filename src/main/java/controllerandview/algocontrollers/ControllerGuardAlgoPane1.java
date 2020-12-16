@@ -9,9 +9,20 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+import main.java.controllerandview.CommonGUI;
+import main.java.model.MainModelThread;
+import main.java.model.MikeSimLogger;
+import main.java.model.mikealgos.MikeAlgo;
+import main.java.model.positionsorders.MikePosOrders;
+import main.java.model.priceserver.PriceServer;
 
-public class ControllerGuardAlgoPane1 {
+public class ControllerGuardAlgoPane1 extends AlgoController implements CommonGUI.ICommonGUI {
+
+    private MainModelThread model;
+    private MikePosOrders monitoredPosOrders = null; //this is the Positions that are being watched by the algo
+    private MikePosOrders orderTargetPosOrders = null; //this is where the orders are being sent to. it can be the same as monitoredPosOrders
 
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
@@ -24,6 +35,12 @@ public class ControllerGuardAlgoPane1 {
 
     @FXML // fx:id="ordersSentTo"
     private Button ordersSentTo; // Value injected by FXMLLoader
+
+    /**
+     * if this is checked, orders will be sent to the same MikePosOrders as the ones being monitored
+     */
+    @FXML
+    private CheckBox targetSameAsMonitoredAuto;
 
     @FXML // fx:id="bufferDistanceUp"
     private TextField bufferDistanceUp; // Value injected by FXMLLoader
@@ -77,11 +94,46 @@ public class ControllerGuardAlgoPane1 {
 
     @FXML
     void guardedPositionBtnPressed(ActionEvent event) {
+        MikeSimLogger.addLogEvent("Guarded position button pressed");
+        //we need to choose the instrument traded:
+        PriceServer priceServer = CommonGUI.setPriceServer(this, model);
+
+        //set the MikePosOrders being guarded:
+        monitoredPosOrders = CommonGUI.setMikePos(this, model, priceServer);
+
+        //display the name of the MikePosOrders being guarded:
+        guardedPosition.setText(monitoredPosOrders.getName());
+
+        //if the checkbox is selected, change the MikePosOrders orders will be sent to automatically:
+        if(targetSameAsMonitoredAuto.isSelected()) orderTargetPosOrders = monitoredPosOrders;
+        if (orderTargetPosOrders != null) {
+            ordersSentTo.setText(orderTargetPosOrders.getName());
+        }
+
+        //todo:
+        //if the algo has been created, update the algo with the new values:
+
 
     }
 
     @FXML
     void ordersSentToBtnPressed(ActionEvent event) {
+        MikeSimLogger.addLogEvent("Orders target button pressed");
+
+        //we are selecting target MikePosOrders different than monitored ones. do not autoselect in future:
+        targetSameAsMonitoredAuto.setSelected(false);
+        //get the instrument traded:
+        PriceServer priceServer = CommonGUI.setPriceServer(this, model);
+
+        //set the MikePosOrders where the algo will send its orders
+        orderTargetPosOrders = CommonGUI.setMikePos(this, model, priceServer);
+
+        if (orderTargetPosOrders != null) {
+            ordersSentTo.setText(orderTargetPosOrders.getName());
+        }
+
+
+//        MikeAlgo.status status = MikeAlgo.status.CREATED;
 
     }
 
@@ -105,6 +157,10 @@ public class ControllerGuardAlgoPane1 {
 
     }
 
+    public void setModel(MainModelThread model) {
+        this.model = model;
+    }
+
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
         assert guardedPosition != null : "fx:id=\"guardedPosition\" was not injected: check your FXML file 'GuardAlgoPane1.fxml'.";
@@ -119,6 +175,51 @@ public class ControllerGuardAlgoPane1 {
         assert activateDownBtn != null : "fx:id=\"activateDownBtn\" was not injected: check your FXML file 'GuardAlgoPane1.fxml'.";
         assert suspendDownBtn != null : "fx:id=\"suspendDownBtn\" was not injected: check your FXML file 'GuardAlgoPane1.fxml'.";
         assert statusDownBtn != null : "fx:id=\"statusDownBtn\" was not injected: check your FXML file 'GuardAlgoPane1.fxml'.";
+
+    }
+
+    @Override
+    public boolean cancel(int entryPrice, MainModelThread model, MikePosOrders posOrders) {
+        //todo: finish this:
+        MikeSimLogger.addLogEvent("Not implemented!");
+        return false;
+    }
+
+    @Override
+    public void mikeGridPaneButtonPressed(int pricePressed, MainModelThread model, MikePosOrders posOrders) {
+        MikeSimLogger.addLogEvent("Not implemented!");
+    }
+
+    @Override
+    public String getSimpleDescriptionRow1() {
+        MikeSimLogger.addLogEvent("Not implemented!");
+        return null;
+    }
+
+    @Override
+    public String getSimpleDescriptionRow2() {
+        MikeSimLogger.addLogEvent("Not implemented!");
+        return null;
+    }
+
+    @Override
+    public String getSimpleDescriptionRow3() {
+        MikeSimLogger.addLogEvent("Not implemented!");
+        return null;
+    }
+
+    @Override
+    public void setPriceServer(PriceServer priceServer) {
+
+    }
+
+    @Override
+    public PriceServer getPriceServer() {
+        return null;
+    }
+
+    @Override
+    public void setMikePosOrders(MikePosOrders posOrders) {
 
     }
 }

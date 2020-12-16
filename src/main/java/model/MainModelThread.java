@@ -33,8 +33,6 @@ public class MainModelThread extends Thread {
     public MainModelThread(MainGUIClass mainGUIClass, Map<Integer, TradedInstrument> tradedInstrumentMap){
         this.mainGUIClass = mainGUIClass;
         //set up connection to outside trading software for market data, orders, etc:
-//        marketConnection = new InteractiveBrokersAPI(tradedInstrumentMap);
-
         marketConnection = InteractiveBrokersAPI.getInstance(tradedInstrumentMap);
         //this stores a priceserver, orderserver and a list of MikePosOrders for each traded instrument:
         posOrdersManager = new PosOrdersManager(tradedInstrumentMap);

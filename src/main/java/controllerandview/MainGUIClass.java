@@ -7,11 +7,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import main.java.controllerandview.algocontrollers.ControllerGuardAlgoPane1;
 import main.java.controllerandview.windowcontrollers.ControllerAlgoManagerPanel;
 import main.java.controllerandview.windowcontrollers.ControllerMainGUIWindow;
 import main.java.controllerandview.windowcontrollers.ControllerPositionsWindow;
 import main.java.controllerandview.windowcontrollers.ControllerPriceControlWindow;
 import main.java.model.MainModelThread;
+import main.java.model.MikeSimLogger;
 import main.java.model.priceserver.PriceServer;
 
 import java.io.IOException;
@@ -38,7 +40,7 @@ public class MainGUIClass {
     //Windows can choose which instrument they refer to. this sets the default instrument set at startup
     int defaultTickerId = 0;
 //    private long count = 0;
-    public MainModelThread mainModelThread;
+    private MainModelThread mainModelThread;
 
     //this stores windows which will be called by updateGUI method:
     private List<Updatable> updatableWindowsList = new ArrayList<>();
@@ -73,10 +75,10 @@ public class MainGUIClass {
         //create PrimaryGUIWindow
         FXMLLoader primaryGUIWindowLoader = new FXMLLoader(getClass().getResource("/MainGUIWindow.fxml"));
         Parent primaryGUIRoot = primaryGUIWindowLoader.load();
-        ControllerMainGUIWindow primaryGUIWindow = (ControllerMainGUIWindow) primaryGUIWindowLoader.getController();
-        primaryGUIWindow.setMainGUIClass(this);
-        primaryGUIWindow.setModel(mainModelThread);
-        primaryGUIWindow.instrumentsList.setItems(mainModelThread.posOrdersManager.getPriceServerObservableList());
+        ControllerMainGUIWindow controllerPrimaryGUIWindow = (ControllerMainGUIWindow) primaryGUIWindowLoader.getController();
+        controllerPrimaryGUIWindow.setMainGUIClass(this);
+        controllerPrimaryGUIWindow.setModel(mainModelThread);
+        controllerPrimaryGUIWindow.instrumentsList.setItems(mainModelThread.posOrdersManager.getPriceServerObservableList());
 
         initialStage.setScene(new Scene(primaryGUIRoot));
         initialStage.setTitle("MikeSimulator prototype 0.1");
@@ -86,8 +88,12 @@ public class MainGUIClass {
 
     }
 
+    public MainModelThread getMainModelThread() {
+        return mainModelThread;
+    }
+
     /**
-     * Creates and displays a new PositionsWindow
+     * Creates and displays a new Positions window
      */
     public void createPosWindow() {
         //create Positions Window:
@@ -120,7 +126,7 @@ public class MainGUIClass {
     }
 
     /**
-     * Creates and displays a new AlgoManagerWindow
+     * Creates and displays a new AlgoManager window
      */
     public void createAlgoManagerWindow() {
 
@@ -148,7 +154,7 @@ public class MainGUIClass {
     }
 
     /**
-     * Creates and displays a new Price Control Window
+     * Creates and displays a new Price Control window
      */
     public void createPriceControlWindow() {
         //create Price Control window:
@@ -162,13 +168,13 @@ public class MainGUIClass {
         }
 
         //get the controller class:
-        ControllerPriceControlWindow priceControlPanel = (ControllerPriceControlWindow) priceControlPanelLoader.getController();
+        ControllerPriceControlWindow controllerPriceControlPanel = (ControllerPriceControlWindow) priceControlPanelLoader.getController();
         //set the priceserver chosen at the beginning:
-        priceControlPanel.setPriceServer(getMainModelThread().posOrdersManager.getPriceServer(defaultTickerId));
+        controllerPriceControlPanel.setPriceServer(getMainModelThread().posOrdersManager.getPriceServer(defaultTickerId));
         //adding list of priceservers:
-        priceControlPanel.setInstrumentList(mainModelThread.posOrdersManager.getPriceServerObservableList());
+        controllerPriceControlPanel.setInstrumentList(mainModelThread.posOrdersManager.getPriceServerObservableList());
         //add the controller to the list of controllers:
-        updatableWindowsList.add(priceControlPanel);
+        updatableWindowsList.add(controllerPriceControlPanel);
         //create the window:
         Stage primaryStage = new Stage();
         primaryStage.setTitle("Price Control");
@@ -183,8 +189,32 @@ public class MainGUIClass {
         primaryStage.setTitle(name);
     }
 
-    public MainModelThread getMainModelThread() {
-        return mainModelThread;
+    /**
+     * Creates and displays a new GuardAlgo window
+     */
+    public void createGuardAlgoWindow(){
+        FXMLLoader guardAlgoPanelLoader = new FXMLLoader(getClass().getResource("/algoControllers/GuardAlgoPane1.fxml"));
+        Parent guardAlgoPaneRoot = null; //FXMLLoader.load(getClass().getResource("view/SceneBuilder/PriceControlPanel.fxml"));
+        try {
+            guardAlgoPaneRoot = guardAlgoPanelLoader.load();
+        } catch (IOException e) {
+            MikeSimLogger.addLogEvent("Exception in createGuardAlgoWindow");
+            e.printStackTrace();
+        }
+        MikeSimLogger.addLogEvent("createGuardAlgoWindow called");
+        //get the controller class:
+        ControllerGuardAlgoPane1 controllerGuardAlgoPane1 = (ControllerGuardAlgoPane1) guardAlgoPanelLoader.getController();
+        //todo: add the controller to the list of updatable controllers:
+
+        //set the model:
+        controllerGuardAlgoPane1.setModel(mainModelThread);
+
+        //create the window:
+        Stage stage = new Stage();
+        stage.setTitle("GuardAlgo");
+        stage.setScene(new Scene(guardAlgoPaneRoot));
+
+        stage.show();
     }
 
     /**

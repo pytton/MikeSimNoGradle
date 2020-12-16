@@ -19,34 +19,45 @@ public class CommonGUI {
     }
 
     /**
-     * Gets the PriceServer from ICommonGUI and sets MikePosOrders inside class implementing ICommonGUI
+     *
+     * Sets MikePosOrders inside class implementing ICommonGUI
+     *
+     * if priceServer is supplied - MikePosOrders available for choosing will be for the instrument traded by that priceserver
+     * if it is null - attempts to get the priceserver from the class implementing the ICommonGUI interface
      * based on user choice in dialog
      * @param setMikePosOrdersTarget
      * @param model
+     * @param priceServer
      */
-    synchronized static public void setMikePos(ICommonGUI setMikePosOrdersTarget, MainModelThread model){
+    synchronized static public MikePosOrders setMikePos(ICommonGUI setMikePosOrdersTarget, MainModelThread model, PriceServer priceServer){
         System.out.println("Attempting to set MikePosOrders");
 
-        if (setMikePosOrdersTarget.getPriceServer() == null) {
-            System.out.println("Price server not available! Unable to set MikePosOrders!");
-            return;
+
+        //use priceServer supplied by call to method or try to get it if null
+        if (priceServer == null) {
+            if (setMikePosOrdersTarget.getPriceServer() == null) {
+                System.out.println("Price server not available! Unable to set MikePosOrders!");
+                return null;
+            }
+            else priceServer = setMikePosOrdersTarget.getPriceServer();
         }
+
 
 
         try {
             //get the list of available MikePosOrders from the model:
             List<MikePosOrders> dialogData = model.posOrdersManager.getMikePosOrdersList(
-                    setMikePosOrdersTarget.getPriceServer().getTickerID());
+                    priceServer.getTickerID());
 
             //make sure we have something to choose from:
-            if(dialogData.isEmpty()) return;
+            if(dialogData.isEmpty()) return null;
             MikePosOrders selected = dialogData.get(0);
 
             //create and display the dialog:
             ChoiceDialog dialog = new ChoiceDialog(dialogData.get(0), dialogData);
             dialog.setTitle("Select MikePosOrders");
             dialog.setHeaderText("MikePosOrders available for " +
-                    setMikePosOrdersTarget.getPriceServer().toString());
+                    priceServer.toString());
             Optional<MikePosOrders> result = dialog.showAndWait();
 
             //handle user selection:
@@ -54,6 +65,7 @@ public class CommonGUI {
                 selected = result.get();
                 System.out.println("Selection: " + selected.toString() + " Current bid price: " + selected.getBidPrice());
                 setMikePosOrdersTarget.setMikePosOrders(selected);
+                return selected;
             } else {
                 System.out.println("Selection Cancelled!");
             }
@@ -63,15 +75,16 @@ public class CommonGUI {
         }
 
 
+        return null;
     }
 
     /**
      * Sets the PriceServer in setPriceServerTarget according to user choice in a JavaFX Dialog pop-up window.
-     *
-     * @param setPriceServerTarget
+     *  @param setPriceServerTarget
      * @param model
+     * @return
      */
-    synchronized static public void setPriceServer(ICommonGUI setPriceServerTarget, MainModelThread model){
+    synchronized static public PriceServer setPriceServer(ICommonGUI setPriceServerTarget, MainModelThread model){
 
         System.out.println("Attempting to set PriceServer");
 
@@ -79,7 +92,7 @@ public class CommonGUI {
         List<PriceServer> dialogData = model.posOrdersManager.getPriceServerObservableList();
 
         //make sure we have something to choose from:
-        if(dialogData.isEmpty()) return;
+        if(dialogData.isEmpty()) return null;
         PriceServer selected = dialogData.get(0);
 
         //create and display the dialog:
@@ -97,6 +110,7 @@ public class CommonGUI {
             System.out.println("Selection Cancelled!");
         }
 
+        return selected;
     }
 
     /**

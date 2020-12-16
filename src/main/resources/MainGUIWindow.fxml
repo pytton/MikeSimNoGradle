@@ -6,38 +6,34 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<Pane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllerandview.windowcontrollers.ControllerMainGUIWindow">
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllerandview.windowcontrollers.ControllerMainGUIWindow">
    <children>
-      <AnchorPane layoutX="5.0" layoutY="9.0">
+      <VBox alignment="CENTER">
          <children>
+            <Button fx:id="createPosWindowButton" mnemonicParsing="false" onAction="#createPosWindowsButtonClicked" text="Create Positions Window" />
+            <Button fx:id="createPriceContrButton" mnemonicParsing="false" onAction="#createPriceContrWinClicked" text="Create Price Control WIndow" />
+            <Button fx:id="createAlgoManagerWinBtn" mnemonicParsing="false" onAction="#createAlgoManagerWindow" text="Create Algo Manager Window" />
+            <Button fx:id="createGuardAlgoWindow" mnemonicParsing="false" onAction="#createGueardAlgoClicked" text="Create GuardAlgo WIndow" />
+            <Button fx:id="connectOutsideDataButton" mnemonicParsing="false" onAction="#connectOutsideDataClicked" text="Connect Outside Data" />
             <VBox alignment="CENTER">
                <children>
-                  <Button fx:id="createPosWindowButton" mnemonicParsing="false" onAction="#createPosWindowsButtonClicked" text="Create Positions Window" />
-                  <Button fx:id="createPriceContrButton" mnemonicParsing="false" onAction="#createPriceContrWinClicked" text="Create Price Control WIndow" />
-                  <Button fx:id="createAlgoManagerWinBtn" mnemonicParsing="false" onAction="#createAlgoManagerWindow" text="Create Algo Manager Window" />
-                  <Button fx:id="createGuardAlgoWindow" mnemonicParsing="false" onAction="#createGueardAlgoClicked" text="Create GuardAlgo WIndow" />
-                  <Button fx:id="connectOutsideDataButton" mnemonicParsing="false" onAction="#connectOutsideDataClicked" text="Connect Outside Data" />
-                  <VBox alignment="CENTER">
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="INSTRUMENT" />
+                  <ListView fx:id="instrumentsList" prefHeight="100.0" prefWidth="240.0" />
+                  <Button fx:id="createPositionOrdersButton" mnemonicParsing="false" onAction="#createPositionOrdersClicked" text="Create PositionOrders" />
+                  <HBox prefHeight="30.0" prefWidth="240.0">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" text="INSTRUMENT" />
-                        <ListView fx:id="instrumentsList" prefHeight="100.0" prefWidth="240.0" />
-                        <Button fx:id="createPositionOrdersButton" mnemonicParsing="false" onAction="#createPositionOrdersClicked" text="Create PositionOrders" />
-                        <HBox prefHeight="30.0" prefWidth="240.0">
-                           <children>
-                              <TextField fx:id="histDataDate" prefHeight="25.0" prefWidth="90.0" text="20200121" />
-                              <TextField fx:id="histDataTime" prefHeight="25.0" prefWidth="90.0" text="20:00:00" />
-                              <TextField fx:id="histDataDuration" prefHeight="25.0" prefWidth="90.0" text="1800" />
-                           </children>
-                        </HBox>
-                        <Button fx:id="requestHistoricalData" mnemonicParsing="false" onAction="#reqHistDataClicked" text="Request Historical Data" />
+                        <TextField fx:id="histDataDate" prefHeight="25.0" prefWidth="90.0" text="20200121" />
+                        <TextField fx:id="histDataTime" prefHeight="25.0" prefWidth="90.0" text="20:00:00" />
+                        <TextField fx:id="histDataDuration" prefHeight="25.0" prefWidth="90.0" text="1800" />
                      </children>
-                  </VBox>
+                  </HBox>
+                  <Button fx:id="requestHistoricalData" mnemonicParsing="false" onAction="#reqHistDataClicked" text="Request Historical Data" />
                </children>
             </VBox>
          </children>
-      </AnchorPane>
+      </VBox>
    </children>
-</Pane>
+</AnchorPane>

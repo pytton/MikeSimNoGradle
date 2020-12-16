@@ -7,6 +7,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import main.java.controllerandview.MainGUIClass;
 import main.java.model.MainModelThread;
+import main.java.model.MikeSimLogger;
 import main.java.model.priceserver.PriceServer;
 
 public class ControllerMainGUIWindow {
@@ -16,17 +17,11 @@ public class ControllerMainGUIWindow {
     public TextField histDataDate;
     public TextField histDataTime;
     private MainGUIClass mainGUIClass;
+    private MainModelThread model;
 
     public void setModel(MainModelThread model) {
         this.model = model;
     }
-
-    private MainModelThread model;
-
-
-
-//    @FXML
-//    private Button createPosWindowButton;
 
     public void setMainGUIClass(MainGUIClass controller){
         mainGUIClass = controller;
@@ -34,7 +29,7 @@ public class ControllerMainGUIWindow {
 
     @FXML
     public void createPosWindowsButtonClicked(){
-        System.out.println("Primary GUI window clicked!");
+        MikeSimLogger.addLogEvent("Primary GUI window clicked!");
         mainGUIClass.createPosWindow();
     }
 
@@ -103,6 +98,8 @@ public class ControllerMainGUIWindow {
     public void createGueardAlgoClicked(ActionEvent actionEvent) {//todo: implement this
 
 
+
+        mainGUIClass.createGuardAlgoWindow();
 
     }
 }

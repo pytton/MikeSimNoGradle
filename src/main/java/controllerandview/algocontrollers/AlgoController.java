@@ -18,7 +18,6 @@ public abstract class AlgoController {
 
     public abstract String getSimpleDescriptionRow1();
     public abstract String getSimpleDescriptionRow2();
-
     public abstract String getSimpleDescriptionRow3();
     /* {
         return null;

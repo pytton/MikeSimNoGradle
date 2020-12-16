@@ -15,4 +15,12 @@ public interface MikeAlgo {
      * @return
      */
     public MikePosOrders getMikePosOrders();
+
+    public enum status{
+        CREATED,
+        RUNNING,
+        STOPPED
+    }
+
+
 }

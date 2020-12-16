@@ -14,9 +14,21 @@ Moved CommonGUI.java from prototypes to commonviewelements
 Issue tracking now handled in Youtrack:
 https://mstawowy.myjetbrains.com/youtrack/projects/7358e1c5-857c-47dd-b351-b4a3817454cc
 
-current commit:
+previous commit:
 updated InterActiveBrokersAPI.disconnect() to print to log
 created GuardAlgoPane1
 created ControllerGuardAlgoPane1
 added "Create GuardAlgo Window" button to MainGUIWindow
 added createGueardAlgoClicked() method do ControllerMainGUIWindow
+
+************************
+
+current commit:
+
+created createGuardAlgoWindow() method in MainGUIClass
+implementing ControllerGuardAlgoPane1
+buttons to choose MikePosOrders inside GuardAlgoPane1 now working
+checkbox in GuardAlgoPane1 working
+
+consider erasing abstract class mikealgos.BaseAlgo since it is not being used by anything even though algos extend from it
+for now, I moved public enum status from BaseAlgo to interface MikeAlgo
