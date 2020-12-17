@@ -14,7 +14,6 @@ import javafx.scene.control.TextField;
 import main.java.controllerandview.CommonGUI;
 import main.java.model.MainModelThread;
 import main.java.model.MikeSimLogger;
-import main.java.model.mikealgos.MikeAlgo;
 import main.java.model.positionsorders.MikePosOrders;
 import main.java.model.priceserver.PriceServer;
 
@@ -133,7 +132,6 @@ public class ControllerGuardAlgoPane1 extends AlgoController implements CommonGU
         }
 
 
-//        MikeAlgo.status status = MikeAlgo.status.CREATED;
 
     }
 

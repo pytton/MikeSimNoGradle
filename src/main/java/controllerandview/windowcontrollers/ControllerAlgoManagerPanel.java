@@ -1,13 +1,12 @@
 package main.java.controllerandview.windowcontrollers;
 
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import main.java.model.MainModelThread;
-import main.java.model.mikealgos.MikeAlgo;
+import main.java.model.mikealgos.BaseAlgo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +33,7 @@ public class ControllerAlgoManagerPanel {
 
 
 
-    public void setAlgoList(ObservableList<MikeAlgo> algoList) {
+    public void setAlgoList(ObservableList<BaseAlgo> algoList) {
         System.out.println("Attempting ");
         this.algoList.setItems(algoList);
     }
@@ -46,10 +45,10 @@ public class ControllerAlgoManagerPanel {
     public void cancelSelectedAlgoBtnPressed(ActionEvent actionEvent) {
         if (algoList.getSelectionModel().getSelectedItem() != null) {
 
-            List<MikeAlgo> algosToCancel = new ArrayList<>();
+            List<BaseAlgo> algosToCancel = new ArrayList<>();
             algosToCancel.addAll(algoList.getSelectionModel().getSelectedItems());
 
-            for(MikeAlgo algo : algosToCancel) {
+            for(BaseAlgo algo : algosToCancel) {
                 model.algoManager.cancelAlgo(algo);
             }
         }

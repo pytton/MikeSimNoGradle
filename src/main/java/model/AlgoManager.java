@@ -3,10 +3,7 @@ package main.java.model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
-import main.java.model.mikealgos.ComplexScalperAlgo1;
-import main.java.model.mikealgos.MikeAlgo;
-import main.java.model.mikealgos.SimpleScalperAlgo;
-import main.java.model.mikealgos.SimpleStepperAlgo;
+import main.java.model.mikealgos.*;
 import main.java.model.orderserver.MikeOrder;
 import main.java.model.positionsorders.MikePosOrders;
 
@@ -21,9 +18,9 @@ public class AlgoManager{
 
     MainModelThread model;
 
-    public ObservableList<MikeAlgo> algoSet;
+    public ObservableList<BaseAlgo> algoSet;
 
-    Set<MikeAlgo> cancelledAlgoSet;
+    Set<BaseAlgo> cancelledAlgoSet;
     //we need this if we want to cancel algos of specific type:
     Set<SimpleScalperAlgo> simpleScalperAlgoSet;
     Set<ComplexScalperAlgo1> complexScalperAlgo1Set;
@@ -43,7 +40,7 @@ public class AlgoManager{
      * This will cancel all working algos irrespective of their MikePosOrders or price:
      */
     synchronized public void cancelAllAlgosGlobally() {
-        for (MikeAlgo algo : algoSet) {
+        for (BaseAlgo algo : algoSet) {
             algo.cancel();
         }
         cancelledAlgoSet.addAll(algoSet);
@@ -54,8 +51,8 @@ public class AlgoManager{
      * Cancels all algos operating on a given MikePosOrders
      */
     synchronized public void cancelAllAlgosInMikePosOrders(MikePosOrders posOrders) {
-        Set<MikeAlgo> algosToCancel = new HashSet<>();
-        for (MikeAlgo algo : algoSet) {
+        Set<BaseAlgo> algosToCancel = new HashSet<>();
+        for (BaseAlgo algo : algoSet) {
             if (algo.getMikePosOrders() == posOrders) {
                 algo.cancel();
                 algosToCancel.add(algo);
@@ -87,7 +84,7 @@ public class AlgoManager{
      * @param entryPrice
      */
     synchronized public void cancelAllSimpleScalperAlgosAtPrice(int entryPrice, MikePosOrders posOrders) {
-        Set<MikeAlgo> algosToCancel = new HashSet<>();
+        Set<BaseAlgo> algosToCancel = new HashSet<>();
         //find all algos initialized with entryPrice and cancel them:
         for (SimpleScalperAlgo algo : simpleScalperAlgoSet) {
             if (algo.getEntryTargetPrice() == entryPrice && algo.getMikePosOrders() == posOrders) {
@@ -108,7 +105,7 @@ public class AlgoManager{
     }
 
     synchronized public void cancelAllComplexScalperAlgo1sAtPrice(int entryPrice, MikePosOrders posOrders) {
-        Set<MikeAlgo> algosToCancel = new HashSet<>();
+        Set<BaseAlgo> algosToCancel = new HashSet<>();
         //find all algos initialized with entryPrice and cancel them:
         for (ComplexScalperAlgo1 algo : complexScalperAlgo1Set) {
             if (algo.getEntryTargetPrice() == entryPrice && algo.getMikePosOrders() == posOrders) {
@@ -132,7 +129,7 @@ public class AlgoManager{
 
     synchronized public void cancelAllSimpleStepperAlgosAtPrice(int entryPrice, MikePosOrders posOrders) {
 
-        Set<MikeAlgo> algosToCancel = new HashSet<>();
+        Set<BaseAlgo> algosToCancel = new HashSet<>();
         //find all algos initialized with entryPrice and cancel them:
         for (SimpleStepperAlgo algo : simpleStepperAlgoSet) {
             if (algo.getEntryTargetPrice() == entryPrice && algo.getMikePosOrders() == posOrders) {
@@ -148,14 +145,14 @@ public class AlgoManager{
 
 
     public synchronized void processAllAlgos(){
-        for (MikeAlgo algo : algoSet) {
+        for (BaseAlgo algo : algoSet) {
             algo.process();
         }
     }
 
     //todo: this doesn't look right. eg if algo is a SimpleStepperAlgo it will not get removed
     //from     Set<SimpleScalperAlgo> simpleScalperAlgoSet; - is this supposed to be that way?
-    public synchronized void cancelAlgo(MikeAlgo algoToCancel) {
+    public synchronized void cancelAlgo(BaseAlgo algoToCancel) {
 
         algoToCancel.cancel();
         algoSet.remove(algoToCancel);
@@ -169,7 +166,7 @@ public class AlgoManager{
         //https://stackoverflow.com/questions/36228664/sorting-observablelistclass-by-value-in-ascending-and-descending-order-javaf
         // assuming there is a instance method Class.getScore that returns int
         // (other implementations for comparator could be used too, of course)
-        Comparator<MikeAlgo> comparator = Comparator.comparingInt(MikeAlgo::getEntryPrice);
+        Comparator<BaseAlgo> comparator = Comparator.comparingInt(BaseAlgo::getEntryPrice);
 
         comparator = comparator.reversed();
         FXCollections.sort(algoSet, comparator);
@@ -177,7 +174,7 @@ public class AlgoManager{
     }
 
 
-    public ObservableList<MikeAlgo> getAlgoSet() {
+    public ObservableList<BaseAlgo> getAlgoSet() {
         return algoSet;
     }
 }
