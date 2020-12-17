@@ -9,7 +9,7 @@ import main.java.model.positionsorders.MikePosOrders;
  * in an amount that if filled will move the ZEROPROFITPOINT lower so that it is never touched.
  * The distance between the ZEROPROFITPOINT and the bid price is specified as GUARDBUFFER
  */
-public class DownGuardAlgo extends BaseAlgo {
+public class GuardAlgo extends BaseAlgo {
     private int guardBuffer = 5;
     MikePosOrders guardedPosOrders;
     Status status;
@@ -20,7 +20,7 @@ public class DownGuardAlgo extends BaseAlgo {
         ARMED,
         ORDERFILLED,
     }
-    public DownGuardAlgo(MikePosOrders posOrders, int guardBuffer) {
+    public GuardAlgo(MikePosOrders posOrders, int guardBuffer) {
         guardedPosOrders = posOrders;
         if(guardBuffer > 0) this.guardBuffer = guardBuffer;
         status = Status.CREATED;
