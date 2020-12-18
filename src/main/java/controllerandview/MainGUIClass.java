@@ -215,6 +215,8 @@ public class MainGUIClass {
         stage.setScene(new Scene(guardAlgoPaneRoot));
 
         stage.show();
+
+        updatableWindowsList.add(controllerGuardAlgoPane1);
     }
 
     /**

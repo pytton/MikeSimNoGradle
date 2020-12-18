@@ -1,8 +1,9 @@
-package main.java.model;
+package main.java.model.mikealgos;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableSet;
+import main.java.model.MainModelThread;
+import main.java.model.MikeSimLogger;
 import main.java.model.mikealgos.*;
 import main.java.model.orderserver.MikeOrder;
 import main.java.model.positionsorders.MikePosOrders;
@@ -25,6 +26,7 @@ public class AlgoManager{
     Set<SimpleScalperAlgo> simpleScalperAlgoSet;
     Set<ComplexScalperAlgo1> complexScalperAlgo1Set;
     Set<SimpleStepperAlgo> simpleStepperAlgoSet;
+    Set<GuardAlgo> guardAlgoSet;
 
 
     public AlgoManager(MainModelThread model) {
@@ -34,6 +36,7 @@ public class AlgoManager{
         simpleScalperAlgoSet = FXCollections.observableSet();
         complexScalperAlgo1Set = FXCollections.observableSet();
         simpleStepperAlgoSet = FXCollections.observableSet();
+        guardAlgoSet = FXCollections.observableSet();
     }
 
     /**
@@ -53,7 +56,7 @@ public class AlgoManager{
     synchronized public void cancelAllAlgosInMikePosOrders(MikePosOrders posOrders) {
         Set<BaseAlgo> algosToCancel = new HashSet<>();
         for (BaseAlgo algo : algoSet) {
-            if (algo.getMikePosOrders() == posOrders) {
+            if (algo.monitoredMikePosOrders() == posOrders) {
                 algo.cancel();
                 algosToCancel.add(algo);
             }
@@ -61,6 +64,17 @@ public class AlgoManager{
         algoSet.removeAll(algosToCancel);
         cancelledAlgoSet.addAll(algosToCancel);
 
+    }
+
+    synchronized public GuardAlgo createGuardAlgo(MikePosOrders monitoredPosOrders, MikePosOrders orderTargetPosOrders, int guardBuffer){
+        //todo: finish this:
+
+        GuardAlgo guardAlgo = new GuardAlgo(monitoredPosOrders, orderTargetPosOrders, guardBuffer);
+
+        algoSet.add(guardAlgo);
+        guardAlgoSet.add(guardAlgo);
+
+        return guardAlgo;
     }
 
     synchronized public void createScalperAlgo1(MikePosOrders posOrders, int entryPrice, int targetPrice, int orderAmount, MikeOrder.MikeOrderType entry){
@@ -87,7 +101,7 @@ public class AlgoManager{
         Set<BaseAlgo> algosToCancel = new HashSet<>();
         //find all algos initialized with entryPrice and cancel them:
         for (SimpleScalperAlgo algo : simpleScalperAlgoSet) {
-            if (algo.getEntryTargetPrice() == entryPrice && algo.getMikePosOrders() == posOrders) {
+            if (algo.getEntryTargetPrice() == entryPrice && algo.monitoredMikePosOrders() == posOrders) {
                 algo.cancel();
                 algosToCancel.add(algo);
             }
@@ -108,7 +122,7 @@ public class AlgoManager{
         Set<BaseAlgo> algosToCancel = new HashSet<>();
         //find all algos initialized with entryPrice and cancel them:
         for (ComplexScalperAlgo1 algo : complexScalperAlgo1Set) {
-            if (algo.getEntryTargetPrice() == entryPrice && algo.getMikePosOrders() == posOrders) {
+            if (algo.getEntryTargetPrice() == entryPrice && algo.monitoredMikePosOrders() == posOrders) {
                 algo.cancel();
                 algosToCancel.add(algo);
             }
@@ -132,7 +146,7 @@ public class AlgoManager{
         Set<BaseAlgo> algosToCancel = new HashSet<>();
         //find all algos initialized with entryPrice and cancel them:
         for (SimpleStepperAlgo algo : simpleStepperAlgoSet) {
-            if (algo.getEntryTargetPrice() == entryPrice && algo.getMikePosOrders() == posOrders) {
+            if (algo.getEntryTargetPrice() == entryPrice && algo.monitoredMikePosOrders() == posOrders) {
                 algo.cancel();
                 algosToCancel.add(algo);
             }
@@ -144,7 +158,7 @@ public class AlgoManager{
     }
 
 
-    public synchronized void processAllAlgos(){
+    public synchronized void processAllAlgos() throws Exception {
         for (BaseAlgo algo : algoSet) {
             algo.process();
         }

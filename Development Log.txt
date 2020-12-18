@@ -28,3 +28,5 @@ for now, I moved public enum status from BaseAlgo to interface MikeAlgo
 ************************
 
 current commit:
+created AlgoManager.createGuardAlgo() method
+working on ControllerGuardAlgoPane1

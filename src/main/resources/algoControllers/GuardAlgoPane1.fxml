@@ -52,11 +52,11 @@
                               </HBox>
                               <HBox prefHeight="30.0" prefWidth="200.0">
                                  <children>
-                                    <Button fx:id="activateBtn" contentDisplay="CENTER" mnemonicParsing="false" onAction="#activateUpBtnPressed" prefHeight="30.0" prefWidth="126.0" text="Activate" />
-                                    <Button fx:id="suspendBtn" mnemonicParsing="false" onAction="#suspendUpBtnPressed" prefHeight="30.0" prefWidth="126.0" text="Suspend" />
+                                    <Button fx:id="activateUpBtn" contentDisplay="CENTER" mnemonicParsing="false" onAction="#activateUpBtnPressed" prefHeight="30.0" prefWidth="126.0" text="Activate" />
+                                    <Button fx:id="suspendUpBtn" mnemonicParsing="false" onAction="#suspendUpBtnPressed" prefHeight="30.0" prefWidth="126.0" text="Suspend" />
                                  </children>
                               </HBox>
-                              <Button fx:id="statusBtn" mnemonicParsing="false" onAction="#statusUpBtnPressed" prefHeight="30.0" prefWidth="200.0" text="Create" />
+                              <Button fx:id="statusAndCreateUpBtn" mnemonicParsing="false" onAction="#statusUpBtnPressed" prefHeight="30.0" prefWidth="200.0" text="Click to create" />
                            </children>
                         </VBox>
                      </children>
@@ -82,7 +82,7 @@
                                     <Button fx:id="suspendDownBtn" mnemonicParsing="false" onAction="#suspendDownBtnPressed" prefHeight="30.0" prefWidth="126.0" text="Suspend" />
                                  </children>
                               </HBox>
-                              <Button fx:id="statusDownBtn" mnemonicParsing="false" onAction="#statusDownBtnPressed" prefHeight="30.0" prefWidth="200.0" text="Create" />
+                              <Button fx:id="statusAndCreateDownBtn" mnemonicParsing="false" onAction="#statusAndCreateDownBtnPressed" prefHeight="30.0" prefWidth="200.0" text="Click to create" />
                            </children>
                         </VBox>
                      </children>

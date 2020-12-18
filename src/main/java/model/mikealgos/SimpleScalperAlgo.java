@@ -36,7 +36,7 @@ public class SimpleScalperAlgo extends BaseAlgo {
      * @param orderAmount
      * @param entryOrderType
      */
-    public SimpleScalperAlgo(MikePosOrders posOrders, int entryTargetPrice, int exitTargetPrice, int orderAmount, MikeOrder.MikeOrderType entryOrderType) {
+    protected SimpleScalperAlgo(MikePosOrders posOrders, int entryTargetPrice, int exitTargetPrice, int orderAmount, MikeOrder.MikeOrderType entryOrderType) {
 
 //        //If entry is BUYLMT or BUYSTP then entryTargetPrice has to lower than exitTargetPrice
 //        if (entry == MikeOrder.MikeOrderType.BUYLMT || entry == MikeOrder.MikeOrderType.BUYSTP){
@@ -125,7 +125,7 @@ public class SimpleScalperAlgo extends BaseAlgo {
     }
 
     @Override
-    public MikePosOrders getMikePosOrders() {
+    public MikePosOrders monitoredMikePosOrders() {
         return posOrders;
     }
 

@@ -1,6 +1,7 @@
 package main.java.model.positionsorders;
 
 import com.ib.client.Order;
+import main.java.model.MikeSimLogger;
 import main.java.model.orderserver.MikeOrder;
 import main.java.model.orderserver.OrderServer;
 import main.java.model.priceserver.PriceServer;
@@ -292,12 +293,6 @@ public class MikePosOrders {
 
         }
 
-
-
-
-
-
-
     }
 
 
@@ -538,16 +533,41 @@ public class MikePosOrders {
         return priceServer.getTickerID();
     }
 
+    /**
+     * CAUTION! this return a DOUBLE IN CENTS!
+     * use Double.asInt() to get the zeroPP in cents for comparisons
+     * this returns null if zeroProfitPoint does not exist
+     * @return
+     */
     public Double getZeroProfitPoint() {
         return zeroProfitPoint;
     }
 
+    /**
+     * returns true if order exists and has been filled
+     * if order does not exist or has not been filled, returns false
+     * @param orderId
+     * @return
+     */
     public boolean checkIfOrderFilled(long orderId) {
-        return getOrderServer().getMikeOrder(orderId).isFilled();
+        boolean isfilled = false;
+        try {
+            if (getOrderServer().getMikeOrder(orderId).isFilled()) {
+                isfilled = true;
+            }
+        } catch (Exception e) {
+            MikeSimLogger.addLogEvent("Exception in MikePosOrders.checkIfOrderFilled");
+            e.printStackTrace();
+        }
+        return isfilled;
     }
 
     public int getBidPrice(){
         return priceServer.getBidPrice();
+    }
+
+    public int getAskPrice(){
+        return priceServer.getAskPrice();
     }
 
 

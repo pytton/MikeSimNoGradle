@@ -112,13 +112,13 @@
                   <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
                      <children>
                         <Label prefHeight="50.0" prefWidth="100.0" text="Order Size" />
-                        <TextField fx:id="orderSizeTextField" prefWidth="90.0" />
+                        <TextField fx:id="orderSizeTextField" prefWidth="90.0" text="100" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
                      <children>
                         <Label prefHeight="50.0" prefWidth="100.0" text="Order Price" />
-                        <TextField fx:id="orderPriceTextField" prefWidth="90.0" />
+                        <TextField fx:id="orderPriceTextField" prefWidth="90.0" text="27110" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">

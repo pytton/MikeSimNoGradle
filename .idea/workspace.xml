@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AnalysisUIOptions">
-    <option name="SCOPE_TYPE" value="8" />
+    <option name="SCOPE_TYPE" value="4" />
     <option name="CUSTOM_SCOPE_NAME" value="MikeSimMainNoTWS" />
   </component>
   <component name="ArtifactsWorkspaceSettings">
@@ -16,14 +16,41 @@
   <component name="ChangeListManager">
     <list default="true" id="0212a54c-a94c-4dfe-9eec-4ace680f76bc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/AlgoManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/AlgoManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Development Log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Development Log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaDoc/main/java/model/AlgoManager.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/main/java/model/AlgoManager.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/MikeSimNoGradle_jar/MikeSimNoGradle.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/MikeSimNoGradle_jar/MikeSimNoGradle.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/PositionsWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/PositionsWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MainGUIClass$MikePositionsWindowCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MainGUIClass$MikePositionsWindowCreator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MainGUIClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MainGUIClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollers/ControllerComplexScalperAlgo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollers/ControllerComplexScalperAlgo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollers/ControllerSimpleScalperAlgo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollers/ControllerSimpleScalperAlgo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollers/ControllerSimpleStepperAlgo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollers/ControllerSimpleStepperAlgo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/AlgoManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/MainModelThread$GUIUpdateDispatcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/MainModelThread$GUIUpdateDispatcher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/MainModelThread$PosOrdersManager$Data.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/MainModelThread$PosOrdersManager$Data.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/MainModelThread$PosOrdersManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/MainModelThread$PosOrdersManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/MainModelThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/MainModelThread.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/mikealgos/BaseAlgo$status.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/mikealgos/BaseAlgo$status.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/mikealgos/BaseAlgo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/mikealgos/BaseAlgo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/mikealgos/ComplexScalperAlgo1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/mikealgos/ComplexScalperAlgo1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/mikealgos/MikeAlgo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/mikealgos/SimpleScalperAlgo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/mikealgos/SimpleScalperAlgo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/mikealgos/SimpleStepperAlgo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/mikealgos/SimpleStepperAlgo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/positionsorders/MikePosOrders$OrdersAtPrice.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/positionsorders/MikePosOrders$OrdersAtPrice.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/positionsorders/MikePosOrders.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/positionsorders/MikePosOrders.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/PositionsWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/PositionsWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/MainGUIClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/MainGUIClass.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollers/ControllerGuardAlgoPane1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollers/ControllerGuardAlgoPane1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerAlgoManagerPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerAlgoManagerPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/AlgoManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/AlgoManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/AlgoManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/mikealgos/AlgoManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/MainModelThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/MainModelThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/mikealgos/BaseAlgo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/mikealgos/BaseAlgo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/mikealgos/MikeAlgo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/mikealgos/ComplexScalperAlgo1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/mikealgos/ComplexScalperAlgo1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/mikealgos/GuardAlgo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/mikealgos/GuardAlgo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/mikealgos/SimpleScalperAlgo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/mikealgos/SimpleScalperAlgo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/mikealgos/SimpleStepperAlgo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/mikealgos/SimpleStepperAlgo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/positionsorders/MikePosOrders.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/positionsorders/MikePosOrders.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/PositionsWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PositionsWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/algoControllers/GuardAlgoPane1.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/algoControllers/GuardAlgoPane1.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,6 +94,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/prototypes" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
@@ -94,19 +122,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="main.java.model.Main" />
-      <module name="MikeSimDevelopingExperiments" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="main.java.model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -115,6 +130,19 @@
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="main.java.controllerandview.chooserPosOrders.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="main.java.model.Main" />
+      <module name="MikeSimDevelopingExperiments" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main.java.model.mikealgos.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -138,7 +166,6 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
-        <item itemvalue="Application.Main (1)" />
         <item itemvalue="Application.ListDemo" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.Main" />
@@ -227,7 +254,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608222364470</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Deleted interface MikeAlgo and moved all functionality to abstract class BaseAlgo">
+      <created>1608223493947</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1608223493947</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -308,7 +342,8 @@
     <MESSAGE value="updated InterActiveBrokersAPI.disconnect() to print to log&#10;created GuardAlgoPane1&#10;created ControllerGuardAlgoPane1&#10;added &quot;Create GuardAlgo Window&quot; button to MainGUIWindow&#10;added createGueardAlgoClicked() method do ControllerMainGUIWindow&#10;&#10;Before changing MainGUIWindow.fxml" />
     <MESSAGE value="made MainGUIWindow.fxml look nicer&#10;created createGuardAlgoWindow() method in MainGUIClass&#10;implementing ControllerGuardAlgoPane1&#10;buttons to choose MikePosOrders inside GuardAlgoPane1 now working&#10;checkbox in GuardAlgoPane1 working&#10;&#10;consider erasing abstract class mikealgos.BaseAlgo since it is not being used by anything even though algos extend from it&#10;for now, I moved public enum status from BaseAlgo to interface MikeAlgo" />
     <MESSAGE value="Before merging abstract class BaseAlgo with interface MikeAlgo" />
-    <option name="LAST_COMMIT_MESSAGE" value="Before merging abstract class BaseAlgo with interface MikeAlgo" />
+    <MESSAGE value="Deleted interface MikeAlgo and moved all functionality to abstract class BaseAlgo" />
+    <option name="LAST_COMMIT_MESSAGE" value="Deleted interface MikeAlgo and moved all functionality to abstract class BaseAlgo" />
   </component>
   <component name="WindowStateProjectService">
     <state x="854" y="1074" width="889" height="635" key="#Inspections" timestamp="1607102790698">
@@ -323,13 +358,13 @@
       <screen x="0" y="25" width="3840" height="2135" />
     </state>
     <state x="958" y="1165" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1607099140250" />
-    <state x="1421" y="412" key="#com.intellij.ide.util.MemberChooser" timestamp="1608137877242">
+    <state x="1421" y="412" key="#com.intellij.ide.util.MemberChooser" timestamp="1608293155050">
       <screen x="0" y="25" width="3840" height="2135" />
     </state>
     <state x="1421" y="410" key="#com.intellij.ide.util.MemberChooser/-1920.1103.1920.1057/3840.1348.1280.777/0.23.3840.2137@0.23.3840.2137" timestamp="1605113878722" />
     <state x="533" y="163" key="#com.intellij.ide.util.MemberChooser/0.0.1440.900@0.0.1440.900" timestamp="1605192978599" />
     <state x="533" y="182" key="#com.intellij.ide.util.MemberChooser/0.23.1440.877@0.23.1440.877" timestamp="1605472639337" />
-    <state x="1421" y="412" key="#com.intellij.ide.util.MemberChooser/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1608137877242" />
+    <state x="1421" y="412" key="#com.intellij.ide.util.MemberChooser/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1608293155050" />
     <state x="416" y="261" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1605193834193">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -348,6 +383,10 @@
       <screen x="0" y="25" width="3840" height="2135" />
     </state>
     <state x="2390" y="1555" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1608120639588" />
+    <state x="906" y="522" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1608224551307">
+      <screen x="0" y="25" width="3840" height="2135" />
+    </state>
+    <state x="906" y="522" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1608224551307" />
     <state x="1832" y="791" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1608223183331">
       <screen x="0" y="25" width="3840" height="2135" />
     </state>
@@ -359,12 +398,12 @@
     </state>
     <state x="1948" y="1306" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/-1920.1105.1920.1055/3840.1350.1280.775/0.25.3840.2135@0.25.3840.2135" timestamp="1605611820297" />
     <state x="1948" y="1306" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1608223229882" />
-    <state x="1311" y="357" width="1920" height="1627" key="CommitChangelistDialog2" timestamp="1608222364228">
+    <state x="1311" y="357" width="1920" height="1627" key="CommitChangelistDialog2" timestamp="1608223493719">
       <screen x="0" y="25" width="3840" height="2135" />
     </state>
     <state x="1378" y="926" width="845" height="1117" key="CommitChangelistDialog2/-1920.1105.1920.1055/3840.1350.1280.775/0.25.3840.2135@0.25.3840.2135" timestamp="1605616631015" />
     <state x="0" y="25" width="1440" height="875" key="CommitChangelistDialog2/0.25.1440.875@0.25.1440.875" timestamp="1607684669008" />
-    <state x="1311" y="357" width="1920" height="1627" key="CommitChangelistDialog2/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1608222364228" />
+    <state x="1311" y="357" width="1920" height="1627" key="CommitChangelistDialog2/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1608223493719" />
     <state width="442" height="442" key="Diff.GoToChangePopup" timestamp="1608221926132">
       <screen x="0" y="25" width="3840" height="2135" />
     </state>
@@ -373,78 +412,78 @@
       <screen x="0" y="25" width="3840" height="2135" />
     </state>
     <state x="1123" y="720" width="1664" height="1336" key="DiffContextDialog/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1608222140650" />
-    <state width="1102" height="712" key="GridCell.Tab.0.bottom" timestamp="1608223229993">
-      <screen x="0" y="25" width="3840" height="2135" />
+    <state width="587" height="742" key="GridCell.Tab.0.bottom" timestamp="1608307361101">
+      <screen x="0" y="25" width="1440" height="875" />
     </state>
     <state width="1920" height="1052" key="GridCell.Tab.0.bottom/-1920.1080.1920.1080/3840.1325.1280.800/0.0.3840.2160@0.0.3840.2160" timestamp="1605029448269" />
     <state width="1920" height="1018" key="GridCell.Tab.0.bottom/-1920.1103.1920.1057/3840.1348.1280.777/0.23.3840.2137@0.23.3840.2137" timestamp="1605127407291" />
     <state width="960" height="999" key="GridCell.Tab.0.bottom/-1920.1105.1920.1055/3200.1105.1280.775/0.25.3200.1775@0.25.3200.1775" timestamp="1606762302576" />
     <state width="960" height="999" key="GridCell.Tab.0.bottom/-1920.1105.1920.1055/3840.1350.1280.775/0.25.3840.2135@0.25.3840.2135" timestamp="1605653692680" />
     <state width="645" height="296" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1605451072294" />
-    <state width="1440" height="200" key="GridCell.Tab.0.bottom/0.25.1440.875@0.25.1440.875" timestamp="1607689574884" />
+    <state width="587" height="742" key="GridCell.Tab.0.bottom/0.25.1440.875@0.25.1440.875" timestamp="1608307361101" />
     <state width="645" height="345" key="GridCell.Tab.0.bottom/0.25.2560.1415@0.25.2560.1415" timestamp="1606767206434" />
     <state width="645" height="296" key="GridCell.Tab.0.bottom/1920.203.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1605485774044" />
-    <state width="1102" height="712" key="GridCell.Tab.0.bottom/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1608223229993" />
+    <state width="1920" height="368" key="GridCell.Tab.0.bottom/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1608305953974" />
     <state width="799" height="410" key="GridCell.Tab.0.bottom/3840.1348.1280.777/0.23.3840.2137/-1920.1103.1920.1057@0.23.3840.2137" timestamp="1603482233511" />
     <state width="1498" height="652" key="GridCell.Tab.0.bottom/3840.1350.1280.775/0.25.3840.2135/-1920.1105.1920.1055@0.25.3840.2135" timestamp="1605567264807" />
-    <state width="1102" height="712" key="GridCell.Tab.0.center" timestamp="1608223229993">
-      <screen x="0" y="25" width="3840" height="2135" />
+    <state width="587" height="742" key="GridCell.Tab.0.center" timestamp="1608307361100">
+      <screen x="0" y="25" width="1440" height="875" />
     </state>
     <state width="1920" height="1052" key="GridCell.Tab.0.center/-1920.1080.1920.1080/3840.1325.1280.800/0.0.3840.2160@0.0.3840.2160" timestamp="1605029448267" />
     <state width="1920" height="1018" key="GridCell.Tab.0.center/-1920.1103.1920.1057/3840.1348.1280.777/0.23.3840.2137@0.23.3840.2137" timestamp="1605127407290" />
     <state width="960" height="999" key="GridCell.Tab.0.center/-1920.1105.1920.1055/3200.1105.1280.775/0.25.3200.1775@0.25.3200.1775" timestamp="1606762302575" />
     <state width="960" height="999" key="GridCell.Tab.0.center/-1920.1105.1920.1055/3840.1350.1280.775/0.25.3840.2135@0.25.3840.2135" timestamp="1605653692680" />
     <state width="645" height="296" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1605451072293" />
-    <state width="1440" height="200" key="GridCell.Tab.0.center/0.25.1440.875@0.25.1440.875" timestamp="1607689574883" />
+    <state width="587" height="742" key="GridCell.Tab.0.center/0.25.1440.875@0.25.1440.875" timestamp="1608307361100" />
     <state width="645" height="345" key="GridCell.Tab.0.center/0.25.2560.1415@0.25.2560.1415" timestamp="1606767206433" />
     <state width="645" height="296" key="GridCell.Tab.0.center/1920.203.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1605485774043" />
-    <state width="1102" height="712" key="GridCell.Tab.0.center/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1608223229993" />
+    <state width="1920" height="368" key="GridCell.Tab.0.center/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1608305953974" />
     <state width="799" height="410" key="GridCell.Tab.0.center/3840.1348.1280.777/0.23.3840.2137/-1920.1103.1920.1057@0.23.3840.2137" timestamp="1603482233510" />
     <state width="1498" height="652" key="GridCell.Tab.0.center/3840.1350.1280.775/0.25.3840.2135/-1920.1105.1920.1055@0.25.3840.2135" timestamp="1605567264806" />
-    <state width="1102" height="712" key="GridCell.Tab.0.left" timestamp="1608223229992">
-      <screen x="0" y="25" width="3840" height="2135" />
+    <state width="587" height="742" key="GridCell.Tab.0.left" timestamp="1608307361099">
+      <screen x="0" y="25" width="1440" height="875" />
     </state>
     <state width="1920" height="1052" key="GridCell.Tab.0.left/-1920.1080.1920.1080/3840.1325.1280.800/0.0.3840.2160@0.0.3840.2160" timestamp="1605029448266" />
     <state width="1920" height="1018" key="GridCell.Tab.0.left/-1920.1103.1920.1057/3840.1348.1280.777/0.23.3840.2137@0.23.3840.2137" timestamp="1605127407289" />
     <state width="960" height="999" key="GridCell.Tab.0.left/-1920.1105.1920.1055/3200.1105.1280.775/0.25.3200.1775@0.25.3200.1775" timestamp="1606762302574" />
     <state width="960" height="999" key="GridCell.Tab.0.left/-1920.1105.1920.1055/3840.1350.1280.775/0.25.3840.2135@0.25.3840.2135" timestamp="1605653692679" />
     <state width="645" height="296" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1605451072292" />
-    <state width="1440" height="200" key="GridCell.Tab.0.left/0.25.1440.875@0.25.1440.875" timestamp="1607689574883" />
+    <state width="587" height="742" key="GridCell.Tab.0.left/0.25.1440.875@0.25.1440.875" timestamp="1608307361099" />
     <state width="645" height="345" key="GridCell.Tab.0.left/0.25.2560.1415@0.25.2560.1415" timestamp="1606767206433" />
     <state width="645" height="296" key="GridCell.Tab.0.left/1920.203.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1605485774042" />
-    <state width="1102" height="712" key="GridCell.Tab.0.left/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1608223229992" />
+    <state width="1920" height="368" key="GridCell.Tab.0.left/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1608305953973" />
     <state width="799" height="410" key="GridCell.Tab.0.left/3840.1348.1280.777/0.23.3840.2137/-1920.1103.1920.1057@0.23.3840.2137" timestamp="1603482233509" />
     <state width="1498" height="652" key="GridCell.Tab.0.left/3840.1350.1280.775/0.25.3840.2135/-1920.1105.1920.1055@0.25.3840.2135" timestamp="1605567264806" />
-    <state width="1102" height="712" key="GridCell.Tab.0.right" timestamp="1608223229993">
-      <screen x="0" y="25" width="3840" height="2135" />
+    <state width="587" height="742" key="GridCell.Tab.0.right" timestamp="1608307361100">
+      <screen x="0" y="25" width="1440" height="875" />
     </state>
     <state width="1920" height="1052" key="GridCell.Tab.0.right/-1920.1080.1920.1080/3840.1325.1280.800/0.0.3840.2160@0.0.3840.2160" timestamp="1605029448268" />
     <state width="1920" height="1018" key="GridCell.Tab.0.right/-1920.1103.1920.1057/3840.1348.1280.777/0.23.3840.2137@0.23.3840.2137" timestamp="1605127407290" />
     <state width="960" height="999" key="GridCell.Tab.0.right/-1920.1105.1920.1055/3200.1105.1280.775/0.25.3200.1775@0.25.3200.1775" timestamp="1606762302575" />
     <state width="960" height="999" key="GridCell.Tab.0.right/-1920.1105.1920.1055/3840.1350.1280.775/0.25.3840.2135@0.25.3840.2135" timestamp="1605653692680" />
     <state width="645" height="296" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1605451072293" />
-    <state width="1440" height="200" key="GridCell.Tab.0.right/0.25.1440.875@0.25.1440.875" timestamp="1607689574884" />
+    <state width="587" height="742" key="GridCell.Tab.0.right/0.25.1440.875@0.25.1440.875" timestamp="1608307361100" />
     <state width="645" height="345" key="GridCell.Tab.0.right/0.25.2560.1415@0.25.2560.1415" timestamp="1606767206434" />
     <state width="645" height="296" key="GridCell.Tab.0.right/1920.203.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1605485774043" />
-    <state width="1102" height="712" key="GridCell.Tab.0.right/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1608223229993" />
+    <state width="1920" height="368" key="GridCell.Tab.0.right/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1608305953974" />
     <state width="799" height="410" key="GridCell.Tab.0.right/3840.1348.1280.777/0.23.3840.2137/-1920.1103.1920.1057@0.23.3840.2137" timestamp="1603482233511" />
     <state width="1498" height="652" key="GridCell.Tab.0.right/3840.1350.1280.775/0.25.3840.2135/-1920.1105.1920.1055@0.25.3840.2135" timestamp="1605567264807" />
-    <state width="1920" height="368" key="GridCell.Tab.1.bottom" timestamp="1608146141145">
+    <state width="1920" height="368" key="GridCell.Tab.1.bottom" timestamp="1608305953976">
       <screen x="0" y="25" width="3840" height="2135" />
     </state>
-    <state width="1920" height="368" key="GridCell.Tab.1.bottom/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1608146141145" />
-    <state width="1920" height="368" key="GridCell.Tab.1.center" timestamp="1608146141145">
+    <state width="1920" height="368" key="GridCell.Tab.1.bottom/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1608305953976" />
+    <state width="1920" height="368" key="GridCell.Tab.1.center" timestamp="1608305953975">
       <screen x="0" y="25" width="3840" height="2135" />
     </state>
-    <state width="1920" height="368" key="GridCell.Tab.1.center/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1608146141145" />
-    <state width="1920" height="368" key="GridCell.Tab.1.left" timestamp="1608146141145">
+    <state width="1920" height="368" key="GridCell.Tab.1.center/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1608305953975" />
+    <state width="1920" height="368" key="GridCell.Tab.1.left" timestamp="1608305953975">
       <screen x="0" y="25" width="3840" height="2135" />
     </state>
-    <state width="1920" height="368" key="GridCell.Tab.1.left/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1608146141145" />
-    <state width="1920" height="368" key="GridCell.Tab.1.right" timestamp="1608146141145">
+    <state width="1920" height="368" key="GridCell.Tab.1.left/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1608305953975" />
+    <state width="1920" height="368" key="GridCell.Tab.1.right" timestamp="1608305953975">
       <screen x="0" y="25" width="3840" height="2135" />
     </state>
-    <state width="1920" height="368" key="GridCell.Tab.1.right/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1608146141145" />
+    <state width="1920" height="368" key="GridCell.Tab.1.right/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1608305953975" />
     <state x="704" y="356" key="SettingsEditor" timestamp="1608117498551">
       <screen x="0" y="25" width="3840" height="2135" />
     </state>
@@ -459,13 +498,21 @@
     <state x="320" y="187" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1606405545449" />
     <state x="320" y="207" width="770" height="466" key="Vcs.Push.Dialog.v2/0.25.1440.875@0.25.1440.875" timestamp="1608115716253" />
     <state x="853" y="469" width="919" height="756" key="Vcs.Push.Dialog.v2/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1608143649422" />
-    <state x="1920" y="1093" width="1920" height="1067" key="dock-window-1" timestamp="1608222140650">
+    <state x="2442" y="1359" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1608303398567">
       <screen x="0" y="25" width="3840" height="2135" />
+    </state>
+    <state x="2442" y="1359" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1608303398567" />
+    <state x="46" y="461" width="502" height="439" key="dock-window-1" timestamp="1608306373569">
+      <screen x="0" y="25" width="1440" height="875" />
     </state>
     <state x="1833" y="1263" width="1917" height="1049" key="dock-window-1/-1920.1103.1920.1057/3840.1348.1280.777/0.23.3840.2137@0.23.3840.2137" timestamp="1605113454539" />
     <state x="410" y="863" width="1531" height="1069" key="dock-window-1/-1920.1105.1920.1055/3840.1350.1280.775/0.25.3840.2135@0.25.3840.2135" timestamp="1605641198719" />
-    <state x="60" y="47" width="1440" height="875" key="dock-window-1/0.25.1440.875@0.25.1440.875" timestamp="1608142376073" />
-    <state x="1920" y="1093" width="1920" height="1067" key="dock-window-1/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1608222140650" />
+    <state x="46" y="461" width="502" height="439" key="dock-window-1/0.25.1440.875@0.25.1440.875" timestamp="1608306373569" />
+    <state x="123" y="1091" width="1338" height="1069" key="dock-window-1/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1608299050377" />
+    <state x="1585" y="1282" key="extract.method.dialog" timestamp="1608296885104">
+      <screen x="0" y="25" width="3840" height="2135" />
+    </state>
+    <state x="1585" y="1282" key="extract.method.dialog/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1608296885104" />
     <state x="63" y="104" width="1298" height="721" key="find.popup" timestamp="1607688772974">
       <screen x="0" y="25" width="1440" height="875" />
     </state>
@@ -488,9 +535,9 @@
       <screen x="0" y="25" width="3840" height="2135" />
     </state>
     <state x="1998" y="1455" width="728" height="390" key="scopes/-1920.1105.1920.1055/3840.1350.1280.775/0.25.3840.2135@0.25.3840.2135" timestamp="1605611805232" />
-    <state x="385" y="214" width="670" height="676" key="search.everywhere.popup" timestamp="1607683892795">
+    <state x="385" y="214" width="670" height="676" key="search.everywhere.popup" timestamp="1608228120811">
       <screen x="0" y="25" width="1440" height="875" />
     </state>
-    <state x="385" y="214" width="670" height="676" key="search.everywhere.popup/0.25.1440.875@0.25.1440.875" timestamp="1607683892795" />
+    <state x="385" y="214" width="670" height="676" key="search.everywhere.popup/0.25.1440.875@0.25.1440.875" timestamp="1608228120811" />
   </component>
 </project>

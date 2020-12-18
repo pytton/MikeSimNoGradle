@@ -27,7 +27,7 @@ public class ComplexScalperAlgo1 extends BaseAlgo {
      * @param amount
      * @param entry
      */
-    public ComplexScalperAlgo1(MikePosOrders posOrders, int entryTarget, int interval, int howManyScalpers, int amount, MikeOrder.MikeOrderType entry) {
+    protected ComplexScalperAlgo1(MikePosOrders posOrders, int entryTarget, int interval, int howManyScalpers, int amount, MikeOrder.MikeOrderType entry) {
         algoSet = new HashSet<>();
         this.entryTargetPrice = entryTarget;
         this.posOrders = posOrders;
@@ -78,7 +78,7 @@ public class ComplexScalperAlgo1 extends BaseAlgo {
     }
 
     @Override
-    public MikePosOrders getMikePosOrders() {
+    public MikePosOrders monitoredMikePosOrders() {
         return posOrders;
     }
 

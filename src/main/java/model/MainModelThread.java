@@ -6,8 +6,8 @@ import javafx.collections.ObservableList;
 import main.java.controllerandview.MainGUIClass;
 import main.java.model.livemarketdata.InteractiveBrokersAPI;
 import main.java.model.livemarketdata.OutsideTradingSoftwareAPIConnection;
+import main.java.model.mikealgos.AlgoManager;
 import main.java.model.orderserver.OrderServer;
-import main.java.model.orderserver.OrderServerRealExternal;
 import main.java.model.orderserver.OrderServerSimulatedInternal;
 import main.java.model.positionsorders.MikePosOrders;
 import main.java.model.positionsorders.MikePosition;
@@ -27,6 +27,7 @@ public class MainModelThread extends Thread {
     private GUIUpdateDispatcher myGUIUpdateDispatcher;
     private long count = 0; //used for printing program 'heartbeat'
     public static boolean interrupted; //used for shutting down the program
+    private int mainLoopThrottleSetting = 10; //main loop will wait this miliseconds between iterations
     int refreshGUIInMiliseconds = 100; //set this to change GUI refresh rate
     long mainLoopTurnaroundTime = 0; //for monitoring performance
 
@@ -45,28 +46,33 @@ public class MainModelThread extends Thread {
     @Override
     public void run() {
 
-        //Hangle GUI updates in seperate thread:
+        //Handle GUI updates in seperate thread:
         long timeOfLastGUIUpdate = System.currentTimeMillis();
+        long timeOfLastModelUpdate = System.currentTimeMillis();
         myGUIUpdateDispatcher = new GUIUpdateDispatcher();
         myGUIUpdateDispatcher.setMainGUIClass(mainGUIClass);
 
         while (!interrupted) {
-            try {
                 long timeStartLoop = System.currentTimeMillis();
 
-                processOrdersAndCalculatePL();
-                processAlgos();
+            try {
+
+                if (System.currentTimeMillis() > timeOfLastModelUpdate + mainLoopThrottleSetting) {
+                    processOrdersAndCalculatePL();
+                    processAlgos();
+                    mainLoopTurnaroundTime = System.currentTimeMillis() - timeOfLastModelUpdate;
+                    timeOfLastModelUpdate = System.currentTimeMillis();
+                    count++;
+                }
 
                 //Update the GUI:
                 if (System.currentTimeMillis() > timeOfLastGUIUpdate + refreshGUIInMiliseconds) {
                     if(myGUIUpdateDispatcher.isReady()){
                     Platform.runLater(myGUIUpdateDispatcher);
                     timeOfLastGUIUpdate = System.currentTimeMillis();
-                        count++;}
+                    }
                 }
 
-                Thread.sleep(1);
-                mainLoopTurnaroundTime = System.currentTimeMillis() - timeStartLoop;
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -89,7 +95,7 @@ public class MainModelThread extends Thread {
         interrupted = true;
     }
 
-    private void processAlgos(){
+    private void processAlgos() throws Exception {
         algoManager.processAllAlgos();
     }
 

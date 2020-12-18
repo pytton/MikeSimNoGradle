@@ -43,7 +43,7 @@ public class SimpleStepperAlgo extends BaseAlgo {
 
     private Status status;
 
-    public SimpleStepperAlgo(MikePosOrders posOrders, int entryTargetPrice, int interval, int amount,
+    protected SimpleStepperAlgo(MikePosOrders posOrders, int entryTargetPrice, int interval, int amount,
                              MikeOrder.MikeOrderType entryOrderType, boolean smTrailingStop, boolean fixedTrailingStop) {
 
         //set the order amount depending on whether trailing stop option selected:
@@ -214,7 +214,7 @@ public class SimpleStepperAlgo extends BaseAlgo {
     }
 
     @Override
-    public MikePosOrders getMikePosOrders() {
+    public MikePosOrders monitoredMikePosOrders() {
         return posOrders;
     }
 
