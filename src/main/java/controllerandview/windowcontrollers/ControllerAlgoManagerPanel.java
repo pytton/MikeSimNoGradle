@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import main.java.model.MainModelThread;
-import main.java.model.mikealgos.BaseAlgo;
+import main.java.model.algocontrol.BaseAlgo;
 
 import java.util.ArrayList;
 import java.util.List;

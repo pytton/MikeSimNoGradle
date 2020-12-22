@@ -190,7 +190,7 @@ public class MainGUIClass {
     }
 
     /**
-     * Creates and displays a new GuardAlgo window
+     * Creates and displays a new GuardAlgoDown window
      */
     public void createGuardAlgoWindow(){
         FXMLLoader guardAlgoPanelLoader = new FXMLLoader(getClass().getResource("/algoControllers/GuardAlgoPane1.fxml"));
@@ -211,7 +211,7 @@ public class MainGUIClass {
 
         //create the window:
         Stage stage = new Stage();
-        stage.setTitle("GuardAlgo");
+        stage.setTitle("GuardAlgoDown");
         stage.setScene(new Scene(guardAlgoPaneRoot));
 
         stage.show();

@@ -15,7 +15,7 @@ import main.java.controllerandview.CommonGUI;
 import main.java.controllerandview.MainGUIClass;
 import main.java.model.MainModelThread;
 import main.java.model.MikeSimLogger;
-import main.java.model.mikealgos.GuardAlgo;
+import main.java.model.algocontrol.GuardAlgoDown;
 import main.java.model.positionsorders.MikePosOrders;
 import main.java.model.priceserver.PriceServer;
 
@@ -24,8 +24,8 @@ public class ControllerGuardAlgoPane1 extends AlgoController implements CommonGU
     private MainModelThread model;
     private MikePosOrders monitoredPosOrders = null; //this is the Positions that are being watched by the algo
     private MikePosOrders orderTargetPosOrders = null; //this is where the orders are being sent to. it can be the same as monitoredPosOrders
-    private GuardAlgo guardAlgoDOWNThatIsControlled = null;
-    private GuardAlgo guardAlgoUPThatIsControlled = null;
+    private GuardAlgoDown guardAlgoDOWNThatIsControlled = null;
+    private GuardAlgoDown guardAlgoUPThatIsControlled = null;
 
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
@@ -77,7 +77,7 @@ public class ControllerGuardAlgoPane1 extends AlgoController implements CommonGU
 
     @FXML
     void restartDownBtnPressed(ActionEvent event) {
-        if(guardAlgoDOWNThatIsControlled != null) guardAlgoDOWNThatIsControlled.restart();
+        if(guardAlgoDOWNThatIsControlled != null) guardAlgoDOWNThatIsControlled.cancelOrdersAndRestart();
     }
 
     @FXML
@@ -149,9 +149,9 @@ public class ControllerGuardAlgoPane1 extends AlgoController implements CommonGU
             ordersSentTo.setText(orderTargetPosOrders.getName());
         }
 
-        //if a GuardAlgo monitoring selected MikePosOrders already exists, update it here:
+        //if a GuardAlgoDown monitoring selected MikePosOrders already exists, update it here:
         try {
-            guardAlgoDOWNThatIsControlled = model.algoManager.getGuardAlgoForMikePosOrders(monitoredPosOrders);
+            guardAlgoDOWNThatIsControlled = model.algoManager.getGuardAlgoDownForMikePosOrders(monitoredPosOrders);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -188,13 +188,13 @@ public class ControllerGuardAlgoPane1 extends AlgoController implements CommonGU
             statusAndCreateDownBtn.setText("Choose PosOrders first!");
             return;
         }
-        MikeSimLogger.addLogEvent("Create Down GuardAlgo button pressed");
+        MikeSimLogger.addLogEvent("Create Down GuardAlgoDown button pressed");
 
         //IF THERE IS A GUARD ALGO MONITORING CHOSEN MIKEPOSORDERS ALREADY - CHOOSE IT INSTEAD OF CREATING NEW ONE
-        GuardAlgo algo = null;
+        GuardAlgoDown algo = null;
         try {
             //this will return null if algo controlling monitoredPosOrders doesn't exist
-            algo = model.algoManager.getGuardAlgoForMikePosOrders(monitoredPosOrders);
+            algo = model.algoManager.getGuardAlgoDownForMikePosOrders(monitoredPosOrders);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -204,7 +204,7 @@ public class ControllerGuardAlgoPane1 extends AlgoController implements CommonGU
             createAlgo();
         }
         else {
-            MikeSimLogger.addLogEvent("GuardAlgo controlling " + monitoredPosOrders.getName() + " already exists");
+            MikeSimLogger.addLogEvent("GuardAlgoDown controlling " + monitoredPosOrders.getName() + " already exists");
         }
     }
 
@@ -215,7 +215,7 @@ public class ControllerGuardAlgoPane1 extends AlgoController implements CommonGU
     private void createAlgo() {
         if(monitoredPosOrders == null) return;
         if(orderTargetPosOrders == null) return;
-        MikeSimLogger.addLogEvent("Creating GuardAlgo");
+        MikeSimLogger.addLogEvent("Creating GuardAlgoDown");
         int guardBuffer = 15; //arbitrary default value
         int userInput;
         try {
@@ -227,7 +227,7 @@ public class ControllerGuardAlgoPane1 extends AlgoController implements CommonGU
         }
 
         //create the algo
-        guardAlgoDOWNThatIsControlled = model.algoManager.createGuardAlgo(monitoredPosOrders, orderTargetPosOrders, guardBuffer);
+        guardAlgoDOWNThatIsControlled = model.algoManager.createGuardAlgoDown(monitoredPosOrders, orderTargetPosOrders, guardBuffer);
 
     }
 

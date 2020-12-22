@@ -1,10 +1,10 @@
-package main.java.model.mikealgos;
+package main.java.model.algocontrol;
 
+import com.ib.controller.ConcurrentHashSet;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import main.java.model.MainModelThread;
 import main.java.model.MikeSimLogger;
-import main.java.model.mikealgos.*;
 import main.java.model.orderserver.MikeOrder;
 import main.java.model.positionsorders.MikePosOrders;
 
@@ -26,7 +26,8 @@ public class AlgoManager{
     Set<SimpleScalperAlgo> simpleScalperAlgoSet;
     Set<ComplexScalperAlgo1> complexScalperAlgo1Set;
     Set<SimpleStepperAlgo> simpleStepperAlgoSet;
-    Set<GuardAlgo> guardAlgoSet;
+    Set<GuardAlgoDown> guardAlgoDownSet;
+    private Set<GuardAlgoUp> guardAlgoUpSet;
 
 
     public AlgoManager(MainModelThread model) {
@@ -36,7 +37,27 @@ public class AlgoManager{
         simpleScalperAlgoSet = FXCollections.observableSet();
         complexScalperAlgo1Set = FXCollections.observableSet();
         simpleStepperAlgoSet = FXCollections.observableSet();
-        guardAlgoSet = FXCollections.observableSet();
+        guardAlgoDownSet = FXCollections.observableSet();
+        guardAlgoUpSet = FXCollections.observableSet();
+    }
+
+    //todo:
+    //this doesn't look right. eg if algo is a SimpleStepperAlgo it will not get removed
+    //from     Set<SimpleScalperAlgo> simpleScalperAlgoSet; - is this supposed to be that way?
+    public synchronized void cancelAlgo(BaseAlgo algoToCancel) {
+
+        //cancelling GuardAlgos is problematic - can suspend them instead:
+        if(algoToCancel instanceof GuardAlgo){
+            algoToCancel.cancel();
+            return;
+        }
+
+        MikeSimLogger.addLogEvent("Cancelling " + algoToCancel);
+
+        algoToCancel.cancel();
+        algoSet.remove(algoToCancel);
+        cancelledAlgoSet.add(algoToCancel);
+
     }
 
     /**
@@ -44,10 +65,8 @@ public class AlgoManager{
      */
     synchronized public void cancelAllAlgosGlobally() {
         for (BaseAlgo algo : algoSet) {
-            algo.cancel();
+            cancelAlgo(algo);
         }
-        cancelledAlgoSet.addAll(algoSet);
-        algoSet.clear();
     }
 
     /**
@@ -57,58 +76,72 @@ public class AlgoManager{
         Set<BaseAlgo> algosToCancel = new HashSet<>();
         for (BaseAlgo algo : algoSet) {
             if (algo.monitoredMikePosOrders() == posOrders) {
-                algo.cancel();
                 algosToCancel.add(algo);
             }
         }
-        algoSet.removeAll(algosToCancel);
-        cancelledAlgoSet.addAll(algosToCancel);
 
+        for (BaseAlgo algo : algosToCancel) cancelAlgo(algo);
     }
 
     /**
-     * enforces creating only one GuardAlgo per one MikePosOrders
+     * not finished
+     */
+    synchronized public GuardAlgoUp createGuardAlgoUp(MikePosOrders monitoredPosOrders, MikePosOrders orderTargetPosOrders, int guardBuffer){
+        GuardAlgoUp guardAlgoUp = null;
+
+        guardAlgoUp = new GuardAlgoUp(monitoredPosOrders, orderTargetPosOrders, guardBuffer);
+
+        algoSet.add(guardAlgoUp);
+        guardAlgoUpSet.add(guardAlgoUp);
+
+        return guardAlgoUp;
+    }
+
+    /**
+     * enforces creating only one GuardAlgoDown per one MikePosOrders
      * @param monitoredPosOrders
      * @param orderTargetPosOrders
      * @param guardBuffer
      * @return
      */
-    synchronized public GuardAlgo createGuardAlgo(MikePosOrders monitoredPosOrders, MikePosOrders orderTargetPosOrders, int guardBuffer){
+    synchronized public GuardAlgoDown createGuardAlgoDown(MikePosOrders monitoredPosOrders, MikePosOrders orderTargetPosOrders, int guardBuffer){
         //todo: finish this:
 
-        GuardAlgo guardAlgo = null;
+        GuardAlgoDown guardAlgoDown = null;
 
         try {
-            guardAlgo = getGuardAlgoForMikePosOrders(monitoredPosOrders);
+            guardAlgoDown = getGuardAlgoDownForMikePosOrders(monitoredPosOrders);
+
         } catch (Exception e) {
-            MikeSimLogger.addLogEvent("Cannot create new GuardAlgo!");
+            MikeSimLogger.addLogEvent("Cannot create new GuardAlgoDown!");
             e.printStackTrace();
-            return guardAlgo;
+            return guardAlgoDown;
         }
 
-        if(guardAlgo == null){
-        guardAlgo = new GuardAlgo(monitoredPosOrders, orderTargetPosOrders, guardBuffer);
+        if(guardAlgoDown == null){
+        guardAlgoDown = new GuardAlgoDown(monitoredPosOrders, orderTargetPosOrders, guardBuffer);
 
-        algoSet.add(guardAlgo);
-        guardAlgoSet.add(guardAlgo);}
+        algoSet.add(guardAlgoDown);
+        guardAlgoDownSet.add(guardAlgoDown);}
 
-        return guardAlgo;
+        return guardAlgoDown;
     }
 
     /**
-     * returns a GuardAlgo that is monitoring provided MikePosOrders.
+     * PROBLEM RELATED TO CANCELLING ALGOS
+     * returns a GuardAlgoDown that is monitoring provided MikePosOrders.
      * if there is more than one, throws an Exception
      * @param posOrders
      * @return
      * @throws Exception
      */
-    synchronized public GuardAlgo getGuardAlgoForMikePosOrders(MikePosOrders posOrders) throws Exception {
-        GuardAlgo guardAlgoMonitoringPosOrders = null;
+    synchronized public GuardAlgoDown getGuardAlgoDownForMikePosOrders(MikePosOrders posOrders) throws Exception {
+        GuardAlgoDown guardAlgoDownMonitoringPosOrders = null;
 
             int guardCount = 0;
-            for (GuardAlgo guardAlgo : guardAlgoSet){
-                if(guardAlgo.monitoredMikePosOrders() == posOrders) {
-                    guardAlgoMonitoringPosOrders = guardAlgo;
+            for (GuardAlgoDown guardAlgoDown : guardAlgoDownSet){
+                if(guardAlgoDown.monitoredMikePosOrders() == posOrders) {
+                    guardAlgoDownMonitoringPosOrders = guardAlgoDown;
                     guardCount++;
                 }
                 if(guardCount > 1) {
@@ -117,7 +150,7 @@ public class AlgoManager{
                 }
             }
 
-        return guardAlgoMonitoringPosOrders;
+        return guardAlgoDownMonitoringPosOrders;
     }
 
     synchronized public void createScalperAlgo1(MikePosOrders posOrders, int entryPrice, int targetPrice, int orderAmount, MikeOrder.MikeOrderType entry){
@@ -207,15 +240,6 @@ public class AlgoManager{
         }
     }
 
-    //todo: this doesn't look right. eg if algo is a SimpleStepperAlgo it will not get removed
-    //from     Set<SimpleScalperAlgo> simpleScalperAlgoSet; - is this supposed to be that way?
-    public synchronized void cancelAlgo(BaseAlgo algoToCancel) {
-
-        algoToCancel.cancel();
-        algoSet.remove(algoToCancel);
-        cancelledAlgoSet.add(algoToCancel);
-
-    }
 
     public synchronized void sortAlgosbyPrice() {
 

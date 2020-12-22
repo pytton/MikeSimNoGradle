@@ -6,7 +6,7 @@ import javafx.collections.ObservableList;
 import main.java.controllerandview.MainGUIClass;
 import main.java.model.livemarketdata.InteractiveBrokersAPI;
 import main.java.model.livemarketdata.OutsideTradingSoftwareAPIConnection;
-import main.java.model.mikealgos.AlgoManager;
+import main.java.model.algocontrol.AlgoManager;
 import main.java.model.orderserver.OrderServer;
 import main.java.model.orderserver.OrderServerSimulatedInternal;
 import main.java.model.positionsorders.MikePosOrders;

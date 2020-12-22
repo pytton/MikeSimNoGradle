@@ -1,4 +1,4 @@
-package main.java.model.mikealgos;
+package main.java.model.algocontrol;
 
 import main.java.model.positionsorders.MikePosOrders;
 
@@ -16,9 +16,11 @@ public abstract class BaseAlgo {
      */
     abstract public MikePosOrders monitoredMikePosOrders();
 
-    public enum status{
+    public enum Status{
         CREATED,
         RUNNING,
-        STOPPED
+        STOPPED,
+        FAILED,
+        SUSPENDED
     }
 }

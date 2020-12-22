@@ -1,4 +1,4 @@
-package main.java.model.mikealgos;
+package main.java.model.algocontrol;
 
 import main.java.model.orderserver.MikeOrder;
 import main.java.model.positionsorders.MikePosOrders;
