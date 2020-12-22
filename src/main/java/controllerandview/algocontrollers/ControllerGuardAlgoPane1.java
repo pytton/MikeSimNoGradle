@@ -24,7 +24,8 @@ public class ControllerGuardAlgoPane1 extends AlgoController implements CommonGU
     private MainModelThread model;
     private MikePosOrders monitoredPosOrders = null; //this is the Positions that are being watched by the algo
     private MikePosOrders orderTargetPosOrders = null; //this is where the orders are being sent to. it can be the same as monitoredPosOrders
-    private GuardAlgo guardAlgoThatIsControlled = null;
+    private GuardAlgo guardAlgoDOWNThatIsControlled = null;
+    private GuardAlgo guardAlgoUPThatIsControlled = null;
 
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
@@ -51,7 +52,7 @@ public class ControllerGuardAlgoPane1 extends AlgoController implements CommonGU
     private Button bufferSetUp; // Value injected by FXMLLoader
 
     @FXML
-    private Button activateUpBtn; // Value injected by FXMLLoader
+    private Button restartUpBtn; // Value injected by FXMLLoader
 
     @FXML
     private Button suspendUpBtn; // Value injected by FXMLLoader
@@ -66,7 +67,7 @@ public class ControllerGuardAlgoPane1 extends AlgoController implements CommonGU
     private Button bufferSetDown; // Value injected by FXMLLoader
 
     @FXML
-    private Button activateDownBtn; // Value injected by FXMLLoader
+    private Button restartDownBtn; // Value injected by FXMLLoader
 
     @FXML
     private Button suspendDownBtn; // Value injected by FXMLLoader
@@ -75,23 +76,23 @@ public class ControllerGuardAlgoPane1 extends AlgoController implements CommonGU
     private Button statusAndCreateDownBtn; // Value injected by FXMLLoader
 
     @FXML
-    void activateDownBtnPressed(ActionEvent event) {
-
+    void restartDownBtnPressed(ActionEvent event) {
+        if(guardAlgoDOWNThatIsControlled != null) guardAlgoDOWNThatIsControlled.restart();
     }
 
     @FXML
-    void activateUpBtnPressed(ActionEvent event) {
+    void restartUpBtnPressed(ActionEvent event) {
 
     }
 
     @FXML
     void bufferSetDownBtnPressed(ActionEvent event) {
-
+        MikeSimLogger.addLogEvent("Not implemented");
     }
 
     @FXML
     void bufferSetUpBtnPressed(ActionEvent event) {
-
+        MikeSimLogger.addLogEvent("Not implemented");
     }
 
 
@@ -102,7 +103,7 @@ public class ControllerGuardAlgoPane1 extends AlgoController implements CommonGU
     public void updateGUI() {
         //todo: finish this
         //check the status of the algo and print it out ot the buttons:
-        if(guardAlgoThatIsControlled == null) return;
+
 
         colorButtonAccordingToStatus();
 
@@ -110,7 +111,15 @@ public class ControllerGuardAlgoPane1 extends AlgoController implements CommonGU
     }
 
     private void colorButtonAccordingToStatus() {
-        String status = guardAlgoThatIsControlled.getStatus();
+        if(guardAlgoDOWNThatIsControlled == null) {
+            if(monitoredPosOrders != null) {
+                statusAndCreateDownBtn.setText("Click to create new");
+                statusAndCreateDownBtn.setStyle("-fx-background-color: grey");
+            }
+            return;
+        }
+
+        String status = guardAlgoDOWNThatIsControlled.getStatus();
         statusAndCreateDownBtn.setText(status);
         if (status.contentEquals("CREATED")) statusAndCreateDownBtn.setStyle("-fx-background-color: lightblue");
         if (status.contentEquals("RUNNING")) statusAndCreateDownBtn.setStyle("-fx-background-color: green");
@@ -140,9 +149,12 @@ public class ControllerGuardAlgoPane1 extends AlgoController implements CommonGU
             ordersSentTo.setText(orderTargetPosOrders.getName());
         }
 
-        //todo:
-        //if the algo has been created, update the algo with the new values:
-
+        //if a GuardAlgo monitoring selected MikePosOrders already exists, update it here:
+        try {
+            guardAlgoDOWNThatIsControlled = model.algoManager.getGuardAlgoForMikePosOrders(monitoredPosOrders);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -171,9 +183,29 @@ public class ControllerGuardAlgoPane1 extends AlgoController implements CommonGU
 
     @FXML
     void statusAndCreateDownBtnPressed(ActionEvent event) {
+
+        if(monitoredPosOrders == null) {
+            statusAndCreateDownBtn.setText("Choose PosOrders first!");
+            return;
+        }
         MikeSimLogger.addLogEvent("Create Down GuardAlgo button pressed");
-        if(guardAlgoThatIsControlled == null) {createAlgo();
-        MikeSimLogger.addLogEvent("Creating GuardAlgo");}
+
+        //IF THERE IS A GUARD ALGO MONITORING CHOSEN MIKEPOSORDERS ALREADY - CHOOSE IT INSTEAD OF CREATING NEW ONE
+        GuardAlgo algo = null;
+        try {
+            //this will return null if algo controlling monitoredPosOrders doesn't exist
+            algo = model.algoManager.getGuardAlgoForMikePosOrders(monitoredPosOrders);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        guardAlgoDOWNThatIsControlled = algo;
+
+        if(guardAlgoDOWNThatIsControlled == null) {
+            createAlgo();
+        }
+        else {
+            MikeSimLogger.addLogEvent("GuardAlgo controlling " + monitoredPosOrders.getName() + " already exists");
+        }
     }
 
     /**
@@ -183,6 +215,7 @@ public class ControllerGuardAlgoPane1 extends AlgoController implements CommonGU
     private void createAlgo() {
         if(monitoredPosOrders == null) return;
         if(orderTargetPosOrders == null) return;
+        MikeSimLogger.addLogEvent("Creating GuardAlgo");
         int guardBuffer = 15; //arbitrary default value
         int userInput;
         try {
@@ -194,22 +227,23 @@ public class ControllerGuardAlgoPane1 extends AlgoController implements CommonGU
         }
 
         //create the algo
-        guardAlgoThatIsControlled = model.algoManager.createGuardAlgo(monitoredPosOrders, orderTargetPosOrders, guardBuffer);
+        guardAlgoDOWNThatIsControlled = model.algoManager.createGuardAlgo(monitoredPosOrders, orderTargetPosOrders, guardBuffer);
+
     }
 
     @FXML
-    void statusUpBtnPressed(ActionEvent event) {
-
+    void statusAndCreateUpBtnPressed(ActionEvent event) {
+        MikeSimLogger.addLogEvent("NOT IMPLEMENTED");
     }
 
     @FXML
     void suspendDownBtnPressed(ActionEvent event) {
-
+        if(guardAlgoDOWNThatIsControlled != null) guardAlgoDOWNThatIsControlled.suspend();
     }
 
     @FXML
     void suspendUpBtnPressed(ActionEvent event) {
-
+        MikeSimLogger.addLogEvent("NOT IMPLEMENTED");
     }
 
     public void setModel(MainModelThread model) {
@@ -218,9 +252,9 @@ public class ControllerGuardAlgoPane1 extends AlgoController implements CommonGU
 
     @Override
     public boolean cancel(int entryPrice, MainModelThread model, MikePosOrders posOrders) {
-        //todo: finish this:
-        MikeSimLogger.addLogEvent("Not implemented!");
-        return false;
+        guardAlgoDOWNThatIsControlled.cancel();
+        guardAlgoUPThatIsControlled.cancel();
+        return true;
     }
 
     @Override
@@ -248,17 +282,19 @@ public class ControllerGuardAlgoPane1 extends AlgoController implements CommonGU
 
     @Override
     public void setPriceServer(PriceServer priceServer) {
+        MikeSimLogger.addLogEvent("NOT IMPLEMENTED");
 
     }
 
     @Override
     public PriceServer getPriceServer() {
+        MikeSimLogger.addLogEvent("NOT IMPLEMENTED");
         return null;
     }
 
     @Override
     public void setMikePosOrders(MikePosOrders posOrders) {
-
+        MikeSimLogger.addLogEvent("NOT IMPLEMENTED");
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
@@ -267,12 +303,12 @@ public class ControllerGuardAlgoPane1 extends AlgoController implements CommonGU
         assert ordersSentTo != null : "fx:id=\"ordersSentTo\" was not injected: check your FXML file 'GuardAlgoPane1.fxml'.";
         assert bufferDistanceUp != null : "fx:id=\"bufferDistanceUp\" was not injected: check your FXML file 'GuardAlgoPane1.fxml'.";
         assert bufferSetUp != null : "fx:id=\"bufferSetUp\" was not injected: check your FXML file 'GuardAlgoPane1.fxml'.";
-        assert activateUpBtn != null : "fx:id=\"activateBtn\" was not injected: check your FXML file 'GuardAlgoPane1.fxml'.";
+        assert restartUpBtn != null : "fx:id=\"activateBtn\" was not injected: check your FXML file 'GuardAlgoPane1.fxml'.";
         assert suspendUpBtn != null : "fx:id=\"suspendBtn\" was not injected: check your FXML file 'GuardAlgoPane1.fxml'.";
         assert statusAndCreateUpBtn != null : "fx:id=\"statusBtn\" was not injected: check your FXML file 'GuardAlgoPane1.fxml'.";
         assert bufferDistanceDown != null : "fx:id=\"bufferDistanceDown\" was not injected: check your FXML file 'GuardAlgoPane1.fxml'.";
         assert bufferSetDown != null : "fx:id=\"bufferSetDown\" was not injected: check your FXML file 'GuardAlgoPane1.fxml'.";
-        assert activateDownBtn != null : "fx:id=\"activateDownBtn\" was not injected: check your FXML file 'GuardAlgoPane1.fxml'.";
+        assert restartDownBtn != null : "fx:id=\"activateDownBtn\" was not injected: check your FXML file 'GuardAlgoPane1.fxml'.";
         assert suspendDownBtn != null : "fx:id=\"suspendDownBtn\" was not injected: check your FXML file 'GuardAlgoPane1.fxml'.";
         assert statusAndCreateDownBtn != null : "fx:id=\"statusDownBtn\" was not injected: check your FXML file 'GuardAlgoPane1.fxml'.";
 

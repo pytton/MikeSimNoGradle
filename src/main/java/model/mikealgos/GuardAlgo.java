@@ -22,12 +22,7 @@ public class GuardAlgo extends BaseAlgo {
     Status status;
     private long orderNeverCreatedCode = -5; //orderIds have positive numbers
     private long guardOrderId = orderNeverCreatedCode;
-    private boolean hasDirectionChanged = false; //used by process()
-
-    public String getStatus() {
-        if(status != null) return status.toString();
-        return "Unknown";
-    }
+//    private boolean hasDirectionChanged = false; //used by process()
 
     private enum Status {
         CREATED,
@@ -45,11 +40,26 @@ public class GuardAlgo extends BaseAlgo {
 
     @Override
     synchronized public void process() throws Exception {
-        if (status == Status.CREATED) processCREATED();
-        if (status == Status.RUNNING) processRUNNING();
-        if (status == Status.FAILED) processCFAILED();
-        if (status == Status.SUSPENDED) processSUSPENDED();
+        try {
+            if (status == Status.CREATED) processCREATED();
+            if (status == Status.RUNNING) processRUNNING();
+            if (status == Status.FAILED) processCFAILED();
+            if (status == Status.SUSPENDED) processSUSPENDED();
+        } catch (Exception e) {
+            MikeSimLogger.addLogEvent("Exception in GuardAlgo");
+            e.printStackTrace();
+        }
     }
+
+    synchronized public void restart(){
+        if (status != Status.RUNNING) cancelOrdersAndRestart();
+    }
+
+    synchronized public void suspend(){
+        orderTarget.cancelOrder(guardOrderId);
+        status = Status.SUSPENDED;
+    }
+
 
     private void processCREATED(){
         if(monitored.getTotalOpenAmount() == 0) return; //if position is zero algo can't work
@@ -57,7 +67,7 @@ public class GuardAlgo extends BaseAlgo {
         //send the first order and change status to RUNNING
         if(checkDistance() > guardBuffer +1){
             //create first order and pass it to the target
-            sendGuardOrder();
+            sendNewGuardOrder();
             status = Status.RUNNING;
             MikeSimLogger.addLogEvent("GuardAlgo monitoring " + monitored.toString() + " changing status to runnong");
         }
@@ -66,32 +76,30 @@ public class GuardAlgo extends BaseAlgo {
 
     private int previousZeroPP = 0;
     private void processRUNNING() {
-        //todo: check if position is empty:
-        //todo: check if failed
-        if(monitored.getBidPrice() < monitored.getZeroProfitPoint().intValue()) {
-            status = Status.FAILED;
-            return;}
+        //todo: check if direction of monitored has changed:
 
-        //check if order has been filled, if it has, send a new one:
-        if(isGuardOrderFilled()){
-
-            MikeSimLogger.addLogEvent("Guard order filled");
-
-
-            sendGuardOrder();
-
+        //check if position is empty:
+        if (monitored.getTotalOpenAmount() == 0) {
+            cancelOrdersAndRestart();
+            return;
         }
 
-        //todo: check if zeroProfitPoint has changed
-        if(monitored.getZeroProfitPoint().intValue() != previousZeroPP){
-            //cancel the guard order and send a new one:
-            orderTarget.cancelOrder(guardOrderId);
-            sendGuardOrder();
+        //check if position is long:
+        if (monitored.getTotalOpenAmount() > 0) {
+            processLongPosition();
         }
 
+        //check if position is short:
+        if(monitored.getTotalOpenAmount() < 0){
+            processShortPosition();
+        }
 
         return;
+    }
 
+    private void cancelOrdersAndRestart() {
+        orderTarget.cancelOrder(guardOrderId);
+        status = Status.CREATED;
     }
 
     private void processCFAILED() {
@@ -99,19 +107,35 @@ public class GuardAlgo extends BaseAlgo {
         //price and zeroProfitPoint gets below a certain margin, wait until it changes
         //and switch the status to RUNNING
 
+        if (checkDistance() > minimumOrderFireDistance) status = Status.RUNNING;
+
+
+
     }
 
     private void processSUSPENDED() {
+
     }
 
     private void processLongPosition(){
+        //check if failed
+        if(monitored.getBidPrice() < monitored.getZeroProfitPoint().intValue()) {
+            status = Status.FAILED;
+            return;}
 
-        //create first order if it hasn't been done yet:
-        if (status == Status.CREATED) processCREATED();
+        //check if order has been filled, if it has, send a new one:
+        if(isGuardOrderFilled()){
+            MikeSimLogger.addLogEvent("Guard order filled");
+            sendNewGuardOrder();
+            return;
+        }
 
-        //if order has been placed - check to see if it has been filled
-
-
+        //check if zeroProfitPoint has changed
+        if(monitored.getZeroProfitPoint().intValue() != previousZeroPP){
+            //cancel the guard order and send a new one:
+            orderTarget.cancelOrder(guardOrderId);
+            sendNewGuardOrder();
+        }
     }
 
     private void processShortPosition(){
@@ -120,12 +144,6 @@ public class GuardAlgo extends BaseAlgo {
 
     //TODO: FINISH THIS
     private void processPositionDirectionChanged() throws Exception {
-
-        if(!hasDirectionChanged) return;
-
-        //todo:
-        //finish this!
-
 
         MikeSimLogger.addLogEvent("Change of direction in GuardAlgo NOT IMPLEMENTED!!");
         MikeSimLogger.addLogEvent("Change of direction in GuardAlgo NOT IMPLEMENTED!!");
@@ -151,17 +169,16 @@ public class GuardAlgo extends BaseAlgo {
         Double zeroProfitPoint = monitored.getZeroProfitPoint();
         if (zeroProfitPoint == null) return distance;
 
-        //if position is long do this:
+        //if position is LONG do this:
         if(monitored.getTotalOpenAmount() > 0){
             int bidPrice = monitored.getBidPrice();
-
-
             //assumes distance is measured in cents
             distance = (bidPrice - zeroProfitPoint.intValue());
 
 //            MikeSimLogger.addLogEvent("ZeroPP is: " + zeroProfitPoint.intValue() + " bid price: " + bidPrice + " Distance is: " + distance);
         }
-        //if position is short do this:
+
+        //if position is SHORT do this:
         if(monitored.getTotalOpenAmount() < 0){
             int askPrice = monitored.getAskPrice();
             distance =  zeroProfitPoint.intValue() - askPrice;
@@ -171,7 +188,6 @@ public class GuardAlgo extends BaseAlgo {
     }
 
     private boolean isGuardOrderFilled(){
-
         try {
 //            MikeSimLogger.addLogEvent("Checking if orders filled");
             if (guardOrderId == orderNeverCreatedCode) return false;
@@ -182,17 +198,17 @@ public class GuardAlgo extends BaseAlgo {
 //            MikeSimLogger.addLogEvent("Exception in isGuardOrderfilled");
             e.printStackTrace();
         }
-
-
         return false;
-
     }
 
-    private void sendGuardOrder(){
+    private void sendNewGuardOrder(){
         //send a stop order for an amount that if executed will move the ZeroProfitPoint to
         //be at a distance defined by guardBuffer
 
         //todo: do the math and implement it for testing just make the order 1/5 of current position:
+
+        //cancel existing guardOrder:
+        orderTarget.cancelOrder(guardOrderId);
 
         int zeroProfitPoint =  orderTarget.getZeroProfitPoint().intValue();   // (int)(orderTarget.getZeroProfitPoint() *100);
 
@@ -210,6 +226,11 @@ public class GuardAlgo extends BaseAlgo {
         previousZeroPP = zeroProfitPoint;
     }
 
+    public String getStatus() {
+        if(status != null) return status.toString();
+        return "Unknown";
+    }
+
     @Override
     public void cancel() {
         MikeSimLogger.addLogEvent("cancel for GuardAlgo NOT IMPLEMENTED!");
@@ -224,7 +245,7 @@ public class GuardAlgo extends BaseAlgo {
      * CAUTION! This algo operates on two different MikePosOrders - monitored and orderTarget
      * this returns the one that is being monitored. orders might be sent here or to a different one!
      *
-     * @return
+     * @return MikePosOrders being monitored by algo
      */
     @Override
     public MikePosOrders monitoredMikePosOrders() {

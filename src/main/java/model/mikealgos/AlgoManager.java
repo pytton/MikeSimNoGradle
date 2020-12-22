@@ -66,15 +66,58 @@ public class AlgoManager{
 
     }
 
+    /**
+     * enforces creating only one GuardAlgo per one MikePosOrders
+     * @param monitoredPosOrders
+     * @param orderTargetPosOrders
+     * @param guardBuffer
+     * @return
+     */
     synchronized public GuardAlgo createGuardAlgo(MikePosOrders monitoredPosOrders, MikePosOrders orderTargetPosOrders, int guardBuffer){
         //todo: finish this:
 
-        GuardAlgo guardAlgo = new GuardAlgo(monitoredPosOrders, orderTargetPosOrders, guardBuffer);
+        GuardAlgo guardAlgo = null;
+
+        try {
+            guardAlgo = getGuardAlgoForMikePosOrders(monitoredPosOrders);
+        } catch (Exception e) {
+            MikeSimLogger.addLogEvent("Cannot create new GuardAlgo!");
+            e.printStackTrace();
+            return guardAlgo;
+        }
+
+        if(guardAlgo == null){
+        guardAlgo = new GuardAlgo(monitoredPosOrders, orderTargetPosOrders, guardBuffer);
 
         algoSet.add(guardAlgo);
-        guardAlgoSet.add(guardAlgo);
+        guardAlgoSet.add(guardAlgo);}
 
         return guardAlgo;
+    }
+
+    /**
+     * returns a GuardAlgo that is monitoring provided MikePosOrders.
+     * if there is more than one, throws an Exception
+     * @param posOrders
+     * @return
+     * @throws Exception
+     */
+    synchronized public GuardAlgo getGuardAlgoForMikePosOrders(MikePosOrders posOrders) throws Exception {
+        GuardAlgo guardAlgoMonitoringPosOrders = null;
+
+            int guardCount = 0;
+            for (GuardAlgo guardAlgo : guardAlgoSet){
+                if(guardAlgo.monitoredMikePosOrders() == posOrders) {
+                    guardAlgoMonitoringPosOrders = guardAlgo;
+                    guardCount++;
+                }
+                if(guardCount > 1) {
+                    MikeSimLogger.addLogEvent("EXCEPTION in getGuardAlgoForMikePosOrders - more than one algo controlling " + posOrders.getName());
+                    throw new Exception();
+                }
+            }
+
+        return guardAlgoMonitoringPosOrders;
     }
 
     synchronized public void createScalperAlgo1(MikePosOrders posOrders, int entryPrice, int targetPrice, int orderAmount, MikeOrder.MikeOrderType entry){

@@ -52,11 +52,11 @@
                               </HBox>
                               <HBox prefHeight="30.0" prefWidth="200.0">
                                  <children>
-                                    <Button fx:id="activateUpBtn" contentDisplay="CENTER" mnemonicParsing="false" onAction="#activateUpBtnPressed" prefHeight="30.0" prefWidth="126.0" text="Activate" />
+                                    <Button fx:id="restartUpBtn" contentDisplay="CENTER" mnemonicParsing="false" onAction="#restartUpBtnPressed" prefHeight="30.0" prefWidth="126.0" text="Activate" />
                                     <Button fx:id="suspendUpBtn" mnemonicParsing="false" onAction="#suspendUpBtnPressed" prefHeight="30.0" prefWidth="126.0" text="Suspend" />
                                  </children>
                               </HBox>
-                              <Button fx:id="statusAndCreateUpBtn" mnemonicParsing="false" onAction="#statusUpBtnPressed" prefHeight="30.0" prefWidth="200.0" text="Click to create" />
+                              <Button fx:id="statusAndCreateUpBtn" mnemonicParsing="false" onAction="#statusAndCreateUpBtnPressed" prefHeight="30.0" prefWidth="200.0" text="Click to create" />
                            </children>
                         </VBox>
                      </children>
@@ -78,7 +78,7 @@
                               </HBox>
                               <HBox prefHeight="30.0" prefWidth="200.0">
                                  <children>
-                                    <Button fx:id="activateDownBtn" contentDisplay="CENTER" mnemonicParsing="false" onAction="#activateDownBtnPressed" prefHeight="30.0" prefWidth="126.0" text="Activate" />
+                                    <Button fx:id="restartDownBtn" contentDisplay="CENTER" mnemonicParsing="false" onAction="#restartDownBtnPressed" prefHeight="30.0" prefWidth="126.0" text="Activate" />
                                     <Button fx:id="suspendDownBtn" mnemonicParsing="false" onAction="#suspendDownBtnPressed" prefHeight="30.0" prefWidth="126.0" text="Suspend" />
                                  </children>
                               </HBox>
