@@ -213,9 +213,13 @@ public class MikeGridPane extends GridPane {
         return handler;
     }
 
+    /**
+     * WARNING THIS DOESN'T SEEM TO WORK CORRECTLY!
+     * @param handler
+     */
     public void setHandler(MikeButtonHandler handler) {
 
-        //todo: this looks wrong!
+        //WARNING THIS IS NOT WORKING
         //this should go through all the MikeButtons inside     private MikeButton[][] buttons;
         //and set the handlers there. it will do nothing here
 

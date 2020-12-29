@@ -193,7 +193,7 @@ public class MainGUIClass {
      * Creates and displays a new GuardAlgoDown window
      */
     public void createGuardAlgoWindow(){
-        FXMLLoader guardAlgoPanelLoader = new FXMLLoader(getClass().getResource("/algoControllers/GuardAlgoPane1.fxml"));
+        FXMLLoader guardAlgoPanelLoader = new FXMLLoader(getClass().getResource("/PositionsWindow/algoControllers/GuardAlgoPane1.fxml"));
         Parent guardAlgoPaneRoot = null; //FXMLLoader.load(getClass().getResource("view/SceneBuilder/PriceControlPanel.fxml"));
         try {
             guardAlgoPaneRoot = guardAlgoPanelLoader.load();
@@ -231,7 +231,7 @@ public class MainGUIClass {
 
         public MikePositionsWindowCreator(PriceServer priceServer) throws IOException {
             //load FXML file
-            loader = new FXMLLoader(getClass().getResource("/PositionsWindow.fxml"));
+            loader = new FXMLLoader(getClass().getResource("/PositionsWindow/PositionsWindow.fxml"));
 //            loader = new FXMLLoader(getClass().getResource("/ConsolidatedPositionsWindow.fxml"));
             //this needed by JavaFX Scene constructor:
             positionsWindowRoot = loader.load(); //this might throw IOException

@@ -272,7 +272,7 @@ public class ControllerPositionsWindow
                     try {
                         //LOAD A DIFFERENT FXML FILE DEPENDING ON THE SELECTION OF THE CHOICEBOX
                         //and set the anchorPane according to that file, and set the controller for it:
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/algoControllers/SimpleScalperAlgoControlPanel.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/PositionsWindow/algoControllers/SimpleScalperAlgoControlPanel.fxml"));
                         Parent anchorPaneParent = loader.load();
                         //this will make the anchorPane display what was in the fxml file:
                         anchorPane.getChildren().setAll(anchorPaneParent);
@@ -287,7 +287,7 @@ public class ControllerPositionsWindow
                 }
                 if(cb.getSelectionModel().getSelectedItem() == "ComplexScalper1"){
                     try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/algoControllers/ComplexScalperControlPanel.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/PositionsWindow/algoControllers/ComplexScalperControlPanel.fxml"));
 
                         Parent anchorPaneParent = loader.load();
                         anchorPane.getChildren().setAll(anchorPaneParent);
@@ -303,7 +303,7 @@ public class ControllerPositionsWindow
 
                 if(cb.getSelectionModel().getSelectedItem() == "SimpleStepperAlgo"){
                     try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/algoControllers/SimpleStepperControlPanel.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/PositionsWindow/algoControllers/SimpleStepperControlPanel.fxml"));
 
                         Parent anchorPaneParent = loader.load();
                         anchorPane.getChildren().setAll(anchorPaneParent);
@@ -320,7 +320,7 @@ public class ControllerPositionsWindow
                 if(cb.getSelectionModel().getSelectedItem() == "PlainOrder"){
                     try {
                         //and set the anchorPane according to that file, and set the controller for it:
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/algoControllers/PlainOrderControlPanel.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/PositionsWindow/algoControllers/PlainOrderControlPanel.fxml"));
                         Parent anchorPaneParent = loader.load();
                         //this will make the anchorPane display what was in the fxml file:
                         anchorPane.getChildren().setAll(anchorPaneParent);

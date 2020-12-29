@@ -15,12 +15,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0212a54c-a94c-4dfe-9eec-4ace680f76bc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/positionsorders/PosOrdersManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/PosOrdersManager.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/MikeSimNoGradle_jar/MikeSimNoGradle.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/MikeSimNoGradle_jar/MikeSimNoGradle.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MainGUIClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MainGUIClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MikeGridPane.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MikeGridPane.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollers/ControllerComplexScalperAlgo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollers/ControllerComplexScalperAlgo.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollers/ControllerPlainOrder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollers/ControllerPlainOrder.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollers/ControllerSimpleScalperAlgo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollers/ControllerSimpleScalperAlgo.class" afterDir="false" />
@@ -36,17 +33,9 @@
       <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/mikealgos/SimpleStepperAlgo.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/positionsorders/MikePosOrders.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/positionsorders/MikePosOrders.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/positionsorders/MikePosition.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/positionsorders/MikePosition.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/MainGUIClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/MainGUIClass.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/MikeGridPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/MikeGridPane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollers/ControllerComplexScalperAlgo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollers/ControllerComplexScalperAlgo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollers/ControllerGuardAlgoPane1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollers/ControllerGuardAlgoPane1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollers/ControllerSimpleScalperAlgo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollers/ControllerSimpleScalperAlgo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/algocontrol/AlgoManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/algocontrol/AlgoManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/algocontrol/GuardAlgo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/algocontrol/GuardAlgo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/algocontrol/GuardAlgoDown.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/algocontrol/GuardAlgoDown.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/algocontrol/GuardAlgoUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/algocontrol/GuardAlgoUp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/positionsorders/MikePosOrders.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/positionsorders/MikePosOrders.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/positionsorders/MikePosition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/positionsorders/MikePosition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/PositionsWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PositionsWindow/PositionsWindow.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -279,7 +268,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608679766225</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="GuardAlgo and its ControllerGuardAlgoPane1 finished and in testing.&#10;Testing: MSim-5, 18, 27, 28">
+      <created>1609261873296</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1609261873296</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -364,7 +360,8 @@
     <MESSAGE value="GuardAlgo first draft working" />
     <MESSAGE value="Before renaming GuardAlgo to GuardAlgoDown" />
     <MESSAGE value="GuardAlgoDown and GuardAlgoUp created. Need to bind ControllerGuardAlgoPane1 with GuardAlgoUp" />
-    <option name="LAST_COMMIT_MESSAGE" value="GuardAlgoDown and GuardAlgoUp created. Need to bind ControllerGuardAlgoPane1 with GuardAlgoUp" />
+    <MESSAGE value="GuardAlgo and its ControllerGuardAlgoPane1 finished and in testing.&#10;Testing: MSim-5, 18, 27, 28" />
+    <option name="LAST_COMMIT_MESSAGE" value="GuardAlgo and its ControllerGuardAlgoPane1 finished and in testing.&#10;Testing: MSim-5, 18, 27, 28" />
   </component>
   <component name="WindowStateProjectService">
     <state x="854" y="1074" width="889" height="635" key="#Inspections" timestamp="1607102790698">
@@ -431,12 +428,12 @@
     </state>
     <state x="1948" y="1306" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/-1920.1105.1920.1055/3840.1350.1280.775/0.25.3840.2135@0.25.3840.2135" timestamp="1605611820297" />
     <state x="1948" y="1306" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1608679841907" />
-    <state x="1311" y="357" width="1920" height="1627" key="CommitChangelistDialog2" timestamp="1608679765785">
+    <state x="291" y="312" width="1920" height="1627" key="CommitChangelistDialog2" timestamp="1609261872818">
       <screen x="0" y="25" width="3840" height="2135" />
     </state>
     <state x="1378" y="926" width="845" height="1117" key="CommitChangelistDialog2/-1920.1105.1920.1055/3840.1350.1280.775/0.25.3840.2135@0.25.3840.2135" timestamp="1605616631015" />
     <state x="0" y="25" width="1440" height="875" key="CommitChangelistDialog2/0.25.1440.875@0.25.1440.875" timestamp="1608307749592" />
-    <state x="1311" y="357" width="1920" height="1627" key="CommitChangelistDialog2/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1608679765785" />
+    <state x="291" y="312" width="1920" height="1627" key="CommitChangelistDialog2/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1609261872818" />
     <state width="442" height="442" key="Diff.GoToChangePopup" timestamp="1608221926132">
       <screen x="0" y="25" width="3840" height="2135" />
     </state>
@@ -537,12 +534,12 @@
     <state x="264" y="159" key="SettingsEditor/0.23.1440.877@0.23.1440.877" timestamp="1605473829724" />
     <state x="704" y="356" key="SettingsEditor/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1608117498551" />
     <state x="704" y="356" key="SettingsEditor/3840.1350.1280.775/0.25.3840.2135/-1920.1105.1920.1055@0.25.3840.2135" timestamp="1605563931887" />
-    <state x="853" y="469" width="770" height="466" key="Vcs.Push.Dialog.v2" timestamp="1608679866289">
+    <state x="853" y="469" width="770" height="466" key="Vcs.Push.Dialog.v2" timestamp="1609261887355">
       <screen x="0" y="25" width="3840" height="2135" />
     </state>
     <state x="320" y="187" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1606405545449" />
     <state x="320" y="207" width="770" height="466" key="Vcs.Push.Dialog.v2/0.25.1440.875@0.25.1440.875" timestamp="1608307774892" />
-    <state x="853" y="469" width="919" height="756" key="Vcs.Push.Dialog.v2/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1608679866289" />
+    <state x="853" y="469" width="919" height="756" key="Vcs.Push.Dialog.v2/3840.1025.1440.875/0.25.3840.2135@0.25.3840.2135" timestamp="1609261887355" />
     <state x="377" y="490" width="1746" height="1215" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1608672086369">
       <screen x="0" y="25" width="3840" height="2135" />
     </state>
