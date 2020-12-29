@@ -39,8 +39,8 @@ public class GuardAlgoDown extends GuardAlgo {
         //order type and order amount depends on whether position is long or short
         MikeOrder.MikeOrderType ordertype = MikeOrder.MikeOrderType.SELLSTP;
         //todo: do the math and implement it
-        // for testing just make the order 1/5 of current position:
-        int orderAmount = monitored.getTotalOpenAmount() / 5;
+        // for testing just make the order 1/10 of current position:
+        int orderAmount = monitored.getTotalOpenAmount() / 10;
         int zeroProfitPoint = orderTarget.getZeroProfitPoint().intValue();
         int price = zeroProfitPoint + guardBuffer;
 

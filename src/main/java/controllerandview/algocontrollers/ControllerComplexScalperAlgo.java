@@ -23,7 +23,7 @@ public class ControllerComplexScalperAlgo extends AlgoController {
     public TextField scalperCount;
     private MikeOrder.MikeOrderType orderType = MikeOrder.MikeOrderType.BUYLMT;
 
-    private String descriptionRow1 = "CPLX SCP1";
+    private final String descriptionRow1 = "CPLX SCP1";
     private String descriptionRow2 = "B LMT";
 
     public TextField getOrderAmount() {
@@ -89,19 +89,15 @@ public class ControllerComplexScalperAlgo extends AlgoController {
     }
 
     private int getAmount() {
-        Integer amount = Integer.parseInt(orderAmount.getText());
-
-        return amount;
+        return Integer.parseInt(orderAmount.getText());
     }
 
     private int getInterval() {
-        Integer interval = Integer.parseInt(targetInterval.getText());
-        return interval;
+        return Integer.parseInt(targetInterval.getText());
     }
 
     private int getScCount() {
-        Integer scCount = Integer.parseInt(scalperCount.getText());
-        return scCount;
+        return Integer.parseInt(scalperCount.getText());
     }
 
     public void oAmtBtnPressed(ActionEvent actionEvent) {

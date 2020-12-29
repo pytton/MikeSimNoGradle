@@ -1,6 +1,5 @@
 package main.java.model.algocontrol;
 
-import com.ib.controller.ConcurrentHashSet;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import main.java.model.MainModelThread;
@@ -89,10 +88,20 @@ public class AlgoManager{
     synchronized public GuardAlgoUp createGuardAlgoUp(MikePosOrders monitoredPosOrders, MikePosOrders orderTargetPosOrders, int guardBuffer){
         GuardAlgoUp guardAlgoUp = null;
 
-        guardAlgoUp = new GuardAlgoUp(monitoredPosOrders, orderTargetPosOrders, guardBuffer);
+        try {
+            guardAlgoUp = getGuardAlgoUPforMikePosOrders(monitoredPosOrders);
 
-        algoSet.add(guardAlgoUp);
-        guardAlgoUpSet.add(guardAlgoUp);
+        } catch (Exception e) {
+            MikeSimLogger.addLogEvent("Cannot create new GuardAlgoDown!");
+            e.printStackTrace();
+            return guardAlgoUp;
+        }
+
+        if(guardAlgoUp == null){
+            guardAlgoUp = new GuardAlgoUp(monitoredPosOrders, orderTargetPosOrders, guardBuffer);
+
+            algoSet.add(guardAlgoUp);
+            guardAlgoUpSet.add(guardAlgoUp);}
 
         return guardAlgoUp;
     }
@@ -110,7 +119,7 @@ public class AlgoManager{
         GuardAlgoDown guardAlgoDown = null;
 
         try {
-            guardAlgoDown = getGuardAlgoDownForMikePosOrders(monitoredPosOrders);
+            guardAlgoDown = getGuardAlgoDOWNforMikePosOrders(monitoredPosOrders);
 
         } catch (Exception e) {
             MikeSimLogger.addLogEvent("Cannot create new GuardAlgoDown!");
@@ -135,7 +144,7 @@ public class AlgoManager{
      * @return
      * @throws Exception
      */
-    synchronized public GuardAlgoDown getGuardAlgoDownForMikePosOrders(MikePosOrders posOrders) throws Exception {
+    synchronized public GuardAlgoDown getGuardAlgoDOWNforMikePosOrders(MikePosOrders posOrders) throws Exception {
         GuardAlgoDown guardAlgoDownMonitoringPosOrders = null;
 
             int guardCount = 0;
@@ -151,6 +160,24 @@ public class AlgoManager{
             }
 
         return guardAlgoDownMonitoringPosOrders;
+    }
+
+    synchronized public GuardAlgoUp getGuardAlgoUPforMikePosOrders(MikePosOrders posOrders) throws Exception {
+        GuardAlgoUp guardAlgoUpMonitoringPosOrders = null;
+
+        int guardCount = 0;
+        for (GuardAlgoUp guardAlgoUp : guardAlgoUpSet){
+            if(guardAlgoUp.monitoredMikePosOrders() == posOrders) {
+                guardAlgoUpMonitoringPosOrders = guardAlgoUp;
+                guardCount++;
+            }
+            if(guardCount > 1) {
+                MikeSimLogger.addLogEvent("EXCEPTION in getGuardAlgoForMikePosOrders - more than one algo controlling " + posOrders.getName());
+                throw new Exception();
+            }
+        }
+
+        return guardAlgoUpMonitoringPosOrders;
     }
 
     synchronized public void createScalperAlgo1(MikePosOrders posOrders, int entryPrice, int targetPrice, int orderAmount, MikeOrder.MikeOrderType entry){

@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import main.java.controllerandview.MainGUIClass;
 import main.java.controllerandview.algocontrollers.*;
 import main.java.model.MainModelThread;
+import main.java.model.MikeSimLogger;
 import main.java.model.orderserver.MikeOrder;
 import main.java.model.positionsorders.AggregatedPosOrders;
 import main.java.model.positionsorders.MikePosOrders;
@@ -203,7 +204,7 @@ public class ControllerPositionsWindow
                     //set the priceserver to the one chosen:
                     controllerPositionsWindow.priceServer = (PriceServer) instrumentsList.getSelectionModel().getSelectedItem();
                     //set the tickerId:
-                    tickerId = ((PriceServer) instrumentsList.getSelectionModel().getSelectedItem()).getTickerID();
+                    tickerId = ( (PriceServer) instrumentsList.getSelectionModel().getSelectedItem() ).getTickerID();
                     //we changed the instrument, change the PosOrders available to be chosen to those for that insturment:
                     positionsList.setItems(model.posOrdersManager.getPosOrdersObservableList(tickerId));
                     //and also the targetPosOrders:
@@ -387,7 +388,7 @@ public class ControllerPositionsWindow
         int price = getPriceOfRow(button.getRowOfButton());
 
         switch (button.getColOfButton()) {
-            case 0: if(controllerCol1 != null) controllerCol1.mikeGridPaneButtonPressed(price, model, mikePosOrders); break;
+            case 0: if(controllerCol1 != null)controllerCol1.mikeGridPaneButtonPressed(price, model, mikePosOrders); break;
             case 1: if(controllerCol2 != null)controllerCol2.mikeGridPaneButtonPressed(price, model, mikePosOrders); break;
             case 2: if(controllerCol3 != null)controllerCol3.mikeGridPaneButtonPressed(price, model, mikePosOrders); break;
             case 3: if(controllerCol4 != null)controllerCol4.mikeGridPaneButtonPressed(price, model, mikePosOrders); break;
@@ -418,12 +419,10 @@ public class ControllerPositionsWindow
         positionPricesToMove.addAll(mikePosOrders.getPositionPricesSet());
 
         for (int price : positionPricesToMove) {
+            MikeSimLogger.addLogEvent("Attempting transfer of postion at price: " + price
+            + " to MikePosOrders: " + targetPosOrders.getName());
             mikePosOrders.movePositionToDifferentMikePosOrders(price, targetPosOrders);
         }
-
-
-
-
     }
 
     @FXML

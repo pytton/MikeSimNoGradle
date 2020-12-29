@@ -10,6 +10,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Font;
 import main.java.controllerandview.windowcontrollers.ControllerPositionsWindow;
+import main.java.model.MikeSimLogger;
 
 import java.util.ArrayList;
 
@@ -48,7 +49,7 @@ public class MikeGridPane extends GridPane {
      */
     private  MikeButtonHandler handler;
 
-    private ControllerPositionsWindow positionsWindow;
+//    private ControllerPositionsWindow positionsWindow;
     /**
      * Buttons in this GridPane. Access via getButton(row,column)
      */
@@ -213,6 +214,12 @@ public class MikeGridPane extends GridPane {
     }
 
     public void setHandler(MikeButtonHandler handler) {
+
+        //todo: this looks wrong!
+        //this should go through all the MikeButtons inside     private MikeButton[][] buttons;
+        //and set the handlers there. it will do nothing here
+
+        MikeSimLogger.addLogEvent("setHandler in MikeGridPane called. NOT SURE IF THIS WORKS CORRECTLY!");
         this.handler = handler;
     }
 

@@ -15,6 +15,14 @@ public class MikePosition {
         this.price = price;
     }
 
+    /**
+     *
+     * @param price
+     * @param open_amount
+     * @param open_pl
+     * @param closed_pl
+     * @param total_pl
+     */
     public MikePosition(int price, int open_amount, int open_pl, int closed_pl, int total_pl) {
         this.price = price;
         this.open_amount = open_amount;

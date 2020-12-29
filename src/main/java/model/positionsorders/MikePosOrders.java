@@ -350,16 +350,23 @@ public class MikePosOrders {
 
     /**
      * Takes a position from this MikePosOrders and moves it to a different one:
+     * returns false if error in parameters or true if successful
      *
      * @param price           price of the MikePosition to be moved
      * @param targetPosOrders the place where the MikePosition should be moved to
      */
-    public synchronized void movePositionToDifferentMikePosOrders(int price, MikePosOrders targetPosOrders) {
+    public synchronized boolean movePositionToDifferentMikePosOrders(int price, MikePosOrders targetPosOrders) {
+        //you cannot move a MikePosition from a MikePosOrders to a MikePosOrders that is the same MikePosOrders!
+        if(targetPosOrders == this){
+            MikeSimLogger.addLogEvent("Attempting to move MikePosition into the same target MikePosOrders as the source one! Aborting!");
+            return false;
+        }
+
         //if there is no position at the price, do nothing:
-        if (positionsMap.get(price) == null) return;
+        if (positionsMap.get(price) == null) return false;
 
         //if target doesn't exist, do nothing:
-        if (targetPosOrders == null) return;
+        if (targetPosOrders == null) return false;
 
         //get the position to move:
         MikePosition positionToMove = positionsMap.get(price);
@@ -374,7 +381,9 @@ public class MikePosOrders {
         recalcutlatePL();
         targetPosOrders.recalcutlatePL();
 
-        //todo: currently not moving children
+        return true;
+
+        //currently not moving children
 
     }
 
@@ -383,7 +392,7 @@ public class MikePosOrders {
      *
      * @param positionToAdd
      */
-    private synchronized void addToMikePosition(MikePosition positionToAdd) {
+    protected synchronized void addToMikePosition(MikePosition positionToAdd) {
         if (positionToAdd == null) return;
 
         //Create a new empty position at the price of the position to add:
@@ -403,13 +412,16 @@ public class MikePosOrders {
                 (existingPosition.getClosed_pl() + positionToAdd.getClosed_pl()),
                 (existingPosition.getTotal_pl() + positionToAdd.getTotal_pl()));
 
+        MikeSimLogger.addLogEvent("newPosition open amount: " +newPosition.getOpen_amount());
+
         //remove the old position from this book and replace it with the new one:
+
         positionsMap.put(newPosition.getPrice(), newPosition);
 
         //recalculate the profit/loss:
         recalcutlatePL();
 
-        //todo: currently not moving children
+        //currently not moving children
     }
 
     @Override
@@ -462,6 +474,14 @@ public class MikePosOrders {
         ordersAtPrice.recalculateOpenOrdersAtPrice();
     }
 
+    /**
+     *
+     * @param currentPrice
+     * @param newPrice
+     */
+    synchronized public void moveMikePosorders(int currentPrice, int newPrice){
+        //TODO: FINISH THIS
+    }
 
 
     /**

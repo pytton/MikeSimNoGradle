@@ -1,7 +1,3 @@
-/**
- * Sample Skeleton for 'GuardAlgoPane1.fxml' Controller Class
- */
-
 package main.java.controllerandview.algocontrollers;
 
 import java.net.URL;
@@ -16,6 +12,7 @@ import main.java.controllerandview.MainGUIClass;
 import main.java.model.MainModelThread;
 import main.java.model.MikeSimLogger;
 import main.java.model.algocontrol.GuardAlgoDown;
+import main.java.model.algocontrol.GuardAlgoUp;
 import main.java.model.positionsorders.MikePosOrders;
 import main.java.model.priceserver.PriceServer;
 
@@ -25,7 +22,7 @@ public class ControllerGuardAlgoPane1 extends AlgoController implements CommonGU
     private MikePosOrders monitoredPosOrders = null; //this is the Positions that are being watched by the algo
     private MikePosOrders orderTargetPosOrders = null; //this is where the orders are being sent to. it can be the same as monitoredPosOrders
     private GuardAlgoDown guardAlgoDOWNThatIsControlled = null;
-    private GuardAlgoDown guardAlgoUPThatIsControlled = null;
+    private GuardAlgoUp guardAlgoUPThatIsControlled = null;
 
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
@@ -82,17 +79,32 @@ public class ControllerGuardAlgoPane1 extends AlgoController implements CommonGU
 
     @FXML
     void restartUpBtnPressed(ActionEvent event) {
+        if(guardAlgoUPThatIsControlled != null) guardAlgoUPThatIsControlled.cancelOrdersAndRestart();
 
     }
 
     @FXML
     void bufferSetDownBtnPressed(ActionEvent event) {
-        MikeSimLogger.addLogEvent("Not implemented");
+        if(guardAlgoDOWNThatIsControlled == null) return;
+        int setting = 5; //arbitrary default value
+        try{
+            setting = Integer.parseInt(bufferDistanceDown.getText());
+        }catch (Exception e){
+        MikeSimLogger.addLogEvent("Exception in bufferSetDownBtnPressed");
+        }
+        guardAlgoDOWNThatIsControlled.setGuardBuffer(setting);
     }
 
     @FXML
     void bufferSetUpBtnPressed(ActionEvent event) {
-        MikeSimLogger.addLogEvent("Not implemented");
+        if(guardAlgoUPThatIsControlled == null) return;
+        int setting = 25; //arbitrary default value
+        try{
+            setting = Integer.parseInt(bufferDistanceUp.getText());
+        }catch (Exception e){
+            MikeSimLogger.addLogEvent("Exception in bufferSetUpBtnPressed");
+        }
+        guardAlgoUPThatIsControlled.setGuardBuffer(setting);
     }
 
 
@@ -105,26 +117,42 @@ public class ControllerGuardAlgoPane1 extends AlgoController implements CommonGU
         //check the status of the algo and print it out ot the buttons:
 
 
-        colorButtonAccordingToStatus();
+        colorButtonsAccordingToStatus();
 
 
     }
 
-    private void colorButtonAccordingToStatus() {
+    private void colorButtonsAccordingToStatus() {
+        String status;
+
         if(guardAlgoDOWNThatIsControlled == null) {
             if(monitoredPosOrders != null) {
                 statusAndCreateDownBtn.setText("Click to create new");
                 statusAndCreateDownBtn.setStyle("-fx-background-color: grey");
             }
-            return;
+        } else
+            {
+            status = guardAlgoDOWNThatIsControlled.getStatus();
+            statusAndCreateDownBtn.setText(status);
+            if (status.contentEquals("CREATED")) statusAndCreateDownBtn.setStyle("-fx-background-color: light-blue");
+            if (status.contentEquals("RUNNING")) statusAndCreateDownBtn.setStyle("-fx-background-color: green");
+            if (status.contentEquals("FAILED")) statusAndCreateDownBtn.setStyle("-fx-background-color: red");
+            if (status.contentEquals("SUSPENDED")) statusAndCreateDownBtn.setStyle("-fx-background-color: yellow");
         }
 
-        String status = guardAlgoDOWNThatIsControlled.getStatus();
-        statusAndCreateDownBtn.setText(status);
-        if (status.contentEquals("CREATED")) statusAndCreateDownBtn.setStyle("-fx-background-color: lightblue");
-        if (status.contentEquals("RUNNING")) statusAndCreateDownBtn.setStyle("-fx-background-color: green");
-        if (status.contentEquals("FAILED")) statusAndCreateDownBtn.setStyle("-fx-background-color: red");
-        if (status.contentEquals("SUSPENDED")) statusAndCreateDownBtn.setStyle("-fx-background-color: yellow");
+        if(guardAlgoUPThatIsControlled == null) {
+            if(monitoredPosOrders != null) {
+                statusAndCreateUpBtn.setText("Click to create new");
+                statusAndCreateUpBtn.setStyle("-fx-background-color: grey");
+            }
+        } else {
+            status = guardAlgoUPThatIsControlled.getStatus();
+            statusAndCreateUpBtn.setText(status);
+            if (status.contentEquals("CREATED")) statusAndCreateUpBtn.setStyle("-fx-background-color: light-blue");
+            if (status.contentEquals("RUNNING")) statusAndCreateUpBtn.setStyle("-fx-background-color: green");
+            if (status.contentEquals("FAILED")) statusAndCreateUpBtn.setStyle("-fx-background-color: red");
+            if (status.contentEquals("SUSPENDED")) statusAndCreateUpBtn.setStyle("-fx-background-color: yellow");
+        }
     }
 
     /**
@@ -141,7 +169,8 @@ public class ControllerGuardAlgoPane1 extends AlgoController implements CommonGU
         monitoredPosOrders = CommonGUI.setMikePos(this, model, priceServer);
 
         //display the name of the MikePosOrders being guarded:
-        guardedPosition.setText(monitoredPosOrders.getName());
+        if (monitoredPosOrders != null && monitoredPosOrders.getName() != null) guardedPosition.setText(monitoredPosOrders.getName());
+
 
         //if the checkbox is selected, change the MikePosOrders orders will be sent to automatically:
         if(targetSameAsMonitoredAuto.isSelected()) orderTargetPosOrders = monitoredPosOrders;
@@ -151,11 +180,11 @@ public class ControllerGuardAlgoPane1 extends AlgoController implements CommonGU
 
         //if a GuardAlgoDown monitoring selected MikePosOrders already exists, update it here:
         try {
-            guardAlgoDOWNThatIsControlled = model.algoManager.getGuardAlgoDownForMikePosOrders(monitoredPosOrders);
+            guardAlgoDOWNThatIsControlled = model.algoManager.getGuardAlgoDOWNforMikePosOrders(monitoredPosOrders);
+            guardAlgoUPThatIsControlled = model.algoManager.getGuardAlgoUPforMikePosOrders(monitoredPosOrders);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     /**
@@ -194,14 +223,14 @@ public class ControllerGuardAlgoPane1 extends AlgoController implements CommonGU
         GuardAlgoDown algo = null;
         try {
             //this will return null if algo controlling monitoredPosOrders doesn't exist
-            algo = model.algoManager.getGuardAlgoDownForMikePosOrders(monitoredPosOrders);
+            algo = model.algoManager.getGuardAlgoDOWNforMikePosOrders(monitoredPosOrders);
         } catch (Exception e) {
             e.printStackTrace();
         }
         guardAlgoDOWNThatIsControlled = algo;
 
         if(guardAlgoDOWNThatIsControlled == null) {
-            createAlgo();
+            createAlgoDown();
         }
         else {
             MikeSimLogger.addLogEvent("GuardAlgoDown controlling " + monitoredPosOrders.getName() + " already exists");
@@ -212,28 +241,78 @@ public class ControllerGuardAlgoPane1 extends AlgoController implements CommonGU
      * creates a new algo and gives this controller access to it.
      * if userinput is missing, broken or negative sets the guardbuffer to an arbitrary value
      */
-    private void createAlgo() {
+    private void createAlgoDown() {
         if(monitoredPosOrders == null) return;
         if(orderTargetPosOrders == null) return;
         MikeSimLogger.addLogEvent("Creating GuardAlgoDown");
-        int guardBuffer = 15; //arbitrary default value
         int userInput;
+        int guardBuffer = 15; //arbitrary default value
         try {
             userInput = Integer.parseInt(bufferDistanceDown.getText());
             if(userInput > 0) guardBuffer = userInput;
         } catch (NumberFormatException e) {
-            MikeSimLogger.addLogEvent("Exeption in ControllerGuardAlgoPane1.createAlgo");
+            MikeSimLogger.addLogEvent("Exception in ControllerGuardAlgoPane1.createAlgoDown");
             e.printStackTrace();
         }
-
         //create the algo
         guardAlgoDOWNThatIsControlled = model.algoManager.createGuardAlgoDown(monitoredPosOrders, orderTargetPosOrders, guardBuffer);
-
     }
 
+    /**
+     * creates a new algo and gives this controller access to it.
+     * if userinput is missing, broken or negative sets the guardbuffer to an arbitrary value
+     */
+    private void createAlgoUp() {
+        if(monitoredPosOrders == null) return;
+        if(orderTargetPosOrders == null) return;
+        MikeSimLogger.addLogEvent("Creating GuardAlgoUp");
+        int userInput;
+        int guardBuffer = 45; //arbitrary default value
+        try {
+            userInput = Integer.parseInt(bufferDistanceUp.getText());
+            if(userInput > 0) guardBuffer = userInput;
+        } catch (NumberFormatException e) {
+            MikeSimLogger.addLogEvent("Exception in ControllerGuardAlgoPane1.createAlgoUp");
+            e.printStackTrace();
+        }
+        //create the algo
+        guardAlgoUPThatIsControlled = model.algoManager.createGuardAlgoUp(monitoredPosOrders, orderTargetPosOrders, guardBuffer);
+    }
+
+    //todo: finish this:
     @FXML
     void statusAndCreateUpBtnPressed(ActionEvent event) {
-        MikeSimLogger.addLogEvent("NOT IMPLEMENTED");
+
+
+
+        if(monitoredPosOrders == null) {
+            statusAndCreateUpBtn.setText("Choose PosOrders first!");
+            return;
+        }
+        MikeSimLogger.addLogEvent("Create  GuardAlgoUp button pressed");
+
+        //IF THERE IS A GUARD ALGO MONITORING CHOSEN MIKEPOSORDERS ALREADY - CHOOSE IT INSTEAD OF CREATING NEW ONE
+        GuardAlgoUp algo = null;
+        try {
+            //this will return null if algo controlling monitoredPosOrders doesn't exist
+            algo = model.algoManager.getGuardAlgoUPforMikePosOrders(monitoredPosOrders);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        guardAlgoUPThatIsControlled = algo;
+
+        if(guardAlgoUPThatIsControlled == null) {
+            createAlgoUp();
+        }
+        else {
+            MikeSimLogger.addLogEvent("GuardAlgoUp controlling " + monitoredPosOrders.getName() + " already exists");
+        }
+//
+//
+//
+//        //***************
+//        MikeSimLogger.addLogEvent("THIS IS NOT FINISHED!");
+//        if(guardAlgoUPThatIsControlled == null) createAlgoUp();
     }
 
     @FXML
@@ -243,7 +322,7 @@ public class ControllerGuardAlgoPane1 extends AlgoController implements CommonGU
 
     @FXML
     void suspendUpBtnPressed(ActionEvent event) {
-        MikeSimLogger.addLogEvent("NOT IMPLEMENTED");
+        if(guardAlgoUPThatIsControlled != null) guardAlgoUPThatIsControlled.suspend();
     }
 
     public void setModel(MainModelThread model) {

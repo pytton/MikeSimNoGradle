@@ -25,7 +25,7 @@ public class ControllerSimpleScalperAlgo extends AlgoController {
     public TextField targetInterval;
     private MikeOrder.MikeOrderType orderType = MikeOrder.MikeOrderType.BUYLMT;
 
-    private String descriptionRow1 = "SCLP1";
+    private final String descriptionRow1 = "SCLP1";
     private String descriptionRow2 = "B LMT";
 
 
@@ -87,13 +87,11 @@ public class ControllerSimpleScalperAlgo extends AlgoController {
     }
 
     private int getAmount() {
-        Integer amount = Integer.parseInt(orderAmount.getText());
-        return amount;
+        return Integer.parseInt(orderAmount.getText());
     }
 
     private int getInterval() {
-        Integer interval = Integer.parseInt(targetInterval.getText());
-        return interval;
+        return Integer.parseInt(targetInterval.getText());
     }
 
 

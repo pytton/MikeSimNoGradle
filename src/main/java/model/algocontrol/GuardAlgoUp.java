@@ -20,7 +20,7 @@ public class GuardAlgoUp extends GuardAlgo {
         if(monitored.getTotalOpenAmount() == 0) return; //if position is zero algo can't work
         //When the bid/ask price gets far enough from the zeroProfitPoint
         //send the first order and change status to RUNNING
-        if(checkDistance() < guardBuffer +1){
+        if( true /*checkDistance() < guardBuffer +1*/){
             //create first order and pass it to the target
             processGuardOrder();
             status = Status.RUNNING;
@@ -30,19 +30,23 @@ public class GuardAlgoUp extends GuardAlgo {
 
     @Override
     protected boolean checkLongPositionFailed() {
-        //check if failed
-        if(monitored.getAskPrice() < monitored.getZeroProfitPoint().intValue()) {
-            status = Status.FAILED;
-            return true;}
+        //this cant fail since orders only need to be placed above ZeroProfitPoint
+
+//        //check if failed
+//        if(monitored.getAskPrice() < monitored.getZeroProfitPoint().intValue()) {
+//            status = Status.FAILED;
+//            return true;}
         return false;
     }
 
     @Override
     protected boolean checkShortPositionFailed() {
-        //check if failed
-        if(monitored.getBidPrice() > monitored.getZeroProfitPoint().intValue()) {
-            status = Status.FAILED;
-            return true;}
+        //this cant fail since orders only need to be placed above ZeroProfitPoint
+
+//        //check if failed
+//        if(monitored.getBidPrice() > monitored.getZeroProfitPoint().intValue()) {
+//            status = Status.FAILED;
+//            return true;}
         return false;
     }
 
@@ -52,8 +56,8 @@ public class GuardAlgoUp extends GuardAlgo {
         //order type and order amount depends on whether position is long or short
         MikeOrder.MikeOrderType ordertype = MikeOrder.MikeOrderType.BUYSTP;
         //todo: do the math and implement it
-        // for testing just make the order 1/5 of current position:
-        int orderAmount = monitored.getTotalOpenAmount() / 10;
+        // for testing just make the order 1/20 of current position:
+        int orderAmount = monitored.getTotalOpenAmount() / 20;
         int zeroProfitPoint = orderTarget.getZeroProfitPoint().intValue();
         int price = zeroProfitPoint + guardBuffer;
 

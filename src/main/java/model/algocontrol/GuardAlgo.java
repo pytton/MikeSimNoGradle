@@ -4,7 +4,7 @@ import main.java.model.MikeSimLogger;
 import main.java.model.positionsorders.MikePosOrders;
 
 abstract class GuardAlgo extends BaseAlgo {
-    //this defines minimum distance between zeroprofitpoint and bid/ask price that is to be maintained by this algo
+    //this defines minimum distance between zeroProfitPoint and bid/ask price that is to be maintained by this algo
     protected int guardBuffer = 10;
 
     //if current bid/ask price gets this close or less to zeroProfitPoint, algo will stop and enter FAILED status
@@ -45,7 +45,7 @@ abstract class GuardAlgo extends BaseAlgo {
     protected abstract void processGuardOrder();
 
     @Override
-    synchronized public void process() throws Exception {
+    synchronized public void process()  {
         try {
             if (status == Status.CREATED) processCREATED();
             if (status == Status.RUNNING) processRUNNING();
@@ -60,6 +60,13 @@ abstract class GuardAlgo extends BaseAlgo {
     synchronized public void suspend(){
         orderTarget.cancelOrder(guardOrderId);
         status = Status.SUSPENDED;
+    }
+
+    public void setGuardBuffer(int setting){
+        if(setting <1) return;
+        guardBuffer = setting;
+        if (guardBuffer - 5 > 1) minimumOrderFireDistance = setting - 5;
+        cancelOrdersAndRestart();
     }
 
     public void cancelOrdersAndRestart() {
@@ -149,7 +156,7 @@ abstract class GuardAlgo extends BaseAlgo {
 //                MikeSimLogger.addLogEvent("order has been filled");
                 return true;}
         } catch (Exception e) {
-//            MikeSimLogger.addLogEvent("Exception in isGuardOrderfilled");
+//            MikeSimLogger.addLogEvent("Exception in isGuardOrderFilled");
             e.printStackTrace();
         }
         return false;
