@@ -14,7 +14,7 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import main.java.controllerandview.MainGUIClass;
-import main.java.controllerandview.algocontrollers.*;
+import main.java.controllerandview.algocontrollerpanes.*;
 import main.java.model.MainModelThread;
 import main.java.model.MikeSimLogger;
 import main.java.model.orderserver.MikeOrder;
@@ -29,6 +29,7 @@ import java.util.*;
 /**
  * To create this window, you need to call createPosWindow() in MainGUIClass.java
  */
+@SuppressWarnings("ALL")
 public class ControllerPositionsWindow
         implements MikeGridPane.MikeButtonHandler,
         MainGUIClass.Updatable,
@@ -269,6 +270,7 @@ public class ControllerPositionsWindow
 
                 //THIS IS WHERE YOU SET THE ACTIONS:
                 if(cb.getSelectionModel().getSelectedItem() == "SimpleScalper1"){
+                    setupControllerInsidePane();
                     try {
                         //LOAD A DIFFERENT FXML FILE DEPENDING ON THE SELECTION OF THE CHOICEBOX
                         //and set the anchorPane according to that file, and set the controller for it:
@@ -370,6 +372,31 @@ public class ControllerPositionsWindow
 
         ChoiceBoxChangeListener listenerCol7 = new ChoiceBoxChangeListener(this, choiceBoxCol7, anPaneCol7, 7);
         choiceBoxCol7.getSelectionModel().selectedItemProperty().addListener(listenerCol7);
+    }
+
+    //todo: pulling out setting up panes for different columns:
+    private void setupControllerInsidePane() {
+        MikeSimLogger.addLogEvent("experiment in Positionswindow");
+
+//
+//        try {
+//            //LOAD A DIFFERENT FXML FILE DEPENDING ON THE SELECTION OF THE CHOICEBOX
+//            //and set the anchorPane according to that file, and set the controller for it:
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/PositionsWindow/algoControllers/SimpleScalperAlgoControlPanel.fxml"));
+//            Parent anchorPaneParent = loader.load();
+//            //this will make the anchorPane display what was in the fxml file:
+//            anchorPane.getChildren().setAll(anchorPaneParent);
+//            ControllerSimpleScalperAlgo controllerSimpleScalperAlgo = loader.getController();
+//            //MikeGridPane will call this controller whenever a button inside MikeGridPane is pressed:
+//            controllerPositionsWindow.setAlgoController(colNumber, controllerSimpleScalperAlgo);
+//
+//            System.out.println("Choicebox algo setting successful");
+//        } catch (Exception e) {
+//            System.out.println("Exception in Choicebox algo setting");
+//        }
+
+
+
     }
 
     public void updateGUI(){

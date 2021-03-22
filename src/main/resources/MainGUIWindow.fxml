@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllerandview.windowcontrollers.ControllerMainGUIWindow">
    <children>
       <VBox alignment="CENTER">
@@ -18,6 +17,7 @@
             <Button fx:id="createAlgoManagerWinBtn" mnemonicParsing="false" onAction="#createAlgoManagerWindow" text="Create Algo Manager Window" />
             <Button fx:id="createGuardAlgoWindow" mnemonicParsing="false" onAction="#createGueardAlgoClicked" text="Create GuardAlgo WIndow" />
             <Button fx:id="connectOutsideDataButton" mnemonicParsing="false" onAction="#connectOutsideDataClicked" text="Connect Outside Data" />
+            <Button fx:id="createStandAloneAlgoWindow" mnemonicParsing="false" onAction="#createMultipleStepperAlgoWindowClicked" text="Create MultipleStepperAlgo WIndow" />
             <VBox alignment="CENTER">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" text="INSTRUMENT" />

@@ -89,17 +89,14 @@ public class ControllerMainGUIWindow {
         duration += histDataDuration.getText();
         duration += " S";
 
-
         model.marketConnection.getEClientSocket().reqHistoricalData(0, contract, endDateTime,  duration, "1 secs", "BID", 1, 1);
-
-
     }
 
-    public void createGueardAlgoClicked(ActionEvent actionEvent) {//todo: implement this
-
-
-
+    public void createGueardAlgoClicked(ActionEvent actionEvent) {
         mainGUIClass.createGuardAlgoWindow();
+    }
 
+    public void createMultipleStepperAlgoWindowClicked(ActionEvent actionEvent) {
+        mainGUIClass.createMultipleStepperAlgoWindow();
     }
 }

@@ -1,4 +1,4 @@
-package main.java.controllerandview.algocontrollers;
+package main.java.controllerandview.algocontrollerpanes;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;

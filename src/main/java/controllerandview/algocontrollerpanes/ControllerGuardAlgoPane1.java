@@ -1,4 +1,4 @@
-package main.java.controllerandview.algocontrollers;
+package main.java.controllerandview.algocontrollerpanes;
 
 import java.net.URL;
 import java.util.ResourceBundle;

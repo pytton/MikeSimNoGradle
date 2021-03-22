@@ -7,11 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import main.java.controllerandview.algocontrollers.ControllerGuardAlgoPane1;
-import main.java.controllerandview.windowcontrollers.ControllerAlgoManagerPanel;
-import main.java.controllerandview.windowcontrollers.ControllerMainGUIWindow;
-import main.java.controllerandview.windowcontrollers.ControllerPositionsWindow;
-import main.java.controllerandview.windowcontrollers.ControllerPriceControlWindow;
+import main.java.controllerandview.algocontrollerpanes.ControllerGuardAlgoPane1;
+import main.java.controllerandview.windowcontrollers.*;
 import main.java.model.MainModelThread;
 import main.java.model.MikeSimLogger;
 import main.java.model.priceserver.PriceServer;
@@ -219,6 +216,47 @@ public class MainGUIClass {
         updatableWindowsList.add(controllerGuardAlgoPane1);
     }
 
+    public void createMultipleStepperAlgoWindow(){
+        FXMLLoader standAloneAlgoWindowLoader = new FXMLLoader(getClass().getResource("/MultipleStepperAlgoWindow.fxml"));
+        Parent paneRoot = null; //FXMLLoader.load(getClass().getResource("view/SceneBuilder/PriceControlPanel.fxml"));
+        try {
+            paneRoot = standAloneAlgoWindowLoader.load();
+        } catch (IOException e) {
+            MikeSimLogger.addLogEvent("Exception in createStandAloneAlgoWindow");
+            e.printStackTrace();
+            return;
+        }
+        MikeSimLogger.addLogEvent("createStandAloneAlgoWindow called");
+        //get the controller class:
+        ControllerMultipleStepperAlgoWindow controllerWindow = (ControllerMultipleStepperAlgoWindow) standAloneAlgoWindowLoader.getController();
+        //todo: add the controller to the list of updatable controllers:
+
+        //set the model:
+//        controllerWindow.setModel(mainModelThread);
+
+        //this adds a custom table of buttons to the scene
+        MikeGridPane buttonTable = new MikeGridPane(30, 2, controllerWindow);
+
+        ScrollPane sp = new ScrollPane();
+        sp.setContent(buttonTable);
+        sp.setFitToWidth(true);
+
+        controllerWindow.getMainBorderPane().setLeft(sp);
+
+
+        //create the window:
+        Stage stage = new Stage();
+        stage.setTitle("Multiple Stepper Algo Control");
+        stage.setScene(new Scene(paneRoot));
+
+        stage.setHeight(750);
+
+        stage.show();
+
+//        updatableWindowsList.add(controllerWindow);
+
+    }
+
     /**
      * Used to create and setup MikePositionsWindow.
      */
@@ -278,6 +316,14 @@ public class MainGUIClass {
 
             //set the initial priceServer(this can later be changed by user in the window)
             controller.setPriceServer(priceServer);
+
+            setupInitialColumns(controller);
+
+        }
+
+        //todo: working on this. this should setup the 7 columns in MikeGridPane to do default actions like buy/sell instead of being blank
+        private void setupInitialColumns(ControllerPositionsWindow controller){
+
 
         }
 

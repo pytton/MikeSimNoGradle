@@ -1,8 +1,7 @@
-package main.java.controllerandview.algocontrollers;
+package main.java.controllerandview.algocontrollerpanes;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import main.java.controllerandview.algocontrollers.AlgoController;
 import main.java.model.MainModelThread;
 import main.java.model.orderserver.MikeOrder;
 import main.java.model.positionsorders.MikePosOrders;

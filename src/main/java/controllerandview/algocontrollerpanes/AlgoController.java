@@ -1,4 +1,4 @@
-package main.java.controllerandview.algocontrollers;
+package main.java.controllerandview.algocontrollerpanes;
 
 import main.java.model.MainModelThread;
 import main.java.model.positionsorders.MikePosOrders;
