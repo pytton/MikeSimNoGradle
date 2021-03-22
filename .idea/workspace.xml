@@ -14,67 +14,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0212a54c-a94c-4dfe-9eec-4ace680f76bc" name="Default Changelist" comment="MSim-10 MultipleStepperAlgo - first draft. Window shows. Need to implement all the buttons">
-      <change afterPath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerMultipleStepperAlgoWindow.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/MultipleStepperAlgoWindow.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaDoc/allclasses-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/allclasses-frame.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaDoc/allclasses-noframe.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/allclasses-noframe.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaDoc/index-files/index-1.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/index-files/index-1.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaDoc/index-files/index-11.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/index-files/index-11.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaDoc/index-files/index-13.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/index-files/index-13.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaDoc/index-files/index-16.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/index-files/index-16.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaDoc/index-files/index-17.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/index-files/index-17.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaDoc/index-files/index-2.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/index-files/index-2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaDoc/index-files/index-3.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/index-files/index-3.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaDoc/index-files/index-4.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/index-files/index-4.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaDoc/index-files/index-6.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/index-files/index-6.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaDoc/index-files/index-7.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/index-files/index-7.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaDoc/index-files/index-9.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/index-files/index-9.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaDoc/main/java/controllerandview/algocontrollers/AlgoController.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/main/java/controllerandview/algocontrollers/AlgoController.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaDoc/main/java/controllerandview/algocontrollers/ControllerComplexScalperAlgo.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/main/java/controllerandview/algocontrollers/ControllerComplexScalperAlgo.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaDoc/main/java/controllerandview/algocontrollers/ControllerPlainOrder.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/main/java/controllerandview/algocontrollers/ControllerPlainOrder.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaDoc/main/java/controllerandview/algocontrollers/ControllerSimpleScalperAlgo.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/main/java/controllerandview/algocontrollers/ControllerSimpleScalperAlgo.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaDoc/main/java/controllerandview/algocontrollers/ControllerSimpleStepperAlgo.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/main/java/controllerandview/algocontrollers/ControllerSimpleStepperAlgo.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaDoc/main/java/controllerandview/algocontrollers/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/main/java/controllerandview/algocontrollers/package-frame.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaDoc/main/java/controllerandview/algocontrollers/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/main/java/controllerandview/algocontrollers/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaDoc/main/java/controllerandview/algocontrollers/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/main/java/controllerandview/algocontrollers/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaDoc/main/java/controllerandview/positionswindow/controller/ControllerPositionsWindow.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/main/java/controllerandview/positionswindow/controller/ControllerPositionsWindow.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaDoc/main/java/controllerandview/positionswindow/controller/ControllerScalperAlgo1.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/main/java/controllerandview/positionswindow/controller/ControllerScalperAlgo1.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaDoc/main/java/controllerandview/positionswindow/controller/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/main/java/controllerandview/positionswindow/controller/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaDoc/overview-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/overview-frame.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaDoc/overview-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/overview-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaDoc/overview-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/JavaDoc/overview-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/MikeSimNoGradle_jar/MikeSimNoGradle.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/MikeSimNoGradle_jar/MikeSimNoGradle.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/MainGUIWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/MainGUIWindow.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MainGUIClass$MikePositionsWindowCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MainGUIClass$MikePositionsWindowCreator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MainGUIClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MainGUIClass.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollers/AlgoController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollers/ControllerComplexScalperAlgo$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollers/ControllerComplexScalperAlgo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollers/ControllerPlainOrder$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollers/ControllerPlainOrder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollers/ControllerSimpleScalperAlgo$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollers/ControllerSimpleScalperAlgo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollers/ControllerSimpleStepperAlgo$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollers/ControllerSimpleStepperAlgo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/MainGUIWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/MainGUIWindow.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/MainGUIClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/MainGUIClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollers/AlgoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/AlgoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollers/ControllerComplexScalperAlgo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerComplexScalperAlgo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollers/ControllerGuardAlgoPane1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerGuardAlgoPane1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollers/ControllerPlainOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerPlainOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollers/ControllerScalperAlgo1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerScalperAlgo1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollers/ControllerSimpleScalperAlgo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerSimpleScalperAlgo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollers/ControllerSimpleStepperAlgo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerSimpleStepperAlgo.java" afterDir="false" />
+    <list default="true" id="0212a54c-a94c-4dfe-9eec-4ace680f76bc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerMainGUIWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerMainGUIWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/MainGUIWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/MainGUIWindow.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/PositionsWindow/algoControllers/ComplexScalperControlPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PositionsWindow/algoControllers/ComplexScalperControlPanel.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/PositionsWindow/algoControllers/GuardAlgoPane1.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PositionsWindow/algoControllers/GuardAlgoPane1.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/PositionsWindow/algoControllers/PlainOrderControlPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PositionsWindow/algoControllers/PlainOrderControlPanel.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/PositionsWindow/algoControllers/SimpleScalperAlgoControlPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PositionsWindow/algoControllers/SimpleScalperAlgoControlPanel.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/PositionsWindow/algoControllers/SimpleStepperControlPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PositionsWindow/algoControllers/SimpleStepperControlPanel.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -258,7 +200,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607948877216</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="MSim-10 MultipleStepperAlgo - first draft. Window shows. Need to implement all the buttons">
+      <created>1616454945501</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1616454945501</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -336,7 +285,8 @@
     <MESSAGE value="Starting work on MSim-14 and MSim-15.&#10;Cleaned up MikePosOrders a little bit.&#10;Starting to create comments for main classes.&#10;Updated gitignore to exclude JavaDoc files from diff view." />
     <MESSAGE value="Changed gitignore to exclude JavaDoc. Working on MSim-15. Added some comments to code. Updating MikeSimulator.xmind &#10;Before changing package structure in controllerandview.algocontrollers" />
     <MESSAGE value="Moved javafx window controllers to single package called windowcontrollers.&#10;MSim-15 - review MikeSimNoGradle - still working on that.&#10;Started working on MikeSimulator.xmind.&#10;&#10;MSim-16 - fix bid price = ask price done. Created model.helpers.DoubleCompare class for comparing double values in the future.&#10;MSim-3 - done. OrderServerRealExternal still not implemented." />
-    <option name="LAST_COMMIT_MESSAGE" value="Moved javafx window controllers to single package called windowcontrollers.&#10;MSim-15 - review MikeSimNoGradle - still working on that.&#10;Started working on MikeSimulator.xmind.&#10;&#10;MSim-16 - fix bid price = ask price done. Created model.helpers.DoubleCompare class for comparing double values in the future.&#10;MSim-3 - done. OrderServerRealExternal still not implemented." />
+    <MESSAGE value="MSim-10 MultipleStepperAlgo - first draft. Window shows. Need to implement all the buttons" />
+    <option name="LAST_COMMIT_MESSAGE" value="MSim-10 MultipleStepperAlgo - first draft. Window shows. Need to implement all the buttons" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/MikeSimNoGradle$Main.ic" NAME="Main Coverage Results" MODIFIED="1609257311491" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

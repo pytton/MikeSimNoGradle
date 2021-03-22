@@ -92,7 +92,7 @@ public class ControllerMainGUIWindow {
         model.marketConnection.getEClientSocket().reqHistoricalData(0, contract, endDateTime,  duration, "1 secs", "BID", 1, 1);
     }
 
-    public void createGueardAlgoClicked(ActionEvent actionEvent) {
+    public void createGuardAlgoClicked(ActionEvent actionEvent) {
         mainGUIClass.createGuardAlgoWindow();
     }
 
