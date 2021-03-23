@@ -1,3 +1,6 @@
+2021/03/23
+start refactoring of ControllerPositionsWindow
+
 2020/11/15:
 Added CommonGUI.java
 Added Development log.txt to project
