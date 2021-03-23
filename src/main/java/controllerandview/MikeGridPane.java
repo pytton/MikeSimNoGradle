@@ -11,6 +11,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Font;
 import main.java.model.MikeSimLogger;
 import main.java.model.positionsorders.MikePosOrders;
+import main.java.model.priceserver.PriceServer;
 
 import java.util.ArrayList;
 
@@ -86,6 +87,131 @@ public class MikeGridPane extends GridPane {
 
         }
 
+    }
+
+    public static void printBuyOrders(MikeGridPane mikeGridPane, MikePosOrders mikePosOrders, int activeBuyOrderCol,
+                                      int topRowPrice){
+        //check parameters:
+        if(activeBuyOrderCol < 0 || activeBuyOrderCol > (mikeGridPane.getHowManyCols())){
+            MikeSimLogger.addLogEvent("INVALID PARAMETERS IN main.java.controllerandview.MikeGridPane.printBuyOrders");
+            return;
+        }
+
+        int priceToPrint;
+        for(int row = 0 ; row < mikeGridPane.getHowManyRows() ; row++) {
+
+            priceToPrint = topRowPrice - row;
+
+            //print active buy orders for the given price:
+            if (mikePosOrders.getOpenBuyOrdersAtPrice(priceToPrint) != 0) {
+                MikeGridPane.setTextForButtonInMikeGridPane(mikeGridPane, row, activeBuyOrderCol, "" + mikePosOrders.getOpenBuyOrdersAtPrice(priceToPrint));
+                mikeGridPane.getButton(row, activeBuyOrderCol).setStyle("-fx-background-color: lightblue; -fx-text-fill: blue; -fx-font-weight: bolder; -fx-border-color : black");
+            } else {
+                MikeGridPane.setTextForButtonInMikeGridPane(mikeGridPane, row, activeBuyOrderCol, "");
+                mikeGridPane.getButton(row, activeBuyOrderCol).setStyle("-fx-background-color: lightyellow  ; -fx-border-color : black");
+            }
+        }
+    }
+
+    public static void printBidInMikeGridPane(MikeGridPane mikeGridPane, PriceServer priceServer, int bidPrintoutCol, int topRowPrice){
+        //check parameters:
+        if(bidPrintoutCol < 0 || bidPrintoutCol > (mikeGridPane.getHowManyCols())){
+            MikeSimLogger.addLogEvent("INVALID PARAMETERS IN main.java.controllerandview.MikeGridPane.printBidInMikeGridPane");
+            return;
+        }
+
+        int priceToPrint;
+        for(int row = 0 ; row < mikeGridPane.getHowManyRows() ; row++) {
+            priceToPrint = topRowPrice - row;
+
+            //print "BID" in the row of the bid price:
+            MikeGridPane.MikeButton button = mikeGridPane.getButton(row, bidPrintoutCol);
+            if (topRowPrice - row == priceServer.getBidPrice()) {
+                MikeGridPane.setTextForButtonInMikeGridPane(mikeGridPane, row, bidPrintoutCol, "BID");
+                button.setStyle("-fx-background-color: yellow; -fx-text-fill: blue; -fx-font-weight: bolder; -fx-border-color : black");
+            } else {
+                MikeGridPane.setTextForButtonInMikeGridPane(mikeGridPane, row, bidPrintoutCol, "");
+                mikeGridPane.getButton(row, bidPrintoutCol).setStyle("-fx-background-color: lightyellow  ; -fx-border-color : black");
+            }
+        }
+    }
+
+    public static void printPricesInMikeGridPane(MikeGridPane mikeGridPane, int pricePrintoutCol, int topRowPrice){
+        //check parameters:
+        if(pricePrintoutCol < 0 || pricePrintoutCol > (mikeGridPane.getHowManyCols())){
+            MikeSimLogger.addLogEvent("INVALID PARAMETERS IN main.java.controllerandview.MikeGridPane.printPricesInMikeGridPane");
+            return;
+        }
+
+        for(int row = 0 ; row < mikeGridPane.getHowManyRows() ; row++) {
+
+            //print prices in mikeGridPane:
+            MikeGridPane.MikeButton button = mikeGridPane.getButton(row, pricePrintoutCol);
+            MikeGridPane.setTextForButtonInMikeGridPane(mikeGridPane, row, pricePrintoutCol, "" + (topRowPrice - row));
+            button.setStyle("-fx-background-color: lightgrey; -fx-text-fill: black; -fx-font-weight: bold");
+        }
+    }
+
+    public static void printAskInMikeGridPane(MikeGridPane mikeGridPane, PriceServer priceServer, int askPrintoutCol, int topRowPrice){
+        //check parameters:
+        if(askPrintoutCol < 0 || askPrintoutCol > (mikeGridPane.getHowManyCols())){
+            MikeSimLogger.addLogEvent("INVALID PARAMETERS IN main.java.controllerandview.MikeGridPane.printAskInMikeGridPane");
+            return;
+        }
+        for(int row = 0 ; row < mikeGridPane.getHowManyRows() ; row++) {
+            //print "ASK" in the row of the ask price in fifth column:
+            MikeGridPane.MikeButton button = mikeGridPane.getButton(row, askPrintoutCol);
+            if (topRowPrice - row == priceServer.getAskPrice()) {
+                MikeGridPane.setTextForButtonInMikeGridPane(mikeGridPane, row, askPrintoutCol, "ASK");
+                button.setStyle("-fx-background-color: yellow; -fx-text-fill: red; -fx-font-weight: bolder; -fx-border-color : black");
+            } else {
+                MikeGridPane.setTextForButtonInMikeGridPane(mikeGridPane, row, askPrintoutCol, "");
+                mikeGridPane.getButton(row, askPrintoutCol).setStyle("-fx-background-color: lightyellow  ; -fx-border-color : black");
+            }
+        }
+    }
+
+    public static void printSellOrders(MikeGridPane mikeGridPane, MikePosOrders mikePosOrders, int activeSellOrderCol, int topRowPrice){
+        //check parameters:
+        if(activeSellOrderCol < 0 || activeSellOrderCol > (mikeGridPane.getHowManyCols())){
+            MikeSimLogger.addLogEvent("INVALID PARAMETERS IN main.java.controllerandview.MikeGridPane.printSellOrders");
+            return;
+        }
+        int priceToPrint;
+        for(int row = 0 ; row < mikeGridPane.getHowManyRows() ; row++) {
+            priceToPrint = topRowPrice - row;
+            //print active sell orders for the given price:
+            if (mikePosOrders.getOpenSellOrdersAtPrice(priceToPrint) != 0) {
+                MikeGridPane.setTextForButtonInMikeGridPane(mikeGridPane, row, activeSellOrderCol, "" + mikePosOrders.getOpenSellOrdersAtPrice(priceToPrint));
+                mikeGridPane.getButton(row, activeSellOrderCol).setStyle("-fx-background-color: salmon; -fx-text-fill: crimson; -fx-font-weight: bolder; -fx-border-color : black");
+            } else {
+                MikeGridPane.setTextForButtonInMikeGridPane(mikeGridPane, row, activeSellOrderCol, "");
+                mikeGridPane.getButton(row, activeSellOrderCol).setStyle("-fx-background-color: lightyellow  ; -fx-border-color : black");
+            }
+        }
+    }
+
+    public static void printZeroProfitPoint(MikeGridPane mikeGridPane, int zeroProfitPointCol, int totalOpenAmount, int topRowPrice, Double zeroProfitPoint){
+        //check parameters:
+        if(zeroProfitPointCol < 0 || zeroProfitPointCol > (mikeGridPane.getHowManyCols())){
+            MikeSimLogger.addLogEvent("INVALID PARAMETERS IN main.java.controllerandview.MikeGridPane.printZeroProfitPoint");
+            return;
+        }
+        int priceToPrint;
+        for(int row = 0 ; row < mikeGridPane.getHowManyRows() ; row++) {
+            priceToPrint = topRowPrice - row;
+            //print the zero profit point
+            if (priceToPrint == zeroProfitPoint.intValue()) {
+                MikeGridPane.setTextForButtonInMikeGridPane(mikeGridPane, row, zeroProfitPointCol, "" + totalOpenAmount);
+                //color the button according to the position being long/short:
+                if (totalOpenAmount > 0)
+                    mikeGridPane.getButton(row, zeroProfitPointCol).setStyle("-fx-text-fill: blue; -fx-font-weight: bolder");
+                if (totalOpenAmount < 0)
+                    mikeGridPane.getButton(row, zeroProfitPointCol).setStyle("-fx-text-fill: red; -fx-font-weight: bolder");
+                if (totalOpenAmount == 0)
+                    mikeGridPane.getButton(row, zeroProfitPointCol).setStyle("-fx-background-color: white");
+            }
+        }
     }
 
     /**

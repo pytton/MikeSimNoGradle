@@ -135,7 +135,7 @@ public class ControllerPositionsWindow
      * @param colNumber 0 is the first column
      * @return
      */
-    private AlgoController getAlgoControllerOfColumn(int colNumber) {
+    public AlgoController getAlgoControllerOfColumn(int colNumber) {
         switch (colNumber) {
             case 0: if (controllerCol1 != null) {return controllerCol1;}
             break;
@@ -378,9 +378,7 @@ public class ControllerPositionsWindow
 
     //todo: pulling out setting up panes for different columns:
     private void setupInitialColumnActions() {
-        MikeSimLogger.addLogEvent("experiment in Positionswindow");
-
-
+        MikeSimLogger.addLogEvent("setting initial column actions in Positionswindow");
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/PositionsWindow/algoControllers/SimpleScalperAlgoControlPanel.fxml"));
 
@@ -390,13 +388,16 @@ public class ControllerPositionsWindow
             setAlgoController(1, controllerSimpleScalperAlgo);
             controllerSimpleScalperAlgo.cancel.fire();
 
+            loader = new FXMLLoader(getClass().getResource("/PositionsWindow/algoControllers/PlainOrderControlPanel.fxml"));
+            anPaneCol2.getChildren().setAll((Parent) loader.load());
+            ControllerPlainOrder controllerPlainOrder = loader.getController();
+            setAlgoController(2, controllerPlainOrder);
+            controllerPlainOrder.buyLimit.fire();
+
             System.out.println("Experiment in setting initial column controller  successful");
         } catch (Exception e) {
             System.out.println("Exception in setupControllerInsidePane()");
         }
-
-
-
     }
 
     public void updateGUI(){
@@ -663,48 +664,17 @@ public class ControllerPositionsWindow
      */
     private synchronized void printout(MikePosOrders mikePosOrders) {
         try {
-
             int totalOpenAmount = mikePosOrders.getTotalOpenAmount();
             Double averagePrice = 0.0;
             if (mikePosOrders.getAveragePrice() != null) {
                 averagePrice = mikePosOrders.getAveragePrice();
             }
-
             Double zeroProfitPoint = 0.0;
             if(mikePosOrders.getZeroProfitPoint() != null) {
                 zeroProfitPoint = mikePosOrders.getZeroProfitPoint();
             }
-
             int totalPL = mikePosOrders.getTotalPL();
 
-
-            //display realtime bid ask priceserver:
-            askPriceTextField.setText("" + (int)priceServer.getAskPrice());
-            bidPriceTextField.setText("" + (int)priceServer.getBidPrice());
-            //display the total open position:
-
-            totalOpenPosTextField.setText("" + totalOpenAmount);
-            //set the color depending on position long/short
-            if (totalOpenAmount >= 0) {
-                totalOpenPosTextField.setStyle("-fx-background-color: lightblue; -fx-text-fill: blue; -fx-font-weight: bolder; -fx-border-color : black");
-            } else {
-                totalOpenPosTextField.setStyle("-fx-background-color: salmon; -fx-text-fill: crimson; -fx-font-weight: bolder; -fx-border-color : black");
-            }
-            //display the average price:
-
-            weighedAveragePriceTextField.setText("" + averagePrice);
-            zeroProfitPointTextField.setText(""+zeroProfitPoint);
-            //display the PL:
-            totalOpenPLTextField.setText("" + mikePosOrders.getOpenPL());
-            totalClosedPLTextField.setText("" + mikePosOrders.getClosedPL());
-            totalPLTextField.setText("" + totalPL);
-            if (totalPL >= 0) {
-                totalPLTextField.setStyle("-fx-background-color: lightblue; -fx-text-fill: blue; -fx-font-weight: bolder; -fx-border-color : black");
-            } else {
-                totalPLTextField.setStyle("-fx-background-color: salmon; -fx-text-fill: crimson; -fx-font-weight: bolder; -fx-border-color : black");
-            }
-
-            //printout data in MikeGridPane:
             int openLongPositionsCol = 0;
             int activeBuyOrderCol = 1;
             int bidPrintoutCol = 2;
@@ -714,144 +684,126 @@ public class ControllerPositionsWindow
             int activeSellOrderCol = 5;
             int openShortPositionsCol = 6;
 
-            //update the top column description depending on what has been set:
-            for (int col = 0; col < 7; col++) {
+            //printout data in MikeGridPane:
+            printoutMainMikeGridPane(mikePosOrders, totalOpenAmount, zeroProfitPoint, openLongPositionsCol, activeBuyOrderCol, bidPrintoutCol,
+                    zeroProfitPointCol, pricePrintoutCol, askPrintoutCol, activeSellOrderCol, openShortPositionsCol);
 
-                AlgoController controller = getAlgoControllerOfColumn(col);
+            //printout total open volume, profit/loss, etc in text fields:
+            printoutTextfields(mikePosOrders, totalOpenAmount, averagePrice, zeroProfitPoint, totalPL);
 
-                //clear the topMikeGridPane:
-                for (int rowToPrint = 0; rowToPrint < topMikeGridPane.getHowManyRows(); rowToPrint++) {
-                    topMikeGridPane.getButton(rowToPrint, col).setFont(Font.font(11));
-                    topMikeGridPane.getButton(rowToPrint, col).setStyle("-fx-background-color: lightgrey  ; -fx-font-weight: bold;-fx-border-color : black");
-                    topMikeGridPane.getButton(rowToPrint, col).setText("");
-                }
-                if (null != controller) {
-                    //Display short description on top:
-                    topMikeGridPane.getButton(0, (col)).setText(getAlgoControllerOfColumn((col)).getSimpleDescriptionRow1());
-                    topMikeGridPane.getButton(1, (col)).setText(getAlgoControllerOfColumn((col)).getSimpleDescriptionRow2());
-                }
-
-                //clear the BottomMikeGridPane
-                bottomMikeGridPane.getButton(0, col).setStyle("-fx-background-color: grey ; -fx-font-weight: bold; -fx-border-color : black");
-                bottomMikeGridPane.getButton(0, col).setText("");
-            }
-
-
-            //print open long and short positions in MikeGridpane:
-            MikeGridPane.printPositions(mikeGridPane, mikePosOrders, openLongPositionsCol, openShortPositionsCol, topRowPrice);
-
-
-            for(int row = 0 ; row < mikeGridPane.getHowManyRows() ; row++){
-
-                int priceToPrint = topRowPrice - row;
-
-                //print open long and short positions:
-
-//                MikeGridPane.printPositionsAtRow(mikeGridPane, mikePosOrders, openLongPositionsCol, openShortPositionsCol, row, priceToPrint);
-
-
-                //print active buy orders for the given price:
-                if(mikePosOrders.getOpenBuyOrdersAtPrice(priceToPrint) != 0){
-                    MikeGridPane.setTextForButtonInMikeGridPane(mikeGridPane, row, activeBuyOrderCol,"" + mikePosOrders.getOpenBuyOrdersAtPrice(priceToPrint));
-                    mikeGridPane.getButton(row, activeBuyOrderCol).setStyle("-fx-background-color: lightblue; -fx-text-fill: blue; -fx-font-weight: bolder; -fx-border-color : black");
-                } else {
-                    MikeGridPane.setTextForButtonInMikeGridPane(mikeGridPane, row, activeBuyOrderCol, "");
-                    mikeGridPane.getButton(row, activeBuyOrderCol).setStyle("-fx-background-color: lightyellow  ; -fx-border-color : black");
-                }
-
-
-                //print "BID" in the row of the bid price:
-                MikeGridPane.MikeButton button = mikeGridPane.getButton(row, 2);
-                if (topRowPrice - row == priceServer.getBidPrice()) {
-                    MikeGridPane.setTextForButtonInMikeGridPane(mikeGridPane, row, bidPrintoutCol, "BID");
-                    button.setStyle("-fx-background-color: yellow; -fx-text-fill: blue; -fx-font-weight: bolder; -fx-border-color : black");
-                }else{
-                    MikeGridPane.setTextForButtonInMikeGridPane(mikeGridPane, row, bidPrintoutCol, "");
-                    mikeGridPane.getButton(row, bidPrintoutCol).setStyle("-fx-background-color: lightyellow  ; -fx-border-color : black");
-
-
-                }
-
-                //print prices in the fourth column of mikeGridPane:
-                button = mikeGridPane.getButton(row, pricePrintoutCol);
-                MikeGridPane.setTextForButtonInMikeGridPane(mikeGridPane, row, pricePrintoutCol, "" +(topRowPrice - row));
-                button.setStyle("-fx-background-color: lightgrey; -fx-text-fill: black; -fx-font-weight: bold");
-
-                //print "ASK" in the row of the ask price in fifth column:
-                button = mikeGridPane.getButton(row, askPrintoutCol);
-                if (topRowPrice - row == priceServer.getAskPrice()) {
-                    MikeGridPane.setTextForButtonInMikeGridPane(mikeGridPane, row, askPrintoutCol, "ASK");
-                    button.setStyle("-fx-background-color: yellow; -fx-text-fill: red; -fx-font-weight: bolder; -fx-border-color : black");
-                }else{
-                    MikeGridPane.setTextForButtonInMikeGridPane(mikeGridPane, row, askPrintoutCol, "");
-                    mikeGridPane.getButton(row, askPrintoutCol).setStyle("-fx-background-color: lightyellow  ; -fx-border-color : black");
-
-
-                }
-
-                //print active sell orders for the given price:
-                if(mikePosOrders.getOpenSellOrdersAtPrice(priceToPrint) != 0){
-                    MikeGridPane.setTextForButtonInMikeGridPane(mikeGridPane, row, activeSellOrderCol,"" + mikePosOrders.getOpenSellOrdersAtPrice(priceToPrint));
-                    mikeGridPane.getButton(row, activeSellOrderCol).setStyle("-fx-background-color: salmon; -fx-text-fill: crimson; -fx-font-weight: bolder; -fx-border-color : black");
-                } else {
-                    MikeGridPane.setTextForButtonInMikeGridPane(mikeGridPane, row, activeSellOrderCol, "");
-                    mikeGridPane.getButton(row, activeSellOrderCol).setStyle("-fx-background-color: lightyellow  ; -fx-border-color : black");
-                }
-
-                //print the zero profit point
-                if( priceToPrint == zeroProfitPoint.intValue()){
-
-                    MikeGridPane.setTextForButtonInMikeGridPane(mikeGridPane, row, zeroProfitPointCol,"" + totalOpenAmount);
-                    //color the button according to the position being long/short:
-                    if(totalOpenAmount>0) mikeGridPane.getButton(row, zeroProfitPointCol).setStyle("-fx-text-fill: blue; -fx-font-weight: bolder");
-                    if(totalOpenAmount<0) mikeGridPane.getButton(row, zeroProfitPointCol).setStyle("-fx-text-fill: red; -fx-font-weight: bolder");
-                    if(totalOpenAmount==0) mikeGridPane.getButton(row, zeroProfitPointCol).setStyle("-fx-background-color: white");
-
-                }
-            }
-
-
-
-            //if BID is outside mikeGridPane, print it in the top or bottom gridPanes:
-            if (priceServer.getBidPrice() >topRowPrice) {
-                topMikeGridPane.getButton(2, bidPrintoutCol).setText("BID");
-                topMikeGridPane.getButton(2, bidPrintoutCol).setStyle("-fx-background-color: yellow; -fx-text-fill: blue; -fx-font-weight: bolder; -fx-border-color : black");
-            }
-            if (priceServer.getBidPrice() <bottomRowPrice) {
-                bottomMikeGridPane.getButton(0, bidPrintoutCol).setText("BID");
-                bottomMikeGridPane.getButton(0, bidPrintoutCol).setStyle("-fx-background-color: yellow; -fx-text-fill: blue; -fx-font-weight: bolder; -fx-border-color : black");
-            }
-
-            //if ASK is outside mikeGridPane, print it in the top or bottom gridPanes:
-            if (priceServer.getAskPrice() >topRowPrice) {
-                topMikeGridPane.getButton(2, askPrintoutCol).setText("ASK");
-                topMikeGridPane.getButton(2, askPrintoutCol).setStyle("-fx-background-color: yellow; -fx-text-fill: red; -fx-font-weight: bolder; -fx-border-color : black");
-            }
-            if (priceServer.getAskPrice() <bottomRowPrice) {
-                bottomMikeGridPane.getButton(0, askPrintoutCol).setText("ASK");
-                bottomMikeGridPane.getButton(0, askPrintoutCol).setStyle("-fx-background-color: yellow; -fx-text-fill: red; -fx-font-weight: bolder; -fx-border-color : black");
-            }
-
-            //if zero profit point is outside mikeGridPane, print it in the top or bottom gridPanes:
-            if (zeroProfitPoint>topRowPrice) {
-                topMikeGridPane.getButton(0, zeroProfitPointCol).setText("" + totalOpenAmount);
-                //color the button according to the position being long/short:
-                if(totalOpenAmount>0) topMikeGridPane.getButton(0, zeroProfitPointCol).setStyle("-fx-text-fill: blue; -fx-font-weight: bolder; -fx-font-size: 14");
-                if(totalOpenAmount<0) topMikeGridPane.getButton(0, zeroProfitPointCol).setStyle("-fx-text-fill: red; -fx-font-weight: bolder; -fx-font-size: 14");
-                if(totalOpenAmount==0) topMikeGridPane.getButton(0, zeroProfitPointCol).setStyle("-fx-background-color: white");
-            }
-            if (zeroProfitPoint<bottomRowPrice) {
-                bottomMikeGridPane.getButton(0, zeroProfitPointCol).setText("" + totalOpenAmount);
-//                        setSpecificButtonInMikeGridPane(row, zeroProfitPointCol,"" + totalOpenAmount);
-                //color the button according to the position being long/short:
-                if(totalOpenAmount>0) bottomMikeGridPane.getButton(0, zeroProfitPointCol).setStyle("-fx-text-fill: blue; -fx-font-weight: bolder");
-                if(totalOpenAmount<0) bottomMikeGridPane.getButton(0, zeroProfitPointCol).setStyle("-fx-text-fill: red; -fx-font-weight: bolder");
-                if(totalOpenAmount==0) bottomMikeGridPane.getButton(0, zeroProfitPointCol).setStyle("-fx-background-color: white");
-            }
+            //print column descriptions etc:
+            printoutBottomAndTopGridPanes(totalOpenAmount, zeroProfitPoint, bidPrintoutCol, zeroProfitPointCol, askPrintoutCol);
 
         } catch (Exception e) {
             System.out.println("EXCEPTION IN POSITIONSWINDOW UPDATE GUI");
             e.printStackTrace();
+        }
+    }
+
+    private void printoutMainMikeGridPane(MikePosOrders mikePosOrders, int totalOpenAmount, Double zeroProfitPoint, int openLongPositionsCol, int activeBuyOrderCol, int bidPrintoutCol, int zeroProfitPointCol, int pricePrintoutCol, int askPrintoutCol, int activeSellOrderCol, int openShortPositionsCol) {
+        //print open long and short positions in MikeGridpane:
+        MikeGridPane.printPositions(mikeGridPane, mikePosOrders, openLongPositionsCol, openShortPositionsCol, topRowPrice);
+        //print active buy orders for the given price:
+        MikeGridPane.printBuyOrders(mikeGridPane, mikePosOrders, activeBuyOrderCol, topRowPrice);
+        //print "BID" in the row of the bid price:
+        MikeGridPane.printBidInMikeGridPane(mikeGridPane, priceServer, bidPrintoutCol, topRowPrice);
+        //print prices in mikeGridPane:
+        MikeGridPane.printPricesInMikeGridPane(mikeGridPane, pricePrintoutCol, topRowPrice);
+        //print "ASK" in the row of the ask price in mikeGridPane:
+        MikeGridPane.printAskInMikeGridPane(mikeGridPane, priceServer, askPrintoutCol, topRowPrice);
+        //print active sell orders for the given price:
+        MikeGridPane.printSellOrders(mikeGridPane, mikePosOrders, activeSellOrderCol, topRowPrice);
+        //print the zero profit point:
+        MikeGridPane.printZeroProfitPoint(mikeGridPane, zeroProfitPointCol, totalOpenAmount, topRowPrice, zeroProfitPoint);
+    }
+
+    private void printoutBottomAndTopGridPanes(int totalOpenAmount, Double zeroProfitPoint, int bidPrintoutCol, int zeroProfitPointCol, int askPrintoutCol) {
+        //update the top column description depending on what has been set:
+        for (int col = 0; col < 7; col++) {
+
+            AlgoController controller = getAlgoControllerOfColumn(col);
+
+            //clear the topMikeGridPane:
+            for (int rowToPrint = 0; rowToPrint < topMikeGridPane.getHowManyRows(); rowToPrint++) {
+                topMikeGridPane.getButton(rowToPrint, col).setFont(Font.font(11));
+                topMikeGridPane.getButton(rowToPrint, col).setStyle("-fx-background-color: lightgrey  ; -fx-font-weight: bold;-fx-border-color : black");
+                topMikeGridPane.getButton(rowToPrint, col).setText("");
+            }
+            if (null != controller) {
+                //Display short description on top:
+                topMikeGridPane.getButton(0, (col)).setText(getAlgoControllerOfColumn((col)).getSimpleDescriptionRow1());
+                topMikeGridPane.getButton(1, (col)).setText(getAlgoControllerOfColumn((col)).getSimpleDescriptionRow2());
+            }
+
+            //clear the BottomMikeGridPane
+            bottomMikeGridPane.getButton(0, col).setStyle("-fx-background-color: grey ; -fx-font-weight: bold; -fx-border-color : black");
+            bottomMikeGridPane.getButton(0, col).setText("");
+        }
+
+        //if BID is outside mikeGridPane, print it in the top or bottom gridPanes:
+        if (priceServer.getBidPrice() >topRowPrice) {
+            topMikeGridPane.getButton(2, bidPrintoutCol).setText("BID");
+            topMikeGridPane.getButton(2, bidPrintoutCol).setStyle("-fx-background-color: yellow; -fx-text-fill: blue; -fx-font-weight: bolder; -fx-border-color : black");
+        }
+        if (priceServer.getBidPrice() <bottomRowPrice) {
+            bottomMikeGridPane.getButton(0, bidPrintoutCol).setText("BID");
+            bottomMikeGridPane.getButton(0, bidPrintoutCol).setStyle("-fx-background-color: yellow; -fx-text-fill: blue; -fx-font-weight: bolder; -fx-border-color : black");
+        }
+
+        //if ASK is outside mikeGridPane, print it in the top or bottom gridPanes:
+        if (priceServer.getAskPrice() >topRowPrice) {
+            topMikeGridPane.getButton(2, askPrintoutCol).setText("ASK");
+            topMikeGridPane.getButton(2, askPrintoutCol).setStyle("-fx-background-color: yellow; -fx-text-fill: red; -fx-font-weight: bolder; -fx-border-color : black");
+        }
+        if (priceServer.getAskPrice() <bottomRowPrice) {
+            bottomMikeGridPane.getButton(0, askPrintoutCol).setText("ASK");
+            bottomMikeGridPane.getButton(0, askPrintoutCol).setStyle("-fx-background-color: yellow; -fx-text-fill: red; -fx-font-weight: bolder; -fx-border-color : black");
+        }
+
+        //if zero profit point is outside mikeGridPane, print it in the top or bottom gridPanes:
+        if (zeroProfitPoint >topRowPrice) {
+            topMikeGridPane.getButton(0, zeroProfitPointCol).setText("" + totalOpenAmount);
+            //color the button according to the position being long/short:
+            if(totalOpenAmount >0) topMikeGridPane.getButton(0, zeroProfitPointCol).setStyle("-fx-text-fill: blue; -fx-font-weight: bolder; -fx-font-size: 14");
+            if(totalOpenAmount <0) topMikeGridPane.getButton(0, zeroProfitPointCol).setStyle("-fx-text-fill: red; -fx-font-weight: bolder; -fx-font-size: 14");
+            if(totalOpenAmount ==0) topMikeGridPane.getButton(0, zeroProfitPointCol).setStyle("-fx-background-color: white");
+        }
+        if (zeroProfitPoint <bottomRowPrice) {
+            bottomMikeGridPane.getButton(0, zeroProfitPointCol).setText("" + totalOpenAmount);
+//                        setSpecificButtonInMikeGridPane(row, zeroProfitPointCol,"" + totalOpenAmount);
+            //color the button according to the position being long/short:
+            if(totalOpenAmount >0) bottomMikeGridPane.getButton(0, zeroProfitPointCol).setStyle("-fx-text-fill: blue; -fx-font-weight: bolder");
+            if(totalOpenAmount <0) bottomMikeGridPane.getButton(0, zeroProfitPointCol).setStyle("-fx-text-fill: red; -fx-font-weight: bolder");
+            if(totalOpenAmount ==0) bottomMikeGridPane.getButton(0, zeroProfitPointCol).setStyle("-fx-background-color: white");
+        }
+    }
+
+    private void printoutTextfields(MikePosOrders mikePosOrders, int totalOpenAmount, Double averagePrice, Double zeroProfitPoint, int totalPL) {
+        //display realtime bid ask priceserver:
+        askPriceTextField.setText("" + (int)priceServer.getAskPrice());
+        bidPriceTextField.setText("" + (int)priceServer.getBidPrice());
+
+        //display the total open position:
+        totalOpenPosTextField.setText("" + totalOpenAmount);
+
+        //set the color depending on position long/short
+        if (totalOpenAmount >= 0) {
+            totalOpenPosTextField.setStyle("-fx-background-color: lightblue; -fx-text-fill: blue; -fx-font-weight: bolder; -fx-border-color : black");
+        } else {
+            totalOpenPosTextField.setStyle("-fx-background-color: salmon; -fx-text-fill: crimson; -fx-font-weight: bolder; -fx-border-color : black");
+        }
+        //display the average price:
+
+        weighedAveragePriceTextField.setText("" + averagePrice);
+        zeroProfitPointTextField.setText(""+ zeroProfitPoint);
+        //display the PL:
+        totalOpenPLTextField.setText("" + mikePosOrders.getOpenPL());
+        totalClosedPLTextField.setText("" + mikePosOrders.getClosedPL());
+        totalPLTextField.setText("" + totalPL);
+        if (totalPL >= 0) {
+            totalPLTextField.setStyle("-fx-background-color: lightblue; -fx-text-fill: blue; -fx-font-weight: bolder; -fx-border-color : black");
+        } else {
+            totalPLTextField.setStyle("-fx-background-color: salmon; -fx-text-fill: crimson; -fx-font-weight: bolder; -fx-border-color : black");
         }
     }
 

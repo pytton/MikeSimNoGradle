@@ -216,7 +216,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616454945501</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Created static method main.java.controllerandview.MikeGridPane.printPositions in MikeGridPane - using it in MikePositionsWindow, can be used by others now">
+      <created>1616512590408</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1616512590408</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -295,7 +302,8 @@
     <MESSAGE value="Changed gitignore to exclude JavaDoc. Working on MSim-15. Added some comments to code. Updating MikeSimulator.xmind &#10;Before changing package structure in controllerandview.algocontrollers" />
     <MESSAGE value="Moved javafx window controllers to single package called windowcontrollers.&#10;MSim-15 - review MikeSimNoGradle - still working on that.&#10;Started working on MikeSimulator.xmind.&#10;&#10;MSim-16 - fix bid price = ask price done. Created model.helpers.DoubleCompare class for comparing double values in the future.&#10;MSim-3 - done. OrderServerRealExternal still not implemented." />
     <MESSAGE value="MSim-10 MultipleStepperAlgo - first draft. Window shows. Need to implement all the buttons" />
-    <option name="LAST_COMMIT_MESSAGE" value="MSim-10 MultipleStepperAlgo - first draft. Window shows. Need to implement all the buttons" />
+    <MESSAGE value="Created static method main.java.controllerandview.MikeGridPane.printPositions in MikeGridPane - using it in MikePositionsWindow, can be used by others now" />
+    <option name="LAST_COMMIT_MESSAGE" value="Created static method main.java.controllerandview.MikeGridPane.printPositions in MikeGridPane - using it in MikePositionsWindow, can be used by others now" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/MikeSimNoGradle$Main.ic" NAME="Main Coverage Results" MODIFIED="1609257311491" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
