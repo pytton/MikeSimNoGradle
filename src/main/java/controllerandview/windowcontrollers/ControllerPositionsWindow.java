@@ -125,6 +125,7 @@ public class ControllerPositionsWindow
     public void initialize(){
         setUpChangeListeners();
         positionsList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        setupInitialColumnActions();
     }
 
     /**
@@ -270,7 +271,6 @@ public class ControllerPositionsWindow
 
                 //THIS IS WHERE YOU SET THE ACTIONS:
                 if(cb.getSelectionModel().getSelectedItem() == "SimpleScalper1"){
-                    setupControllerInsidePane();
                     try {
                         //LOAD A DIFFERENT FXML FILE DEPENDING ON THE SELECTION OF THE CHOICEBOX
                         //and set the anchorPane according to that file, and set the controller for it:
@@ -374,26 +374,26 @@ public class ControllerPositionsWindow
         choiceBoxCol7.getSelectionModel().selectedItemProperty().addListener(listenerCol7);
     }
 
+
+
     //todo: pulling out setting up panes for different columns:
-    private void setupControllerInsidePane() {
+    private void setupInitialColumnActions() {
         MikeSimLogger.addLogEvent("experiment in Positionswindow");
 
-//
-//        try {
-//            //LOAD A DIFFERENT FXML FILE DEPENDING ON THE SELECTION OF THE CHOICEBOX
-//            //and set the anchorPane according to that file, and set the controller for it:
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/PositionsWindow/algoControllers/SimpleScalperAlgoControlPanel.fxml"));
-//            Parent anchorPaneParent = loader.load();
-//            //this will make the anchorPane display what was in the fxml file:
-//            anchorPane.getChildren().setAll(anchorPaneParent);
-//            ControllerSimpleScalperAlgo controllerSimpleScalperAlgo = loader.getController();
-//            //MikeGridPane will call this controller whenever a button inside MikeGridPane is pressed:
-//            controllerPositionsWindow.setAlgoController(colNumber, controllerSimpleScalperAlgo);
-//
-//            System.out.println("Choicebox algo setting successful");
-//        } catch (Exception e) {
-//            System.out.println("Exception in Choicebox algo setting");
-//        }
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/PositionsWindow/algoControllers/SimpleScalperAlgoControlPanel.fxml"));
+
+            anPaneCol1.getChildren().setAll((Parent) loader.load());
+            ControllerSimpleScalperAlgo controllerSimpleScalperAlgo = loader.getController();
+            //MikeGridPane will call this controller whenever a button inside MikeGridPane is pressed:
+            setAlgoController(1, controllerSimpleScalperAlgo);
+            controllerSimpleScalperAlgo.cancel.fire();
+
+            System.out.println("Experiment in setting initial column controller  successful");
+        } catch (Exception e) {
+            System.out.println("Exception in setupControllerInsidePane()");
+        }
 
 
 

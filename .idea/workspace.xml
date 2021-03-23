@@ -15,8 +15,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0212a54c-a94c-4dfe-9eec-4ace680f76bc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerMainGUIWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerMainGUIWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/MainGUIWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/MainGUIWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/MainGUIWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/MainGUIWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/MainGUIWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/MainGUIWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -259,7 +261,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="refactoring" />
+                        <option value="master" />
                       </list>
                     </value>
                   </entry>

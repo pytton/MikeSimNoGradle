@@ -15,9 +15,9 @@
             <Button fx:id="createPosWindowButton" mnemonicParsing="false" onAction="#createPosWindowsButtonClicked" text="Create Positions Window" />
             <Button fx:id="createPriceContrButton" mnemonicParsing="false" onAction="#createPriceContrWinClicked" text="Create Price Control WIndow" />
             <Button fx:id="createAlgoManagerWinBtn" mnemonicParsing="false" onAction="#createAlgoManagerWindow" text="Create Algo Manager Window" />
-            <Button fx:id="createGuardAlgoWindow" mnemonicParsing="false" onAction="#createGueardAlgoClicked" text="Create GuardAlgo WIndow" />
+            <Button fx:id="createGuardAlgoWindow" mnemonicParsing="false" onAction="#createGuardAlgoClicked" text="Create GuardAlgo WIndow" />
             <Button fx:id="connectOutsideDataButton" mnemonicParsing="false" onAction="#connectOutsideDataClicked" text="Connect Outside Data" />
-            <Button fx:id="createStandAloneAlgoWindow" mnemonicParsing="false" onAction="#createStandAloneAlgoWindowClicked" text="Create StandAloneAlgo WIndow" />
+            <Button fx:id="createStandAloneAlgoWindow" mnemonicParsing="false" onAction="#createMultipleStepperAlgoWindowClicked" text="Create MultipleStepperAlgo WIndow" />
             <VBox alignment="CENTER">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" text="INSTRUMENT" />
