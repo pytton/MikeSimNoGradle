@@ -9,8 +9,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Font;
-import main.java.controllerandview.windowcontrollers.ControllerPositionsWindow;
 import main.java.model.MikeSimLogger;
+import main.java.model.positionsorders.MikePosOrders;
 
 import java.util.ArrayList;
 
@@ -24,11 +24,75 @@ import static javafx.geometry.Pos.CENTER;
  */
 public class MikeGridPane extends GridPane {
 
+    public static void setTextForButtonInMikeGridPane(MikeGridPane mikeGridPane, int row, int col, String text) {
+        assert (row <= mikeGridPane.getHowManyRows() && row >=0 ) : "setTextForButtonInMikeGridPane: row outside of bounds";
+        assert (col <= mikeGridPane.getHowManyCols() && col >=0 ) : "setTextForButtonInMikeGridPane: col outside of bounds";
+        mikeGridPane.getButton(row, col).setText(text);
+    }
+
+    public static void printPositionsAtRow(MikeGridPane mikeGridPane, MikePosOrders mikePosOrders, int openLongPositionsCol, int openShortPositionsCol,
+                                           int row, int priceToPrintAtRow) {
+        int openPosAtPrice = mikePosOrders.getOpenAmountAtPrice(priceToPrintAtRow);
+
+        if (openPosAtPrice == 0) {
+            setTextForButtonInMikeGridPane(mikeGridPane, row, openLongPositionsCol, "" );
+            setTextForButtonInMikeGridPane(mikeGridPane, row, openShortPositionsCol, "" );
+            mikeGridPane.getButton(row, openLongPositionsCol).setStyle("-fx-background-color: lightyellow  ; -fx-border-color : black");
+            mikeGridPane.getButton(row, openShortPositionsCol).setStyle("-fx-background-color: lightyellow  ; -fx-border-color : black");
+        } else {
+            if (openPosAtPrice > 0) {
+                mikeGridPane.getButton(row, openLongPositionsCol).setStyle("" +
+                        "-fx-background-color: lightblue  ; -fx-text-fill: blue; -fx-font-weight: bolder;-fx-border-color : black");
+                setTextForButtonInMikeGridPane(mikeGridPane, row, openLongPositionsCol, "" + openPosAtPrice);
+            } else if(openPosAtPrice < 0){
+                mikeGridPane.getButton(row, openShortPositionsCol).setStyle("" +
+                        "-fx-background-color: lightred; -fx-text-fill: red; -fx-font-weight: bolder; -fx-border-color : black");
+                setTextForButtonInMikeGridPane(mikeGridPane, row, openShortPositionsCol, "" + openPosAtPrice);
+            }
+        }
+    }
+
+    public static void printPositions(MikeGridPane mikeGridPane, MikePosOrders mikePosOrders, int openLongPositionsColumn, int openShortPositionsCol,
+                                      int topRowPrice){
+        //check parameters:
+        if((openLongPositionsColumn < 0 || openLongPositionsColumn > (mikeGridPane.getHowManyCols()))
+        || (openShortPositionsCol < 0 || openShortPositionsCol > mikeGridPane.getHowManyCols())){
+            MikeSimLogger.addLogEvent("INVALID PARAMETERS IN main.java.controllerandview.MikeGridPane.printPositions");
+            return;
+        }
+
+        int priceToPrintAtRow;
+        for (int row = 0; row < mikeGridPane.getHowManyRows(); row++){
+            priceToPrintAtRow = topRowPrice - row;
+
+            int openPosAtPrice = mikePosOrders.getOpenAmountAtPrice(priceToPrintAtRow);
+
+            if (openPosAtPrice == 0) {
+                setTextForButtonInMikeGridPane(mikeGridPane, row, openLongPositionsColumn, "" );
+                setTextForButtonInMikeGridPane(mikeGridPane, row, openShortPositionsCol, "" );
+                mikeGridPane.getButton(row, openLongPositionsColumn).setStyle("-fx-background-color: lightyellow  ; -fx-border-color : black");
+                mikeGridPane.getButton(row, openShortPositionsCol).setStyle("-fx-background-color: lightyellow  ; -fx-border-color : black");
+            } else {
+                if (openPosAtPrice > 0) {
+                    mikeGridPane.getButton(row, openLongPositionsColumn).setStyle("" +
+                            "-fx-background-color: lightblue  ; -fx-text-fill: blue; -fx-font-weight: bolder;-fx-border-color : black");
+                    setTextForButtonInMikeGridPane(mikeGridPane, row, openLongPositionsColumn, "" + openPosAtPrice);
+                } else if(openPosAtPrice < 0){
+                    mikeGridPane.getButton(row, openShortPositionsCol).setStyle("" +
+                            "-fx-background-color: lightred; -fx-text-fill: red; -fx-font-weight: bolder; -fx-border-color : black");
+                    setTextForButtonInMikeGridPane(mikeGridPane, row, openShortPositionsCol, "" + openPosAtPrice);
+                }
+            }
+
+        }
+
+    }
+
     /**
      * This interface gets an event when a button within the MikeGridPane is clicked
      */
     public interface MikeButtonHandler{
-        public void handleMikeButtonClicked(MikeGridPane.MikeButton event);
+        void handleMikeButtonClicked(MikeGridPane.MikeButton event);
 //        public ActionEvent handleMikeButtonClicked(ActionEvent event);
     }
 
@@ -205,6 +269,12 @@ public class MikeGridPane extends GridPane {
         return rows;
     }
 
+    /**
+     * one column returns 1
+     * 10 columns returns 10
+     * WARNING! FIRST COLUMN NUMBER IS 0 AND THIS METHOD RETURNS 1 IF ONLY COLMUN IN MIKEGRIDPANE IS COLUMN 0!
+     * @return
+     */
     public int getHowManyCols() {
         return howManyCols;
     }
