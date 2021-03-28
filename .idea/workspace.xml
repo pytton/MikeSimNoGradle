@@ -14,26 +14,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0212a54c-a94c-4dfe-9eec-4ace680f76bc" name="Default Changelist" comment="MSim-30 complete: button &quot;ask +50 everywhere&quot; added to main GUI window - centers all PositionsWindow on current bid/ask price">
-      <change afterPath="$PROJECT_DIR$/src/main/java/controllerandview/Nonnull.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/MainGUIWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/MainGUIWindow.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/PriceControlPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/PriceControlPanel.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MainGUIClass$MikePositionsWindowCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MainGUIClass$MikePositionsWindowCreator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MainGUIClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MainGUIClass.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/MainGUIWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/MainGUIWindow.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/PriceControlPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/PriceControlPanel.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/CommonGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/CommonGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/MainGUIClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/MainGUIClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerPlainOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerPlainOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerMainGUIWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerMainGUIWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerPriceControlWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerPriceControlWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/MainGUIWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/MainGUIWindow.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/PositionsWindow/PositionsWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PositionsWindow/PositionsWindow.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/PositionsWindow/algoControllers/PlainOrderControlPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PositionsWindow/algoControllers/PlainOrderControlPanel.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/PriceControlPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PriceControlPanel.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="0212a54c-a94c-4dfe-9eec-4ace680f76bc" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -253,7 +234,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616517976817</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="MSim-30 complete: button &quot;ask +50 everywhere&quot; added to main GUI window - centers all PositionsWindow on current bid/ask price.&#10;placeMultipleOrder() added to CommonGUI - use it with a class implementing GUICommandMultipleOrder interface to place multiple orders or algos with one click&#10;getScreenForStage() added to CommonGUI.java multiple buy/sell orders now possible in ControllerPlainOrder.java added list of PositionsWindow to MainGUIClass">
+      <created>1616959330422</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1616959330422</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -339,7 +327,8 @@
     <MESSAGE value="MSim-10 MultipleStepperAlgo - first draft. Window shows. Need to implement all the buttons" />
     <MESSAGE value="Created static method main.java.controllerandview.MikeGridPane.printPositions in MikeGridPane - using it in MikePositionsWindow, can be used by others now" />
     <MESSAGE value="Refactoring main.java.controllerandview.windowcontrollers.ControllerPositionsWindow.printout complete. Printout methods moved to MikeGridPane as static methods for use by others." />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactoring main.java.controllerandview.windowcontrollers.ControllerPositionsWindow.printout complete. Printout methods moved to MikeGridPane as static methods for use by others." />
+    <MESSAGE value="MSim-30 complete: button &quot;ask +50 everywhere&quot; added to main GUI window - centers all PositionsWindow on current bid/ask price.&#10;placeMultipleOrder() added to CommonGUI - use it with a class implementing GUICommandMultipleOrder interface to place multiple orders or algos with one click&#10;getScreenForStage() added to CommonGUI.java multiple buy/sell orders now possible in ControllerPlainOrder.java added list of PositionsWindow to MainGUIClass" />
+    <option name="LAST_COMMIT_MESSAGE" value="MSim-30 complete: button &quot;ask +50 everywhere&quot; added to main GUI window - centers all PositionsWindow on current bid/ask price.&#10;placeMultipleOrder() added to CommonGUI - use it with a class implementing GUICommandMultipleOrder interface to place multiple orders or algos with one click&#10;getScreenForStage() added to CommonGUI.java multiple buy/sell orders now possible in ControllerPlainOrder.java added list of PositionsWindow to MainGUIClass" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

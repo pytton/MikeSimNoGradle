@@ -501,11 +501,6 @@ public class ControllerPositionsWindow
             stage.setScene(scene);
             stage.show();
 
-
-
-
-
-
 //        MikeSimLogger.addLogEvent("X position of window: " + getMainBorderPane().getScene().getWindow().getX());
 
 
