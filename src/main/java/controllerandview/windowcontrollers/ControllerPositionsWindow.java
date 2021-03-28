@@ -6,12 +6,16 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import main.java.controllerandview.MainGUIClass;
 import main.java.controllerandview.algocontrollerpanes.*;
@@ -325,7 +329,17 @@ public class ControllerPositionsWindow
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/PositionsWindow/algoControllers/PlainOrderControlPanel.fxml"));
                         Parent anchorPaneParent = loader.load();
                         //this will make the anchorPane display what was in the fxml file:
+
+//
+//                        //experimenting:
+//                        ScrollPane sp = new ScrollPane();
+//                        sp.setContent(anchorPaneParent);
+//                        sp.setFitToWidth(true);
+//                        anchorPane.getChildren().setAll(sp);
+
                         anchorPane.getChildren().setAll(anchorPaneParent);
+
+
                         ControllerPlainOrder controller = loader.getController();
                         //let Plain Order Controller know where to find targetPosOrders for transferring positions:
                         controller.setControllerPositionsWindow(controllerPositionsWindow);
@@ -456,35 +470,43 @@ public class ControllerPositionsWindow
     @FXML
     public void testTwoButtonClicked(ActionEvent actionEvent) {
 
-        //testing: set mikePosOrders using dialog:
+
+        Stage thisWindowStage = (Stage) mainBorderPane.getScene().getWindow();
+
+        MikeSimLogger.addLogEvent("Screen window displayed on: " + CommonGUI.getScreenForStage(thisWindowStage));
 
 
-        System.out.println("PriceServer before change: " + priceServer.toString());
 
-        CommonGUI.setPriceServer(this, model);
+        Stage stage = new Stage();
 
 
-        System.out.println("PriceServer after change: " + priceServer.toString());
+            VBox root = new VBox(10);
+            root.setAlignment(Pos.CENTER);
+            Scene scene = new Scene(root, 200, 250);
 
-//        //testing: generate new MikeGridPane with more columns:
-//
-//        mikeGridPane = new MikeGridPane(30, 12, this);
-//
-//        VBox topVbox = new VBox();
-//        topMikeGridPane = new MikeGridPane(3, 12, new MikeGridPane.EmptyMikeButtonHandler());
-//        bottomMikeGridPane = new MikeGridPane(1, 12, new MikeGridPane.EmptyMikeButtonHandler());
-//
-//        topMikeGridPane.setPadding(new Insets(0, 15, 0, 0));
-//        bottomMikeGridPane.setPadding(new Insets(0, 15, 0, 0));
-//        topVbox.getChildren().add(topMikeGridPane);
-//
-//        ScrollPane sp = new ScrollPane();
-//        sp.setContent(mikeGridPane);
-//        sp.setFitToWidth(true);
-//        topVbox.getChildren().add(sp);
-//        topVbox.getChildren().add(bottomMikeGridPane);
-//
-//        getMainBorderPane().setLeft(topVbox);
+            int index = 1;
+            for (Screen screen : Screen.getScreens()) {
+                Rectangle2D bounds = screen.getVisualBounds();
+
+                Button btn = new Button("Move me to Screen " + index++);
+                btn.setOnAction((e) -> {
+                    stage.setX(bounds.getMinX() + 100);
+                    stage.setY(bounds.getMinY() + 100);
+                    MikeSimLogger.addLogEvent("Visual bounds of screen: " + screen.getVisualBounds());
+                });
+                root.getChildren().add(btn);
+            }
+
+            stage.setTitle("Screen Jumper");
+            stage.setScene(scene);
+            stage.show();
+
+
+
+
+
+
+//        MikeSimLogger.addLogEvent("X position of window: " + getMainBorderPane().getScene().getWindow().getX());
 
 
 

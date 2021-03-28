@@ -215,4 +215,5 @@ public class ControllerPriceControlWindow implements MainGUIClass.Updatable {
 
         priceServer.setHistoricalTempo(tempo);
     }
+
 }

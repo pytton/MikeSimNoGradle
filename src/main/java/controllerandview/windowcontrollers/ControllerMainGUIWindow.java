@@ -99,4 +99,15 @@ public class ControllerMainGUIWindow {
     public void createMultipleStepperAlgoWindowClicked(ActionEvent actionEvent) {
         mainGUIClass.createMultipleStepperAlgoWindow();
     }
+
+
+    /**
+     * Centers all the MikeGridPanes in all MikeposWindows and current ask/bid
+     * @param actionEvent
+     */
+    public void ask50everywherePressed(ActionEvent actionEvent) {
+        for (ControllerPositionsWindow controller : mainGUIClass.controllerPositionsWindowList){
+            controller.ask50Clicked(actionEvent);
+        }
+    }
 }

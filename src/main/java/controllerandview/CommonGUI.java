@@ -3,11 +3,17 @@ package main.java.controllerandview;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceDialog;
+import javafx.scene.control.TextField;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 import main.java.model.MainModelThread;
+import main.java.model.MikeSimLogger;
+import main.java.model.orderserver.MikeOrder;
 import main.java.model.positionsorders.MikePosOrders;
 import main.java.model.priceserver.PriceServer;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 public class CommonGUI {
@@ -17,6 +23,80 @@ public class CommonGUI {
         PriceServer getPriceServer();
         void setMikePosOrders(MikePosOrders posOrders);
     }
+
+
+    /**
+     * If you want to fire off different algos or orders on consecutive prices you can use this.
+     * Create a class that implements GUICommandMultipleOrder
+     * with the parameters you want and implement command() inside GUICommandMultipleOrder however you wish.
+     * command() gets called multiple times by depending on what is entered into TextField multipleAmount, TextField multipleDistance
+     */
+    public static void placeMultipleOrder(GUICommandMultipleOrder command, TextField multipleAmount, TextField multipleDistance, MikeOrder.MikeOrderType orderType,
+                                          int pricePressed){
+
+        MikeSimLogger.addLogEvent("Placing multiple order");
+
+        //how many orders do we want?
+        Integer amountOfOrders = 1;
+        try{ amountOfOrders =  Integer.parseInt(multipleAmount.getText());
+            if (amountOfOrders < 0) amountOfOrders = 1;
+        }catch (Exception e){
+            amountOfOrders = 1;
+        }
+
+        //distance in cents between orders?
+        Integer distanceBetweenOrders = 1;
+        try{ distanceBetweenOrders =  Integer.parseInt(multipleDistance.getText());
+            if (distanceBetweenOrders < 0) distanceBetweenOrders = 1;
+        }catch (Exception e){
+            distanceBetweenOrders = 1;
+        }
+
+        int direction = 1;
+        //place orders going down in price for buy lmt and sell stp
+        if(orderType == MikeOrder.MikeOrderType.BUYLMT || orderType == MikeOrder.MikeOrderType.SELLSTP) direction = -1;
+        //going up in price for buy stop and sell limit
+        if(orderType == MikeOrder.MikeOrderType.BUYSTP || orderType == MikeOrder.MikeOrderType.SELLLMT) direction = 1;
+
+        MikeSimLogger.addLogEvent("Amount of orders: " + amountOfOrders + " distance: " + distanceBetweenOrders
+        + " direction: " + direction);
+
+        int priceToSend = pricePressed;
+        for(int i = 0; i < amountOfOrders; i++){
+            //place the order in the right direction and distance from previous one:
+
+            command.command();
+            priceToSend = priceToSend + (distanceBetweenOrders * direction);
+            command.setPriceToSend(priceToSend);
+
+//            posOrders.placeNewOrder(orderType, priceToSend, priceToSend, orderAmount);
+//            priceToSend = priceToSend + (distanceBetweenOrders * direction);
+        }
+    }
+
+    /**
+     * If you want to fire off different algos or orders on consecutive prices you can use this.
+     * Create a class with the parameters you want and implement command however you wish.
+     * command() gets called multiple times by main.java.controllerandview.CommonGUI#placeMultipleOrder
+     */
+    public interface GUICommandMultipleOrder {
+        /**
+         * This is the reason for this class.
+         * This gets called multiple times in main.java.controllerandview.CommonGUI#placeMultipleOrder
+         * to place multiple orders
+         * @return
+         */
+        boolean command();
+
+        /**
+         * This gets called inside main.java.controllerandview.CommonGUI#placeMultipleOrder
+         * To change the price of the next order that will be sent by command();
+         * @param priceToSend
+         */
+        void setPriceToSend(int priceToSend);
+    }
+
+
 
     /**
      *
@@ -127,6 +207,20 @@ public class CommonGUI {
 
         if ((result.isPresent()) && (result.get() == ButtonType.OK)) return true;
         else return false;
+    }
+
+    /**
+     * Returns the screen for the specified stage.
+     *
+     * @param stage the stage
+     * @return the screen for the specified stage
+     */
+    @Nonnull
+    public static Screen getScreenForStage(@Nonnull Stage stage) {
+        for (Screen screen : Screen.getScreensForRectangle(stage.getX(), stage.getY(), 1., 1.)) {
+            return screen;
+        }
+        throw new NoSuchElementException("Cannot determine screen for stage.");
     }
 
 }

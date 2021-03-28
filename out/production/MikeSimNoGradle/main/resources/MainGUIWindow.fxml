@@ -12,6 +12,7 @@
    <children>
       <VBox alignment="CENTER">
          <children>
+            <Button mnemonicParsing="false" onAction="#ask50everywherePressed" text="Ask +50 everywhere" />
             <Button fx:id="createPosWindowButton" mnemonicParsing="false" onAction="#createPosWindowsButtonClicked" text="Create Positions Window" />
             <Button fx:id="createPriceContrButton" mnemonicParsing="false" onAction="#createPriceContrWinClicked" text="Create Price Control WIndow" />
             <Button fx:id="createAlgoManagerWinBtn" mnemonicParsing="false" onAction="#createAlgoManagerWindow" text="Create Algo Manager Window" />

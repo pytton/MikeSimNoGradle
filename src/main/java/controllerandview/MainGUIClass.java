@@ -2,6 +2,7 @@ package main.java.controllerandview;
 
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
@@ -16,6 +17,7 @@ import main.java.model.priceserver.PriceServer;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * All windows created here.
@@ -39,8 +41,17 @@ public class MainGUIClass {
 //    private long count = 0;
     private MainModelThread mainModelThread;
 
+    public Stage getInitialStage() {
+        return initialStage;
+    }
+
+    private Stage initialStage;
+
     //this stores windows which will be called by updateGUI method:
     private List<Updatable> updatableWindowsList = new ArrayList<>();
+
+    //this stores all the PositionWindow controllers:
+    public List<ControllerPositionsWindow> controllerPositionsWindowList = new ArrayList<>();
 
     //   private List<ControllerPriceControlWindow> priceControlPanelControllerList = new ArrayList<>();
     //   private List<ControllerPositionsWindow> posWindowControllerList = new ArrayList<>();
@@ -69,6 +80,7 @@ public class MainGUIClass {
      */
     public void initializeGUI(Stage initialStage, /*PriceServer priceServer,*/ MainModelThread mainModelThread) throws Exception {
         this.mainModelThread = mainModelThread;
+        this.initialStage = initialStage;
         //create PrimaryGUIWindow
         FXMLLoader primaryGUIWindowLoader = new FXMLLoader(getClass().getResource("/MainGUIWindow.fxml"));
         Parent primaryGUIRoot = primaryGUIWindowLoader.load();
@@ -119,6 +131,7 @@ public class MainGUIClass {
 
         //add the controller to the list of controllers (for updateGUI):
         updatableWindowsList.add(creator.getController());
+        controllerPositionsWindowList.add(creator.getController());
 
     }
 
@@ -252,6 +265,15 @@ public class MainGUIClass {
         stage.setHeight(750);
 
         stage.show();
+
+
+        //I want to display the newly created window on the same screen that the MainGUI is currently displayed at.
+        //This does the magic:
+        Rectangle2D bounds = CommonGUI.getScreenForStage(getInitialStage()).getVisualBounds();
+        stage.setX(bounds.getMinX() +50);
+        stage.setY(bounds.getMinY() +50);
+
+
 
 //        updatableWindowsList.add(controllerWindow);
 
