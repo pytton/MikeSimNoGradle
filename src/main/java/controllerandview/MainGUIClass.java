@@ -125,6 +125,9 @@ public class MainGUIClass {
         //display the window:
         stage.show();
 
+        //move to same monitor as Main GUI Window:
+        CommonGUI.placeOnSameMonitor(getInitialStage(), stage, 0,0);
+
         //name the window:
         String name = ("PositionsWindow " + updatableWindowsList.size());
         stage.setTitle(name);
@@ -132,6 +135,8 @@ public class MainGUIClass {
         //add the controller to the list of controllers (for updateGUI):
         updatableWindowsList.add(creator.getController());
         controllerPositionsWindowList.add(creator.getController());
+
+
 
     }
 
@@ -160,6 +165,9 @@ public class MainGUIClass {
         stage.setX(0);
         stage.setY(0);
         stage.show();
+
+        //move to same monitor as Main GUI Window:
+        CommonGUI.placeOnSameMonitor(getInitialStage(), stage, 50,50);
 
     }
 
@@ -194,6 +202,9 @@ public class MainGUIClass {
         //display the window:
         primaryStage.show();
 
+        //move to same monitor as Main GUI Window:
+        CommonGUI.placeOnSameMonitor(getInitialStage(), primaryStage, 300,0);
+
         //name the window:
         String name = ("Price Control " + updatableWindowsList.size());
         primaryStage.setTitle(name);
@@ -225,6 +236,9 @@ public class MainGUIClass {
         stage.setScene(new Scene(guardAlgoPaneRoot));
 
         stage.show();
+
+        //move to same monitor as Main GUI Window:
+        CommonGUI.placeOnSameMonitor(getInitialStage(), stage, 50,50);
 
         updatableWindowsList.add(controllerGuardAlgoPane1);
     }

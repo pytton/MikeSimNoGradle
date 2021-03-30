@@ -6,6 +6,7 @@
   </component>
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
+      <artifact name="CustomFXMLs:jar" />
       <artifact name="MikeSimNoGradle:jar" />
     </artifacts-to-build>
   </component>
@@ -14,7 +15,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0212a54c-a94c-4dfe-9eec-4ace680f76bc" name="Default Changelist" comment="" />
+    <list default="true" id="0212a54c-a94c-4dfe-9eec-4ace680f76bc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MainGUIClass$MikePositionsWindowCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MainGUIClass$MikePositionsWindowCreator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MainGUIClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MainGUIClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/CommonGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/CommonGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/MainGUIClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/MainGUIClass.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -241,7 +248,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616959330422</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Updated JavaDoc and built .jar files">
+      <created>1616959616489</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1616959616489</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -328,14 +342,15 @@
     <MESSAGE value="Created static method main.java.controllerandview.MikeGridPane.printPositions in MikeGridPane - using it in MikePositionsWindow, can be used by others now" />
     <MESSAGE value="Refactoring main.java.controllerandview.windowcontrollers.ControllerPositionsWindow.printout complete. Printout methods moved to MikeGridPane as static methods for use by others." />
     <MESSAGE value="MSim-30 complete: button &quot;ask +50 everywhere&quot; added to main GUI window - centers all PositionsWindow on current bid/ask price.&#10;placeMultipleOrder() added to CommonGUI - use it with a class implementing GUICommandMultipleOrder interface to place multiple orders or algos with one click&#10;getScreenForStage() added to CommonGUI.java multiple buy/sell orders now possible in ControllerPlainOrder.java added list of PositionsWindow to MainGUIClass" />
-    <option name="LAST_COMMIT_MESSAGE" value="MSim-30 complete: button &quot;ask +50 everywhere&quot; added to main GUI window - centers all PositionsWindow on current bid/ask price.&#10;placeMultipleOrder() added to CommonGUI - use it with a class implementing GUICommandMultipleOrder interface to place multiple orders or algos with one click&#10;getScreenForStage() added to CommonGUI.java multiple buy/sell orders now possible in ControllerPlainOrder.java added list of PositionsWindow to MainGUIClass" />
+    <MESSAGE value="Updated JavaDoc and built .jar files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated JavaDoc and built .jar files" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/controllerandview/CommonGUI.java</url>
-          <line>34</line>
+          <line>35</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>

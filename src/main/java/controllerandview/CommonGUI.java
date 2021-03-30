@@ -1,5 +1,6 @@
 package main.java.controllerandview;
 
+import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceDialog;
@@ -221,6 +222,28 @@ public class CommonGUI {
             return screen;
         }
         throw new NoSuchElementException("Cannot determine screen for stage.");
+    }
+
+    /**
+     * Use this to place a (new) stage on the same monitor as the stage that you clicked a button in
+     *
+     * @param sourceStage the stage on which a button was clicked
+     * @param newStage the stage on which to place the new window
+     * @param XPos XPosition of new window
+     * @param YPos YPosition of new window
+     */
+    public static void placeOnSameMonitor(Stage sourceStage, Stage newStage, int XPos, int YPos){
+
+        //I want to display the newly created window on the same screen that the MainGUI is currently displayed at.
+        //This does the magic:
+        Rectangle2D bounds = CommonGUI.getScreenForStage(sourceStage).getVisualBounds();
+        newStage.setX(bounds.getMinX() + XPos);
+        newStage.setY(bounds.getMinY() + YPos);
+
+        //experimenting:
+        MikeSimLogger.addLogEvent("Location of stage on screen: " + sourceStage.getX() + " X "
+        + sourceStage.getY() + " Y");
+
     }
 
 }
