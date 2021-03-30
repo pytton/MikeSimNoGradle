@@ -36,7 +36,7 @@ public class MainModelThread extends Thread {
         //set up connection to outside trading software for market data, orders, etc:
         marketConnection = InteractiveBrokersAPI.getInstance(tradedInstrumentMap);
         //this stores a priceserver, orderserver and a list of MikePosOrders for each traded instrument:
-        posOrdersManager = new PosOrdersManager(tradedInstrumentMap);
+        posOrdersManager = new PosOrdersManager(tradedInstrumentMap, this);
         algoManager = new AlgoManager(this);
     }
 
@@ -100,7 +100,7 @@ public class MainModelThread extends Thread {
     }
 
     private void processOrdersAndCalculatePL(){
-        for(PosOrdersManager.Data data: posOrdersManager.dataMap.values()){
+        for(PosOrdersManager.Data data: posOrdersManager.getDataMap().values()){
             //check for fills in orderserver of every traded instrument:
             data.getOrderServer().checkFills(data.getPriceServer());
 
@@ -132,10 +132,12 @@ public class MainModelThread extends Thread {
      */
     public class PosOrdersManager {
 
+        private MainModelThread mainModelThread;
         private Map<Integer, Data> dataMap;
         private ObservableList<PriceServer> priceServerObservableList = FXCollections.observableArrayList();
 
-        public PosOrdersManager(Map<Integer, TradedInstrument> tradedInstrumentMap) {
+        public PosOrdersManager(Map<Integer, TradedInstrument> tradedInstrumentMap, MainModelThread mainModelThread) {
+            this.mainModelThread = mainModelThread;
             dataMap = new TreeMap<>();
             for (TradedInstrument instrument : tradedInstrumentMap.values()) {
                 //create an orderserver, priceserver and PosOrdersObservable list based on the instruments that can be traded:
@@ -143,6 +145,10 @@ public class MainModelThread extends Thread {
                 dataMap.put(instrument.getTickerId(), data);
                 priceServerObservableList.add(data.getPriceServer());
             }
+        }
+
+        protected Map<Integer, Data> getDataMap() {
+            return  dataMap;
         }
 
         /**
