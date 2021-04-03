@@ -29,8 +29,11 @@ public class ControllerMainGUIWindow {
 
     @FXML
     public void createPosWindowsButtonClicked(){
-        MikeSimLogger.addLogEvent("Primary GUI window clicked!");
-        mainGUIClass.createPosWindow();
+        MikeSimLogger.addLogEvent("Creating new PositionsWindow!");
+        int xPos, yPos;
+        xPos = 0;
+        yPos = 0;
+        mainGUIClass.createPosWindow(xPos, yPos);
     }
 
     @FXML
@@ -109,5 +112,27 @@ public class ControllerMainGUIWindow {
         for (ControllerPositionsWindow controller : mainGUIClass.controllerPositionsWindowList){
             controller.ask50Clicked(actionEvent);
         }
+    }
+
+    public void create12PosWinOn4KClicked(ActionEvent actionEvent) {
+        MikeSimLogger.addLogEvent("Implement this");
+
+        mainGUIClass.createPosWindow(0,0);
+        mainGUIClass.createPosWindow(640,0);
+        mainGUIClass.createPosWindow(1280,0);
+//        mainGUIClass.createPosWindow(1920,0);
+//        mainGUIClass.createPosWindow(2560,0);
+//        mainGUIClass.createPosWindow(0,0);
+//        mainGUIClass.createPosWindow(0,0);
+//        mainGUIClass.createPosWindow(0,0);
+//        mainGUIClass.createPosWindow(0,0);
+//        mainGUIClass.createPosWindow(0,0);
+//        mainGUIClass.createPosWindow(0,0);
+//        mainGUIClass.createPosWindow(0,0);
+
+
+
+
+
     }
 }

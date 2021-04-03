@@ -16,8 +16,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0212a54c-a94c-4dfe-9eec-4ace680f76bc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/exceptionsDump.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/MainGUIWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/MainGUIWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MainGUIClass$MikePositionsWindowCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MainGUIClass$MikePositionsWindowCreator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MainGUIClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MainGUIClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/MainGUIWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/MainGUIWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/MainGUIClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/MainGUIClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerMainGUIWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerMainGUIWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/MainGUIWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/MainGUIWindow.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -276,7 +283,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617133387873</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="added exceptionsDump.txt">
+      <created>1617136078049</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1617136078049</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -367,7 +381,8 @@
     <MESSAGE value="added placeOnSameMonitor() in CommonGUI.java&#10;new windows now appear on the same screen as the button that was pressed." />
     <MESSAGE value="before moving PosOrdersManager" />
     <MESSAGE value="moved PosOrdersManager to seperate class" />
-    <option name="LAST_COMMIT_MESSAGE" value="moved PosOrdersManager to seperate class" />
+    <MESSAGE value="added exceptionsDump.txt" />
+    <option name="LAST_COMMIT_MESSAGE" value="added exceptionsDump.txt" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

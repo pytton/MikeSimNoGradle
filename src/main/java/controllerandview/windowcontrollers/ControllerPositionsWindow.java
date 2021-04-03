@@ -388,25 +388,68 @@ public class ControllerPositionsWindow
         choiceBoxCol7.getSelectionModel().selectedItemProperty().addListener(listenerCol7);
     }
 
-
-
-    //todo: pulling out setting up panes for different columns:
+    /**
+     * Called by onitialize() - sets up the defauld actions of the columns.
+     * User can later change what each column does.
+     */
     private void setupInitialColumnActions() {
         MikeSimLogger.addLogEvent("setting initial column actions in Positionswindow");
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/PositionsWindow/algoControllers/SimpleScalperAlgoControlPanel.fxml"));
+            FXMLLoader loader;
+            ControllerSimpleScalperAlgo controllerSimpleScalperAlgo;// = loader.getController();
+            ControllerPlainOrder controllerPlainOrder;// = loader.getController();
 
+            //setup first column:
+            loader = new FXMLLoader(getClass().getResource("/PositionsWindow/algoControllers/SimpleScalperAlgoControlPanel.fxml"));
             anPaneCol1.getChildren().setAll((Parent) loader.load());
-            ControllerSimpleScalperAlgo controllerSimpleScalperAlgo = loader.getController();
+            controllerSimpleScalperAlgo = loader.getController();
             //MikeGridPane will call this controller whenever a button inside MikeGridPane is pressed:
             setAlgoController(1, controllerSimpleScalperAlgo);
-            controllerSimpleScalperAlgo.cancel.fire();
+            controllerSimpleScalperAlgo.buyLimit.fire();
 
+            //setup second column:
             loader = new FXMLLoader(getClass().getResource("/PositionsWindow/algoControllers/PlainOrderControlPanel.fxml"));
             anPaneCol2.getChildren().setAll((Parent) loader.load());
-            ControllerPlainOrder controllerPlainOrder = loader.getController();
+            controllerPlainOrder = loader.getController();
             setAlgoController(2, controllerPlainOrder);
             controllerPlainOrder.buyLimit.fire();
+
+            //setup third column:
+            loader = new FXMLLoader(getClass().getResource("/PositionsWindow/algoControllers/PlainOrderControlPanel.fxml"));
+            anPaneCol3.getChildren().setAll((Parent) loader.load());
+            controllerPlainOrder = loader.getController();
+            setAlgoController(3, controllerPlainOrder);
+            controllerPlainOrder.buyStop.fire();
+
+            //setup 4th column:
+            loader = new FXMLLoader(getClass().getResource("/PositionsWindow/algoControllers/PlainOrderControlPanel.fxml"));
+            anPaneCol4.getChildren().setAll((Parent) loader.load());
+            controllerPlainOrder = loader.getController();
+            setAlgoController(4, controllerPlainOrder);
+            controllerPlainOrder.cancel.fire();
+
+            //setup 5th column:
+            loader = new FXMLLoader(getClass().getResource("/PositionsWindow/algoControllers/PlainOrderControlPanel.fxml"));
+            anPaneCol5.getChildren().setAll((Parent) loader.load());
+            controllerPlainOrder = loader.getController();
+            setAlgoController(5, controllerPlainOrder);
+            controllerPlainOrder.sellStop.fire();
+
+            //setup 6th column:
+            loader = new FXMLLoader(getClass().getResource("/PositionsWindow/algoControllers/PlainOrderControlPanel.fxml"));
+            anPaneCol6.getChildren().setAll((Parent) loader.load());
+            controllerPlainOrder = loader.getController();
+            setAlgoController(6, controllerPlainOrder);
+            controllerPlainOrder.sellLimit.fire();
+
+            //setup 7th column:
+            loader = new FXMLLoader(getClass().getResource("/PositionsWindow/algoControllers/SimpleScalperAlgoControlPanel.fxml"));
+            anPaneCol7.getChildren().setAll((Parent) loader.load());
+            controllerSimpleScalperAlgo = loader.getController();
+            //MikeGridPane will call this controller whenever a button inside MikeGridPane is pressed:
+            setAlgoController(7, controllerSimpleScalperAlgo);
+            controllerSimpleScalperAlgo.sellLimit.fire();
+
 
             System.out.println("Experiment in setting initial column controller  successful");
         } catch (Exception e) {

@@ -102,9 +102,12 @@ public class MainGUIClass {
     }
 
     /**
-     * Creates and displays a new Positions window
+     * Creates and displays a new Positions window.
+     * Default size is 640x1000 pixels
+     * @param xPos
+     * @param yPos
      */
-    public void createPosWindow() {
+    public void createPosWindow(int xPos, int yPos) {
         //create Positions Window:
         //we need to add custom MikeGridPane not defined in FXML:
         MikePositionsWindowCreator creator = null;
@@ -119,14 +122,14 @@ public class MainGUIClass {
 
         //create the window:
         Stage stage = new Stage();
-        stage.setX(0);
-        stage.setY(0);
+//        stage.setX(xPos);
+//        stage.setY(yPos);
         stage.setScene(new Scene(creator.getPositionsWindowRoot()));
         //display the window:
         stage.show();
 
         //move to same monitor as Main GUI Window:
-        CommonGUI.placeOnSameMonitor(getInitialStage(), stage, 0,0);
+        CommonGUI.placeOnSameMonitor(getInitialStage(), stage, xPos,yPos);
 
         //name the window:
         String name = ("PositionsWindow " + updatableWindowsList.size());
