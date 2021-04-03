@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import main.java.model.MainModelThread;
+import main.java.model.MikeSimLogger;
 import main.java.model.orderserver.MikeOrder;
 import main.java.model.positionsorders.MikePosOrders;
 
@@ -61,7 +62,7 @@ public class ControllerSimpleStepperAlgo extends AlgoController {
         } else {
             model.algoManager.cancelAllSimpleStepperAlgosAtPrice(pricePressed, posOrders);
         }
-        System.out.println("ControllerSimpleStepperAlgo. Price clicked: " + pricePressed);
+        MikeSimLogger.addLogEvent("ControllerSimpleStepperAlgo. Price clicked: " + pricePressed);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package main.java.prototypes;
 
+import main.java.model.MikeSimLogger;
 import main.java.model.helpers.DoubleCompare;
 
 /**
@@ -9,64 +10,64 @@ public class DoubleEqualTest {
 
     public void runTest(){
 
-        System.out.println("Attempting double equality check. Adding 0.01");
+        MikeSimLogger.addLogEvent("Attempting double equality check. Adding 0.01");
 
         double number1 = 0.09d;
         double number2 = 0.08d;
 
         number2 = number2 + 0.01d;
 
-        if(Double.compare(number1, number2) == 0) System.out.println("number 1 equals number 2");
-        else System.out.println("Double comparison - they are different");
+        if(Double.compare(number1, number2) == 0) MikeSimLogger.addLogEvent("number 1 equals number 2");
+        else MikeSimLogger.addLogEvent("Double comparison - they are different");
 
-        if(number1 == number2) System.out.println("Double equality test passed!");
-        else System.out.println("Double comparison - they are different");
+        if(number1 == number2) MikeSimLogger.addLogEvent("Double equality test passed!");
+        else MikeSimLogger.addLogEvent("Double comparison - they are different");
 
-        System.out.println("Doing it with (int)(double*precision) : ");
+        MikeSimLogger.addLogEvent("Doing it with (int)(double*precision) : ");
         int precision = 100;
-        if (((int)(number1*precision)) == ((int)(number2*precision))) System.out.println("number1 equals number2");
-        else System.out.println("Int comparison - they are different");
+        if (((int)(number1*precision)) == ((int)(number2*precision))) MikeSimLogger.addLogEvent("number1 equals number2");
+        else MikeSimLogger.addLogEvent("Int comparison - they are different");
 
-        System.out.println("Attempting double equality check. Substracting 0.01");
+        MikeSimLogger.addLogEvent("Attempting double equality check. Substracting 0.01");
 
         number1 = 0.09d;
         number2 = 0.10d;
 
         number2 = number2 - 0.01d;
 
-        if(Double.compare(number1, number2) == 0) System.out.println("number 1 equals number 2");
-        else System.out.println("Double comparison - they are different");
+        if(Double.compare(number1, number2) == 0) MikeSimLogger.addLogEvent("number 1 equals number 2");
+        else MikeSimLogger.addLogEvent("Double comparison - they are different");
 
-        if(number1 == number2) System.out.println("Double equality test passed!");
-        else System.out.println("Double comparison - they are different");
+        if(number1 == number2) MikeSimLogger.addLogEvent("Double equality test passed!");
+        else MikeSimLogger.addLogEvent("Double comparison - they are different");
 
-        System.out.println("Doing it with (int)(double*precision) : ");
+        MikeSimLogger.addLogEvent("Doing it with (int)(double*precision) : ");
         precision = 100;
-        if (((int)(number1*precision)) == ((int)(number2*precision))) System.out.println("number1 equals number2");
-        else System.out.println("Int comparison - they are different");
+        if (((int)(number1*precision)) == ((int)(number2*precision))) MikeSimLogger.addLogEvent("number1 equals number2");
+        else MikeSimLogger.addLogEvent("Int comparison - they are different");
 
 
-        System.out.println("Attempting double equality check. Substracting 0.0100005");
+        MikeSimLogger.addLogEvent("Attempting double equality check. Substracting 0.0100005");
 
         number1 = 0.09d;
         number2 = 0.10d;
 
         number2 = number2 - 0.0100005d;
 
-        if(Double.compare(number1, number2) == 0) System.out.println("number 1 equals number 2");
-        else System.out.println("Double comparison - they are different");
+        if(Double.compare(number1, number2) == 0) MikeSimLogger.addLogEvent("number 1 equals number 2");
+        else MikeSimLogger.addLogEvent("Double comparison - they are different");
 
-        if(number1 == number2) System.out.println("Double equality test passed!");
-        else System.out.println("Double comparison - they are different");
+        if(number1 == number2) MikeSimLogger.addLogEvent("Double equality test passed!");
+        else MikeSimLogger.addLogEvent("Double comparison - they are different");
 
-        System.out.println("Doing it with (int)(double*precision) : ");
+        MikeSimLogger.addLogEvent("Doing it with (int)(double*precision) : ");
         precision = 100;
-        if (((int)(number1*precision)) == ((int)(number2*precision))) System.out.println("number1 equals number2");
-        else System.out.println("Int comparison - they are different");
+        if (((int)(number1*precision)) == ((int)(number2*precision))) MikeSimLogger.addLogEvent("number1 equals number2");
+        else MikeSimLogger.addLogEvent("Int comparison - they are different");
 
-        System.out.println("\nUsing DoubleCompare: ");
-        if(DoubleCompare.equals(number1, number2)) System.out.println("They are equal");
-        else System.out.println("The are different");
+        MikeSimLogger.addLogEvent("\nUsing DoubleCompare: ");
+        if(DoubleCompare.equals(number1, number2)) MikeSimLogger.addLogEvent("They are equal");
+        else MikeSimLogger.addLogEvent("The are different");
 
 
     }

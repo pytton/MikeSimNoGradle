@@ -111,13 +111,13 @@ public class CommonGUI {
      * @param priceServer
      */
     synchronized static public MikePosOrders setMikePos(ICommonGUI setMikePosOrdersTarget, MainModelThread model, PriceServer priceServer){
-        System.out.println("Attempting to set MikePosOrders");
+        MikeSimLogger.addLogEvent("Attempting to set MikePosOrders");
 
 
         //use priceServer supplied by call to method or try to get it if null
         if (priceServer == null) {
             if (setMikePosOrdersTarget.getPriceServer() == null) {
-                System.out.println("Price server not available! Unable to set MikePosOrders!");
+                MikeSimLogger.addLogEvent("Price server not available! Unable to set MikePosOrders!");
                 return null;
             }
             else priceServer = setMikePosOrdersTarget.getPriceServer();
@@ -144,15 +144,15 @@ public class CommonGUI {
             //handle user selection:
             if (result.isPresent()) {
                 selected = result.get();
-                System.out.println("Selection: " + selected.toString() + " Current bid price: " + selected.getBidPrice());
+                MikeSimLogger.addLogEvent("Selection: " + selected.toString() + " Current bid price: " + selected.getBidPrice());
                 setMikePosOrdersTarget.setMikePosOrders(selected);
                 return selected;
             } else {
-                System.out.println("Selection Cancelled!");
+                MikeSimLogger.addLogEvent("Selection Cancelled!");
             }
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("Error in setMikePos dialog");
+            MikeSimLogger.addLogEvent("Error in setMikePos dialog");
         }
 
 
@@ -167,7 +167,7 @@ public class CommonGUI {
      */
     synchronized static public PriceServer setPriceServer(ICommonGUI setPriceServerTarget, MainModelThread model){
 
-        System.out.println("Attempting to set PriceServer");
+        MikeSimLogger.addLogEvent("Attempting to set PriceServer");
 
         //get the list of available PriceServers from the model:
         List<PriceServer> dialogData = model.posOrdersManager.getPriceServerObservableList();
@@ -185,10 +185,10 @@ public class CommonGUI {
         //handle user selection:
         if (result.isPresent()) {
             selected = result.get();
-            System.out.println("Selection: " + selected.toString() + " Current bid price: " + selected.getBidPrice());
+            MikeSimLogger.addLogEvent("Selection: " + selected.toString() + " Current bid price: " + selected.getBidPrice());
             setPriceServerTarget.setPriceServer(selected);
         } else {
-            System.out.println("Selection Cancelled!");
+            MikeSimLogger.addLogEvent("Selection Cancelled!");
         }
 
         return selected;
@@ -237,8 +237,10 @@ public class CommonGUI {
         //I want to display the newly created window on the same screen that the MainGUI is currently displayed at.
         //This does the magic:
         Rectangle2D bounds = CommonGUI.getScreenForStage(sourceStage).getVisualBounds();
-        newStage.setX(bounds.getMinX() + XPos);
-        newStage.setY(bounds.getMinY() + YPos);
+        if((bounds.getMinX() + XPos + 10) < bounds.getMaxX()) newStage.setX(bounds.getMinX() + XPos);
+        else newStage.setX(bounds.getMinX() + 50);
+        if((bounds.getMinY() + YPos + 10) < bounds.getMaxY()) newStage.setY(bounds.getMinY() + YPos);
+        else newStage.setY(bounds.getMinY() +50);
 
         //experimenting:
         MikeSimLogger.addLogEvent("Location of stage on screen: " + sourceStage.getX() + " X "

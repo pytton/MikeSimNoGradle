@@ -1,5 +1,6 @@
 package main.java.model.algocontrol;
 
+import main.java.model.MikeSimLogger;
 import main.java.model.orderserver.MikeOrder;
 import main.java.model.positionsorders.MikePosOrders;
 
@@ -79,7 +80,7 @@ public class SimpleStepperAlgo extends BaseAlgo {
 
 
         exitOrderPrice = entryTargetPrice - interval;
-        System.out.println("Creating SimpleStepperAlgo with exitOrder Price: " + exitOrderPrice);
+        MikeSimLogger.addLogEvent("Creating SimpleStepperAlgo with exitOrder Price: " + exitOrderPrice);
         trailingStopPrice = exitOrderPrice;
 
         //setup the order types and trailing stop trigger price:
@@ -93,7 +94,7 @@ public class SimpleStepperAlgo extends BaseAlgo {
             secondExitOrderType = MikeOrder.MikeOrderType.BUYSTP;
             returnOrderType = MikeOrder.MikeOrderType.SELLSTP;
         } else {
-            System.out.println("ERROR CREATING STEPPERALGO1");
+            MikeSimLogger.addLogEvent("ERROR CREATING STEPPERALGO1");
             status = Status.CANCELLED;
         }
 
@@ -160,7 +161,7 @@ public class SimpleStepperAlgo extends BaseAlgo {
         //send the first trailing stop order if it hasn't been done yet:
         //trailingStopPrice has been set to exitOrderPrice in constructor
         if(!trailingStopTriggered){
-            System.out.println("Placing first trailing stop");
+            MikeSimLogger.addLogEvent("Placing first trailing stop");
             trailingStopOrderId = posOrders.placeNewOrder(secondExitOrderType, entryTargetPrice, trailingStopPrice, trailingStopOrderAmount);
             trailingStopTriggered = true;
         }

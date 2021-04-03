@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import main.java.model.MainModelThread;
+import main.java.model.MikeSimLogger;
 import main.java.model.orderserver.MikeOrder;
 import main.java.model.positionsorders.MikePosOrders;
 
@@ -32,7 +33,7 @@ public class ControllerComplexScalperAlgo extends AlgoController {
 
     @FXML
     public void initialize() {
-//        System.out.println("ControllerSimpleScalperAlgo created.");
+//        MikeSimLogger.addLogEvent("ControllerSimpleScalperAlgo created.");
 
 
         //setup the kind of order passed to algoManager depending on which radiobutton is pressed:
@@ -70,7 +71,7 @@ public class ControllerComplexScalperAlgo extends AlgoController {
             model.algoManager.cancelAllComplexScalperAlgo1sAtPrice(pricePressed, posOrders);
         }
 
-        System.out.println("ControllerComplexScalperAlgo. Price clicked: " + pricePressed);
+        MikeSimLogger.addLogEvent("ControllerComplexScalperAlgo. Price clicked: " + pricePressed);
     }
 
     @Override
@@ -102,7 +103,7 @@ public class ControllerComplexScalperAlgo extends AlgoController {
 
     public void oAmtBtnPressed(ActionEvent actionEvent) {
         Button button = (Button) actionEvent.getSource();
-//        System.out.println("Pressed: " + button.getText());
+//        MikeSimLogger.addLogEvent("Pressed: " + button.getText());
         orderAmount.setText(button.getText());
     }
 

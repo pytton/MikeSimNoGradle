@@ -284,7 +284,7 @@ public class MikeGridPane extends GridPane {
                 buttons[row][col] = button;
                 buttonList.get(row).add(button);
 
-                button.setPrefWidth(60);
+                button.setPrefWidth(58);
 //                if (col == 3) button.setPrefWidth(90);
                 button.setMinHeight(20);
                 button.setMaxHeight(20);
@@ -294,8 +294,8 @@ public class MikeGridPane extends GridPane {
 //                button.setMaxHeight(5);
 //                button.setStyle("-fx-background-color: lightgrey;-fx-border-color: black; -fx-border-width: 1px");
 //                button.setStyle("-fx-background-color: white");
-//                System.out.println(button.getLabelPadding());
-//                System.out.println(button.getLayoutBounds());
+//                MikeSimLogger.addLogEvent(button.getLabelPadding());
+//                MikeSimLogger.addLogEvent(button.getLayoutBounds());
 
 
 
@@ -308,7 +308,7 @@ public class MikeGridPane extends GridPane {
         this.setAlignment(CENTER);
 
 
-        System.out.println("MikeGridPane generated");
+        MikeSimLogger.addLogEvent("MikeGridPane generated");
     }
 
     public MikeButton getButton(int row, int col) {
@@ -347,7 +347,7 @@ public class MikeGridPane extends GridPane {
 
 
                 if (event.getButton() == MouseButton.SECONDARY) {
-                    System.out.println("MikeGridPane MikeButton clicked with RIGHT MOUSE BUTTON. This message" +
+                    MikeSimLogger.addLogEvent("MikeGridPane MikeButton clicked with RIGHT MOUSE BUTTON. This message" +
                             " generated in MikeButton class");
                 }
             }

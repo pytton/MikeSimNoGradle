@@ -6,6 +6,7 @@ import main.java.model.livemarketdata.InteractiveBrokersAPI;
 import main.java.model.livemarketdata.OutsideTradingSoftwareAPIConnection;
 import main.java.model.algocontrol.AlgoManager;
 import main.java.model.positionsorders.MikePosOrders;
+import main.java.model.positionsorders.PosOrdersManager;
 
 import java.util.Map;
 
@@ -104,7 +105,7 @@ public class MainModelThread extends Thread {
             }
 
             //process historical data:
-            data.priceServer.processHistoricalData();
+            data.getPriceServer().processHistoricalData();
         }
     }
 
@@ -134,10 +135,17 @@ public class MainModelThread extends Thread {
                 count++;
 //                Thread.sleep(refreshGUIInMiliseconds);
                 isReady = true;
-                if (count%10 == 0) MikeSimLogger.addLogEvent("Mainloop count: " + count + " MainLoop turnaround in miliseconds: " + mainLoopTurnaroundTime);
+                if (count%10 == 0) {
+
+                    mainGUIClass.controllerPrimaryGUIWindow.mainloopCountTextField.setText("" + count);
+                    mainGUIClass.controllerPrimaryGUIWindow.mainloopSpeedTextField.setText("" + mainLoopTurnaroundTime);
 
 
-//                    System.out.println("Mainloop count: " + count + " MainLoop turnaround in miliseconds: " + mainLoopTurnaroundTime);
+//                    MikeSimLogger.addLogEvent("Mainloop count: " + count + " MainLoop turnaround in miliseconds: " + mainLoopTurnaroundTime);
+
+                }
+
+//                    MikeSimLogger.addLogEvent("Mainloop count: " + count + " MainLoop turnaround in miliseconds: " + mainLoopTurnaroundTime);
             } catch (Exception e) {
                 e.printStackTrace();
             }

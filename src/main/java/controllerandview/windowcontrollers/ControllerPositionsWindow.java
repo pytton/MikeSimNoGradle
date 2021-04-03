@@ -216,7 +216,7 @@ public class ControllerPositionsWindow
                     //and also the targetPosOrders:
                     targetPositionsList.setItems(model.posOrdersManager.getPosOrdersObservableList(tickerId));
 
-                    System.out.println("Chosen: " + controllerPositionsWindow.priceServer.toString());
+                    MikeSimLogger.addLogEvent("Chosen: " + controllerPositionsWindow.priceServer.toString());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -237,7 +237,7 @@ public class ControllerPositionsWindow
                 try {
                     //set the MikePosOrders to the one selected:
                     controllerPositionsWindow.mikePosOrders = (MikePosOrders) positionsList.getSelectionModel().getSelectedItem();
-                    System.out.println("Chosen: " + ((MikePosOrders) positionsList.getSelectionModel().getSelectedItem()).getName());
+                    MikeSimLogger.addLogEvent("Chosen: " + ((MikePosOrders) positionsList.getSelectionModel().getSelectedItem()).getName());
 
                     //rename the window:
                     Stage stage = (Stage) controllerPositionsWindow.getMainBorderPane().getScene().getWindow();
@@ -271,7 +271,7 @@ public class ControllerPositionsWindow
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
 
-                System.out.println("Chosen: " + cb.getSelectionModel().getSelectedItem());
+                MikeSimLogger.addLogEvent("Chosen: " + cb.getSelectionModel().getSelectedItem());
 
                 //THIS IS WHERE YOU SET THE ACTIONS:
                 if(cb.getSelectionModel().getSelectedItem() == "SimpleScalper1"){
@@ -286,9 +286,9 @@ public class ControllerPositionsWindow
                         //MikeGridPane will call this controller whenever a button inside MikeGridPane is pressed:
                         controllerPositionsWindow.setAlgoController(colNumber, controllerSimpleScalperAlgo);
 
-                        System.out.println("Choicebox algo setting successful");
+                        MikeSimLogger.addLogEvent("Choicebox algo setting successful");
                     } catch (Exception e) {
-                        System.out.println("Exception in Choicebox algo setting");
+                        MikeSimLogger.addLogEvent("Exception in Choicebox algo setting");
                     }
                 }
                 if(cb.getSelectionModel().getSelectedItem() == "ComplexScalper1"){
@@ -301,9 +301,9 @@ public class ControllerPositionsWindow
 
                         controllerPositionsWindow.setAlgoController(colNumber, controllerSimpleScalperAlgo);
 
-                        System.out.println("Choicebox algo setting successful");
+                        MikeSimLogger.addLogEvent("Choicebox algo setting successful");
                     } catch (Exception e) {
-                        System.out.println("Exception in Choicebox algo setting");
+                        MikeSimLogger.addLogEvent("Exception in Choicebox algo setting");
                     }
                 }
 
@@ -317,9 +317,9 @@ public class ControllerPositionsWindow
 
                         controllerPositionsWindow.setAlgoController(colNumber, controller);
 
-                        System.out.println("Choicebox algo setting successful");
+                        MikeSimLogger.addLogEvent("Choicebox algo setting successful");
                     } catch (Exception e) {
-                        System.out.println("Exception in Choicebox algo setting");
+                        MikeSimLogger.addLogEvent("Exception in Choicebox algo setting");
                     }
                 }
 
@@ -346,9 +346,9 @@ public class ControllerPositionsWindow
                         //MikeGridPane will call this controller whenever a button inside MikeGridPane is pressed:
                         controllerPositionsWindow.setAlgoController(colNumber, controller);
 
-                        System.out.println("Choicebox algo setting successful");
+                        MikeSimLogger.addLogEvent("Choicebox algo setting successful");
                     } catch (Exception e) {
-                        System.out.println("Exception in Choicebox algo setting");
+                        MikeSimLogger.addLogEvent("Exception in Choicebox algo setting");
                     }
                 }
 
@@ -451,9 +451,9 @@ public class ControllerPositionsWindow
             controllerSimpleScalperAlgo.sellLimit.fire();
 
 
-            System.out.println("Experiment in setting initial column controller  successful");
+            MikeSimLogger.addLogEvent("Experiment in setting initial column controller  successful");
         } catch (Exception e) {
-            System.out.println("Exception in setupControllerInsidePane()");
+            MikeSimLogger.addLogEvent("Exception in setupControllerInsidePane()");
         }
     }
 
@@ -492,7 +492,7 @@ public class ControllerPositionsWindow
 //        //printout positions to console:
 //        mikePosOrders.printPositionsToConsole();
 
-        System.out.println("Transferring all positions to target PosOrders");
+        MikeSimLogger.addLogEvent("Transferring all positions to target PosOrders");
 
         MikePosOrders targetPosOrders = mikePosOrders;
         if (targetPositionsList.getSelectionModel().getSelectedItem() != null) {
@@ -553,7 +553,7 @@ public class ControllerPositionsWindow
     @FXML
     private void testThreeButtonClicked(){
 
-        System.out.println("Test three clicked");
+        MikeSimLogger.addLogEvent("Test three clicked");
 
         List<PriceServer> dialogData;
 
@@ -571,7 +571,7 @@ public class ControllerPositionsWindow
         if (result.isPresent()) {
 
             selected = result.get();
-            System.out.println("Selection: " + selected.toString() + " Current bid price: " + selected.getBidPrice());
+            MikeSimLogger.addLogEvent("Selection: " + selected.toString() + " Current bid price: " + selected.getBidPrice());
 
 
 
@@ -583,14 +583,14 @@ public class ControllerPositionsWindow
 
 
 
-//        System.out.println("Size: " + aggregatedPosOrders.posOrdersList.size());
+//        MikeSimLogger.addLogEvent("Size: " + aggregatedPosOrders.posOrdersList.size());
 //
 //        Set<MikePosOrders> posOrders = new HashSet<>();
 //
 //        posOrders.addAll( positionsList.getSelectionModel().getSelectedItems());
 //
 //        for (MikePosOrders positions : posOrders) {
-//            System.out.println("Selected: " + positions.getName());
+//            MikeSimLogger.addLogEvent("Selected: " + positions.getName());
 //        }
 
 
@@ -630,7 +630,7 @@ public class ControllerPositionsWindow
         Integer price = Integer.parseInt(orderPriceTextField.getText());
         Integer amount = Integer.parseInt(orderSizeTextField.getText());
 
-        System.out.println("Buy limit pressed. Order price: " + price + " Order size: " + amount);
+        MikeSimLogger.addLogEvent("Buy limit pressed. Order price: " + price + " Order size: " + amount);
 
         mikePosOrders.placeNewOrder(MikeOrder.MikeOrderType.BUYLMT, price, price, amount);
 //        model.getOrderServer().placeNewOrder(MikeOrder.MikeOrderType.BUYLMT, price, price, amount);
@@ -682,7 +682,7 @@ public class ControllerPositionsWindow
         Integer price = Integer.parseInt(orderPriceTextField.getText());
         Integer amount = Integer.parseInt(orderSizeTextField.getText());
 
-        System.out.println("Sell limit pressed. Order price: " + price + " Order size: " + amount);
+        MikeSimLogger.addLogEvent("Sell limit pressed. Order price: " + price + " Order size: " + amount);
 
         mikePosOrders.placeNewOrder(MikeOrder.MikeOrderType.SELLLMT, price, price, amount);
 //        model.getOrderServer().placeNewOrder(MikeOrder.MikeOrderType.SELLLMT, price, price, amount);
@@ -693,7 +693,7 @@ public class ControllerPositionsWindow
         Integer price = Integer.parseInt(orderPriceTextField.getText());
         Integer amount = Integer.parseInt(orderSizeTextField.getText());
 
-        System.out.println("Buy stop pressed. Order price: " + price + " Order size: " + amount);
+        MikeSimLogger.addLogEvent("Buy stop pressed. Order price: " + price + " Order size: " + amount);
 
         mikePosOrders.placeNewOrder(MikeOrder.MikeOrderType.BUYSTP, price, price, amount);
 //        model.getOrderServer().placeNewOrder(MikeOrder.MikeOrderType.BUYSTP, price, price, amount);
@@ -702,18 +702,18 @@ public class ControllerPositionsWindow
 
     public void testThreeMouseClicked(MouseEvent mouseEvent) {
         if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-            System.out.println("Test Three RIGHT BUTTON CLICKED");
+            MikeSimLogger.addLogEvent("Test Three RIGHT BUTTON CLICKED");
         }
     }
 
     public void cancelAlgosThisBookBtnPressed(ActionEvent actionEvent) {
         model.algoManager.cancelAllAlgosInMikePosOrders(mikePosOrders);
-        System.out.println("Cancelling all algos in this Book!");
+        MikeSimLogger.addLogEvent("Cancelling all algos in this Book!");
     }
 
     public void cancelAlgosGloballyBtnPressed(ActionEvent actionEvent) {
         model.algoManager.cancelAllAlgosGlobally();
-        System.out.println("Cancelling all algos GLOBALLY!!!");
+        MikeSimLogger.addLogEvent("Cancelling all algos GLOBALLY!!!");
     }
 
     /**
@@ -755,7 +755,7 @@ public class ControllerPositionsWindow
             printoutBottomAndTopGridPanes(totalOpenAmount, zeroProfitPoint, bidPrintoutCol, zeroProfitPointCol, askPrintoutCol);
 
         } catch (Exception e) {
-            System.out.println("EXCEPTION IN POSITIONSWINDOW UPDATE GUI");
+            MikeSimLogger.addLogEvent("EXCEPTION IN POSITIONSWINDOW UPDATE GUI");
             e.printStackTrace();
         }
     }
@@ -871,7 +871,7 @@ public class ControllerPositionsWindow
         Integer price = Integer.parseInt(orderPriceTextField.getText());
         Integer amount = Integer.parseInt(orderSizeTextField.getText());
 
-        System.out.println("Sell stop pressed. Order price: " + price + " Order size: " + amount);
+        MikeSimLogger.addLogEvent("Sell stop pressed. Order price: " + price + " Order size: " + amount);
 
         mikePosOrders.placeNewOrder(MikeOrder.MikeOrderType.SELLSTP, price, price, amount);
 //        model.getOrderServer().placeNewOrder(MikeOrder.MikeOrderType.SELLSTP, price, price, amount);

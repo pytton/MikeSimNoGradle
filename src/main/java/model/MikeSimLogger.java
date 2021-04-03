@@ -24,7 +24,6 @@ public class MikeSimLogger {
     public synchronized static void addLogEvent(String logEntry){
         System.out.println(logEntry);
         log.append(java.time.LocalTime.now() + ": " + logEntry + "\n");
-//        System.out.println("MikeSimLogger.addLogEvent");
     }
 
     public synchronized static void printLogToFile(){

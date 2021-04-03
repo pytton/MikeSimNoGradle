@@ -104,9 +104,9 @@ abstract public class OrderServer {
      * For testing
      */
     public void printAllOrdersToConsole(){
-        System.out.println("Printing all orders");
+        MikeSimLogger.addLogEvent("Printing all orders");
         for(MikeOrder order : getAllOrdersMap().values()){
-            System.out.println("Order id: " + order.getMikeOrderNumber() +
+            MikeSimLogger.addLogEvent("Order id: " + order.getMikeOrderNumber() +
                     " Order price: " + order.getPrice() +
                     " Order amount: " + order.getAmount());
         }
@@ -117,11 +117,11 @@ abstract public class OrderServer {
      * for testing
      */
     public void printActiveOrdersToConsole(){
-        System.out.println("Printing active orders in OrderServer");
+        MikeSimLogger.addLogEvent("Printing active orders in OrderServer");
 
         for(long orderID : getActiveOrdersList()){
             //print out active orders to console:
-            System.out.println("Active order ID: " + getAllOrdersMap().get(orderID).getMikeOrderNumber() + " Order price: "
+            MikeSimLogger.addLogEvent("Active order ID: " + getAllOrdersMap().get(orderID).getMikeOrderNumber() + " Order price: "
                     + getAllOrdersMap().get(orderID).getPrice());
         }
 

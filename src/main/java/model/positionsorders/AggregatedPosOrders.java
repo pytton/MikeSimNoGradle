@@ -1,6 +1,7 @@
 package main.java.model.positionsorders;
 
 
+import main.java.model.MikeSimLogger;
 import main.java.model.orderserver.MikeOrder;
 import main.java.model.orderserver.OrderServer;
 import main.java.model.priceserver.PriceServer;
@@ -27,7 +28,7 @@ public class AggregatedPosOrders extends MikePosOrders {
     public synchronized void setPosOrdersList(List<MikePosOrders> posOrdersList) {
         this.posOrdersList.clear();
         this.posOrdersList.addAll(posOrdersList);
-        System.out.println("Setting PosOrders in AggregatedPosOrders");
+        MikeSimLogger.addLogEvent("Setting PosOrders in AggregatedPosOrders");
     }
 
     @Override
@@ -85,7 +86,7 @@ public class AggregatedPosOrders extends MikePosOrders {
                 zeroProfitPoint = averagePrice - ( closedPL / totalOpenAmount   );
             } else averagePrice = null;
         } catch (Exception e) {
-            System.out.println("Exception in AggregatePosOrders recalculatePL");
+            MikeSimLogger.addLogEvent("Exception in AggregatePosOrders recalculatePL");
             e.printStackTrace();
         }
 

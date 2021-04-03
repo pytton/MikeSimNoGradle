@@ -1,6 +1,7 @@
 package main.java.model.priceserver;
 
 
+import main.java.model.MikeSimLogger;
 import main.java.model.livemarketdata.InteractiveBrokersAPI;
 import main.java.model.livemarketdata.OutsideTradingSoftwareAPIConnection;
 
@@ -71,7 +72,7 @@ public class PriceServer {
 
     synchronized public void setBidPrice(int bidPrice) {
         this.bidPrice = bidPrice;
-//        System.out.println("Bid price set to: " + bidPrice);
+//        MikeSimLogger.addLogEvent("Bid price set to: " + bidPrice);
     }
 
     public int getAskPrice() {
@@ -85,7 +86,7 @@ public class PriceServer {
 
     synchronized public void setAskPrice(int askPrice) {
         this.askPrice = askPrice;
-//        System.out.println("Ask price set to: " + askPrice);
+//        MikeSimLogger.addLogEvent("Ask price set to: " + askPrice);
     }
 
     //used by processHistoricalData:
@@ -109,14 +110,14 @@ public class PriceServer {
             if (!outsideTradingSoftwareAPIConnection.getHistoricalPriceDataMap().get(tickerID).isEmpty()
                     && lastHistoricalPos < outsideTradingSoftwareAPIConnection.getHistoricalPriceDataMap().get(tickerID).size()) {
                 try {
-//                        System.out.println("Inside processHistoricalData");
+//                        MikeSimLogger.addLogEvent("Inside processHistoricalData");
                     List<InteractiveBrokersAPI.PriceData> historicalPriceDataList = outsideTradingSoftwareAPIConnection.getHistoricalPriceDataMap().get(tickerID);
                     historicalBidPrice = ((int)(historicalPriceDataList.get(lastHistoricalPos).getBidPrice() * 100));
                     historicalAskPrice = ((int)(historicalPriceDataList.get(lastHistoricalPos).getAskPrice() * 100));
                     lastHistoricalPos++;
 
                 } catch (Exception e) {
-                    System.out.println("Exception in historical Data");
+                    MikeSimLogger.addLogEvent("Exception in historical Data");
                     e.printStackTrace();
                 }
             }

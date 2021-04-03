@@ -270,7 +270,7 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
     private boolean connectToTWS() {
         //check if already connected:
         if (connectedToTWS) {
-            System.out.println("OutsideTradingSoftwareAPIConnection already connected to TWS!");
+            MikeSimLogger.addLogEvent("OutsideTradingSoftwareAPIConnection already connected to TWS!");
             return true;
         } else {
             // Create a new EClientSocket object
@@ -282,20 +282,20 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
                 // Port Number (should match TWS/IB Gateway configuration
                 client.eConnect(null, 7496, 0);
                 int connectionAttempts = 5;
-                System.out.println("Attempting to connect to InterActiveBrokers TWS API");
+                MikeSimLogger.addLogEvent("Attempting to connect to InterActiveBrokers TWS API");
 
                 for (int i = 0; i < connectionAttempts; i++) {
                     if (client.isConnected()) {
                         connectedToTWS = true;
-                        System.out.println("Connection attempt successful!");
+                        MikeSimLogger.addLogEvent("Connection attempt successful!");
                         return true;
                     }
-                    System.out.println("Failed to connect. Retrying in 1000 ms");
+                    MikeSimLogger.addLogEvent("Failed to connect. Retrying in 1000 ms");
                     // Pause here for connection to complete
                     Thread.sleep(1000);
                 }
             } catch (Exception e) {
-                System.out.println("Error connecting to TWS!");
+                MikeSimLogger.addLogEvent("Error connecting to TWS!");
                 return false;
             }
 
@@ -320,7 +320,7 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
 
         //if contracts had been previously set up, return true:
         if (contractsAlreadySetupFlag) {
-            System.out.println("Contracts have already been set up!");
+            MikeSimLogger.addLogEvent("Contracts have already been set up!");
             return true;
         }
 
@@ -390,14 +390,14 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
 //            priceDataMap.put(4, new PriceData()); //priceDataMap stores market data for each tickerId
 
         } catch (Exception e) {
-            System.out.println("Exception in InterActiveBrokersAPI setUpContracts!");
+            MikeSimLogger.addLogEvent("Exception in InterActiveBrokersAPI setUpContracts!");
             e.printStackTrace();
             contractsAlreadySetupFlag = false;
             return false;
         }
 
         //if everything successful, set the flag:
-        System.out.println("Setting up contracts successful.");
+        MikeSimLogger.addLogEvent("Setting up contracts successful.");
         contractsAlreadySetupFlag = true;
         return true;
     }
@@ -405,14 +405,14 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
     public void consolePrintRealTimeData() {
 
         if (!connectedToTWS) {
-            System.out.println("Not connected to live data!");
+            MikeSimLogger.addLogEvent("Not connected to live data!");
             return;
         }
-        System.out.println("Bid Price: " + getBidPrice());
-        System.out.println("Ask Price: " + getAskPrice());
+        MikeSimLogger.addLogEvent("Bid Price: " + getBidPrice());
+        MikeSimLogger.addLogEvent("Ask Price: " + getAskPrice());
 
         for (int tickerID : priceDataMap.keySet()) {
-            System.out.println("Prices: " + priceDataMap.get(tickerID).getAskPrice());
+            MikeSimLogger.addLogEvent("Prices: " + priceDataMap.get(tickerID).getAskPrice());
         }
     }
 
@@ -430,7 +430,7 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
 
         //if TWS API passes price as -1.00 or 0 - it means price is not available:
         if(price == -1.00 || price == 0) {
-            System.out.println("EMPTY PRICE sent by TWS API");
+            MikeSimLogger.addLogEvent("EMPTY PRICE sent by TWS API");
             return;
         }
 
@@ -476,7 +476,7 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
                 if (field == 2) askPrice = price;
             }
         } catch (Exception e) {
-            System.out.println("ERROR IN InteractiveBrokersAPI tickPrice method!");
+            MikeSimLogger.addLogEvent("ERROR IN InteractiveBrokersAPI tickPrice method!");
             e.printStackTrace();
         }
     }
@@ -500,7 +500,7 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
                 if (field == 3) askSize = size;
             }
         } catch (Exception e) {
-            System.out.println("Error in InteractiveBrokersAPI.java.tickSize");
+            MikeSimLogger.addLogEvent("Error in InteractiveBrokersAPI.java.tickSize");
             e.printStackTrace();
         }
     }
@@ -510,7 +510,7 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
 
         // Display Historical data
         try {
-            System.out.println("historicalData: " + reqId + ", date: " + date + ", open: " +
+            MikeSimLogger.addLogEvent("historicalData: " + reqId + ", date: " + date + ", open: " +
                     open + " ,high: " + high + ", low: " + low + ", close: " + close + ", vol: " +
                     volume);
 
@@ -524,7 +524,7 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
             priceData.setDate(date);
             list.add(priceData);
 
-            System.out.println("Setting historical price: " + open);
+            MikeSimLogger.addLogEvent("Setting historical price: " + open);
 
         } catch (Exception e) {
             e.printStackTrace();

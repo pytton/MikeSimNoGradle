@@ -64,7 +64,8 @@ public class Main extends Application {
 
     @Override
     public void stop(){
-        System.out.println("Shutting down.");
+        MikeSimLogger.addLogEvent("Shutting down.");
+//        MikeSimLogger.addLogEvent("Shutting down.");
         mainModelThread.shutDownMikeSim();
 //        MainModelThread.interrupted = true;
     }
@@ -75,14 +76,15 @@ public class Main extends Application {
         MikeSimLogger logger = MikeSimLogger.getInstance();
 
         //testing:
-        DoubleEqualTest test = new DoubleEqualTest();
+//        DoubleEqualTest test = new DoubleEqualTest();
 
-        test.runTest();
+//        test.runTest();
 
         //JavaFX application reguires this line. It does JavaFX stuff and then calls start(Stage primaryStage)
         launch(args);
 
-        System.out.println("Ending program and writing to MikeSimLog.txt");
+        MikeSimLogger.addLogEvent("Ending program and writing to MikeSimLog.txt");
+//        MikeSimLogger.addLogEvent("Ending program and writing to MikeSimLog.txt");
         MikeSimLogger.printLogToFile();
 
     }

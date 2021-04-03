@@ -26,7 +26,7 @@ public class MikePosOrders {
      */
     synchronized public long placeNewOrder(MikeOrder.MikeOrderType orderType, int assignedToPos, int price, int amount) {
 
-        System.out.println("Placing new order in " + getName());
+        MikeSimLogger.addLogEvent("Placing new order in " + getName());
         //send the order to orderserver and get the order number:
         long orderNumber = orderServer.placeNewOrder(this, orderType, assignedToPos, price, amount);
         //add the order number to the list of active orders:
@@ -71,7 +71,7 @@ public class MikePosOrders {
         }
         ordersAtPrice.recalculateOpenOrdersAtPrice();
 
-        System.out.println("Cancelling all orders at price. NOT CANCELLING IN CHILDREN! " + price + " in " + getName());
+        MikeSimLogger.addLogEvent("Cancelling all orders at price. NOT CANCELLING IN CHILDREN! " + price + " in " + getName());
     }
 
     protected MikePosOrders() {
@@ -489,9 +489,9 @@ public class MikePosOrders {
      */
     public void printPositionsToConsole() {
 
-        System.out.println("Printing positions!");
+        MikeSimLogger.addLogEvent("Printing positions!");
         for (MikePosition position : positionsMap.values()) {
-            System.out.println("Position price: " + position.getPrice() +
+            MikeSimLogger.addLogEvent("Position price: " + position.getPrice() +
                     " Position amount: " + position.getOpen_amount() +
                     " Position total PL: " + position.getTotal_pl());
         }
@@ -504,7 +504,7 @@ public class MikePosOrders {
 
         for (long orderId : activeOrdersSet) {
             //print out active orders to console:
-            System.out.println("Active order ID: " + getOrderServer().getAllOrdersMap().get(orderId).getMikeOrderNumber() + " Order price: "
+            MikeSimLogger.addLogEvent("Active order ID: " + getOrderServer().getAllOrdersMap().get(orderId).getMikeOrderNumber() + " Order price: "
                     + getOrderServer().getAllOrdersMap().get(orderId).getPrice());
         }
     }

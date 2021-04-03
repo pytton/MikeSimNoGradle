@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import main.java.controllerandview.CommonGUI;
 import main.java.controllerandview.windowcontrollers.ControllerPositionsWindow;
 import main.java.model.MainModelThread;
+import main.java.model.MikeSimLogger;
 import main.java.model.orderserver.MikeOrder;
 import main.java.model.positionsorders.MikePosOrders;
 
@@ -70,7 +71,7 @@ public class ControllerPlainOrder extends AlgoController {
     @Override
     public void mikeGridPaneButtonPressed(int pricePressed, MainModelThread model, MikePosOrders posOrders) {
         if (orderType == MikeOrder.MikeOrderType.TRANSFER && controllerPositionsWindow.targetPositionsList.getSelectionModel().getSelectedItem() != null){
-            System.out.println("Attempting transfer");
+            MikeSimLogger.addLogEvent("Attempting transfer");
             posOrders.movePositionToDifferentMikePosOrders(pricePressed, (MikePosOrders) controllerPositionsWindow.targetPositionsList.getSelectionModel().getSelectedItem());
             return;
         }

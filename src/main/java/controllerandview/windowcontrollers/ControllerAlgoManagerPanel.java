@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import main.java.model.MainModelThread;
+import main.java.model.MikeSimLogger;
 import main.java.model.algocontrol.BaseAlgo;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class ControllerAlgoManagerPanel {
 
     @FXML
     public void initialize() {
-        System.out.println("AlgoManagerPanel created");
+        MikeSimLogger.addLogEvent("AlgoManagerPanel created");
         algoList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
 
@@ -34,7 +35,7 @@ public class ControllerAlgoManagerPanel {
 
 
     public void setAlgoList(ObservableList<BaseAlgo> algoList) {
-        System.out.println("Attempting ");
+        MikeSimLogger.addLogEvent("Attempting ");
         this.algoList.setItems(algoList);
     }
 

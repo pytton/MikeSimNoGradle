@@ -1,5 +1,7 @@
 package main.java.model.positionsorders;
 
+import main.java.model.MikeSimLogger;
+
 public class MikePosition {
 
     private int price = 0;
@@ -35,7 +37,7 @@ public class MikePosition {
     void fill(int fillprice, int filledamount)
     {
 
-        System.out.println("Testing. Filling position in MikePosition");
+        MikeSimLogger.addLogEvent("Testing. Filling position in MikePosition");
         //this will modify the closed_pl by:
         //difference in fill price and price of this position
         //multiplied by amount

@@ -1,5 +1,6 @@
 package main.java.model.algocontrol;
 
+import main.java.model.MikeSimLogger;
 import main.java.model.orderserver.MikeOrder;
 import main.java.model.positionsorders.MikePosOrders;
 
@@ -64,7 +65,7 @@ public class SimpleScalperAlgo extends BaseAlgo {
             //make sure the scalper sells at a higher price than it buys:
             if(entryTargetPrice <= exitTargetPrice) exitTargetPrice = entryTargetPrice -1;
         } else {
-            System.out.println("ERROR CREATING SIMPLESCALPERALGO");
+            MikeSimLogger.addLogEvent("ERROR CREATING SIMPLESCALPERALGO");
             status = Status.CANCELLED;
         }
 

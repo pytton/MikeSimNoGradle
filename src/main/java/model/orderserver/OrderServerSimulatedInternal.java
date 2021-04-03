@@ -117,14 +117,14 @@ public class OrderServerSimulatedInternal extends OrderServer {
                 getCancelledOrdersList().add(orderID);
             }
         } catch (Exception e) {
-            System.out.println("Exception in cancelOrder!");
+            MikeSimLogger.addLogEvent("Exception in cancelOrder!");
             e.printStackTrace();
         }
 
         try {
             getActiveOrdersList().remove(orderID);
         } catch (Exception e) {
-            System.out.println("Exception in cancelOrder!");
+            MikeSimLogger.addLogEvent("Exception in cancelOrder!");
             e.printStackTrace();
         }
     }

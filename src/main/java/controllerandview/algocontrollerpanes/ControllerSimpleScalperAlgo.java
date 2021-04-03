@@ -32,7 +32,7 @@ public class ControllerSimpleScalperAlgo extends AlgoController {
 
     @FXML
     public void initialize() {
-//        System.out.println("ControllerSimpleScalperAlgo created.");
+//        MikeSimLogger.addLogEvent("ControllerSimpleScalperAlgo created.");
 
 
         //setup the kind of order passed to algoManager depending on which radiobutton is pressed:
@@ -76,7 +76,7 @@ public class ControllerSimpleScalperAlgo extends AlgoController {
 
     @Override
     public void mikeGridPaneButtonPressed(int pricePressed, MainModelThread model, MikePosOrders posOrders) {
-//        System.out.println("SimpleScalperAlgo: mikeGridPaneButtonPressed. Price: " + pricePressed
+//        MikeSimLogger.addLogEvent("SimpleScalperAlgo: mikeGridPaneButtonPressed. Price: " + pricePressed
 //        + " target price: " + (pricePressed + getInterval()) + " Amount: " + (getAmount())  );
         if (orderType != MikeOrder.MikeOrderType.CANCEL) {
             model.algoManager.createScalperAlgo1(posOrders, pricePressed, pricePressed + getInterval(), getAmount(), orderType);

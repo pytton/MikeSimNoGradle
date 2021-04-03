@@ -16,6 +16,8 @@ public class ControllerMainGUIWindow {
     public TextField histDataDuration;
     public TextField histDataDate;
     public TextField histDataTime;
+    public TextField mainloopCountTextField;
+    public TextField mainloopSpeedTextField;
     private MainGUIClass mainGUIClass;
     private MainModelThread model;
 
@@ -117,18 +119,18 @@ public class ControllerMainGUIWindow {
     public void create12PosWinOn4KClicked(ActionEvent actionEvent) {
         MikeSimLogger.addLogEvent("Implement this");
 
-        mainGUIClass.createPosWindow(0,0);
-        mainGUIClass.createPosWindow(640,0);
-        mainGUIClass.createPosWindow(1280,0);
-//        mainGUIClass.createPosWindow(1920,0);
-//        mainGUIClass.createPosWindow(2560,0);
-//        mainGUIClass.createPosWindow(0,0);
-//        mainGUIClass.createPosWindow(0,0);
-//        mainGUIClass.createPosWindow(0,0);
-//        mainGUIClass.createPosWindow(0,0);
-//        mainGUIClass.createPosWindow(0,0);
-//        mainGUIClass.createPosWindow(0,0);
-//        mainGUIClass.createPosWindow(0,0);
+        mainGUIClass.createPosWindow((640*0),0);
+        mainGUIClass.createPosWindow((640*1),0);
+        mainGUIClass.createPosWindow((640*2),0);
+        mainGUIClass.createPosWindow((640*3),0);
+        mainGUIClass.createPosWindow((640*4),0);
+        mainGUIClass.createPosWindow((640*5),0);
+        mainGUIClass.createPosWindow((640*0),1000);
+        mainGUIClass.createPosWindow((640*1),1000);
+        mainGUIClass.createPosWindow((640*2),1000);
+        mainGUIClass.createPosWindow((640*3),1000);
+        mainGUIClass.createPosWindow((640*4),1000);
+        mainGUIClass.createPosWindow((640*5),1000);
 
 
 

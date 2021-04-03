@@ -27,6 +27,8 @@ import java.util.Stack;
  */
 public class MainGUIClass {
 
+    public ControllerMainGUIWindow controllerPrimaryGUIWindow;
+
     //this used so MainModelThread can periodically send signals to windows to update their data from the model
     public interface Updatable {
         /**
@@ -84,7 +86,7 @@ public class MainGUIClass {
         //create PrimaryGUIWindow
         FXMLLoader primaryGUIWindowLoader = new FXMLLoader(getClass().getResource("/MainGUIWindow.fxml"));
         Parent primaryGUIRoot = primaryGUIWindowLoader.load();
-        ControllerMainGUIWindow controllerPrimaryGUIWindow = (ControllerMainGUIWindow) primaryGUIWindowLoader.getController();
+        /*ControllerMainGUIWindow */ controllerPrimaryGUIWindow = (ControllerMainGUIWindow) primaryGUIWindowLoader.getController();
         controllerPrimaryGUIWindow.setMainGUIClass(this);
         controllerPrimaryGUIWindow.setModel(mainModelThread);
         controllerPrimaryGUIWindow.instrumentsList.setItems(mainModelThread.posOrdersManager.getPriceServerObservableList());
@@ -115,7 +117,7 @@ public class MainGUIClass {
         try {
             creator = new MikePositionsWindowCreator(getMainModelThread().posOrdersManager.getPriceServer(defaultTickerId));
         } catch (IOException e) {
-            System.out.println("Exception in createPosWindow\nPoswindow not created!");
+            MikeSimLogger.addLogEvent("Exception in createPosWindow\nPoswindow not created!");
             e.printStackTrace();
             return;
         }
@@ -134,6 +136,9 @@ public class MainGUIClass {
         //name the window:
         String name = ("PositionsWindow " + updatableWindowsList.size());
         stage.setTitle(name);
+
+        //resize it:
+        stage.setHeight(1000);
 
         //add the controller to the list of controllers (for updateGUI):
         updatableWindowsList.add(creator.getController());
@@ -154,7 +159,7 @@ public class MainGUIClass {
         try {
             root = loader.load();
         } catch (IOException e) {
-            System.out.println("Exception in createAlgoManagerWindow");
+            MikeSimLogger.addLogEvent("Exception in createAlgoManagerWindow");
             e.printStackTrace();
         }
 
@@ -184,7 +189,7 @@ public class MainGUIClass {
         try {
             pricePanelRoot = priceControlPanelLoader.load();
         } catch (IOException e) {
-            System.out.println("Exception in createPriceControlWindow");
+            MikeSimLogger.addLogEvent("Exception in createPriceControlWindow");
             e.printStackTrace();
         }
 

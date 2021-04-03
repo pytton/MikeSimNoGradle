@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import main.java.controllerandview.MainGUIClass;
+import main.java.model.MikeSimLogger;
 import main.java.model.priceserver.PriceServer;
 
 public class ControllerPriceControlWindow implements MainGUIClass.Updatable {
@@ -75,7 +76,7 @@ public class ControllerPriceControlWindow implements MainGUIClass.Updatable {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
                 controllerPriceControlPanel.priceServer = (PriceServer) instrumentsList.getSelectionModel().getSelectedItem();
-                System.out.println("Chosen: " + controllerPriceControlPanel.priceServer.toString());
+                MikeSimLogger.addLogEvent("Chosen: " + controllerPriceControlPanel.priceServer.toString());
             }
         }
         MyChangeListener listener = new MyChangeListener(this);
@@ -93,8 +94,8 @@ public class ControllerPriceControlWindow implements MainGUIClass.Updatable {
                         experimentalTextField1.setText("Live");
                         getPriceServer().setPriceType(PriceServer.PriceType.LIVEMARKET);
 
-                        System.out.println("Live prices selected");
-                        System.out.println("Live ask price: " + getPriceServer().getRealTimeAskPrice());
+                        MikeSimLogger.addLogEvent("Live prices selected");
+                        MikeSimLogger.addLogEvent("Live ask price: " + getPriceServer().getRealTimeAskPrice());
                     }
                     if (priceSourceToggleGroup.getSelectedToggle() == historicalRadioButton) {
                         experimentalTextField1.setText("Historical");
@@ -122,7 +123,7 @@ public class ControllerPriceControlWindow implements MainGUIClass.Updatable {
             priceServer.setAskPrice((int) (priceSlider.getValue() + bidAskSpread));
         } catch (NumberFormatException e) {
             e.printStackTrace();
-            System.out.println("Exception in onMouseDragged");
+            MikeSimLogger.addLogEvent("Exception in onMouseDragged");
         }
 
     }
@@ -157,9 +158,9 @@ public class ControllerPriceControlWindow implements MainGUIClass.Updatable {
         int minvalue = minSliderValue.intValue();
         try {
             minvalue = Integer.parseInt(minPriceTextField.getText());
-//            System.out.println("minvalue: " + minvalue + "minSliderValue: " + minSliderValue.intValue());
+//            MikeSimLogger.addLogEvent("minvalue: " + minvalue + "minSliderValue: " + minSliderValue.intValue());
             if (minvalue < maxSliderValue.intValue()) {
-//                System.out.println("setting slider");
+//                MikeSimLogger.addLogEvent("setting slider");
                 priceSlider.setMin((double) minvalue);
                 minPriceTextField.setText("" + minvalue);
                 minSliderValue = minvalue;
@@ -173,11 +174,11 @@ public class ControllerPriceControlWindow implements MainGUIClass.Updatable {
 
     public void testButtonClicked(ActionEvent actionEvent) {
 
-        System.out.println("Test button clicked");
+        MikeSimLogger.addLogEvent("Test button clicked");
 
-        System.out.println("Ask price: " + getPriceServer().getAskPrice());
+        MikeSimLogger.addLogEvent("Ask price: " + getPriceServer().getAskPrice());
 
-        System.out.println("Realtime ask price: " + getPriceServer().getRealTimeAskPrice());
+        MikeSimLogger.addLogEvent("Realtime ask price: " + getPriceServer().getRealTimeAskPrice());
 
 
 //        instrumentsList.getItems().add("Hello");
