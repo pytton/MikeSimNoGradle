@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="PositionAndPLPane" prefHeight="300.0" prefWidth="140.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox alignment="TOP_CENTER" fillWidth="false" pickOnBounds="false" prefHeight="300.0" prefWidth="140.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="50.0" prefWidth="100.0" text="Ask Price" />
+                  <TextField fx:id="askPriceTextField" prefWidth="70.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="50.0" prefWidth="100.0" text="Bid Price" />
+                  <TextField fx:id="bidPriceTextField" prefWidth="70.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="50.0" prefWidth="100.0" text="Ask Volume" />
+                  <TextField fx:id="askVolumeTextField" prefWidth="70.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="50.0" prefWidth="100.0" text="Bid Volume" />
+                  <TextField fx:id="bidVolumeTextField" prefWidth="70.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="50.0" prefWidth="100.0" text="Open Pos" />
+                  <TextField fx:id="totalOpenPosTextField" prefWidth="70.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="50.0" prefWidth="100.0" text="W Avg Price">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="weighedAveragePriceTextField" prefWidth="70.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="50.0" prefWidth="100.0" text="Zero Profit Point">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="zeroProfitPointTextField" prefWidth="70.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="50.0" prefWidth="100.0" text="Open P/L" />
+                  <TextField fx:id="totalOpenPLTextField" prefWidth="70.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="50.0" prefWidth="100.0" text="Closed P/L" />
+                  <TextField fx:id="totalClosedPLTextField" prefWidth="70.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="50.0" prefWidth="100.0" text="Total P/L">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="totalPLTextField" prefWidth="70.0" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

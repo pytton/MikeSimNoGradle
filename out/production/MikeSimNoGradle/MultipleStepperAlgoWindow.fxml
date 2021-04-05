@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="mainBorderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pickOnBounds="false" prefHeight="976.0" prefWidth="442.0" scaleShape="false" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllerandview.windowcontrollers.ControllerMultipleStepperAlgoWindow">
+   <center>
+      <!--<TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">-->
+        <!--<columns>-->
+            <!--<TableColumn prefWidth="75.0" text="Column X" />-->
+            <!--<TableColumn prefWidth="75.0" text="Column X" />-->
+          <!--<TableColumn prefWidth="75.0" text="C1" />-->
+          <!--<TableColumn prefWidth="75.0" text="C2" />-->
+            <!--<TableColumn prefWidth="75.0" text="Column X" />-->
+        <!--</columns>-->
+      <!--</TableView>-->
+   </center>
+   <right>
+      <VBox alignment="TOP_CENTER" fillWidth="false" pickOnBounds="false" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="50.0" prefWidth="100.0" text="Ask Price" />
+                  <TextField fx:id="askPriceTextField" prefWidth="90.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="50.0" prefWidth="100.0" text="Bid Price" />
+                  <TextField fx:id="bidPriceTextField" prefWidth="90.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="50.0" prefWidth="100.0" text="Total Open Pos" />
+                  <TextField fx:id="totalOpenPosTextField" prefWidth="90.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="50.0" prefWidth="100.0" text="Weighed Avg Price">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="weighedAveragePriceTextField" prefWidth="90.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="50.0" prefWidth="100.0" text="Zero Profit Point">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="zeroProfitPointTextField" prefWidth="90.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="50.0" prefWidth="100.0" text="Total Open P/L" />
+                  <TextField fx:id="totalOpenPLTextField" prefWidth="90.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="50.0" prefWidth="100.0" text="Total Closed P/L" />
+                  <TextField fx:id="totalClosedPLTextField" prefWidth="90.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="50.0" prefWidth="100.0" text="Total Profit/Loss">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <TextField fx:id="totalPLTextField" prefWidth="90.0" />
+               </children>
+            </HBox>
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="195.0" text="Cancel All Orders This Book" />
+            <Button fx:id="cancelAlgosThisBookBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#cancelAlgosThisBookBtnPressed" prefWidth="195.0" text="Cancel Algos this Book" />
+            <VBox prefHeight="100.0" prefWidth="200.0" />
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+               <children>
+                  <VBox prefHeight="650.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Multiple Stepper Algo">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <VBox alignment="CENTER_LEFT" prefHeight="68.0" prefWidth="150.0" spacing="3.0">
+                           <children>
+                              <Label fx:id="priceSourceLabel" text="Entry Order Type:" />
+                              <RadioButton fx:id="buyLimit" mnemonicParsing="false" selected="true" text="Buy Limit">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="orderTypeToggleGroup" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="buyStop" mnemonicParsing="false" text="Buy Stop" toggleGroup="$orderTypeToggleGroup" />
+                              <RadioButton fx:id="sellLimit" mnemonicParsing="false" text="Sell Limit" toggleGroup="$orderTypeToggleGroup" />
+                              <RadioButton fx:id="sellStop" mnemonicParsing="false" text="Sell Stop" toggleGroup="$orderTypeToggleGroup" />
+                              <RadioButton fx:id="cancel" mnemonicParsing="false" text="Cancel" toggleGroup="$orderTypeToggleGroup" />
+                           </children>
+                        </VBox>
+                        <VBox prefWidth="100.0" style="-fx-border-color: black;">
+                           <children>
+                              <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0">
+                                 <children>
+                                    <Label text="Order Amount" />
+                                    <TextField fx:id="orderAmount" prefHeight="25.0" prefWidth="70.0" text="100" />
+                                 </children>
+                              </HBox>
+                              <HBox minWidth="225.0" prefWidth="450.0">
+                                 <children>
+                                    <Button fx:id="oAmtBtn10" mnemonicParsing="false" onAction="#oAmtBtnPressed" text="10" />
+                                    <Button fx:id="oAmtBt20" mnemonicParsing="false" onAction="#oAmtBtnPressed" text="20" />
+                                    <Button fx:id="oAmtBtn50" mnemonicParsing="false" onAction="#oAmtBtnPressed" text="50" />
+                                    <Button fx:id="oAmtBtn100" mnemonicParsing="false" onAction="#oAmtBtnPressed" text="100" />
+                                    <Button fx:id="oAmtBtn200" mnemonicParsing="false" onAction="#oAmtBtnPressed" text="200" />
+                                    <Button fx:id="oAmtBtn500" mnemonicParsing="false" onAction="#oAmtBtnPressed" text="500" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox prefWidth="100.0" style="-fx-border-color: black;">
+                           <children>
+                              <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0">
+                                 <children>
+                                    <Label text="Stepper Target Interval" />
+                                    <TextField fx:id="targetInterval" prefHeight="25.0" prefWidth="70.0" text="5" />
+                                 </children>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                    <Button fx:id="intervalBtn1" mnemonicParsing="false" onAction="#intervalBtnPressed" text="1" />
+                                    <Button fx:id="intervalBtn2" mnemonicParsing="false" onAction="#intervalBtnPressed" text="2" />
+                                    <Button fx:id="intervalBtn3" mnemonicParsing="false" onAction="#intervalBtnPressed" text="3" />
+                                    <Button fx:id="intervalBtn4" mnemonicParsing="false" onAction="#intervalBtnPressed" text="4" />
+                                    <Button fx:id="intervalBtn5" mnemonicParsing="false" onAction="#intervalBtnPressed" text="5" />
+                                    <Button fx:id="intervalBtn10" mnemonicParsing="false" onAction="#intervalBtnPressed" text="10" />
+                                    <Button fx:id="intervalBtn15" mnemonicParsing="false" onAction="#intervalBtnPressed" text="15" />
+                                 </children>
+                              </HBox>
+                              <CheckBox fx:id="smTrailingStopCheckBox" mnemonicParsing="false" text="Smart Trailing Stop" />
+                              <CheckBox fx:id="fixedTrailingStopCheckBox" mnemonicParsing="false" text="Fixed Trailing Stop" />
+                           </children>
+                        </VBox>
+                        <VBox prefWidth="100.0" style="-fx-border-color: black;">
+                           <children>
+                              <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0">
+                                 <children>
+                                    <Label text="How many algos?" />
+                                    <TextField fx:id="targetInterval1" prefHeight="25.0" prefWidth="70.0" text="5" />
+                                 </children>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                    <Button fx:id="intervalBtn11" mnemonicParsing="false" onAction="#intervalBtnPressed" text="1" />
+                                    <Button fx:id="intervalBtn21" mnemonicParsing="false" onAction="#intervalBtnPressed" text="2" />
+                                    <Button fx:id="intervalBtn31" mnemonicParsing="false" onAction="#intervalBtnPressed" text="3" />
+                                    <Button fx:id="intervalBtn41" mnemonicParsing="false" onAction="#intervalBtnPressed" text="4" />
+                                    <Button fx:id="intervalBtn51" mnemonicParsing="false" onAction="#intervalBtnPressed" text="5" />
+                                    <Button fx:id="intervalBtn101" mnemonicParsing="false" onAction="#intervalBtnPressed" text="10" />
+                                    <Button fx:id="intervalBtn151" mnemonicParsing="false" onAction="#intervalBtnPressed" text="15" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox prefWidth="100.0" style="-fx-border-color: black;">
+                           <children>
+                              <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0">
+                                 <children>
+                                    <Label text="Price between algos?" />
+                                    <TextField fx:id="targetInterval11" prefHeight="25.0" prefWidth="70.0" text="1" />
+                                 </children>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                    <Button fx:id="intervalBtn111" mnemonicParsing="false" onAction="#intervalBtnPressed" text="1" />
+                                    <Button fx:id="intervalBtn211" mnemonicParsing="false" onAction="#intervalBtnPressed" text="2" />
+                                    <Button fx:id="intervalBtn311" mnemonicParsing="false" onAction="#intervalBtnPressed" text="3" />
+                                    <Button fx:id="intervalBtn411" mnemonicParsing="false" onAction="#intervalBtnPressed" text="4" />
+                                    <Button fx:id="intervalBtn511" mnemonicParsing="false" onAction="#intervalBtnPressed" text="5" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </right>
+   <left>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </left>
+   <top>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER">
+               <children>
+                  <HBox alignment="CENTER" spacing="20.0">
+                     <children>
+                        <FlowPane prefHeight="20.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="testOneButton" mnemonicParsing="false" onAction="#testOneButtonClicked" prefWidth="60.0" text="Test 1" />
+                              <Button fx:id="testTwoButton" mnemonicParsing="false" onAction="#testTwoButtonClicked" text="Test 2" />
+                              <Button fx:id="testThreeButton" mnemonicParsing="false" onAction="#testThreeButtonClicked" onMouseClicked="#testThreeMouseClicked" text="Test 3" />
+                           </children>
+                        </FlowPane>
+                     </children>
+                  </HBox>
+                  <Button fx:id="setTopRowPriceButton" mnemonicParsing="false" onAction="#setTopRowPriceBtnClicked" prefHeight="24.0" prefWidth="123.0" text="Set Top Row Price -&gt;">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Button>
+                  <TextField fx:id="TopRowPriceTextField" prefHeight="25.0" prefWidth="60.0" />
+                  <Button fx:id="ask50" mnemonicParsing="false" onAction="#ask50Clicked" prefHeight="24.0" prefWidth="68.0" text="Ask +50">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </top>
+</BorderPane>
