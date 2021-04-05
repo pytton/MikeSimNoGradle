@@ -1,7 +1,10 @@
 package main.java.model;
 
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
+import main.java.controllerandview.CommonGUI;
 import main.java.controllerandview.MainGUIClass;
 import main.java.model.orderserver.OrderServer;
 import main.java.prototypes.DoubleEqualTest;
@@ -60,6 +63,21 @@ public class Main extends Application {
 
         //start the main model thread:
         mainModelThread.start();
+
+
+        primaryStage.setOnCloseRequest(event -> {
+//        https://www.programcreek.com/java-api-examples/?class=javafx.stage.Stage&method=setOnCloseRequest
+//        https://stackoverflow.com/questions/34573562/how-to-disable-remove-stage-close-button-only
+//        https://stackoverflow.com/questions/29710492/how-can-i-fire-internal-close-request
+
+            event.consume();
+//            if(CommonGUI.showConfirmationDialog("Are you sure you want to exit?")) Platform.exit();
+            if(CommonGUI.showConfirmationDialog("Are you sure you want to exit?")) {
+                stop();
+                Platform.exit();
+                System.exit(0);}
+        });
+
     }
 
     @Override
