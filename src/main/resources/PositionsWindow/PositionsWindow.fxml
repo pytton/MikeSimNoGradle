@@ -12,6 +12,7 @@
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -32,7 +33,22 @@
    <right>
       <VBox alignment="TOP_CENTER" fillWidth="false" pickOnBounds="false" prefHeight="950.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="setTopRowPriceButton" mnemonicParsing="false" onAction="#setTopRowPriceBtnClicked" prefHeight="24.0" prefWidth="60.0" text="Top Pirce">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Button>
+                  <TextField fx:id="TopRowPriceTextField" prefHeight="25.0" prefWidth="80.0" />
+                  <Button fx:id="ask50" mnemonicParsing="false" onAction="#ask50Clicked" prefHeight="24.0" prefWidth="60.0" text="Ask +50">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox prefWidth="200.0">
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
                      <children>
@@ -48,7 +64,7 @@
                   </HBox>
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefWidth="200.0">
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
                      <children>
@@ -278,35 +294,22 @@
                         </TabPane>
                      </content>
                   </TitledPane>
+                  <TitledPane prefHeight="200.0" prefWidth="200.0" style="-fx-padding: 1.5;" text="Tests">
+                     <content>
+                        <FlowPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="testOneButton" mnemonicParsing="false" onAction="#testOneButtonClicked" text="Test One" />
+                              <Button fx:id="testTwoButton" mnemonicParsing="false" onAction="#testTwoButtonClicked" text="Test Two" />
+                              <Button fx:id="testThreeButton" mnemonicParsing="false" onAction="#testThreeButtonClicked" onMouseClicked="#testThreeMouseClicked" text="Test Three" />
+                           </children>
+                        </FlowPane>
+                     </content>
+                  </TitledPane>
               </panes>
             </Accordion>
          </children>
       </VBox>
    </right>
-   <top>
-      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="testOneButton" mnemonicParsing="false" onAction="#testOneButtonClicked" text="Test One" />
-            <Button fx:id="testTwoButton" mnemonicParsing="false" onAction="#testTwoButtonClicked" text="Test Two" />
-            <Button fx:id="testThreeButton" mnemonicParsing="false" onAction="#testThreeButtonClicked" onMouseClicked="#testThreeMouseClicked" text="Test Three" />
-            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="250.0">
-               <children>
-                  <Button fx:id="setTopRowPriceButton" mnemonicParsing="false" onAction="#setTopRowPriceBtnClicked" prefHeight="24.0" prefWidth="123.0" text="Set Top Row Price -&gt;">
-                     <font>
-                        <Font size="11.0" />
-                     </font>
-                  </Button>
-                  <TextField fx:id="TopRowPriceTextField" prefHeight="25.0" prefWidth="60.0" />
-                  <Button fx:id="ask50" mnemonicParsing="false" onAction="#ask50Clicked" prefHeight="24.0" prefWidth="68.0" text="Ask +50">
-                     <font>
-                        <Font size="11.0" />
-                     </font>
-                  </Button>
-               </children>
-            </HBox>
-         </children>
-      </HBox>
-   </top>
    <left>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </left>
