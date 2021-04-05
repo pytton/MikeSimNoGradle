@@ -17,40 +17,9 @@
   <component name="ChangeListManager">
     <list default="true" id="0212a54c-a94c-4dfe-9eec-4ace680f76bc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/MainGUIWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/MainGUIWindow.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MainGUIClass$MikePositionsWindowCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MainGUIClass$MikePositionsWindowCreator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MainGUIClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MainGUIClass.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MikeGridPane.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MikeGridPane.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/MainGUIWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/MainGUIWindow.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/CommonGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/CommonGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/MainGUIClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/MainGUIClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/MikeGridPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/MikeGridPane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerComplexScalperAlgo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerComplexScalperAlgo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerPlainOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerPlainOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerScalperAlgo1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerScalperAlgo1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerSimpleScalperAlgo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerSimpleScalperAlgo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerSimpleStepperAlgo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerSimpleStepperAlgo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerAlgoManagerPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerAlgoManagerPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerMainGUIWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerMainGUIWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerPriceControlWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerPriceControlWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/MainModelThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/MainModelThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/MikeSimLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/MikeSimLogger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/PosOrdersManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/algocontrol/AlgoManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/algocontrol/AlgoManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/algocontrol/SimpleScalperAlgo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/algocontrol/SimpleScalperAlgo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/algocontrol/SimpleStepperAlgo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/algocontrol/SimpleStepperAlgo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/livemarketdata/InteractiveBrokersAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/livemarketdata/InteractiveBrokersAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/orderserver/OrderServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/orderserver/OrderServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/orderserver/OrderServerSimulatedInternal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/orderserver/OrderServerSimulatedInternal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/positionsorders/AggregatedPosOrders.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/positionsorders/AggregatedPosOrders.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/positionsorders/MikePosOrders.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/positionsorders/MikePosOrders.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/positionsorders/MikePosition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/positionsorders/MikePosition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/positionsorders/PosOrdersManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/positionsorders/PosOrdersManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/priceserver/PriceServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/priceserver/PriceServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/prototypes/DoubleEqualTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/prototypes/DoubleEqualTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/MainGUIWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/MainGUIWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/CustomFXMLs_jar/CustomFXMLs.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/CustomFXMLs_jar/CustomFXMLs.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/MikeSimNoGradle_jar/MikeSimNoGradle.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/MikeSimNoGradle_jar/MikeSimNoGradle.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MikeGridPane$MikeButton$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MikeGridPane$MikeButton$2.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,7 +160,6 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
-        <item itemvalue="Application.Main (1)" />
         <item itemvalue="Application.ListDemo" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.Main" />
@@ -329,7 +297,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617460804261</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="MSim-9 Logging done. MSim 32 Multiple PositionsWindow done. MainGUIWindow - moved create buttons to menu. updated placeOnSameMonitor().&#10;mainloop status moved from console printout to MainGUIWindow. Moved transferAmountAndClosedPL() to PosOrdersManager">
+      <created>1617473440064</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1617473440064</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -422,7 +397,8 @@
     <MESSAGE value="moved PosOrdersManager to seperate class" />
     <MESSAGE value="added exceptionsDump.txt" />
     <MESSAGE value="added menu to MainGUIWindow. added create12PosWinOn4KClicked() - makes multiple PosWindows with one click.&#10;added setupInitialColumnActions() in ControllerPositionsWindow" />
-    <option name="LAST_COMMIT_MESSAGE" value="added menu to MainGUIWindow. added create12PosWinOn4KClicked() - makes multiple PosWindows with one click.&#10;added setupInitialColumnActions() in ControllerPositionsWindow" />
+    <MESSAGE value="MSim-9 Logging done. MSim 32 Multiple PositionsWindow done. MainGUIWindow - moved create buttons to menu. updated placeOnSameMonitor().&#10;mainloop status moved from console printout to MainGUIWindow. Moved transferAmountAndClosedPL() to PosOrdersManager" />
+    <option name="LAST_COMMIT_MESSAGE" value="MSim-9 Logging done. MSim 32 Multiple PositionsWindow done. MainGUIWindow - moved create buttons to menu. updated placeOnSameMonitor().&#10;mainloop status moved from console printout to MainGUIWindow. Moved transferAmountAndClosedPL() to PosOrdersManager" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
