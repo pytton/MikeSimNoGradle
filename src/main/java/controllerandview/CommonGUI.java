@@ -199,7 +199,7 @@ public class CommonGUI {
      * @param text
      * @return
      */
-    static private boolean showConfirmationDialog(String text){
+    static public boolean showConfirmationDialog(String text){
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setContentText(text);

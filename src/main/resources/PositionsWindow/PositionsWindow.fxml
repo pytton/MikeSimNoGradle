@@ -301,6 +301,7 @@
                               <Button fx:id="testOneButton" mnemonicParsing="false" onAction="#testOneButtonClicked" text="Test One" />
                               <Button fx:id="testTwoButton" mnemonicParsing="false" onAction="#testTwoButtonClicked" text="Test Two" />
                               <Button fx:id="testThreeButton" mnemonicParsing="false" onAction="#testThreeButtonClicked" onMouseClicked="#testThreeMouseClicked" text="Test Three" />
+                              <Button fx:id="testConfDialog" mnemonicParsing="false" onAction="#testConfDialogClicked" onMouseClicked="#testThreeMouseClicked" text="Test  Conf Dialog" />
                            </children>
                         </FlowPane>
                      </content>

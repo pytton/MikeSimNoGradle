@@ -514,13 +514,12 @@ public class ControllerPositionsWindow
     public void testTwoButtonClicked(ActionEvent actionEvent) {
 
 
-        Stage thisWindowStage = (Stage) mainBorderPane.getScene().getWindow();
+        if (CommonGUI.showConfirmationDialog("Are you sure?")) {
+            Stage thisWindowStage = (Stage) mainBorderPane.getScene().getWindow();
 
-        MikeSimLogger.addLogEvent("Screen window displayed on: " + CommonGUI.getScreenForStage(thisWindowStage));
+            MikeSimLogger.addLogEvent("Screen window displayed on: " + CommonGUI.getScreenForStage(thisWindowStage));
 
-
-
-        Stage stage = new Stage();
+            Stage stage = new Stage();
 
 
             VBox root = new VBox(10);
@@ -543,6 +542,7 @@ public class ControllerPositionsWindow
             stage.setTitle("Screen Jumper");
             stage.setScene(scene);
             stage.show();
+        }
 
 //        MikeSimLogger.addLogEvent("X position of window: " + getMainBorderPane().getScene().getWindow().getX());
 
@@ -879,6 +879,14 @@ public class ControllerPositionsWindow
 
     private int getPriceOfRow(int rowClicked) {
         return topRowPrice - rowClicked;
+    }
+
+    public void testConfDialogClicked(ActionEvent actionEvent) {
+        MikeSimLogger.addLogEvent("Test dialog clicked");
+
+        if (CommonGUI.showConfirmationDialog("Dialog Test")) testTwoButtonClicked(null);
+
+
     }
 
 //    public void mikeGridPaneButtonClicked(ActionEvent event) {
