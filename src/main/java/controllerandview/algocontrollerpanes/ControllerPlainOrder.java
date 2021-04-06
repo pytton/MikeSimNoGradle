@@ -54,7 +54,7 @@ public class ControllerPlainOrder extends AlgoController {
     @Override
     public String getSimpleDescriptionRow1() {
 
-        if(multipleCheckBox.isSelected()) return "MULT ORD";
+//        if(multipleCheckBox.isSelected()) return "MULT ORD";
         return descriptionRow1;
     }
 
@@ -65,6 +65,8 @@ public class ControllerPlainOrder extends AlgoController {
 
     @Override
     public String getSimpleDescriptionRow3() {
+
+        if(multipleCheckBox.isSelected()) return ("M " + orderAmount.getText());
         return orderAmount.getText();
     }
 

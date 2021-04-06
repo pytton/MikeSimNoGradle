@@ -5,8 +5,10 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import main.java.controllerandview.CommonGUI;
 import main.java.model.MainModelThread;
 import main.java.model.MikeSimLogger;
+import main.java.model.algocontrol.AlgoManager;
 import main.java.model.orderserver.MikeOrder;
 import main.java.model.positionsorders.MikePosOrders;
 
@@ -23,6 +25,9 @@ public class ControllerSimpleStepperAlgo extends AlgoController {
     public TextField targetInterval;
     public CheckBox smTrailingStopCheckBox;
     public CheckBox fixedTrailingStopCheckBox;
+    public CheckBox multipleCheckBox;
+    public TextField multipleAmount;
+    public TextField multipleDistance;
     //    public TextField scalperCount;
     private MikeOrder.MikeOrderType orderType = MikeOrder.MikeOrderType.BUYLMT;
 
@@ -50,6 +55,49 @@ public class ControllerSimpleStepperAlgo extends AlgoController {
 
     }
 
+    /**
+     * Used for placing multiple algos with one click
+     */
+    class MultipleOrderCommand implements CommonGUI.GUICommandMultipleOrder {
+
+        AlgoManager algoManager;
+        MikePosOrders posOrdersToSendTo;
+        MikeOrder.MikeOrderType orderType;
+        int priceToSend;
+        int orderAmount;
+        int interval;
+
+        public MultipleOrderCommand(AlgoManager algoManager, MikePosOrders posOrdersToSendTo,
+                                    MikeOrder.MikeOrderType orderType, int priceToSend, int orderAmount, int interval) {
+
+            this.posOrdersToSendTo = posOrdersToSendTo;
+            this.orderType = orderType;
+            this.priceToSend = priceToSend;
+            this.orderAmount = orderAmount;
+            this.algoManager = algoManager;
+            this.interval = interval;
+        }
+
+        @Override
+        public void setPriceToSend(int priceToSend) {
+            this.priceToSend = priceToSend;
+        }
+
+        /**
+         * This is the reason for this class.
+         * This gets called multiple times in main.java.controllerandview.CommonGUI#placeMultipleOrder
+         * to place multiple orders/algos
+         * @return
+         */
+        @Override
+        public boolean command() {
+
+            algoManager.createSimpleStepperAlgo(posOrdersToSendTo, priceToSend, getInterval(), getAmount(), orderType,
+                    smTrailingStopCheckBox.isSelected(), fixedTrailingStopCheckBox.isSelected());
+            return true;
+        }
+    }
+
     @Override
     public boolean cancel(int entryPrice, MainModelThread model, MikePosOrders posOrders) {
         return false;
@@ -57,12 +105,23 @@ public class ControllerSimpleStepperAlgo extends AlgoController {
 
     @Override
     public void mikeGridPaneButtonPressed(int pricePressed, MainModelThread model, MikePosOrders posOrders) {
+        MikeSimLogger.addLogEvent("ControllerSimpleStepperAlgo. Price clicked: " + pricePressed);
         if (orderType != MikeOrder.MikeOrderType.CANCEL) {
-            model.algoManager.createSimpleStepperAlgo(posOrders, pricePressed, getInterval(), getAmount(), orderType, smTrailingStopCheckBox.isSelected(), fixedTrailingStopCheckBox.isSelected());
+            if(multipleCheckBox.isSelected()){
+                MikeSimLogger.addLogEvent("Attempting multiple");
+
+                MultipleOrderCommand command = new MultipleOrderCommand(model.algoManager, posOrders, orderType,
+                        pricePressed, getAmount(), getInterval());
+
+                CommonGUI.placeMultipleOrder(command, multipleAmount, multipleDistance, orderType, pricePressed);
+
+                return;
+            }
+            model.algoManager.createSimpleStepperAlgo(posOrders, pricePressed, getInterval(), getAmount(), orderType,
+                    smTrailingStopCheckBox.isSelected(), fixedTrailingStopCheckBox.isSelected());
         } else {
             model.algoManager.cancelAllSimpleStepperAlgosAtPrice(pricePressed, posOrders);
         }
-        MikeSimLogger.addLogEvent("ControllerSimpleStepperAlgo. Price clicked: " + pricePressed);
     }
 
     @Override

@@ -793,6 +793,7 @@ public class ControllerPositionsWindow
                 //Display short description on top:
                 topMikeGridPane.getButton(0, (col)).setText(getAlgoControllerOfColumn((col)).getSimpleDescriptionRow1());
                 topMikeGridPane.getButton(1, (col)).setText(getAlgoControllerOfColumn((col)).getSimpleDescriptionRow2());
+                topMikeGridPane.getButton(2, (col)).setText(getAlgoControllerOfColumn((col)).getSimpleDescriptionRow3());
             }
 
             //clear the BottomMikeGridPane

@@ -263,6 +263,9 @@ public class MikeGridPane extends GridPane {
         //Set the row height:
         RowConstraints rowConstraints = new RowConstraints(20);
 
+        //padding of buttons:
+//        int padding = 1;
+
         //add buttons to grid:
         for (int row = 0; row < howManyRows; row++) {
             this.getRowConstraints().add(rowConstraints);
@@ -273,6 +276,7 @@ public class MikeGridPane extends GridPane {
 //                button.setPrefWidth(90);//not working
 
                 button.setButtonClickHandler(this.getHandler());
+//                button.setPadding(new Insets(padding));
 
 //                button.setOnAction();
 

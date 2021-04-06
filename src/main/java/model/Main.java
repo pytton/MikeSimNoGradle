@@ -83,28 +83,24 @@ public class Main extends Application {
     @Override
     public void stop(){
         MikeSimLogger.addLogEvent("Shutting down.");
-//        MikeSimLogger.addLogEvent("Shutting down.");
         mainModelThread.shutDownMikeSim();
-//        MainModelThread.interrupted = true;
+
+        MikeSimLogger.addLogEvent("Ending program and writing to MikeSimLog.txt");
+        MikeSimLogger.printLogToFile();
     }
 
     public static void main(String[] args) {
+
 
         //create the logger:
         MikeSimLogger logger = MikeSimLogger.getInstance();
 
         //testing:
 //        DoubleEqualTest test = new DoubleEqualTest();
-
 //        test.runTest();
 
-        //JavaFX application reguires this line. It does JavaFX stuff and then calls start(Stage primaryStage)
+        //JavaFX application requires this line. It does JavaFX stuff and then calls start(Stage primaryStage)
         launch(args);
-
-        MikeSimLogger.addLogEvent("Ending program and writing to MikeSimLog.txt");
-//        MikeSimLogger.addLogEvent("Ending program and writing to MikeSimLog.txt");
-        MikeSimLogger.printLogToFile();
-
     }
 
     //this defines which instruments (contracts) will be available for trading
