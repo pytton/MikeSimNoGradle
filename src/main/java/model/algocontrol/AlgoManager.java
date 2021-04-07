@@ -1,5 +1,6 @@
 package main.java.model.algocontrol;
 
+import com.sun.xml.internal.rngom.parse.host.Base;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import main.java.model.MainModelThread;
@@ -10,6 +11,7 @@ import main.java.model.positionsorders.MikePosOrders;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Creates, stores and manages all the trading algos available
@@ -45,6 +47,11 @@ public class AlgoManager{
     //from     Set<SimpleScalperAlgo> simpleScalperAlgoSet; - is this supposed to be that way?
     public synchronized void cancelAlgo(BaseAlgo algoToCancel) {
 
+        if(algoToCancel == null){
+            MikeSimLogger.addLogEvent("Null passed to cancelAlgo!");
+            return;
+        }
+
         //cancelling GuardAlgos is problematic - can suspend them instead:
         if(algoToCancel instanceof GuardAlgo){
             algoToCancel.cancel();
@@ -63,9 +70,22 @@ public class AlgoManager{
      * This will cancel all working algos irrespective of their MikePosOrders or price:
      */
     synchronized public void cancelAllAlgosGlobally() {
-        for (BaseAlgo algo : algoSet) {
+        long time = System.currentTimeMillis();
+
+        //prepare set to cancel. we cannot remove items from a set while iterating through it so we need this:
+        ObservableList<BaseAlgo> algosToCancel = FXCollections.observableArrayList();
+        for (BaseAlgo algo : algoSet){
+            algosToCancel.add(algo);
+        }
+
+        for (BaseAlgo algo : algosToCancel) {
             cancelAlgo(algo);
         }
+
+        long elapsedTime = System.currentTimeMillis() - time;
+        MikeSimLogger.addLogEvent("Cancelled all algos globally. Operation took "
+        + elapsedTime + " ms" );
+
     }
 
     /**

@@ -1,5 +1,6 @@
 package main.java.controllerandview.windowcontrollers;
 
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -707,13 +708,53 @@ public class ControllerPositionsWindow
     }
 
     public void cancelAlgosThisBookBtnPressed(ActionEvent actionEvent) {
-        model.algoManager.cancelAllAlgosInMikePosOrders(mikePosOrders);
-        MikeSimLogger.addLogEvent("Cancelling all algos in this Book!");
+
+        if(CommonGUI.showConfirmationDialog("Are you sure you want to CANCEL ALL ALGOS IN THIS BOOK ???")) {
+
+            model.algoManager.cancelAllAlgosInMikePosOrders(mikePosOrders);
+            MikeSimLogger.addLogEvent("Cancelling all algos in book " + mikePosOrders.getName());
+        }
+
     }
 
     public void cancelAlgosGloballyBtnPressed(ActionEvent actionEvent) {
-        model.algoManager.cancelAllAlgosGlobally();
-        MikeSimLogger.addLogEvent("Cancelling all algos GLOBALLY!!!");
+        if(CommonGUI.showConfirmationDialog("Are you sure you want to CANCEL ALL GLOBALLY ???")) {
+
+            model.algoManager.cancelAllAlgosGlobally();
+        MikeSimLogger.addLogEvent("Cancelling all algos GLOBALLY!!!");}
+    }
+
+
+    public void cancelAllOrdersThisBookPressed(ActionEvent actionEvent){
+
+
+
+        if(CommonGUI.showConfirmationDialog("Are you sure you want to CANCEL ALL ORDERS IN THIS BOOK (INCLUDING ALGO ORDERS) ???")) {
+
+
+            MikeSimLogger.addLogEvent("Canceling all orders in book " + mikePosOrders.getName());
+            mikePosOrders.cancelAllOrders();
+
+
+        }
+
+
+
+
+    }
+
+    public void cancelOrdersGlobally(ActionEvent actionEvent) {
+//        MikeSimLogger.addLogEvent("cancelOrdersGlobally NOT IMPLEMENTED!");
+
+        if(CommonGUI.showConfirmationDialog("Are you sure you want to CANCEL ALL ORDERS FOR THIS INSTRUMENT (INCLUDING ALGO ORDERS) "
+        + priceServer.toString() + " ???") ) {
+
+            MikeSimLogger.addLogEvent("Canceling all orders for instrument " + priceServer.toString());
+
+            for(MikePosOrders posOrdersToCancel : model.posOrdersManager.getPosOrdersObservableList(priceServer.getTickerID())   ){
+                posOrdersToCancel.cancelAllOrders();
+            }
+        }
     }
 
     /**
@@ -889,6 +930,8 @@ public class ControllerPositionsWindow
 
 
     }
+
+
 
 //    public void mikeGridPaneButtonClicked(ActionEvent event) {
 //

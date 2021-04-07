@@ -131,8 +131,8 @@
                   <TextField fx:id="totalPLTextField" alignment="BASELINE_CENTER" prefWidth="90.0" style="-fx-padding: 2;" />
                </children>
             </HBox>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="195.0" style="-fx-padding: 1.5;" text="Cancel All Orders This Book" />
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="195.0" style="-fx-padding: 1.5;" text="Clear All Positions" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#cancelAllOrdersThisBookPressed" prefWidth="195.0" style="-fx-padding: 1.5;" text="Cancel All Orders This Book" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#cancelOrdersGlobally" prefWidth="195.0" style="-fx-padding: 1.5;" text="CANCEL All Orders This Instrument" />
             <Button fx:id="cancelAlgosThisBookBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#cancelAlgosThisBookBtnPressed" prefWidth="195.0" style="-fx-padding: 1.5;" text="Cancel Algos this Book" />
             <Button fx:id="cancelAlgosGloballyBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#cancelAlgosGloballyBtnPressed" prefHeight="25.0" prefWidth="195.0" style="-fx-padding: 1.5;" text="Cancell All Algos Globally" />
             <Accordion prefHeight="750.0" prefWidth="200.0">

@@ -131,38 +131,10 @@
                   <TextField fx:id="totalPLTextField" alignment="BASELINE_CENTER" prefWidth="90.0" style="-fx-padding: 2;" />
                </children>
             </HBox>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="195.0" style="-fx-padding: 1.5;" text="Cancel All Orders This Book" />
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="195.0" style="-fx-padding: 1.5;" text="Clear All Positions" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#cancelAllOrdersThisBookPressed" prefWidth="195.0" style="-fx-padding: 1.5;" text="Cancel All Orders This Book" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#cancelOrdersGlobally" prefWidth="195.0" style="-fx-padding: 1.5;" text="CANCEL All Orders This Instrument" />
             <Button fx:id="cancelAlgosThisBookBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#cancelAlgosThisBookBtnPressed" prefWidth="195.0" style="-fx-padding: 1.5;" text="Cancel Algos this Book" />
             <Button fx:id="cancelAlgosGloballyBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#cancelAlgosGloballyBtnPressed" prefHeight="25.0" prefWidth="195.0" style="-fx-padding: 1.5;" text="Cancell All Algos Globally" />
-            <VBox prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
-                     <children>
-                        <Label prefHeight="50.0" prefWidth="100.0" text="Order Size" />
-                        <TextField fx:id="orderSizeTextField" prefWidth="90.0" style="-fx-padding: 1;" text="100" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
-                     <children>
-                        <Label prefHeight="50.0" prefWidth="100.0" text="Order Price" />
-                        <TextField fx:id="orderPriceTextField" prefWidth="90.0" style="-fx-padding: 1;" text="27110" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
-                     <children>
-                        <Button fx:id="buyLimitButton" mnemonicParsing="false" onAction="#buyLimitButtonClicked" prefWidth="100.0" style="-fx-padding: 1.5;" text="Buy Limit" />
-                        <Button fx:id="sellLimitButton" mnemonicParsing="false" onAction="#sellLimitButtonClicked" prefWidth="100.0" style="-fx-padding: 1.5;" text="Sell Limit" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
-                     <children>
-                        <Button fx:id="buyStopButton" mnemonicParsing="false" onAction="#buyStopButtonClicked" prefWidth="100.0" style="-fx-padding: 1.5;" text="Buy Stop" />
-                        <Button fx:id="sellStopButton" mnemonicParsing="false" onAction="#sellStopButtonClicked" prefWidth="100.0" style="-fx-padding: 1.5;" text="Sell Stop" />
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
             <Accordion prefHeight="750.0" prefWidth="200.0">
               <panes>
                 <TitledPane animated="false" style="-fx-padding: 1.5;" text="Choose Instrument + PosOrders">
@@ -294,16 +266,63 @@
                         </TabPane>
                      </content>
                   </TitledPane>
-                  <TitledPane prefHeight="200.0" prefWidth="200.0" style="-fx-padding: 1.5;" text="Tests">
+                  <TitledPane animated="false" style="-fx-padding: 1.5;" text="Tests and Manual Orders">
                      <content>
-                        <FlowPane prefHeight="200.0" prefWidth="200.0">
-                           <children>
-                              <Button fx:id="testOneButton" mnemonicParsing="false" onAction="#testOneButtonClicked" text="Test One" />
-                              <Button fx:id="testTwoButton" mnemonicParsing="false" onAction="#testTwoButtonClicked" text="Test Two" />
-                              <Button fx:id="testThreeButton" mnemonicParsing="false" onAction="#testThreeButtonClicked" onMouseClicked="#testThreeMouseClicked" text="Test Three" />
-                              <Button fx:id="testConfDialog" mnemonicParsing="false" onAction="#testConfDialogClicked" onMouseClicked="#testThreeMouseClicked" text="Test  Conf Dialog" />
-                           </children>
-                        </FlowPane>
+                        <TabPane prefHeight="252.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+                           <tabs>
+                            <Tab text="Tests">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <FlowPane prefHeight="200.0" prefWidth="200.0">
+                                             <children>
+                                                <Button fx:id="testOneButton" mnemonicParsing="false" onAction="#testOneButtonClicked" text="Test One" />
+                                                <Button fx:id="testTwoButton" mnemonicParsing="false" onAction="#testTwoButtonClicked" text="Test Two" />
+                                                <Button fx:id="testThreeButton" mnemonicParsing="false" onAction="#testThreeButtonClicked" onMouseClicked="#testThreeMouseClicked" text="Test Three" />
+                                                <Button fx:id="testConfDialog" mnemonicParsing="false" onAction="#testConfDialogClicked" onMouseClicked="#testThreeMouseClicked" text="Test  Conf Dialog" />
+                                             </children>
+                                          </FlowPane>
+                                       </children>
+                                    </AnchorPane>
+                              </content>
+                            </Tab>
+                            <Tab text="Manual Orders">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <VBox prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Label prefHeight="50.0" prefWidth="100.0" text="Order Size" />
+                                                      <TextField fx:id="manualOrderSizeTextField" prefWidth="90.0" style="-fx-padding: 1;" text="100" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Label prefHeight="50.0" prefWidth="100.0" text="Order Price" />
+                                                      <TextField fx:id="manualOrderPriceTextField" prefWidth="90.0" style="-fx-padding: 1;" text="27110" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Button fx:id="buyLimitButton" mnemonicParsing="false" onAction="#buyLimitButtonClicked" prefWidth="100.0" style="-fx-padding: 1.5;" text="Buy Limit" />
+                                                      <Button fx:id="sellLimitButton" mnemonicParsing="false" onAction="#sellLimitButtonClicked" prefWidth="100.0" style="-fx-padding: 1.5;" text="Sell Limit" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Button fx:id="buyStopButton" mnemonicParsing="false" onAction="#buyStopButtonClicked" prefWidth="100.0" style="-fx-padding: 1.5;" text="Buy Stop" />
+                                                      <Button fx:id="sellStopButton" mnemonicParsing="false" onAction="#sellStopButtonClicked" prefWidth="100.0" style="-fx-padding: 1.5;" text="Sell Stop" />
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                       </children></AnchorPane>
+                              </content>
+                            </Tab>
+                           </tabs>
+                        </TabPane>
                      </content>
                   </TitledPane>
               </panes>

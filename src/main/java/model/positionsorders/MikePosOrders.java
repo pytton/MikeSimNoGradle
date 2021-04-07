@@ -74,6 +74,25 @@ public class MikePosOrders {
         MikeSimLogger.addLogEvent("Cancelling all orders at price. NOT CANCELLING IN CHILDREN! " + price + " in " + getName());
     }
 
+    /**
+     * Cancels all the orders in this PosOrders
+     */
+    public synchronized void cancelAllOrders(){
+
+        Set<Long> ordersToCancel = new TreeSet<>();
+
+        //cancelling orders includes removing them from this set so we need a copy
+        for(Long orderId : activeOrdersSet){
+            ordersToCancel.add(orderId);
+        }
+
+        for (Long orderId : ordersToCancel){
+            cancelOrder(orderId);
+        }
+
+
+    }
+
     protected MikePosOrders() {
 
     }
