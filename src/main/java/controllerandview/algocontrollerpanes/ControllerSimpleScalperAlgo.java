@@ -4,7 +4,10 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import main.java.controllerandview.CommonGUI;
 import main.java.model.MainModelThread;
+import main.java.model.MikeSimLogger;
+import main.java.model.algocontrol.AlgoManager;
 import main.java.model.orderserver.MikeOrder;
 import main.java.model.positionsorders.MikePosOrders;
 
@@ -22,11 +25,60 @@ public class ControllerSimpleScalperAlgo extends AlgoController {
 
     public TextField orderAmount;
     public TextField targetInterval;
+    public CheckBox multipleCheckBox;
+    public TextField multipleAmount;
+    public TextField multipleDistance;
     private MikeOrder.MikeOrderType orderType = MikeOrder.MikeOrderType.BUYLMT;
 
     private final String descriptionRow1 = "SCLP1";
     private String descriptionRow2 = "B LMT";
 
+    /**
+     * Used for placing multiple algos with one click
+     */
+    class MultipleOrderCommand implements CommonGUI.GUICommandMultipleOrder {
+
+        AlgoManager algoManager;
+        MikePosOrders posOrdersToSendTo;
+        MikeOrder.MikeOrderType orderType;
+        int priceToSend;
+        int orderAmount;
+        int interval;
+
+        public MultipleOrderCommand(AlgoManager algoManager, MikePosOrders posOrdersToSendTo,
+                                    MikeOrder.MikeOrderType orderType, int priceToSend, int orderAmount, int interval) {
+
+            this.posOrdersToSendTo = posOrdersToSendTo;
+            this.orderType = orderType;
+            this.priceToSend = priceToSend;
+            this.orderAmount = orderAmount;
+            this.algoManager = algoManager;
+            this.interval = interval;
+        }
+
+        @Override
+        public void setPriceToSend(int priceToSend) {
+            this.priceToSend = priceToSend;
+        }
+
+        /**
+         * This is the reason for this class.
+         * This gets called multiple times in main.java.controllerandview.CommonGUI#placeMultipleOrder
+         * to place multiple orders/algos
+         * @return
+         */
+        @Override
+        public boolean command() {
+
+//            model.algoManager.createScalperAlgo1(posOrders, pricePressed, pricePressed + getInterval(), getAmount(), orderType);
+
+            algoManager.createScalperAlgo1(posOrdersToSendTo, priceToSend, priceToSend + getInterval(), getAmount(), orderType);
+
+//            algoManager.createSimpleStepperAlgo(posOrdersToSendTo, priceToSend, getInterval(), getAmount(), orderType,
+//                    smTrailingStopCheckBox.isSelected(), fixedTrailingStopCheckBox.isSelected());
+            return true;
+        }
+    }
 
 
 
@@ -79,6 +131,20 @@ public class ControllerSimpleScalperAlgo extends AlgoController {
 //        MikeSimLogger.addLogEvent("SimpleScalperAlgo: mikeGridPaneButtonPressed. Price: " + pricePressed
 //        + " target price: " + (pricePressed + getInterval()) + " Amount: " + (getAmount())  );
         if (orderType != MikeOrder.MikeOrderType.CANCEL) {
+
+            //handle multiple alogos created with one click if checkbox clicked:
+            if(multipleCheckBox.isSelected()){
+                MikeSimLogger.addLogEvent("Attempting multiple");
+
+                ControllerSimpleScalperAlgo.MultipleOrderCommand command = new ControllerSimpleScalperAlgo.MultipleOrderCommand(model.algoManager,
+                        posOrders, orderType, pricePressed, getAmount(), getInterval());
+
+                CommonGUI.placeMultipleOrder(command, multipleAmount, multipleDistance, orderType, pricePressed);
+
+                return;
+            }
+
+
             model.algoManager.createScalperAlgo1(posOrders, pricePressed, pricePressed + getInterval(), getAmount(), orderType);
         } else {
             model.algoManager.cancelAllSimpleScalperAlgosAtPrice(pricePressed, posOrders);
