@@ -39,19 +39,23 @@ public class SimpleScalperAlgo extends BaseAlgo {
      */
     protected SimpleScalperAlgo(MikePosOrders posOrders, int entryTargetPrice, int exitTargetPrice, int orderAmount, MikeOrder.MikeOrderType entryOrderType) {
 
-//        //If entry is BUYLMT or BUYSTP then entryTargetPrice has to lower than exitTargetPrice
-//        if (entry == MikeOrder.MikeOrderType.BUYLMT || entry == MikeOrder.MikeOrderType.BUYSTP){
-//            if (exitTargetPrice <= entryTargetPrice) {
-//                exitTargetPrice = entryTargetPrice + 1;
-//            }
-//            }
-//
-//        //If entry is SELLLMT or SELLSTP then entryTargetPrice has to higher than exitTargetPrice
-//        if (entry == MikeOrder.MikeOrderType.SELLLMT || entry == MikeOrder.MikeOrderType.SELLSTP) {
-//            if (exitTargetPrice >= entryTargetPrice) {
-//                exitTargetPrice = entryTargetPrice - 1;
-//            }
-//        }
+        //If entry is BUYLMT or BUYSTP then interval has to be a positive value
+        int interval =  exitTargetPrice - entryTargetPrice;
+        if (entryOrderType == MikeOrder.MikeOrderType.BUYLMT || entryOrderType == MikeOrder.MikeOrderType.BUYSTP){
+            if (interval < 0) {
+                interval = interval * -1;
+            }
+            if (interval == 0) interval = 1;
+        }
+
+        //If entry is SELLLMT or SELLSTP then interval has to be negative.
+        if (entryOrderType == MikeOrder.MikeOrderType.SELLLMT || entryOrderType == MikeOrder.MikeOrderType.SELLSTP){
+            if (interval > 0) {
+                interval = interval * -1;
+            }
+            if (interval == 0) interval = -1;
+        }
+        exitTargetPrice = entryTargetPrice + interval;
 
 
         if (entryOrderType == MikeOrder.MikeOrderType.BUYLMT || entryOrderType == MikeOrder.MikeOrderType.BUYSTP) {

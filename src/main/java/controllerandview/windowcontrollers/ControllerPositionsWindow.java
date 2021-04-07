@@ -87,9 +87,9 @@ public class ControllerPositionsWindow
     @FXML
     private TextField totalClosedPLTextField;
     @FXML
-    private TextField orderSizeTextField;
+    private TextField manualOrderSizeTextField;
     @FXML
-    private TextField orderPriceTextField;
+    private TextField manualOrderPriceTextField;
     @FXML
     private Button buyLimitButton;
     @FXML
@@ -627,8 +627,8 @@ public class ControllerPositionsWindow
     }
 
     public void buyLimitButtonClicked(ActionEvent actionEvent) {
-        Integer price = Integer.parseInt(orderPriceTextField.getText());
-        Integer amount = Integer.parseInt(orderSizeTextField.getText());
+        Integer price = Integer.parseInt(manualOrderPriceTextField.getText());
+        Integer amount = Integer.parseInt(manualOrderSizeTextField.getText());
 
         MikeSimLogger.addLogEvent("Buy limit pressed. Order price: " + price + " Order size: " + amount);
 
@@ -679,8 +679,8 @@ public class ControllerPositionsWindow
     public void setPositionsList(ObservableList positionsList) { this.positionsList.setItems(positionsList); }
 
     public void sellLimitButtonClicked(ActionEvent actionEvent) {
-        Integer price = Integer.parseInt(orderPriceTextField.getText());
-        Integer amount = Integer.parseInt(orderSizeTextField.getText());
+        Integer price = Integer.parseInt(manualOrderPriceTextField.getText());
+        Integer amount = Integer.parseInt(manualOrderSizeTextField.getText());
 
         MikeSimLogger.addLogEvent("Sell limit pressed. Order price: " + price + " Order size: " + amount);
 
@@ -690,8 +690,8 @@ public class ControllerPositionsWindow
 
     public void buyStopButtonClicked(ActionEvent actionEvent) {
 
-        Integer price = Integer.parseInt(orderPriceTextField.getText());
-        Integer amount = Integer.parseInt(orderSizeTextField.getText());
+        Integer price = Integer.parseInt(manualOrderPriceTextField.getText());
+        Integer amount = Integer.parseInt(manualOrderSizeTextField.getText());
 
         MikeSimLogger.addLogEvent("Buy stop pressed. Order price: " + price + " Order size: " + amount);
 
@@ -869,8 +869,8 @@ public class ControllerPositionsWindow
     }
 
     public void sellStopButtonClicked(ActionEvent actionEvent) {
-        Integer price = Integer.parseInt(orderPriceTextField.getText());
-        Integer amount = Integer.parseInt(orderSizeTextField.getText());
+        Integer price = Integer.parseInt(manualOrderPriceTextField.getText());
+        Integer amount = Integer.parseInt(manualOrderSizeTextField.getText());
 
         MikeSimLogger.addLogEvent("Sell stop pressed. Order price: " + price + " Order size: " + amount);
 
