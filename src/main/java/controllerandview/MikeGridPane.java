@@ -8,6 +8,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import main.java.model.MikeSimLogger;
 import main.java.model.positionsorders.MikePosOrders;
@@ -24,6 +25,18 @@ import static javafx.geometry.Pos.CENTER;
  *Custom GridPane with buttons that can be accessed with getButton function
  */
 public class MikeGridPane extends GridPane {
+
+    //colors used by print methods:
+    /**
+     *https://docs.oracle.com/javafx/2/api/javafx/scene/doc-files/cssref.html
+     */
+
+    static String longPosBackgroundColor = "blue";
+    static String longPosTextColor = "cyan";
+    static String shortPosBackgroundColor = "firebrick";
+    static String shortPosTextColor = "lightpink";
+    static String buyOrderBackgroundColor = "deepskyblue";
+    static String sellOrderBackgroundColor = "salmon";
 
     public static void setTextForButtonInMikeGridPane(MikeGridPane mikeGridPane, int row, int col, String text) {
         assert (row <= mikeGridPane.getHowManyRows() && row >=0 ) : "setTextForButtonInMikeGridPane: row outside of bounds";
@@ -68,19 +81,28 @@ public class MikeGridPane extends GridPane {
 
             int openPosAtPrice = mikePosOrders.getOpenAmountAtPrice(priceToPrintAtRow);
 
+            //MSim-41 experimenting:
             if (openPosAtPrice == 0) {
                 setTextForButtonInMikeGridPane(mikeGridPane, row, openLongPositionsColumn, "" );
                 setTextForButtonInMikeGridPane(mikeGridPane, row, openShortPositionsCol, "" );
+
+
+
                 mikeGridPane.getButton(row, openLongPositionsColumn).setStyle("-fx-background-color: lightyellow  ; -fx-border-color : black");
                 mikeGridPane.getButton(row, openShortPositionsCol).setStyle("-fx-background-color: lightyellow  ; -fx-border-color : black");
             } else {
                 if (openPosAtPrice > 0) {
                     mikeGridPane.getButton(row, openLongPositionsColumn).setStyle("" +
-                            "-fx-background-color: lightblue  ; -fx-text-fill: blue; -fx-font-weight: bolder;-fx-border-color : black");
+                            "-fx-background-color: " + longPosBackgroundColor + "   ; -fx-text-fill: " + longPosTextColor +
+                            "; -fx-font-weight: bolder;-fx-border-color : black");
+
+
+
                     setTextForButtonInMikeGridPane(mikeGridPane, row, openLongPositionsColumn, "" + openPosAtPrice);
                 } else if(openPosAtPrice < 0){
                     mikeGridPane.getButton(row, openShortPositionsCol).setStyle("" +
-                            "-fx-background-color: lightred; -fx-text-fill: red; -fx-font-weight: bolder; -fx-border-color : black");
+                            "-fx-background-color: " + shortPosBackgroundColor + "; -fx-text-fill: " + shortPosTextColor +
+                            "; -fx-font-weight: bolder; -fx-border-color : black");
                     setTextForButtonInMikeGridPane(mikeGridPane, row, openShortPositionsCol, "" + openPosAtPrice);
                 }
             }
@@ -105,7 +127,7 @@ public class MikeGridPane extends GridPane {
             //print active buy orders for the given price:
             if (mikePosOrders.getOpenBuyOrdersAtPrice(priceToPrint) != 0) {
                 MikeGridPane.setTextForButtonInMikeGridPane(mikeGridPane, row, activeBuyOrderCol, "" + mikePosOrders.getOpenBuyOrdersAtPrice(priceToPrint));
-                mikeGridPane.getButton(row, activeBuyOrderCol).setStyle("-fx-background-color: lightblue; -fx-text-fill: blue; -fx-font-weight: bolder; -fx-border-color : black");
+                mikeGridPane.getButton(row, activeBuyOrderCol).setStyle("-fx-background-color: " + buyOrderBackgroundColor + "; -fx-text-fill: blue; -fx-font-weight: bolder; -fx-border-color : black");
             } else {
                 MikeGridPane.setTextForButtonInMikeGridPane(mikeGridPane, row, activeBuyOrderCol, "");
                 mikeGridPane.getButton(row, activeBuyOrderCol).setStyle("-fx-background-color: lightyellow  ; -fx-border-color : black");
@@ -172,6 +194,7 @@ public class MikeGridPane extends GridPane {
     }
 
     public static void printSellOrders(MikeGridPane mikeGridPane, MikePosOrders mikePosOrders, int activeSellOrderCol, int topRowPrice){
+
         //check parameters:
         if(activeSellOrderCol < 0 || activeSellOrderCol > (mikeGridPane.getHowManyCols())){
             MikeSimLogger.addLogEvent("INVALID PARAMETERS IN main.java.controllerandview.MikeGridPane.printSellOrders");
@@ -183,7 +206,8 @@ public class MikeGridPane extends GridPane {
             //print active sell orders for the given price:
             if (mikePosOrders.getOpenSellOrdersAtPrice(priceToPrint) != 0) {
                 MikeGridPane.setTextForButtonInMikeGridPane(mikeGridPane, row, activeSellOrderCol, "" + mikePosOrders.getOpenSellOrdersAtPrice(priceToPrint));
-                mikeGridPane.getButton(row, activeSellOrderCol).setStyle("-fx-background-color: salmon; -fx-text-fill: crimson; -fx-font-weight: bolder; -fx-border-color : black");
+                mikeGridPane.getButton(row, activeSellOrderCol).setStyle("-fx-background-color: " + sellOrderBackgroundColor +
+                        "; -fx-text-fill: crimson; -fx-font-weight: bolder; -fx-border-color : black");
             } else {
                 MikeGridPane.setTextForButtonInMikeGridPane(mikeGridPane, row, activeSellOrderCol, "");
                 mikeGridPane.getButton(row, activeSellOrderCol).setStyle("-fx-background-color: lightyellow  ; -fx-border-color : black");
