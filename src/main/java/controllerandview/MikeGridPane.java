@@ -35,8 +35,10 @@ public class MikeGridPane extends GridPane {
     static String longPosTextColor = "cyan";
     static String shortPosBackgroundColor = "firebrick";
     static String shortPosTextColor = "lightpink";
-    static String buyOrderBackgroundColor = "deepskyblue";
-    static String sellOrderBackgroundColor = "salmon";
+    static String buyOrderBackgroundColor = "yellow";
+//    static String buyOrderBackgroundColor = "deepskyblue";
+    static String sellOrderBackgroundColor = "yellow";
+//    static String sellOrderBackgroundColor = "salmon";
 
     public static void setTextForButtonInMikeGridPane(MikeGridPane mikeGridPane, int row, int col, String text) {
         assert (row <= mikeGridPane.getHowManyRows() && row >=0 ) : "setTextForButtonInMikeGridPane: row outside of bounds";

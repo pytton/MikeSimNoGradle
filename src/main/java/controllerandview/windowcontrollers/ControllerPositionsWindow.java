@@ -353,10 +353,46 @@ public class ControllerPositionsWindow
                     }
                 }
 
+                //working on transfer/cancel:
+
+                if(cb.getSelectionModel().getSelectedItem() == "Transfer/Cancel"){
+
+                    MikeSimLogger.addLogEvent("Attempting transfer/cancel");
+
+                    try {
+                        //and set the anchorPane according to that file, and set the controller for it:
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/PositionsWindow/algoControllers/TransferAndCancelControlPanel.fxml"));
+                        Parent anchorPaneParent = loader.load();
+                        //this will make the anchorPane display what was in the fxml file:
+
+
+                        anchorPane.getChildren().setAll(anchorPaneParent);
+
+
+                        ControllerTransferAndCancel controller = loader.getController();
+                        //let Plain Order Controller know where to find targetPosOrders for transferring positions:
+                        controller.setControllerPositionsWindow(controllerPositionsWindow);
+                        //MikeGridPane will call this controller whenever a button inside MikeGridPane is pressed:
+                        controllerPositionsWindow.setAlgoController(colNumber, controller);
+
+                        MikeSimLogger.addLogEvent("Choicebox algo setting successful");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        MikeSimLogger.addLogEvent("Exception in Choicebox algo setting");
+                    }
+
+                }
+
+
+
+
+
+
+
             }
         }
 
-        List<String> algosAvailable = Arrays.asList("SimpleScalper1", "ComplexScalper1", "SimpleStepperAlgo", "PlainOrder");
+        List<String> algosAvailable = Arrays.asList("SimpleScalper1", "ComplexScalper1", "SimpleStepperAlgo", "PlainOrder", "Transfer/Cancel");
 
         choiceBoxCol1.getItems().addAll(algosAvailable);
         choiceBoxCol2.getItems().addAll(algosAvailable);
