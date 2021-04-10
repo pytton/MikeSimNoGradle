@@ -505,18 +505,20 @@ public class ControllerPositionsWindow
     /**
      * This is called whenever a button in MikeGridPane is clicked
      */
-    public void handleMikeButtonClicked(MikeGridPane.MikeButton button) {
+    public void handleMikeButtonClicked(MikeGridPane.MikeButton button, MouseEvent event) {
 
+
+        MikeSimLogger.addLogEvent("not finished implementing!");
         int price = getPriceOfRow(button.getRowOfButton());
 
         switch (button.getColOfButton()) {
-            case 0: if(controllerCol1 != null)controllerCol1.mikeGridPaneButtonPressed(price, model, mikePosOrders); break;
-            case 1: if(controllerCol2 != null)controllerCol2.mikeGridPaneButtonPressed(price, model, mikePosOrders); break;
-            case 2: if(controllerCol3 != null)controllerCol3.mikeGridPaneButtonPressed(price, model, mikePosOrders); break;
-            case 3: if(controllerCol4 != null)controllerCol4.mikeGridPaneButtonPressed(price, model, mikePosOrders); break;
-            case 4: if(controllerCol5 != null)controllerCol5.mikeGridPaneButtonPressed(price, model, mikePosOrders); break;
-            case 5: if(controllerCol6 != null)controllerCol6.mikeGridPaneButtonPressed(price, model, mikePosOrders); break;
-            case 6: if(controllerCol7 != null)controllerCol7.mikeGridPaneButtonPressed(price, model, mikePosOrders); break;
+            case 0: if(controllerCol1 != null)controllerCol1.mikeGridPaneButtonPressed(price, model, mikePosOrders, button, event); break;
+            case 1: if(controllerCol2 != null)controllerCol2.mikeGridPaneButtonPressed(price, model, mikePosOrders, button, event); break;
+            case 2: if(controllerCol3 != null)controllerCol3.mikeGridPaneButtonPressed(price, model, mikePosOrders, button, event); break;
+            case 3: if(controllerCol4 != null)controllerCol4.mikeGridPaneButtonPressed(price, model, mikePosOrders, button, event); break;
+            case 4: if(controllerCol5 != null)controllerCol5.mikeGridPaneButtonPressed(price, model, mikePosOrders, button, event); break;
+            case 5: if(controllerCol6 != null)controllerCol6.mikeGridPaneButtonPressed(price, model, mikePosOrders, button, event); break;
+            case 6: if(controllerCol7 != null)controllerCol7.mikeGridPaneButtonPressed(price, model, mikePosOrders, button, event); break;
         }
     }
 

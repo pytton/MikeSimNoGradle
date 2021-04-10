@@ -176,7 +176,7 @@ public class ControllerMultipleStepperAlgoWindow implements
     /**
      * This handles what happens when a button in MikeGridPane is clicked
      */
-    public void handleMikeButtonClicked(MikeGridPane.MikeButton event) {
+    public void handleMikeButtonClicked(MikeGridPane.MikeButton mikeButton, MouseEvent event) {
         MikeSimLogger.addLogEvent("NOT IMPLEMENTED!");
 //        MikeSimLogger.addLogEvent(event.);
     }

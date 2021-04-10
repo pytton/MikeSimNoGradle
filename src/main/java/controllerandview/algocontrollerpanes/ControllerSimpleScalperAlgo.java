@@ -4,7 +4,9 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import main.java.controllerandview.CommonGUI;
+import main.java.controllerandview.MikeGridPane;
 import main.java.model.MainModelThread;
 import main.java.model.MikeSimLogger;
 import main.java.model.algocontrol.AlgoManager;
@@ -127,7 +129,9 @@ public class ControllerSimpleScalperAlgo extends AlgoController {
 
 
     @Override
-    public void mikeGridPaneButtonPressed(int pricePressed, MainModelThread model, MikePosOrders posOrders) {
+    public void mikeGridPaneButtonPressed(int pricePressed, MainModelThread model, MikePosOrders posOrders,
+                                          MikeGridPane.MikeButton button,
+                                          MouseEvent event) {
 //        MikeSimLogger.addLogEvent("SimpleScalperAlgo: mikeGridPaneButtonPressed. Price: " + pricePressed
 //        + " target price: " + (pricePressed + getInterval()) + " Amount: " + (getAmount())  );
         if (orderType != MikeOrder.MikeOrderType.CANCEL) {

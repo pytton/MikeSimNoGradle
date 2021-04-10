@@ -244,13 +244,13 @@ public class MikeGridPane extends GridPane {
      * This interface gets an event when a button within the MikeGridPane is clicked
      */
     public interface MikeButtonHandler{
-        void handleMikeButtonClicked(MikeGridPane.MikeButton event);
+        void handleMikeButtonClicked(MikeGridPane.MikeButton mikeButton, MouseEvent event );
 //        public ActionEvent handleMikeButtonClicked(ActionEvent event);
     }
 
     public static class EmptyMikeButtonHandler implements MikeButtonHandler {
         @Override
-        public void handleMikeButtonClicked(MikeButton event) {
+        public void handleMikeButtonClicked(MikeButton button, MouseEvent event) {
 
         }
     }
@@ -355,24 +355,27 @@ public class MikeGridPane extends GridPane {
         //interface which is called when MikeButton is pressed
         public MikeButtonHandler buttonClickHandler;
 
-        //handler for pressing the button. This gets called when the button is pressed
-        EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                //pass the MikeButton which was pressed to the interface which handles it:
-                getButtonClickHandler().handleMikeButtonClicked((MikeButton)event.getSource());
-            }
-
-        };
+//        //handler for pressing the button. This gets called when the button is pressed
+//        EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent event) {
+//                MikeSimLogger.addLogEvent("EventHandler<ActionEvent> buttonHandler in MikeButton called");
+//                //pass the MikeButton which was pressed to the interface which handles it:
+//                getButtonClickHandler().handleMikeButtonClicked((MikeButton)event.getSource(), event);
+//            }
+//
+//        };
 
         EventHandler<MouseEvent> mouseEventEventHandler = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 //todo: experimenting:
 
+                MikeSimLogger.addLogEvent("EventHandler<MouseEvent> mouseEventEventHandler called");
+
                 //pass the MikeButton which was pressed to the interface which handles it:
                 if (event.getButton() == MouseButton.PRIMARY) {
-                    getButtonClickHandler().handleMikeButtonClicked((MikeButton)event.getSource());
+                    getButtonClickHandler().handleMikeButtonClicked((MikeButton)event.getSource(), event);
                 }
 
 

@@ -5,6 +5,8 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
+import main.java.controllerandview.MikeGridPane;
 import main.java.model.MainModelThread;
 import main.java.model.MikeSimLogger;
 import main.java.model.orderserver.MikeOrder;
@@ -62,7 +64,11 @@ public class ControllerComplexScalperAlgo extends AlgoController {
     }
 
     @Override
-    public void mikeGridPaneButtonPressed(int pricePressed, MainModelThread model, MikePosOrders posOrders) {
+    public void mikeGridPaneButtonPressed(int pricePressed,
+                                          MainModelThread model,
+                                          MikePosOrders posOrders,
+                                          MikeGridPane.MikeButton button,
+                                          MouseEvent event) {
 
 
         if (orderType != MikeOrder.MikeOrderType.CANCEL) {

@@ -7,8 +7,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import main.java.controllerandview.CommonGUI;
 import main.java.controllerandview.MainGUIClass;
+import main.java.controllerandview.MikeGridPane;
 import main.java.model.MainModelThread;
 import main.java.model.MikeSimLogger;
 import main.java.model.algocontrol.GuardAlgoDown;
@@ -337,7 +339,9 @@ public class ControllerGuardAlgoPane1 extends AlgoController implements CommonGU
     }
 
     @Override
-    public void mikeGridPaneButtonPressed(int pricePressed, MainModelThread model, MikePosOrders posOrders) {
+    public void mikeGridPaneButtonPressed(int pricePressed, MainModelThread model, MikePosOrders posOrders,
+                                          MikeGridPane.MikeButton button,
+                                          MouseEvent event) {
         MikeSimLogger.addLogEvent("Not implemented!");
     }
 
