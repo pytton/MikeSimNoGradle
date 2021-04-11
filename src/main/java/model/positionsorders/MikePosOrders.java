@@ -93,6 +93,37 @@ public class MikePosOrders {
 
     }
 
+    public synchronized void cancelAllOrdersAtOrABOVEPrice(int price){
+        Set<Long> ordersToCancel = new TreeSet<>();
+
+        //find all the orders with the specified price and if it is higher than price passed as parameter,
+        //add it to the list to be cancelled
+        for(Long orderId : activeOrdersSet){
+            if(getOrderServer().getMikeOrder(orderId).getPrice() >= price) ordersToCancel.add(orderId);
+        }
+
+        for (Long orderId : ordersToCancel){
+            cancelOrder(orderId);
+        }
+
+    }
+
+    public synchronized void cancelAllOrdersAtOrBELOWPrice(int price){
+        Set<Long> ordersToCancel = new TreeSet<>();
+
+        //find all the orders with the specified price and if it is higher than price passed as parameter,
+        //add it to the list to be cancelled
+        for(Long orderId : activeOrdersSet){
+            if(getOrderServer().getMikeOrder(orderId).getPrice() <= price) ordersToCancel.add(orderId);
+        }
+
+        for (Long orderId : ordersToCancel){
+            cancelOrder(orderId);
+        }
+
+    }
+
+
     protected MikePosOrders() {
 
     }

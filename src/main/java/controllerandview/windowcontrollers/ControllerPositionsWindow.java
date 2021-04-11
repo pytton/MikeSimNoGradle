@@ -160,6 +160,8 @@ public class ControllerPositionsWindow
 
         //set the initial instrument, posOrders and targetPosOrders:
         instrumentsList.getSelectionModel().clearAndSelect(0);
+        positionsList.getSelectionModel().clearAndSelect(0);
+        targetPositionsList.getSelectionModel().clearAndSelect(0);
 
     }
 
@@ -253,6 +255,7 @@ public class ControllerPositionsWindow
                     MikeSimLogger.addLogEvent("Chosen: " + controllerPositionsWindow.priceServer.toString());
                 } catch (Exception e) {
                     e.printStackTrace();
+                    MikeSimLogger.addLogEvent("Exception thrown in MyInstrumentChangeListener");
                 }
             }
         }
@@ -281,7 +284,8 @@ public class ControllerPositionsWindow
                     aggregatedPosOrders.setPosOrdersList(positionsList.getSelectionModel().getSelectedItems());
 
                 } catch (Exception e) {
-                    e.printStackTrace();
+//                    e.printStackTrace();
+                    MikeSimLogger.addLogEvent("Exception thrown in MyPosOrdersChangeListener");
                 }
             }
         }
@@ -564,7 +568,7 @@ public class ControllerPositionsWindow
 //        //printout positions to console:
 //        mikePosOrders.printPositionsToConsole();
 
-        MikeSimLogger.addLogEvent("Transferring all positions to target PosOrders");
+        MikeSimLogger.addLogEvent("Transferring all positions from" + mikePosOrders.getName() + " to target PosOrders");
 
         MikePosOrders targetPosOrders = mikePosOrders;
         if (targetPositionsList.getSelectionModel().getSelectedItem() != null) {
@@ -732,6 +736,19 @@ public class ControllerPositionsWindow
 
     public MikePosOrders getMikePosOrders() {
         return mikePosOrders;
+    }
+
+    public MikePosOrders getTargetMikePosOrders(){
+        MikePosOrders posOrdersToReturn = mikePosOrders;
+        try {
+            posOrdersToReturn = (MikePosOrders) targetPositionsList.getSelectionModel().getSelectedItem();
+        }catch (Exception e){
+            e.printStackTrace();
+            MikeSimLogger.addLogEvent("Error trying to select targetPosOrders in ControllerPositionsWindow!");
+        }
+
+
+        return posOrdersToReturn;
     }
 
     /**

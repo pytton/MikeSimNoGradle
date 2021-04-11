@@ -1,19 +1,19 @@
 package main.java.controllerandview.algocontrollerpanes;
 
-import com.sun.org.apache.bcel.internal.generic.RET;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import main.java.controllerandview.CommonGUI;
 import main.java.controllerandview.MikeGridPane;
 import main.java.controllerandview.windowcontrollers.ControllerPositionsWindow;
 import main.java.model.MainModelThread;
 import main.java.model.MikeSimLogger;
-import main.java.model.orderserver.MikeOrder;
 import main.java.model.positionsorders.MikePosOrders;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -96,26 +96,61 @@ public class ControllerTransferAndCancel extends AlgoController {
 
         //if left button was clicked, cancel all orders at or below the price that was pressed
         if (event.getButton() == MouseButton.PRIMARY) {
-                MikeSimLogger.addLogEvent("cancelling all orders BELOW " + pricePressed + " not implemented");
+                MikeSimLogger.addLogEvent("cancelling all orders BELOW " + pricePressed );
+                posOrders.cancelAllOrdersAtOrBELOWPrice(pricePressed);
         }
 
         //if right was clicked, cancel all orders above pricePressed
         if (event.getButton() == MouseButton.SECONDARY) {
-            MikeSimLogger.addLogEvent("cancelling all orders ABOVE " + pricePressed + " not implemented");
+            MikeSimLogger.addLogEvent("cancelling all orders ABOVE " + pricePressed );
+            posOrders.cancelAllOrdersAtOrABOVEPrice(pricePressed);
         }
 
     }
 
     private void processTransferClicked(int pricePressed, MainModelThread model, MikePosOrders posOrders, MikeGridPane.MikeButton button, MouseEvent event) {
+
+
+        MikePosOrders targetPosOrders = controllerPositionsWindow.getTargetMikePosOrders();
+
+        //this will store all the prices of the MikePositions that we want to move:
+        Set<Integer> positionPricesToMove = new HashSet<>();
+
         //if left button was clicked, transfer all MikePositions at or below the price that was pressed
         if (event.getButton() == MouseButton.PRIMARY) {
-            MikeSimLogger.addLogEvent("transferring all positions BELOW " + pricePressed + " from: " + posOrders +  " not implemented");
+
+            //find all the MikePositions at or below the price that has been specified and add them to the transfer list
+            for (int positionPrice : posOrders.getPositionPricesSet()){
+                if(positionPrice <= pricePressed) positionPricesToMove.add(positionPrice);
+            }
+
+            MikeSimLogger.addLogEvent("transferring all positions BELOW " + pricePressed + " from: " + posOrders +
+                    " to " + targetPosOrders);
         }
 
-        //transfer all MikePositions above if right button clicked
+
+
+
+        //if right button clicked - transfer all MikePositions at or above the price that was pressed
         if (event.getButton() == MouseButton.SECONDARY) {
-            MikeSimLogger.addLogEvent("transferring all positions ABOVE " + pricePressed + " from: " + posOrders +  " not implemented");
+            //find all the MikePositions at or above the price that has been specified and add them to the transfer list
+            for (int positionPrice : posOrders.getPositionPricesSet()){
+                if(positionPrice >= pricePressed) positionPricesToMove.add(positionPrice);
+            }
+            MikeSimLogger.addLogEvent("transferring all positions ABOVE " + pricePressed + " from: " + posOrders +
+                    " to " + targetPosOrders);
         }
+
+
+        //make the transfers at the prices found:
+        for (int price : positionPricesToMove) {
+            MikeSimLogger.addLogEvent("Attempting transfer of postion at price: " + price
+                    + " to MikePosOrders: " + targetPosOrders.getName());
+            posOrders.movePositionToDifferentMikePosOrders(price, targetPosOrders);
+        }
+
+
+
     }
 
     private void processMovePosClicked(int pricePressed, MainModelThread model, MikePosOrders posOrders, MikeGridPane.MikeButton button, MouseEvent event) {
@@ -123,11 +158,13 @@ public class ControllerTransferAndCancel extends AlgoController {
         //if left button was clicked move the single MikePosition at that price to the next MikePosition at a lower price, or if none exists, one cent lower
         if (event.getButton() == MouseButton.PRIMARY) {
             MikeSimLogger.addLogEvent("Moving single MikePosition at price " + pricePressed + " lower not implemented");
+            MikeSimLogger.addLogEvent("TargetPosOrders is: " + controllerPositionsWindow.getTargetMikePosOrders());
         }
 
         //move higher if right button clicked
         if (event.getButton() == MouseButton.SECONDARY) {
             MikeSimLogger.addLogEvent("Moving single MikePosition at price " + pricePressed + " higher not implemented");
+            MikeSimLogger.addLogEvent("TargetPosOrders is: " + controllerPositionsWindow.getTargetMikePosOrders());
         }
 
 
