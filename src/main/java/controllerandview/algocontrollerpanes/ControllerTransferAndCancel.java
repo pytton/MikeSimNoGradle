@@ -1,9 +1,11 @@
 package main.java.controllerandview.algocontrollerpanes;
 
+import com.sun.org.apache.bcel.internal.generic.RET;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import main.java.controllerandview.CommonGUI;
 import main.java.controllerandview.MikeGridPane;
@@ -20,22 +22,13 @@ public class ControllerTransferAndCancel extends AlgoController {
 
     @FXML
     public ToggleGroup actionTypeToggleGroup;
-    public RadioButton buyLimit;
-    public RadioButton transferAboveOrBelow;
-    public RadioButton sellLimit;
-    public RadioButton sellStop;
-    public RadioButton cancel;
-    public RadioButton transfer;
-
-    public TextField orderAmount;
-    public CheckBox multipleCheckBox;
-    public TextField multipleAmount;
-    public TextField multipleDistance;
-    private MikeOrder.MikeOrderType orderType = MikeOrder.MikeOrderType.BUYLMT;
+    public RadioButton movePosDownOrUp;
+    public RadioButton transferBelowOrAbove;
+    public RadioButton cancelBelowOrAbove;
     private ControllerPositionsWindow controllerPositionsWindow;
 
-    private String descriptionRow1 = "ORDER:";
-    private String descriptionRow2 = "B LMT";
+    private String descriptionRow1 = "TRNSF:";
+    private String descriptionRow2 = "DN / UP";
 
     @FXML
     public void initialize() {
@@ -44,12 +37,9 @@ public class ControllerTransferAndCancel extends AlgoController {
                 new ChangeListener<Toggle>() {
             @Override
             public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
-            if (actionTypeToggleGroup.getSelectedToggle() == buyLimit) {orderType = MikeOrder.MikeOrderType.BUYLMT; descriptionRow2 = "B LMT"; }
-                if (actionTypeToggleGroup.getSelectedToggle() == transferAboveOrBelow) {orderType = MikeOrder.MikeOrderType.BUYSTP; descriptionRow2 = "B STP"; }
-                if (actionTypeToggleGroup.getSelectedToggle() == sellLimit) {orderType = MikeOrder.MikeOrderType.SELLLMT; descriptionRow2 = "S LMT";}
-                if (actionTypeToggleGroup.getSelectedToggle() == sellStop) {orderType = MikeOrder.MikeOrderType.SELLSTP; descriptionRow2 = "S STP";}
-                if (actionTypeToggleGroup.getSelectedToggle() == cancel) {orderType = MikeOrder.MikeOrderType.CANCEL; descriptionRow2 = "CANCEL";}
-                if (actionTypeToggleGroup.getSelectedToggle() == transfer) {orderType = MikeOrder.MikeOrderType.TRANSFER; descriptionRow2 = "TRANSFER";}
+            if (actionTypeToggleGroup.getSelectedToggle() == movePosDownOrUp) { descriptionRow1 = "MOVE"; }
+                if (actionTypeToggleGroup.getSelectedToggle() == transferBelowOrAbove) { descriptionRow1 = "TRNSF"; }
+                if (actionTypeToggleGroup.getSelectedToggle() == cancelBelowOrAbove) { descriptionRow1 = "CX DW/UP"; }
              } } );
     }
 
@@ -62,89 +52,91 @@ public class ControllerTransferAndCancel extends AlgoController {
 
     @Override
     public String getSimpleDescriptionRow2() {
+        //todo: need to add a method to ControllerPositionsWindow which returns the target PosOrders to make this nice
         return descriptionRow2;
     }
 
     @Override
     public String getSimpleDescriptionRow3() {
-
-        if(multipleCheckBox.isSelected()) return ("M " + orderAmount.getText());
-        return orderAmount.getText();
+        return " ";
     }
 
+    /**
+     * This method handles clicks inside MikeGridPane
+     * @param pricePressed
+     * @param model
+     * @param posOrders
+     * @param button
+     * @param event
+     */
     @Override
     public void mikeGridPaneButtonPressed(int pricePressed, MainModelThread model, MikePosOrders posOrders,
                                           MikeGridPane.MikeButton button,
                                           MouseEvent event) {
-        if (orderType == MikeOrder.MikeOrderType.TRANSFER && controllerPositionsWindow.targetPositionsList.getSelectionModel().getSelectedItem() != null){
-            MikeSimLogger.addLogEvent("Attempting transfer");
-            posOrders.movePositionToDifferentMikePosOrders(pricePressed, (MikePosOrders) controllerPositionsWindow.targetPositionsList.getSelectionModel().getSelectedItem());
-            return;
+
+        MikeSimLogger.addLogEvent("Inside ControllerTransferAndCancel");
+
+        if (actionTypeToggleGroup.getSelectedToggle() == movePosDownOrUp) processMovePosClicked(pricePressed, model,
+                posOrders, button, event);
+        if (actionTypeToggleGroup.getSelectedToggle() == transferBelowOrAbove) processTransferClicked(pricePressed, model,
+                posOrders, button, event);
+        if (actionTypeToggleGroup.getSelectedToggle() == cancelBelowOrAbove) processCancelBelowOrAboveClicked(pricePressed, model,
+                posOrders, button, event);
+
+
+
+
+        if (event.getButton() == MouseButton.SECONDARY) {
+            MikeSimLogger.addLogEvent("right button recognized in ControllerTransferAndCancel");
         }
 
-        //cancel orders at price if CANCEL selected
-        if (orderType == MikeOrder.MikeOrderType.CANCEL) {
-            posOrders.cancelAllOrdersAtPrice(pricePressed);
-            return;
+    }
+
+    private void processCancelBelowOrAboveClicked(int pricePressed, MainModelThread model, MikePosOrders posOrders, MikeGridPane.MikeButton button, MouseEvent event) {
+
+        //if left button was clicked, cancel all orders at or below the price that was pressed
+        if (event.getButton() == MouseButton.PRIMARY) {
+                MikeSimLogger.addLogEvent("cancelling all orders BELOW " + pricePressed + " not implemented");
         }
 
-        //place new order if CANCEL not selected
-        if (orderType != MikeOrder.MikeOrderType.CANCEL) {
-            //handle multiple orders if choicebox selected:
-            if(multipleCheckBox.isSelected()){
+        //if right was clicked, cancel all orders above pricePressed
+        if (event.getButton() == MouseButton.SECONDARY) {
+            MikeSimLogger.addLogEvent("cancelling all orders ABOVE " + pricePressed + " not implemented");
+        }
 
-                //send a multipleAmount of orders with a distance of multipleDistance between their prices:
+    }
 
-                MultipleOrderCommand command = new MultipleOrderCommand(posOrders, orderType, pricePressed, getAmount());
+    private void processTransferClicked(int pricePressed, MainModelThread model, MikePosOrders posOrders, MikeGridPane.MikeButton button, MouseEvent event) {
+        //if left button was clicked, transfer all MikePositions at or below the price that was pressed
+        if (event.getButton() == MouseButton.PRIMARY) {
+            MikeSimLogger.addLogEvent("transferring all positions BELOW " + pricePressed + " from: " + posOrders +  " not implemented");
+        }
 
-                CommonGUI.placeMultipleOrder(command, multipleAmount, multipleDistance, orderType, pricePressed);
-                return;
-            }
-            //otherwise just place an order:
-            posOrders.placeNewOrder(orderType, pricePressed, pricePressed, getAmount());
-            return;
+        //transfer all MikePositions above if right button clicked
+        if (event.getButton() == MouseButton.SECONDARY) {
+            MikeSimLogger.addLogEvent("transferring all positions ABOVE " + pricePressed + " from: " + posOrders +  " not implemented");
         }
     }
 
-    //experimenting:
-    class MultipleOrderCommand implements CommonGUI.GUICommandMultipleOrder {
+    private void processMovePosClicked(int pricePressed, MainModelThread model, MikePosOrders posOrders, MikeGridPane.MikeButton button, MouseEvent event) {
 
-        MikePosOrders posOrdersToSendTo;
-        MikeOrder.MikeOrderType orderType;
-        int priceToSend;
-        int orderAmount;
-
-        public MultipleOrderCommand(MikePosOrders posOrdersToSendTo, MikeOrder.MikeOrderType orderType, int priceToSend, int orderAmount) {
-            this.posOrdersToSendTo = posOrdersToSendTo;
-            this.orderType = orderType;
-            this.priceToSend = priceToSend;
-            this.orderAmount = orderAmount;
+        //if left button was clicked move the single MikePosition at that price to the next MikePosition at a lower price, or if none exists, one cent lower
+        if (event.getButton() == MouseButton.PRIMARY) {
+            MikeSimLogger.addLogEvent("Moving single MikePosition at price " + pricePressed + " lower not implemented");
         }
 
-        @Override
-        public void setPriceToSend(int priceToSend) {
-            this.priceToSend = priceToSend;
+        //move higher if right button clicked
+        if (event.getButton() == MouseButton.SECONDARY) {
+            MikeSimLogger.addLogEvent("Moving single MikePosition at price " + pricePressed + " higher not implemented");
         }
 
-        /**
-         * This is the reason for this class.
-         * This gets called multiple times in main.java.controllerandview.CommonGUI#placeMultipleOrder
-         * to place multiple orders
-         * @return
-         */
-        @Override
-        public boolean command() {
 
-            posOrdersToSendTo.placeNewOrder(orderType, priceToSend, priceToSend, orderAmount);
-
-            return true;
-        }
     }
 
-    private int getAmount() {
-        Integer amount = Integer.parseInt(orderAmount.getText());
-        return amount;
-    }
+
+//    private int getAmount() {
+//    return 0;
+//    }
 
     @Override
     public boolean cancel(int entryPrice, MainModelThread model, MikePosOrders posOrders) {

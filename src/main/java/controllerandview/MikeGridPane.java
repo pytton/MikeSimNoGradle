@@ -382,6 +382,7 @@ public class MikeGridPane extends GridPane {
                 if (event.getButton() == MouseButton.SECONDARY) {
                     MikeSimLogger.addLogEvent("MikeGridPane MikeButton clicked with RIGHT MOUSE BUTTON. This message" +
                             " generated in MikeButton class");
+                    getButtonClickHandler().handleMikeButtonClicked((MikeButton)event.getSource(), event);
                 }
             }
         };

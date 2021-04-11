@@ -140,6 +140,11 @@ public class MainGUIClass {
         //resize it:
         stage.setHeight(1000);
 
+        creator.getController().initialSetupAfterCreation( mainModelThread,
+                getMainModelThread().posOrdersManager.getPriceServer(defaultTickerId),
+                defaultTickerId );
+
+
         //add the controller to the list of controllers (for updateGUI):
         updatableWindowsList.add(creator.getController());
         controllerPositionsWindowList.add(creator.getController());
@@ -344,32 +349,30 @@ public class MainGUIClass {
             controller.topMikeGridPane = topGridPane;
             controller.bottomMikeGridPane = bottomGridPane;
 
-            controller.setModel(mainModelThread);
 
+//            controller.initialSetupAfterCreation( mainModelThread,  priceServer, defaultTickerId );
 
-            //setup the initial traded instrument and posOrders this window refers to:
-            //set the default instrument
-            controller.setInstrumentList(mainModelThread.posOrdersManager.getPriceServerObservableList());
-
-            controller.setMikePosOrders(mainModelThread.posOrdersManager.getMikePosOrders(defaultTickerId, 0));
-
-            //populate the ListView that allows choosing PosOrders
-//            controller.positionsList.setItems(mainModelThread.posOrdersManager.getPosOrdersObservableList(defaultTickerId));
-
-            controller.setPositionsList(mainModelThread.posOrdersManager.getPosOrdersObservableList(defaultTickerId));
-
-            //set the initial priceServer(this can later be changed by user in the window)
-            controller.setPriceServer(priceServer);
-
-            setupInitialColumns(controller);
-
-        }
-
-        //todo: working on this. this should setup the 7 columns in MikeGridPane to do default actions like buy/sell instead of being blank
-        private void setupInitialColumns(ControllerPositionsWindow controller){
-
+//            controller.setModel(mainModelThread);
+//
+//
+//            //setup the initial traded instrument and posOrders this window refers to:
+//            //set the default instrument
+//            controller.setInstrumentList(mainModelThread.posOrdersManager.getPriceServerObservableList());
+//
+//            controller.setMikePosOrders(mainModelThread.posOrdersManager.getMikePosOrders(defaultTickerId, 0));
+//
+//            //populate the ListView that allows choosing PosOrders
+////            controller.positionsList.setItems(mainModelThread.posOrdersManager.getPosOrdersObservableList(defaultTickerId));
+//
+//            controller.setPositionsList(mainModelThread.posOrdersManager.getPosOrdersObservableList(defaultTickerId));
+//
+//            //set the initial priceServer(this can later be changed by user in the window)
+//            controller.setPriceServer(priceServer);
+//
+//            //set the initial instrument, posOrders and targetPosOrders:
 
         }
+
 
 
         public Parent getPositionsWindowRoot() {

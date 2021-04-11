@@ -61,6 +61,7 @@ public class ControllerPositionsWindow
     private ListView instrumentsList;
     @FXML
     private CheckBox aggregatedCheckBox;
+    //https://docs.oracle.com/javafx/2/api/javafx/scene/control/SelectionModel.html
     @FXML //this is where secondary actions are routed to
     public ListView targetPositionsList;
 
@@ -124,6 +125,7 @@ public class ControllerPositionsWindow
 
     public void setInstrumentList(ObservableList<PriceServer> instrumentNamesList) {
         instrumentsList.setItems(instrumentNamesList);
+
     }
 
     @FXML
@@ -131,6 +133,34 @@ public class ControllerPositionsWindow
         setUpChangeListeners();
         positionsList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         setupInitialColumnActions();
+    }
+
+    /**
+     * This must be called in method creating this window to set it up. It is run after the initialize() method.
+     * @param mainModelThread
+     * @param priceServer
+     * @param defaultTickerId
+     */
+    public void initialSetupAfterCreation(MainModelThread mainModelThread, PriceServer priceServer, int defaultTickerId) {
+        setModel(mainModelThread);
+
+
+        //setup the initial traded instrument and posOrders this window refers to:
+        //set the default instrument
+        setInstrumentList(mainModelThread.posOrdersManager.getPriceServerObservableList());
+
+        setMikePosOrders(mainModelThread.posOrdersManager.getMikePosOrders(defaultTickerId, 0));
+
+        //populate the ListView that allows choosing PosOrders
+
+        setPositionsList(mainModelThread.posOrdersManager.getPosOrdersObservableList(defaultTickerId));
+
+        //set the initial priceServer(this can later be changed by user in the window)
+        setPriceServer(priceServer);
+
+        //set the initial instrument, posOrders and targetPosOrders:
+        instrumentsList.getSelectionModel().clearAndSelect(0);
+
     }
 
     /**
@@ -216,6 +246,9 @@ public class ControllerPositionsWindow
                     positionsList.setItems(model.posOrdersManager.getPosOrdersObservableList(tickerId));
                     //and also the targetPosOrders:
                     targetPositionsList.setItems(model.posOrdersManager.getPosOrdersObservableList(tickerId));
+                    //setup initial posOrders and targetPosOrders:
+                    positionsList.getSelectionModel().clearAndSelect(0);
+                    targetPositionsList.getSelectionModel().clearAndSelect(0);
 
                     MikeSimLogger.addLogEvent("Chosen: " + controllerPositionsWindow.priceServer.toString());
                 } catch (Exception e) {
@@ -968,6 +1001,11 @@ public class ControllerPositionsWindow
 
 
     }
+
+    public void testTargetPosClicked(ActionEvent actionEvent) {
+        MikeSimLogger.addLogEvent("Selected: " + targetPositionsList.getSelectionModel().getSelectedItem().toString());
+    }
+
 
 
 

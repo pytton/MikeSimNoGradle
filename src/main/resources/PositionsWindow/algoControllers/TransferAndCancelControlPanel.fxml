@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -22,33 +19,15 @@
             <VBox alignment="CENTER_LEFT" prefHeight="68.0" prefWidth="150.0" spacing="3.0">
                <children>
                   <Label fx:id="priceSourceLabel" text="Entry Order Type:" />
-                  <RadioButton fx:id="buyLimit" mnemonicParsing="false" selected="true" text="Buy Limit">
+                  <RadioButton fx:id="movePosDownOrUp" mnemonicParsing="false" selected="true" text="Move pos down/up">
                      <toggleGroup>
                         <ToggleGroup fx:id="actionTypeToggleGroup" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton fx:id="transferAboveOrBelow" mnemonicParsing="false" text="Transfer above/below" toggleGroup="$actionTypeToggleGroup" />
-                  <RadioButton fx:id="sellLimit" mnemonicParsing="false" text="Sell Limit" toggleGroup="$actionTypeToggleGroup" />
-                  <RadioButton fx:id="sellStop" mnemonicParsing="false" text="Sell Stop" toggleGroup="$actionTypeToggleGroup" />
-                  <RadioButton fx:id="cancel" mnemonicParsing="false" text="Cancel" toggleGroup="$actionTypeToggleGroup" />
-                  <RadioButton fx:id="transfer" mnemonicParsing="false" text="Transfer to target PosOrders" toggleGroup="$actionTypeToggleGroup" />
+                  <RadioButton fx:id="transferBelowOrAbove" mnemonicParsing="false" text="Transfer below/above" toggleGroup="$actionTypeToggleGroup" />
+                  <RadioButton fx:id="cancelBelowOrAbove" mnemonicParsing="false" text="Cancel below/above" toggleGroup="$actionTypeToggleGroup" />
                </children>
             </VBox>
-            <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0">
-               <children>
-                  <Label text="Order Amount" />
-                  <TextField fx:id="orderAmount" prefHeight="25.0" prefWidth="70.0" text="100" />
-               </children>
-            </HBox>
-            <CheckBox fx:id="multipleCheckBox" mnemonicParsing="false" text="Multiple?" />
-            <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0">
-               <children>
-                  <Label prefWidth="70.0" text="Amt" />
-                  <TextField fx:id="multipleAmount" prefHeight="25.0" prefWidth="70.0" text="15" />
-                  <Label prefWidth="70.0" text="Dist" />
-                  <TextField fx:id="multipleDistance" prefHeight="25.0" prefWidth="70.0" text="2" />
-               </children>
-            </HBox>
          </children>
       </VBox>
    </children>
