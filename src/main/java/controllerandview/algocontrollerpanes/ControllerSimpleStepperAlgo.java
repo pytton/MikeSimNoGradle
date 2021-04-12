@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import main.java.controllerandview.CommonGUI;
 import main.java.controllerandview.MikeGridPane;
+import main.java.controllerandview.windowcontrollers.ControllerPositionsWindow;
 import main.java.model.MainModelThread;
 import main.java.model.MikeSimLogger;
 import main.java.model.algocontrol.AlgoManager;
@@ -106,7 +107,8 @@ public class ControllerSimpleStepperAlgo extends AlgoController {
     }
 
     @Override
-    public void mikeGridPaneButtonPressed(int pricePressed, MainModelThread model, MikePosOrders posOrders,
+    public void mikeGridPaneButtonPressed(ControllerPositionsWindow controllerPositionsWindow,
+                                          int pricePressed, MainModelThread model, MikePosOrders posOrders,
                                           MikeGridPane.MikeButton button,
                                           MouseEvent event) {
         MikeSimLogger.addLogEvent("ControllerSimpleStepperAlgo. Price clicked: " + pricePressed);
@@ -126,6 +128,11 @@ public class ControllerSimpleStepperAlgo extends AlgoController {
         } else {
             model.algoManager.cancelAllSimpleStepperAlgosAtPrice(pricePressed, posOrders);
         }
+    }
+
+    @Override
+    public void setControllerPositionsWindow(ControllerPositionsWindow controllerPositionsWindow) {
+        MikeSimLogger.addLogEvent("NOT IMPLEMENTED!");
     }
 
     @Override

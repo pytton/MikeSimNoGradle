@@ -116,25 +116,43 @@ public class ControllerMainGUIWindow {
         }
     }
 
-    public void create12PosWinOn4KClicked(ActionEvent actionEvent) {
-        MikeSimLogger.addLogEvent("Implement this");
+    public void create6PosWinOn4KClicked(ActionEvent actionEvent) {
+        MikeSimLogger.addLogEvent("Creating 6 PositionsWindows");
 
-        mainGUIClass.createPosWindow((640*0),0);
-        mainGUIClass.createPosWindow((640*1),0);
-        mainGUIClass.createPosWindow((640*2),0);
-        mainGUIClass.createPosWindow((640*3),0);
-        mainGUIClass.createPosWindow((640*4),0);
-        mainGUIClass.createPosWindow((640*5),0);
-        mainGUIClass.createPosWindow((640*0),1000);
-        mainGUIClass.createPosWindow((640*1),1000);
-        mainGUIClass.createPosWindow((640*2),1000);
-        mainGUIClass.createPosWindow((640*3),1000);
-        mainGUIClass.createPosWindow((640*4),1000);
-        mainGUIClass.createPosWindow((640*5),1000);
+        //indexes are defined in main.java.model.MainModelThread.setupInitialPosOrders()
 
+        ControllerPositionsWindow controller = null;
 
+        controller = mainGUIClass.createPosWindow((640*0),0);
+        controller.positionsList.getSelectionModel().clearAndSelect(1);
+        controller.targetPositionsList.getSelectionModel().clearAndSelect(3);
 
+        controller = mainGUIClass.createPosWindow((640*1),0);
+        controller.positionsList.getSelectionModel().clearAndSelect(2);
+        controller.targetPositionsList.getSelectionModel().clearAndSelect(3);
 
+        controller =  mainGUIClass.createPosWindow((640*2),0);
+        controller.positionsList.getSelectionModel().clearAndSelect(3);
+        controller.targetPositionsList.getSelectionModel().clearAndSelect(7);
+//
+//        mainGUIClass.createPosWindow((640*3),0);
+//        mainGUIClass.createPosWindow((640*4),0);
+//        mainGUIClass.createPosWindow((640*5),0);
 
+        controller = mainGUIClass.createPosWindow((640*0),1000);
+        controller.positionsList.getSelectionModel().clearAndSelect(4);
+        controller.targetPositionsList.getSelectionModel().clearAndSelect(6);
+
+        controller = mainGUIClass.createPosWindow((640*1),1000);
+        controller.positionsList.getSelectionModel().clearAndSelect(5);
+        controller.targetPositionsList.getSelectionModel().clearAndSelect(6);
+
+        controller =  mainGUIClass.createPosWindow((640*2),1000);
+        controller.positionsList.getSelectionModel().clearAndSelect(6);
+        controller.targetPositionsList.getSelectionModel().clearAndSelect(7);
+
+//        mainGUIClass.createPosWindow((640*3),1000);
+//        mainGUIClass.createPosWindow((640*4),1000);
+//        mainGUIClass.createPosWindow((640*5),1000);
     }
 }

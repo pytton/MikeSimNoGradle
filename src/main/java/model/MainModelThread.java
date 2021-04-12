@@ -32,6 +32,29 @@ public class MainModelThread extends Thread {
         //this stores a priceserver, orderserver and a list of MikePosOrders for each traded instrument:
         posOrdersManager = new PosOrdersManager(this, tradedInstrumentMap /*this*/);
         algoManager = new AlgoManager(this);
+        setupInitialPosOrders();
+    }
+
+    /**
+     * Convenience method
+     * Creates a standard set of MikePositionsOrders for trading
+     */
+    private void setupInitialPosOrders() {
+        MikePosOrders posOrders = posOrdersManager.createMikePosorders(0);
+        posOrders.setName("Long Orders");
+        posOrders = posOrdersManager.createMikePosorders(0);
+        posOrders.setName("Long Scalper");
+        posOrders = posOrdersManager.createMikePosorders(0);
+        posOrders.setName("Long Bank");
+        posOrders = posOrdersManager.createMikePosorders(0);
+        posOrders.setName("Short Orders");
+        posOrders = posOrdersManager.createMikePosorders(0);
+        posOrders.setName("Short Scalper");
+        posOrders = posOrdersManager.createMikePosorders(0);
+        posOrders.setName("Short Bank");
+
+        posOrders = posOrdersManager.createMikePosorders(0);
+        posOrders.setName("Booked Profits");
     }
 
     /**

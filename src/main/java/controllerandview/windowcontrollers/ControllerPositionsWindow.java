@@ -56,7 +56,7 @@ public class ControllerPositionsWindow
     @FXML
     public BorderPane mainBorderPane;
     @FXML //this is where all the orders are routed to
-    private ListView positionsList;
+    public ListView positionsList;
     @FXML //this holds the instruments available for trading
     private ListView instrumentsList;
     @FXML
@@ -465,6 +465,7 @@ public class ControllerPositionsWindow
     /**
      * Called by onitialize() - sets up the defauld actions of the columns.
      * User can later change what each column does.
+     * DON'T FORGET TO CALL setControllerPositionsWindow() WHEN ADDING NEW CONTROLLERS HERE!
      */
     private void setupInitialColumnActions() {
         MikeSimLogger.addLogEvent("setting initial column actions in Positionswindow");
@@ -480,6 +481,8 @@ public class ControllerPositionsWindow
             //MikeGridPane will call this controller whenever a button inside MikeGridPane is pressed:
             setAlgoController(1, controllerSimpleScalperAlgo);
             controllerSimpleScalperAlgo.buyLimit.fire();
+            controllerSimpleScalperAlgo.setControllerPositionsWindow(this);
+
 
             //setup second column:
             loader = new FXMLLoader(getClass().getResource("/PositionsWindow/algoControllers/PlainOrderControlPanel.fxml"));
@@ -487,6 +490,7 @@ public class ControllerPositionsWindow
             controllerPlainOrder = loader.getController();
             setAlgoController(2, controllerPlainOrder);
             controllerPlainOrder.buyLimit.fire();
+            controllerPlainOrder.setControllerPositionsWindow(this);
 
             //setup third column:
             loader = new FXMLLoader(getClass().getResource("/PositionsWindow/algoControllers/PlainOrderControlPanel.fxml"));
@@ -494,6 +498,7 @@ public class ControllerPositionsWindow
             controllerPlainOrder = loader.getController();
             setAlgoController(3, controllerPlainOrder);
             controllerPlainOrder.buyStop.fire();
+            controllerPlainOrder.setControllerPositionsWindow(this);
 
             //setup 4th column:
             loader = new FXMLLoader(getClass().getResource("/PositionsWindow/algoControllers/PlainOrderControlPanel.fxml"));
@@ -501,6 +506,7 @@ public class ControllerPositionsWindow
             controllerPlainOrder = loader.getController();
             setAlgoController(4, controllerPlainOrder);
             controllerPlainOrder.cancel.fire();
+            controllerPlainOrder.setControllerPositionsWindow(this);
 
             //setup 5th column:
             loader = new FXMLLoader(getClass().getResource("/PositionsWindow/algoControllers/PlainOrderControlPanel.fxml"));
@@ -508,6 +514,7 @@ public class ControllerPositionsWindow
             controllerPlainOrder = loader.getController();
             setAlgoController(5, controllerPlainOrder);
             controllerPlainOrder.sellStop.fire();
+            controllerPlainOrder.setControllerPositionsWindow(this);
 
             //setup 6th column:
             loader = new FXMLLoader(getClass().getResource("/PositionsWindow/algoControllers/PlainOrderControlPanel.fxml"));
@@ -515,6 +522,7 @@ public class ControllerPositionsWindow
             controllerPlainOrder = loader.getController();
             setAlgoController(6, controllerPlainOrder);
             controllerPlainOrder.sellLimit.fire();
+            controllerPlainOrder.setControllerPositionsWindow(this);
 
             //setup 7th column:
             loader = new FXMLLoader(getClass().getResource("/PositionsWindow/algoControllers/SimpleScalperAlgoControlPanel.fxml"));
@@ -523,6 +531,7 @@ public class ControllerPositionsWindow
             //MikeGridPane will call this controller whenever a button inside MikeGridPane is pressed:
             setAlgoController(7, controllerSimpleScalperAlgo);
             controllerSimpleScalperAlgo.sellLimit.fire();
+            controllerSimpleScalperAlgo.setControllerPositionsWindow(this  );
 
 
             MikeSimLogger.addLogEvent("Experiment in setting initial column controller  successful");
@@ -549,13 +558,13 @@ public class ControllerPositionsWindow
         int price = getPriceOfRow(button.getRowOfButton());
 
         switch (button.getColOfButton()) {
-            case 0: if(controllerCol1 != null)controllerCol1.mikeGridPaneButtonPressed(price, model, mikePosOrders, button, event); break;
-            case 1: if(controllerCol2 != null)controllerCol2.mikeGridPaneButtonPressed(price, model, mikePosOrders, button, event); break;
-            case 2: if(controllerCol3 != null)controllerCol3.mikeGridPaneButtonPressed(price, model, mikePosOrders, button, event); break;
-            case 3: if(controllerCol4 != null)controllerCol4.mikeGridPaneButtonPressed(price, model, mikePosOrders, button, event); break;
-            case 4: if(controllerCol5 != null)controllerCol5.mikeGridPaneButtonPressed(price, model, mikePosOrders, button, event); break;
-            case 5: if(controllerCol6 != null)controllerCol6.mikeGridPaneButtonPressed(price, model, mikePosOrders, button, event); break;
-            case 6: if(controllerCol7 != null)controllerCol7.mikeGridPaneButtonPressed(price, model, mikePosOrders, button, event); break;
+            case 0: if(controllerCol1 != null)controllerCol1.mikeGridPaneButtonPressed(this, price, model, mikePosOrders, button, event); break;
+            case 1: if(controllerCol2 != null)controllerCol2.mikeGridPaneButtonPressed(this, price, model, mikePosOrders, button, event); break;
+            case 2: if(controllerCol3 != null)controllerCol3.mikeGridPaneButtonPressed(this, price, model, mikePosOrders, button, event); break;
+            case 3: if(controllerCol4 != null)controllerCol4.mikeGridPaneButtonPressed(this, price, model, mikePosOrders, button, event); break;
+            case 4: if(controllerCol5 != null)controllerCol5.mikeGridPaneButtonPressed(this, price, model, mikePosOrders, button, event); break;
+            case 5: if(controllerCol6 != null)controllerCol6.mikeGridPaneButtonPressed(this, price, model, mikePosOrders, button, event); break;
+            case 6: if(controllerCol7 != null)controllerCol7.mikeGridPaneButtonPressed(this, price, model, mikePosOrders, button, event); break;
         }
     }
 

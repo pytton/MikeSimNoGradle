@@ -71,7 +71,6 @@ public class Main extends Application {
 //        https://stackoverflow.com/questions/29710492/how-can-i-fire-internal-close-request
 
             event.consume();
-//            if(CommonGUI.showConfirmationDialog("Are you sure you want to exit?")) Platform.exit();
             if(CommonGUI.showConfirmationDialog("Are you sure you want to exit?")) {
                 stop();
                 Platform.exit();

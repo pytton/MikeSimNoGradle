@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import main.java.controllerandview.MikeGridPane;
+import main.java.controllerandview.windowcontrollers.ControllerPositionsWindow;
 import main.java.model.MainModelThread;
 import main.java.model.MikeSimLogger;
 import main.java.model.orderserver.MikeOrder;
@@ -34,10 +35,16 @@ public class ControllerScalperAlgo1 extends AlgoController {
 
 
     @Override
-    public void mikeGridPaneButtonPressed(int pricePressed, MainModelThread model, MikePosOrders posOrders,
+    public void mikeGridPaneButtonPressed(ControllerPositionsWindow controllerPositionsWindow,
+                                          int pricePressed, MainModelThread model, MikePosOrders posOrders,
                                           MikeGridPane.MikeButton button,
                                           MouseEvent event) {
         MikeSimLogger.addLogEvent("SimpleScalperAlgo: mikeGridPaneButtonPressed. Price: " + pricePressed);
+    }
+
+    @Override
+    public void setControllerPositionsWindow(ControllerPositionsWindow controllerPositionsWindow) {
+        MikeSimLogger.addLogEvent("NOT IMPLEMENTED!");
     }
 
     @Override

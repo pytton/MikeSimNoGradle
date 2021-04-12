@@ -27,10 +27,18 @@ public class ControllerPlainOrder extends AlgoController {
     public RadioButton cancel;
     public RadioButton transfer;
 
+    public RadioButton size1of8;
+    public RadioButton size1of4;
+    public RadioButton size1of2;
+    public RadioButton size1of1;
+    public RadioButton defaultSize;
+    public RadioButton manualSize;
+
     public TextField orderAmount;
     public CheckBox multipleCheckBox;
     public TextField multipleAmount;
     public TextField multipleDistance;
+
     private MikeOrder.MikeOrderType orderType = MikeOrder.MikeOrderType.BUYLMT;
     private ControllerPositionsWindow controllerPositionsWindow;
 
@@ -68,14 +76,18 @@ public class ControllerPlainOrder extends AlgoController {
     @Override
     public String getSimpleDescriptionRow3() {
 
-        if(multipleCheckBox.isSelected()) return ("M " + orderAmount.getText());
-        return orderAmount.getText();
+        if(multipleCheckBox.isSelected()) return ("M " + getAmount());
+        return ("" + getAmount());
     }
 
     @Override
-    public void mikeGridPaneButtonPressed(int pricePressed, MainModelThread model, MikePosOrders posOrders,
+    public void mikeGridPaneButtonPressed(ControllerPositionsWindow controllerPositionsWindow,
+                                          int pricePressed, MainModelThread model, MikePosOrders posOrders,
                                           MikeGridPane.MikeButton button,
                                           MouseEvent event) {
+
+        this.controllerPositionsWindow = controllerPositionsWindow;
+
         if (orderType == MikeOrder.MikeOrderType.TRANSFER && controllerPositionsWindow.targetPositionsList.getSelectionModel().getSelectedItem() != null){
             MikeSimLogger.addLogEvent("Attempting transfer");
             posOrders.movePositionToDifferentMikePosOrders(pricePressed, (MikePosOrders) controllerPositionsWindow.targetPositionsList.getSelectionModel().getSelectedItem());
@@ -141,8 +153,29 @@ public class ControllerPlainOrder extends AlgoController {
         }
     }
 
+    /**
+     * gives the amount of the order depending on which radiobutton is selected:
+     * @return
+     */
     private int getAmount() {
-        Integer amount = Integer.parseInt(orderAmount.getText());
+
+        Integer amount = 1; //Integer.parseInt(orderAmount.getText());
+
+
+
+        if (manualSize.isSelected()) amount = Integer.parseInt(orderAmount.getText());
+
+        if (controllerPositionsWindow == null) {MikeSimLogger.addLogEvent("null pointer in ControllerPlainOrder.getAmount()");
+        return amount; }
+
+
+        if (size1of1.isSelected()) amount = controllerPositionsWindow.getMikePosOrders().getTotalOpenAmount();
+        if (size1of2.isSelected()) amount = (int) (0.5 * controllerPositionsWindow.getMikePosOrders().getTotalOpenAmount());
+        if (size1of4.isSelected()) amount = (int) (0.25 * controllerPositionsWindow.getMikePosOrders().getTotalOpenAmount());
+        if (size1of8.isSelected()) amount = (int) (0.125 * controllerPositionsWindow.getMikePosOrders().getTotalOpenAmount());
+        if(defaultSize.isSelected()) MikeSimLogger.addLogEvent("NOT IMPLEMENTED!");
+
+
         return amount;
     }
 
@@ -151,6 +184,10 @@ public class ControllerPlainOrder extends AlgoController {
         return false;
     }
 
+    /**
+     * this doesn't get called unless user clicks on a choicebox inside PositionsWindow
+     * @param controllerPositionsWindow
+     */
     public void setControllerPositionsWindow(ControllerPositionsWindow controllerPositionsWindow) {
         this.controllerPositionsWindow = controllerPositionsWindow;
     }

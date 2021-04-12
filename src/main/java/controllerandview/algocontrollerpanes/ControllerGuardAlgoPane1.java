@@ -11,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import main.java.controllerandview.CommonGUI;
 import main.java.controllerandview.MainGUIClass;
 import main.java.controllerandview.MikeGridPane;
+import main.java.controllerandview.windowcontrollers.ControllerPositionsWindow;
 import main.java.model.MainModelThread;
 import main.java.model.MikeSimLogger;
 import main.java.model.algocontrol.GuardAlgoDown;
@@ -339,10 +340,16 @@ public class ControllerGuardAlgoPane1 extends AlgoController implements CommonGU
     }
 
     @Override
-    public void mikeGridPaneButtonPressed(int pricePressed, MainModelThread model, MikePosOrders posOrders,
+    public void mikeGridPaneButtonPressed(ControllerPositionsWindow controllerPositionsWindow,
+                                          int pricePressed, MainModelThread model, MikePosOrders posOrders,
                                           MikeGridPane.MikeButton button,
                                           MouseEvent event) {
         MikeSimLogger.addLogEvent("Not implemented!");
+    }
+
+    @Override
+    public void setControllerPositionsWindow(ControllerPositionsWindow controllerPositionsWindow) {
+        MikeSimLogger.addLogEvent("NOT IMPLEMENTED!");
     }
 
     @Override

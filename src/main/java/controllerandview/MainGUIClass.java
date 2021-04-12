@@ -109,7 +109,7 @@ public class MainGUIClass {
      * @param xPos
      * @param yPos
      */
-    public void createPosWindow(int xPos, int yPos) {
+    public ControllerPositionsWindow createPosWindow(int xPos, int yPos) {
         //create Positions Window:
         //we need to add custom MikeGridPane not defined in FXML:
         MikePositionsWindowCreator creator = null;
@@ -119,7 +119,7 @@ public class MainGUIClass {
         } catch (IOException e) {
             MikeSimLogger.addLogEvent("Exception in createPosWindow\nPoswindow not created!");
             e.printStackTrace();
-            return;
+            return null;
         }
 
         //create the window:
@@ -149,6 +149,7 @@ public class MainGUIClass {
         updatableWindowsList.add(creator.getController());
         controllerPositionsWindowList.add(creator.getController());
 
+        return creator.getController();
 
 
     }

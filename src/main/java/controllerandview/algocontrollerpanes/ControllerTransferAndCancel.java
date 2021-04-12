@@ -76,7 +76,8 @@ public class ControllerTransferAndCancel extends AlgoController {
      * @param event
      */
     @Override
-    public void mikeGridPaneButtonPressed(int pricePressed, MainModelThread model, MikePosOrders posOrders,
+    public void mikeGridPaneButtonPressed(ControllerPositionsWindow controllerPositionsWindow,
+                                          int pricePressed, MainModelThread model, MikePosOrders posOrders,
                                           MikeGridPane.MikeButton button,
                                           MouseEvent event) {
 

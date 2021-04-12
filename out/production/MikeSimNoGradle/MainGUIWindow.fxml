@@ -24,7 +24,7 @@
                         <MenuItem mnemonicParsing="false" onAction="#createPriceContrWinClicked" text="Create Price Control WIndow" />
                         <MenuItem mnemonicParsing="false" onAction="#createAlgoManagerWindow" text="Create Algo Manager Window" />
                         <MenuItem mnemonicParsing="false" onAction="#createGuardAlgoClicked" text="Create GuardAlgo WIndow" />
-                        <MenuItem mnemonicParsing="false" onAction="#create12PosWinOn4KClicked" text="Create 12 PosWin on 4K monitor" />
+                        <MenuItem mnemonicParsing="false" onAction="#create6PosWinOn4KClicked" text="Create 6 PosWin on 4K monitor" />
                         <MenuItem mnemonicParsing="false" onAction="#createMultipleStepperAlgoWindowClicked" text="Create MultipleStepperAlgo WIndow" />
                   </items>
                 </Menu>
