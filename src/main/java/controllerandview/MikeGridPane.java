@@ -371,7 +371,7 @@ public class MikeGridPane extends GridPane {
             public void handle(MouseEvent event) {
                 //todo: experimenting:
 
-                MikeSimLogger.addLogEvent("EventHandler<MouseEvent> mouseEventEventHandler called");
+//                MikeSimLogger.addLogEvent("EventHandler<MouseEvent> mouseEventEventHandler called");
 
                 //pass the MikeButton which was pressed to the interface which handles it:
                 if (event.getButton() == MouseButton.PRIMARY) {
@@ -380,8 +380,8 @@ public class MikeGridPane extends GridPane {
 
 
                 if (event.getButton() == MouseButton.SECONDARY) {
-                    MikeSimLogger.addLogEvent("MikeGridPane MikeButton clicked with RIGHT MOUSE BUTTON. This message" +
-                            " generated in MikeButton class");
+//                    MikeSimLogger.addLogEvent("MikeGridPane MikeButton clicked with RIGHT MOUSE BUTTON. This message" +
+//                            " generated in MikeButton class");
                     getButtonClickHandler().handleMikeButtonClicked((MikeButton)event.getSource(), event);
                 }
             }

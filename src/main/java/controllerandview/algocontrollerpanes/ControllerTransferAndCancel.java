@@ -25,28 +25,34 @@ public class ControllerTransferAndCancel extends AlgoController {
     public RadioButton movePosDownOrUp;
     public RadioButton transferBelowOrAbove;
     public RadioButton cancelBelowOrAbove;
+    public Label trnsfTargetName;
     private ControllerPositionsWindow controllerPositionsWindow;
 
     private String descriptionRow1 = "TRNSF:";
     private String descriptionRow2 = "DN / UP";
+    private String descriptionRow3 = "TRANSFER";
 
     @FXML
     public void initialize() {
+//        movePosDownOrUp.setText("\u1F5D");
         //setup the kind of order passed to algoManager depending on which radiobutton is pressed:
         actionTypeToggleGroup.selectedToggleProperty().addListener(
                 new ChangeListener<Toggle>() {
             @Override
             public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
-            if (actionTypeToggleGroup.getSelectedToggle() == movePosDownOrUp) { descriptionRow1 = "MOVE"; }
-                if (actionTypeToggleGroup.getSelectedToggle() == transferBelowOrAbove) { descriptionRow1 = "TRNSF"; }
-                if (actionTypeToggleGroup.getSelectedToggle() == cancelBelowOrAbove) { descriptionRow1 = "CX DW/UP"; }
+            if (actionTypeToggleGroup.getSelectedToggle() == movePosDownOrUp) { descriptionRow1 = "MOVE"; descriptionRow3 = "MOVE";}
+                if (actionTypeToggleGroup.getSelectedToggle() == transferBelowOrAbove) { descriptionRow1 = "TRNSF"; descriptionRow3 = controllerPositionsWindow.getTargetMikePosOrders().getName();}
+                if (actionTypeToggleGroup.getSelectedToggle() == cancelBelowOrAbove) { descriptionRow1 = "CX DW/UP"; descriptionRow3 = "CANCEL";}
              } } );
     }
 
     @Override
     public String getSimpleDescriptionRow1() {
 
-//        if(multipleCheckBox.isSelected()) return "MULT ORD";
+        //update the label here in this controller:
+        trnsfTargetName.setText(controllerPositionsWindow.getTargetMikePosOrders().getName());
+
+        //and give them what they want
         return descriptionRow1;
     }
 
@@ -58,7 +64,7 @@ public class ControllerTransferAndCancel extends AlgoController {
 
     @Override
     public String getSimpleDescriptionRow3() {
-        return " ";
+        return descriptionRow3;
     }
 
     /**
@@ -74,7 +80,7 @@ public class ControllerTransferAndCancel extends AlgoController {
                                           MikeGridPane.MikeButton button,
                                           MouseEvent event) {
 
-        MikeSimLogger.addLogEvent("Inside ControllerTransferAndCancel");
+//        MikeSimLogger.addLogEvent("Inside ControllerTransferAndCancel");
 
         if (actionTypeToggleGroup.getSelectedToggle() == movePosDownOrUp) processMovePosClicked(pricePressed, model,
                 posOrders, button, event);
@@ -87,7 +93,7 @@ public class ControllerTransferAndCancel extends AlgoController {
 
 
         if (event.getButton() == MouseButton.SECONDARY) {
-            MikeSimLogger.addLogEvent("right button recognized in ControllerTransferAndCancel");
+//            MikeSimLogger.addLogEvent("right button recognized in ControllerTransferAndCancel");
         }
 
     }
@@ -157,14 +163,14 @@ public class ControllerTransferAndCancel extends AlgoController {
 
         //if left button was clicked move the single MikePosition at that price to the next MikePosition at a lower price, or if none exists, one cent lower
         if (event.getButton() == MouseButton.PRIMARY) {
-            MikeSimLogger.addLogEvent("Moving single MikePosition at price " + pricePressed + " lower not implemented");
-            MikeSimLogger.addLogEvent("TargetPosOrders is: " + controllerPositionsWindow.getTargetMikePosOrders());
+            MikeSimLogger.addLogEvent("Moving single MikePosition at price " + pricePressed + " lower NOT IMPLEMENTED!");
+//            MikeSimLogger.addLogEvent("TargetPosOrders is: " + controllerPositionsWindow.getTargetMikePosOrders());
         }
 
         //move higher if right button clicked
         if (event.getButton() == MouseButton.SECONDARY) {
-            MikeSimLogger.addLogEvent("Moving single MikePosition at price " + pricePressed + " higher not implemented");
-            MikeSimLogger.addLogEvent("TargetPosOrders is: " + controllerPositionsWindow.getTargetMikePosOrders());
+            MikeSimLogger.addLogEvent("Moving single MikePosition at price " + pricePressed + " higher NOT IMPLEMENTED!");
+//            MikeSimLogger.addLogEvent("TargetPosOrders is: " + controllerPositionsWindow.getTargetMikePosOrders());
         }
 
 

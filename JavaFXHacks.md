@@ -45,3 +45,7 @@ https://rterp.wordpress.com/2013/09/13/creating-custom-javafx-components-with-sc
 
 https://rterp.wordpress.com/2014/07/28/adding-custom-javafx-component-to-scene-builder-2-0-part-2/
 
+using unicode and special fonts:
+https://stackoverflow.com/questions/49016202/using-unicode-characters-with-javafx
+https://unicode-table.com/en/1F5D8/
+https://docs.oracle.com/javase/8/javafx/user-interface-tutorial/text-settings.htm
