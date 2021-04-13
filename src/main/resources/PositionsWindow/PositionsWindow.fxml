@@ -30,7 +30,10 @@
         <!--</columns>-->
       <!--</TableView>-->
    </center>
-   <right>
+   <center>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
+   <left>
       <VBox alignment="TOP_CENTER" fillWidth="false" pickOnBounds="false" prefHeight="950.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
@@ -135,6 +138,7 @@
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#cancelOrdersGlobally" prefWidth="195.0" style="-fx-padding: 1.5;" text="CANCEL All Orders This Instrument" />
             <Button fx:id="cancelAlgosThisBookBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#cancelAlgosThisBookBtnPressed" prefWidth="195.0" style="-fx-padding: 1.5;" text="Cancel Algos this Book" />
             <Button fx:id="cancelAlgosGloballyBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#cancelAlgosGloballyBtnPressed" prefHeight="25.0" prefWidth="195.0" style="-fx-padding: 1.5;" text="Cancell All Algos Globally" />
+            <Button fx:id="cancelAllAndFlattenThisBook" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="195.0" style="-fx-padding: 1.5;" text="Book CANCEL ALL + FLATTEN" />
             <Accordion prefHeight="750.0" prefWidth="200.0">
               <panes>
                 <TitledPane animated="false" style="-fx-padding: 1.5;" text="Choose Instrument + PosOrders">
@@ -330,8 +334,5 @@
             </Accordion>
          </children>
       </VBox>
-   </right>
-   <left>
-      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </left>
 </BorderPane>

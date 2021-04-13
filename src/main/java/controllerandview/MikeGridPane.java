@@ -320,6 +320,9 @@ public class MikeGridPane extends GridPane {
                 button.setMaxHeight(20);
                 button.setPrefHeight(20);
 
+                //MSim-44:
+                button.setMinWidth(50);
+
 
 //                button.setMaxHeight(5);
 //                button.setStyle("-fx-background-color: lightgrey;-fx-border-color: black; -fx-border-width: 1px");
@@ -337,6 +340,7 @@ public class MikeGridPane extends GridPane {
         }
         this.setAlignment(CENTER);
 
+//        this.setMinWidth(50);
 
         MikeSimLogger.addLogEvent("MikeGridPane generated");
     }

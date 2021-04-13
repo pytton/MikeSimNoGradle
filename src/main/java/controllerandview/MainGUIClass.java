@@ -138,7 +138,8 @@ public class MainGUIClass {
         stage.setTitle(name);
 
         //resize it:
-        stage.setHeight(1000);
+        stage.setHeight(1050);
+//        stage.setWidth(435);
 
         creator.getController().initialSetupAfterCreation( mainModelThread,
                 getMainModelThread().posOrdersManager.getPriceServer(defaultTickerId),
@@ -148,6 +149,8 @@ public class MainGUIClass {
         //add the controller to the list of controllers (for updateGUI):
         updatableWindowsList.add(creator.getController());
         controllerPositionsWindowList.add(creator.getController());
+
+
 
         return creator.getController();
 
@@ -342,7 +345,10 @@ public class MainGUIClass {
             topVbox.getChildren().add(sp);
             topVbox.getChildren().add(bottomGridPane);
 
-            controller.getMainBorderPane().setLeft(topVbox);
+            topVbox.setMinWidth(50);
+
+//            controller.getMainBorderPane().setLeft(topVbox);
+            controller.getMainBorderPane().setCenter(topVbox);
 
 
             controller.setMikeGridPane(buttonTable);

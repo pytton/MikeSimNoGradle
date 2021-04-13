@@ -139,20 +139,20 @@ public class ControllerMainGUIWindow {
 //        mainGUIClass.createPosWindow((640*4),0);
 //        mainGUIClass.createPosWindow((640*5),0);
 
-        controller = mainGUIClass.createPosWindow((640*0),1000);
+        controller = mainGUIClass.createPosWindow((640*0),1050);
         controller.positionsList.getSelectionModel().clearAndSelect(4);
         controller.targetPositionsList.getSelectionModel().clearAndSelect(6);
 
-        controller = mainGUIClass.createPosWindow((640*1),1000);
+        controller = mainGUIClass.createPosWindow((640*1),1050);
         controller.positionsList.getSelectionModel().clearAndSelect(5);
         controller.targetPositionsList.getSelectionModel().clearAndSelect(6);
 
-        controller =  mainGUIClass.createPosWindow((640*2),1000);
+        controller =  mainGUIClass.createPosWindow((640*2),1050);
         controller.positionsList.getSelectionModel().clearAndSelect(6);
         controller.targetPositionsList.getSelectionModel().clearAndSelect(7);
 
-//        mainGUIClass.createPosWindow((640*3),1000);
-//        mainGUIClass.createPosWindow((640*4),1000);
-//        mainGUIClass.createPosWindow((640*5),1000);
+//        mainGUIClass.createPosWindow((640*3),1050);
+//        mainGUIClass.createPosWindow((640*4),1050);
+//        mainGUIClass.createPosWindow((640*5),1050);
     }
 }
