@@ -38,7 +38,7 @@ public class PosOrdersManager {
         dataMap = new TreeMap<>();
         for (TradedInstrument instrument : tradedInstrumentMap.values()) {
             //create an orderserver, priceserver and PosOrdersObservable list based on the instruments that can be traded:
-            Data data = new Data(instrument.getTickerId(), instrument.getSymbol());
+            Data data = new Data(instrument.getTickerId(), instrument.getSymbol(), instrument);
             dataMap.put(instrument.getTickerId(), data);
             priceServerObservableList.add(data.getPriceServer());
         }
@@ -89,6 +89,7 @@ public class PosOrdersManager {
         //one tickerId per one instrument traded
         private int tickerId;
         private String tradedInstrumentName;
+        public TradedInstrument tradedInstrument;
 
         //handles all orders, checking for order fills:
         private OrderServer orderServer;
@@ -102,7 +103,8 @@ public class PosOrdersManager {
         //used for unique names:
         private long mikePosOrdersNumber = 0;
 
-        public Data(int tickerId, String tradedInstrumentName) {
+        public Data(int tickerId, String tradedInstrumentName, TradedInstrument instrument) {
+            this.tradedInstrument = instrument;
             this.tickerId = tickerId;
             this.tradedInstrumentName = tradedInstrumentName;
             posOrdersObservableList = FXCollections.observableArrayList();
@@ -110,7 +112,7 @@ public class PosOrdersManager {
             orderServer = new OrderServerSimulatedInternal();
 //                orderServer = new OrderServerRealExternal();
             //marketConnection taken from outer class:
-            priceServer = new PriceServer(tickerId, tradedInstrumentName, mainModelThread.marketConnection);
+            priceServer = new PriceServer(tickerId, tradedInstrumentName, mainModelThread.marketConnection, instrument);
 
             //create at least one MikePosOrders for each instrument traded:
             createMikePosorders();

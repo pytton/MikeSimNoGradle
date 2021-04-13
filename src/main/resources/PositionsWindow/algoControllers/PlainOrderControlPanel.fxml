@@ -59,7 +59,7 @@
                   <TextField fx:id="orderAmount" prefHeight="25.0" prefWidth="70.0" text="10" />
                </children>
             </HBox>
-            <CheckBox fx:id="multipleCheckBox" mnemonicParsing="false" selected="true" text="Multiple?" />
+            <CheckBox fx:id="multipleCheckBox" mnemonicParsing="false" text="Multiple?" />
             <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0">
                <children>
                   <Label prefWidth="70.0" text="Amt" />

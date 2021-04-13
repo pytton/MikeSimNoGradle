@@ -5,6 +5,8 @@ import main.java.model.priceserver.PriceServer;
 
 public class TradedInstrument {
 
+    public final boolean isThisInstrumentFOREX;
+
     private int tickerId = 0;
     private String symbol = "SPY";
     private String exchange = "SMART";
@@ -21,6 +23,10 @@ public class TradedInstrument {
         this.exchange = exchange;
         this.secType = secType;
         this.currency = currency;
+
+        //check if FOREX HERE:
+        if(secType == "CASH") isThisInstrumentFOREX = true;
+        else isThisInstrumentFOREX = false;
     }
 
 /*    private double bidPrice = -5;

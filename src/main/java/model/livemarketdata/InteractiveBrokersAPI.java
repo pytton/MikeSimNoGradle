@@ -55,14 +55,22 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
 
         for(TradedInstrument instrument : tradedInstrumentMap.values()){
 
+            boolean isFOREX = false;
+
+            if(instrument.isThisInstrumentFOREX) isFOREX =true;
+
             //setup realtime data:
             priceDataMap.put(instrument.getTickerId(), new PriceData(
                     instrument.getTickerId(),
                     instrument.getSymbol(),
                     instrument.getExchange(),
                     instrument.getSecType(),
-                    instrument.getCurrency()
+                    instrument.getCurrency(),
+                    instrument,
+                    isFOREX
             ));
+
+
 
             //setup historical data:
             List<PriceData> historicalPriceData = new ArrayList();
@@ -113,6 +121,8 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
 
     public class PriceData {
 
+        protected TradedInstrument instrument;
+
         int tickerId = 0;
         private String symbol = "SPY";
         private String exchange = "SMART";
@@ -125,15 +135,29 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
         public double bidSize = -5;
         public double askSize = -5;
 
+        //todo: this might cause issues in historical data:
         private PriceData() {
         }
 
-        private PriceData(int tickerId, String symbol, String exchange, String secType, String currency) {
+        private PriceData(TradedInstrument instrument){
+
+            this.tickerId = instrument.getTickerId();// tickerId;
+            this.symbol = instrument.getSymbol();// symbol;
+            this.exchange = instrument.getExchange();// exchange;
+            this.secType = instrument.getSecType();// secType;
+            this.currency = instrument.getCurrency();// currency;
+            this.instrument = instrument;
+
+        }
+
+        private PriceData(int tickerId, String symbol, String exchange, String secType, String currency,
+                          TradedInstrument instrument, boolean isForex ) {
             this.tickerId = tickerId;
             this.symbol = symbol;
             this.exchange = exchange;
             this.secType = secType;
             this.currency = currency;
+            this.instrument = instrument;
         }
 
         public double getBidPrice() {
@@ -346,7 +370,7 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
                 // MarketDataOptions - tagValue list of additional options (API 9.71 and newer)
 
                 client.reqMktData(instrument.getTickerId(), contract, null, false);
-                priceDataMap.put(instrument.getTickerId(), new PriceData()); //priceDataMap stores market data for each tickerId
+                priceDataMap.put(instrument.getTickerId(), new PriceData(instrument)); //priceDataMap stores market data for each tickerId
 
                 // For API Version 9.73 and higher, add one more parameter: regulatory snapshot
                 // client.reqMktData(0, contract, null, false, false, mktDataOptions);
@@ -446,11 +470,17 @@ public class InteractiveBrokersAPI implements EWrapper, OutsideTradingSoftwareAP
             //priceDataMap contains prices for all tickerIds
             PriceData priceData = priceDataMap.get(tickerId);
 
+
+
             //make sure that Bid price is always at least minBidAskSpread lower than ask price
             //before updating prices in priceData
 
+            //todo: issues with forex here:
             //The minimum enforced difference between the bid price and ask price:
-            final double minBidAskSpread = 0.01d;
+            double minBidAskSpread = 0.01d;
+
+            if (priceData.instrument.isThisInstrumentFOREX) minBidAskSpread = 0.00001d;
+
 
             switch (field) {
                 case 1: //"field" defines what "price" is - if price provided by API is BID price this happens

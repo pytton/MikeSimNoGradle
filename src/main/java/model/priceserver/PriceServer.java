@@ -2,6 +2,7 @@ package main.java.model.priceserver;
 
 
 import main.java.model.MikeSimLogger;
+import main.java.model.TradedInstrument;
 import main.java.model.livemarketdata.InteractiveBrokersAPI;
 import main.java.model.livemarketdata.OutsideTradingSoftwareAPIConnection;
 
@@ -15,7 +16,10 @@ import java.util.List;
  */
 public class PriceServer {
 
+
     //    private Integer tickerId;
+
+    boolean isThisAForexPriceServer = false;
     final private int tickerID;
     final public String TradedInstrumentName;
     private OutsideTradingSoftwareAPIConnection outsideTradingSoftwareAPIConnection = null;
@@ -29,10 +33,12 @@ public class PriceServer {
         return TradedInstrumentName;
     }
 
-    public PriceServer(int tickerID, String TradedInstrumentName, OutsideTradingSoftwareAPIConnection marketConnection){
+    public PriceServer(int tickerID, String TradedInstrumentName, OutsideTradingSoftwareAPIConnection marketConnection, TradedInstrument instrument){
         this.tickerID = tickerID;
         this.TradedInstrumentName = TradedInstrumentName;
         setRealTimeDataSource(marketConnection);
+        //check if this is a FOREX instrument:
+        if(instrument.getSecType() == "CASH") isThisAForexPriceServer = true;
     }
 
     public enum PriceType{
@@ -175,15 +181,26 @@ public class PriceServer {
         this.outsideTradingSoftwareAPIConnection = outsideTradingSoftwareAPIConnection;
     }
 
+    /**
+     * FOREX IMPLEMENTATION IS EXPERIMENTAL!!!
+     * @return
+     */
     public int getRealTimeBidPrice(){
         if(!(outsideTradingSoftwareAPIConnection == null)){
+            if(isThisAForexPriceServer) return (int)(100000*outsideTradingSoftwareAPIConnection.getBidPrice(tickerID));
             return (int)(100*outsideTradingSoftwareAPIConnection.getBidPrice(tickerID));
         }
         return -5;
     }
 
+    /**
+     * FOREX IMPLEMENTATION IS EXPERIMENTAL!!!
+     * @return
+     */
     public int getRealTimeAskPrice(){
         if(!(outsideTradingSoftwareAPIConnection == null)){
+
+            if(isThisAForexPriceServer) return(int)(100000* outsideTradingSoftwareAPIConnection.getAskPrice(tickerID));
             return(int)(100* outsideTradingSoftwareAPIConnection.getAskPrice(tickerID));
         }
         return -5;
