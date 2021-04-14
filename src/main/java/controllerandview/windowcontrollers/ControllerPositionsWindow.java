@@ -1043,6 +1043,17 @@ public class ControllerPositionsWindow
         mikePosOrders.flattenThisPosition();}
     }
 
+    public void testSellTrailingStopClicked(ActionEvent actionEvent) {
+        MikeSimLogger.addLogEvent("Testing Sell Trailing stop with a distance of 8 and amount of 20");
+        model.algoManager.createTrailingStopAlgo(MikeOrder.MikeOrderType.SELLSTP, 20, 8, mikePosOrders);
+    }
+
+    public void testBuyTrailingStopClicked(ActionEvent actionEvent) {
+        MikeSimLogger.addLogEvent("Testing Buy Trailing stop with a distance of 8 and amount of 20");
+        model.algoManager.createTrailingStopAlgo(MikeOrder.MikeOrderType.BUYSTP, 20, 8, mikePosOrders);
+
+    }
+
 
 //    public void mikeGridPaneButtonClicked(ActionEvent event) {
 //

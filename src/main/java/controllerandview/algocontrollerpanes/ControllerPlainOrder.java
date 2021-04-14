@@ -38,6 +38,7 @@ public class ControllerPlainOrder extends AlgoController {
     public CheckBox multipleCheckBox;
     public TextField multipleAmount;
     public TextField multipleDistance;
+    public CheckBox trailingStopCheckbox;
 
     private MikeOrder.MikeOrderType orderType = MikeOrder.MikeOrderType.BUYLMT;
     private ControllerPositionsWindow controllerPositionsWindow;
@@ -104,14 +105,40 @@ public class ControllerPlainOrder extends AlgoController {
         if (orderType != MikeOrder.MikeOrderType.CANCEL) {
             //handle multiple orders if choicebox selected:
             if(multipleCheckBox.isSelected()){
-
                 //send a multipleAmount of orders with a distance of multipleDistance between their prices:
-
                 MultipleOrderCommand command = new MultipleOrderCommand(posOrders, orderType, pricePressed, getAmount());
-
                 CommonGUI.placeMultipleOrder(command, multipleAmount, multipleDistance, orderType, pricePressed);
                 return;
             }
+
+            //handle placing trailing stop orders:
+            if(trailingStopCheckbox.isSelected()){
+                //do we want this behaviour?
+                if(multipleCheckBox.isSelected()){
+                    MikeSimLogger.addLogEvent("Unable to place multiple trailing stop algos! Uncheck \"Multiple\" checkbox to place trailing" +
+                            "stop algos!");
+                    return;
+                }
+
+                int distanceFromBidOrAsk = 0;
+                if(orderType == MikeOrder.MikeOrderType.BUYSTP){
+                    //distance from ask is used in trailing stop algo to place buy stop orders. calculate it:
+                    distanceFromBidOrAsk = pricePressed - posOrders.getAskPrice();
+                    //we don't want buy stop orders placed below the ask price?:
+                    if(distanceFromBidOrAsk < 0) distanceFromBidOrAsk = 0;
+                    MikeSimLogger.addLogEvent("Placing trailing stop buy order");
+                }
+                if(orderType == MikeOrder.MikeOrderType.SELLSTP){
+                    //distance from bid is used in trailing stop algo to place sell stop orders. calculate it:
+                    distanceFromBidOrAsk = posOrders.getBidPrice() - pricePressed;
+                    //we don't want sell stop orders placed above the bid price?:
+                    if(distanceFromBidOrAsk < 0) distanceFromBidOrAsk = 0;
+                    MikeSimLogger.addLogEvent("Placing trailing stop sell order");
+                }
+                    model.algoManager.createTrailingStopAlgo(orderType, getAmount(), distanceFromBidOrAsk, posOrders);
+                    return;
+            }
+
             //otherwise just place an order:
             posOrders.placeNewOrder(orderType, pricePressed, pricePressed, getAmount());
             return;

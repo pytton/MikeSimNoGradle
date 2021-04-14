@@ -8,6 +8,7 @@ import main.java.model.MikeSimLogger;
 import main.java.model.orderserver.MikeOrder;
 import main.java.model.positionsorders.MikePosOrders;
 
+import java.time.temporal.TemporalQueries;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
@@ -233,6 +234,37 @@ public class AlgoManager{
         //housekeeping - remove cancelled algos from active algos and add them to the set of cancelled algos:
         algoSet.removeAll(algosToCancel);
         cancelledAlgoSet.addAll(algosToCancel);
+    }
+
+    /**
+     * This makes a simple trailing stop algo following currnent bid/ask price at certain distance
+     * @param orderType this has to be BUYSTP or SELLSTP otherwise SELLSTP is enforced
+     * @param posOrders the MikePosOrders being monitored
+     * @param distanceFromPrice how far from bid/ask price the stop order should be
+     * @param orderAmount the amount of the order
+     */
+    synchronized public TrailingStopAlgo createTrailingStopAlgo(MikeOrder.MikeOrderType orderType, int orderAmount, int distanceFromPrice, MikePosOrders posOrders){
+
+        if(posOrders == null){
+            MikeSimLogger.addLogEvent("Cannot create TrailingStopAlgo with a null MikePosOrders supplied!");
+            return null;
+        }
+
+        if( !( (orderType == MikeOrder.MikeOrderType.BUYSTP) || (orderType == MikeOrder.MikeOrderType.SELLSTP) ) ){
+            orderType = MikeOrder.MikeOrderType.SELLSTP;
+            MikeSimLogger.addLogEvent("WARNING! Order submitted to TrailingStopAlgo is not a stop order! Setting it to SELL STOP!!!");
+        }
+
+        TrailingStopAlgo algo = null;
+        try {
+            algo = new TrailingStopAlgo(orderType, orderAmount, distanceFromPrice, posOrders);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        algoSet.add(algo);
+        return algo;
     }
 
     synchronized public void createComplexScalperAlgoUp1(MikePosOrders posOrders, int lowerTarget, int interval, int howManyScalpers, int amount, MikeOrder.MikeOrderType entry) {

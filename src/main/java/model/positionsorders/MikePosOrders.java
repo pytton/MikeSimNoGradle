@@ -569,7 +569,7 @@ public class MikePosOrders {
         return positionsMap.keySet();
     }
 
-    private OrderServer getOrderServer() {
+    public OrderServer getOrderServer() {
         return orderServer;
     }
 

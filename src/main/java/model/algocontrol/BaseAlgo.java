@@ -19,6 +19,7 @@ public abstract class BaseAlgo {
     public enum Status{
         CREATED,
         RUNNING,
+        CANCELLED,
         STOPPED,
         FAILED,
         SUSPENDED
