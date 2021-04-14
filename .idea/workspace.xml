@@ -16,11 +16,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0212a54c-a94c-4dfe-9eec-4ace680f76bc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/TradedInstrument.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/TradedInstrument.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/livemarketdata/InteractiveBrokersAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/livemarketdata/InteractiveBrokersAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/positionsorders/PosOrdersManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/positionsorders/PosOrdersManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/priceserver/PriceServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/priceserver/PriceServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/PositionsWindow/algoControllers/PlainOrderControlPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/PositionsWindow/algoControllers/PlainOrderControlPanel.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/PositionsWindow/algoControllers/PlainOrderControlPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/PositionsWindow/algoControllers/PlainOrderControlPanel.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -435,7 +432,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618323468051</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="MSim-47 issues with FOREX prices done.">
+      <created>1618327599263</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1618327599263</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -511,7 +515,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Updated JavaDoc and built .jar files" />
     <MESSAGE value="added placeOnSameMonitor() in CommonGUI.java&#10;new windows now appear on the same screen as the button that was pressed." />
     <MESSAGE value="before moving PosOrdersManager" />
     <MESSAGE value="moved PosOrdersManager to seperate class" />
@@ -536,7 +539,8 @@
     <MESSAGE value="still working on MSim-27. switching to adding some features to PlainOrder" />
     <MESSAGE value="after merge with 'addingFeatures' branch." />
     <MESSAGE value="MSim-44 done." />
-    <option name="LAST_COMMIT_MESSAGE" value="MSim-44 done." />
+    <MESSAGE value="MSim-47 issues with FOREX prices done." />
+    <option name="LAST_COMMIT_MESSAGE" value="MSim-47 issues with FOREX prices done." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/MikeSimNoGradle$Main.ic" NAME="Main Coverage Results" MODIFIED="1609257311491" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
