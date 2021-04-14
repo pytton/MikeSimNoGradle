@@ -39,7 +39,7 @@
                   <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0">
                      <children>
                         <Label text="Order Amount" />
-                        <TextField fx:id="orderAmount" prefHeight="25.0" prefWidth="70.0" text="100" />
+                        <TextField fx:id="orderAmount" prefHeight="25.0" prefWidth="70.0" text="10" />
                      </children>
                   </HBox>
                   <HBox>
@@ -73,17 +73,17 @@
                         <Button fx:id="intervalBtn15" mnemonicParsing="false" onAction="#intervalBtnPressed" text="15" />
                      </children>
                   </HBox>
-                  <CheckBox fx:id="smTrailingStopCheckBox" mnemonicParsing="false" text="Smart Trailing Stop" />
-                  <CheckBox fx:id="fixedTrailingStopCheckBox" mnemonicParsing="false" text="Fixed Trailing Stop" />
+                  <CheckBox fx:id="smTrailingStopCheckBox" mnemonicParsing="false" selected="true" text="Smart Trailing Stop" />
+                  <CheckBox fx:id="fixedTrailingStopCheckBox" mnemonicParsing="false" selected="true" text="Fixed Trailing Stop" />
                </children>
             </VBox>
-            <CheckBox fx:id="multipleCheckBox" mnemonicParsing="false" text="Multiple?" />
+            <CheckBox fx:id="multipleCheckBox" mnemonicParsing="false" selected="true" text="Multiple?" />
             <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0">
                <children>
                   <Label prefWidth="70.0" text="Amt" />
-                  <TextField fx:id="multipleAmount" prefHeight="25.0" prefWidth="70.0" text="15" />
+                  <TextField fx:id="multipleAmount" prefHeight="25.0" prefWidth="70.0" text="50" />
                   <Label prefWidth="70.0" text="Dist" />
-                  <TextField fx:id="multipleDistance" prefHeight="25.0" prefWidth="70.0" text="2" />
+                  <TextField fx:id="multipleDistance" prefHeight="25.0" prefWidth="70.0" text="1" />
                </children>
             </HBox>
          </children>

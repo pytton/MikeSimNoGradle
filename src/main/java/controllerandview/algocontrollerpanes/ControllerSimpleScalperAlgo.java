@@ -116,6 +116,7 @@ public class ControllerSimpleScalperAlgo extends AlgoController {
 
     @Override
     public String getSimpleDescriptionRow3() {
+        if(multipleCheckBox.isSelected()) return ("M " + orderAmount.getText());
         return orderAmount.getText();
     }
 
