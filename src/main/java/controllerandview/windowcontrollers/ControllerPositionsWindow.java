@@ -1032,7 +1032,16 @@ public class ControllerPositionsWindow
         MikeSimLogger.addLogEvent("Selected: " + targetPositionsList.getSelectionModel().getSelectedItem().toString());
     }
 
-
+    /**
+     * This cancels all algos and orders in PositionsOrders of this Window and flattens the position
+     * @param actionEvent
+     */
+    public void cancelAndFlattenThisBook(ActionEvent actionEvent) {
+        if(CommonGUI.showConfirmationDialog("Are you sure you want to CANCEL EVERYTHING AND FLATTEN THIS BOOK (INCLUDING ALGOS) ???")){
+        model.algoManager.cancelAllAlgosInMikePosOrders(mikePosOrders);
+        mikePosOrders.cancelAllOrders();
+        mikePosOrders.flattenThisPosition();}
+    }
 
 
 //    public void mikeGridPaneButtonClicked(ActionEvent event) {

@@ -19,6 +19,8 @@ public class MikePosition {
 
     /**
      *
+     * positive open_amount means position is long
+     * negative open_amount means position is short
      * @param price
      * @param open_amount
      * @param open_pl

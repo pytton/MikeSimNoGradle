@@ -76,22 +76,27 @@ public class MikePosOrders {
     }
 
     /**
+     * This makes the position flat by submitting stop orders 5 pricepoints below bid/ask for instant fill
+     */
+    public synchronized void flattenThisPosition(){
+        int safetyAmount = 5; //this is how far from the bid/ask we want to place the stop orders
+        int openAmount = getTotalOpenAmount();
+        if(openAmount > 0) placeNewOrder(MikeOrder.MikeOrderType.SELLSTP, getAskPrice(), (getAskPrice() + safetyAmount), openAmount);
+        if(openAmount < 0) placeNewOrder(MikeOrder.MikeOrderType.BUYSTP, getBidPrice(), (getBidPrice() - safetyAmount), openAmount);
+    }
+
+    /**
      * Cancels all the orders in this PosOrders
      */
     public synchronized void cancelAllOrders(){
-
         Set<Long> ordersToCancel = new TreeSet<>();
-
         //cancelling orders includes removing them from this set so we need a copy
         for(Long orderId : activeOrdersSet){
             ordersToCancel.add(orderId);
         }
-
         for (Long orderId : ordersToCancel){
             cancelOrder(orderId);
         }
-
-
     }
 
     public synchronized void cancelAllOrdersAtOrABOVEPrice(int price){
