@@ -1,5 +1,6 @@
 package main.java.model.orderserver;
 
+import main.java.model.MikeSimLogger;
 import main.java.model.positionsorders.MikePosOrders;
 
 public class MikeOrder {
@@ -61,7 +62,18 @@ public class MikeOrder {
     //was the order cancelled?
     private boolean cancelled = false;
 
+    /**
+     * Watch out for negative order amounts!
+     * @param orderType
+     * @param assignedToPosition
+     * @param price
+     * @param amount
+     */
     public MikeOrder(MikeOrderType orderType, int assignedToPosition, int price, int amount) {
+        if(amount < 0){
+            MikeSimLogger.addLogEvent("Negative order amount submitted to MikeOrder! Changing it to positive!");
+            amount = amount * -1;
+        }
         this.orderType = orderType;
         this.assignedToPosition = assignedToPosition;
         this.price = price;

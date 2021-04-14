@@ -88,6 +88,8 @@ public class OrderServerSimulatedInternal extends OrderServer {
                                            int assignedToPos/*what price within MikePosOrders is this assigned to?*/,
                                            int price/*price of the order*/,
                                            int amount/*size of the order*/){
+        //order amounts have to be a positive number:
+
         //create the order:
         MikeOrder order = new MikeOrder(orderType, assignedToPos, price, amount);
         //tell the order which MikePosOrders it is assigned to - to notify it once the order gets filled

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllerandview.algocontrollerpanes.ControllerTransferAndCancel">
+   <children>
+      <VBox prefHeight="650.0" prefWidth="200.0">
+         <children>
+            <Label text="Transfer / Cancel Target:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="trnsfTargetName" text="MikePosOrders">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <VBox alignment="CENTER" prefHeight="68.0" prefWidth="150.0" spacing="3.0">
+               <children>
+                  <Label text="Entry Order Type:" />
+                  <RadioButton fx:id="movePosDownOrUp" mnemonicParsing="false" selected="true" text="Move pos down/up">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="actionTypeToggleGroup" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="transferBelowOrAbove" mnemonicParsing="false" text="Transfer below/above" toggleGroup="$actionTypeToggleGroup" />
+                  <RadioButton fx:id="cancelBelowOrAbove" mnemonicParsing="false" text="Cancel below/above" toggleGroup="$actionTypeToggleGroup" />
+                  <Button mnemonicParsing="false" text="Transfer ALL Closed P/L" />
+                  <Button mnemonicParsing="false" text="Transfer HALF Closed P/L" />
+                  <Button mnemonicParsing="false" text="Consolidate all MikePos into one" />
+                  <Button mnemonicParsing="false" text="Reduce Position by 1/4" />
+                  <Button mnemonicParsing="false" text="Reduce Position by 1/2" />
+                  <Button mnemonicParsing="false" text="FLATTEN Position" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

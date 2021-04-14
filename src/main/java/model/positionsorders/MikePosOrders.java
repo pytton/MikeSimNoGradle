@@ -21,7 +21,8 @@ public class MikePosOrders {
 
     /**
      * Use this to place a new order. Passes the order to the OrderServer.
-     * returns the orderID obtained from orderServer
+     * returns the orderID obtained from orderServer.
+     * Watch out for negative order amounts!
      * @return
      */
     synchronized public long placeNewOrder(MikeOrder.MikeOrderType orderType, int assignedToPos, int price, int amount) {

@@ -176,6 +176,8 @@ public class ControllerPlainOrder extends AlgoController {
         if(defaultSize.isSelected()) MikeSimLogger.addLogEvent("NOT IMPLEMENTED!");
 
 
+        //if position is short it is negative, therefore we need to make sure order amount is positive:
+        if(amount < 0) amount = amount *-1;
         return amount;
     }
 
