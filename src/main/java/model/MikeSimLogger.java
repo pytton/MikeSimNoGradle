@@ -37,6 +37,14 @@ public class MikeSimLogger {
         }
 
     }
-    
+
+    public synchronized static void printTradingStatistics(TradingDayStatistics stats){
+        MikeSimLogger.addLogEvent("\nCurrent Profit/Loss: " + stats.getCurrentGlobalPL());
+        MikeSimLogger.addLogEvent("Current Open Position: " + stats.getCurrentGlobalOpenPos());
+        MikeSimLogger.addLogEvent("Highest Profit: " + stats.getMaxProfit());
+        MikeSimLogger.addLogEvent("Highest Loss: " + stats.getMaxLoss());
+        MikeSimLogger.addLogEvent("Highest Open Long Position: " + stats.getHighestOpenLongPosition());
+        MikeSimLogger.addLogEvent("Highest Open Short Position: " + stats.getHighestOpenShortPosition());
+    }
 }
 

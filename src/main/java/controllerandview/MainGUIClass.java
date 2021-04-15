@@ -12,6 +12,7 @@ import main.java.controllerandview.algocontrollerpanes.ControllerGuardAlgoPane1;
 import main.java.controllerandview.windowcontrollers.*;
 import main.java.model.MainModelThread;
 import main.java.model.MikeSimLogger;
+import main.java.model.TradingDayStatistics;
 import main.java.model.priceserver.PriceServer;
 
 import java.io.IOException;
@@ -28,6 +29,10 @@ import java.util.Stack;
 public class MainGUIClass {
 
     public ControllerMainGUIWindow controllerPrimaryGUIWindow;
+
+    public void updateInfo(long count, long mainLoopTurnaroundTime, TradingDayStatistics tradingStatistics) {
+
+    }
 
     //this used so MainModelThread can periodically send signals to windows to update their data from the model
     public interface Updatable {
@@ -96,6 +101,8 @@ public class MainGUIClass {
 
         //display the initial window:
         initialStage.show();
+
+        updatableWindowsList.add(controllerPrimaryGUIWindow);
 
     }
 

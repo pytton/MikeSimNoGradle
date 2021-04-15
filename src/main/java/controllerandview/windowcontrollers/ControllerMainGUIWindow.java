@@ -3,6 +3,7 @@ package main.java.controllerandview.windowcontrollers;
 import com.ib.client.Contract;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import main.java.controllerandview.MainGUIClass;
@@ -14,7 +15,7 @@ import main.java.model.MainModelThread;
 import main.java.model.MikeSimLogger;
 import main.java.model.priceserver.PriceServer;
 
-public class ControllerMainGUIWindow {
+public class ControllerMainGUIWindow implements MainGUIClass.Updatable {
 
     public ListView instrumentsList;
     public TextField histDataDuration;
@@ -22,6 +23,12 @@ public class ControllerMainGUIWindow {
     public TextField histDataTime;
     public TextField mainloopCountTextField;
     public TextField mainloopSpeedTextField;
+    public Label openPosLabel;
+    public Label currentPLLabel;
+    public Label longMaxLabel;
+    public Label shortMaxLabel;
+    public Label profitMaxLabel;
+    public Label lossMaxLabel;
     private MainGUIClass mainGUIClass;
     private MainModelThread model;
 
@@ -202,5 +209,15 @@ public class ControllerMainGUIWindow {
 //        mainGUIClass.createPosWindow((640*3),1050);
 //        mainGUIClass.createPosWindow((640*4),1050);
 //        mainGUIClass.createPosWindow((640*5),1050);
+    }
+
+    @Override
+    public void updateGUI() {
+        openPosLabel.setText("" + model.tradingStatistics.getCurrentGlobalOpenPos());
+        currentPLLabel.setText("" + model.tradingStatistics.getCurrentGlobalPL());
+        longMaxLabel.setText("" + model.tradingStatistics.getHighestOpenLongPosition());
+        shortMaxLabel.setText("" + model.tradingStatistics.getHighestOpenShortPosition());
+        profitMaxLabel.setText("" + model.tradingStatistics.getMaxProfit());
+        lossMaxLabel.setText("" + model.tradingStatistics.getMaxLoss());
     }
 }

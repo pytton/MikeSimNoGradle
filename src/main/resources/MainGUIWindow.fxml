@@ -66,6 +66,78 @@
                         <TextField fx:id="mainloopSpeedTextField" prefWidth="35.0" />
                      </children>
                   </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="18.0" prefWidth="200.0">
+                     <children>
+                        <Label prefHeight="50.0" prefWidth="70.0" text="Open Pos">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="openPosLabel" alignment="CENTER" prefHeight="50.0" prefWidth="70.0" text="0">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="50.0" prefWidth="45.0" text="P/L:">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="currentPLLabel" alignment="CENTER" prefHeight="50.0" prefWidth="70.0" text="0">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="18.0" prefWidth="200.0">
+                     <children>
+                        <Label prefHeight="50.0" prefWidth="70.0" text="Long Max">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="longMaxLabel" alignment="CENTER" prefHeight="50.0" prefWidth="70.0" text="0">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="50.0" prefWidth="45.0" text="Short Max">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="shortMaxLabel" alignment="CENTER" prefHeight="50.0" prefWidth="70.0" text="0">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="18.0" prefWidth="200.0">
+                     <children>
+                        <Label prefHeight="50.0" prefWidth="70.0" text="Profit Max">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="profitMaxLabel" alignment="CENTER" prefHeight="50.0" prefWidth="70.0" text="0">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="50.0" prefWidth="45.0" text="Loss Max">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lossMaxLabel" alignment="CENTER" prefHeight="50.0" prefWidth="70.0" text="0">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
                </children>
             </VBox>
          </children>

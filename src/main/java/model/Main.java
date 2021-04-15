@@ -85,6 +85,7 @@ public class Main extends Application {
         mainModelThread.shutDownMikeSim();
 
         MikeSimLogger.addLogEvent("Ending program and writing to MikeSimLog.txt");
+        MikeSimLogger.printTradingStatistics(mainModelThread.tradingStatistics);
         MikeSimLogger.printLogToFile();
     }
 

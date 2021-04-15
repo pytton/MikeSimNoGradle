@@ -14,6 +14,7 @@ public class MainModelThread extends Thread {
 
     public MainGUIClass mainGUIClass;
     public PosOrdersManager posOrdersManager;
+    public TradingDayStatistics tradingStatistics;
 
     //set up connection to outside trading software for market data, orders, etc:
     public OutsideTradingSoftwareAPIConnection marketConnection;
@@ -32,6 +33,7 @@ public class MainModelThread extends Thread {
         //this stores a priceserver, orderserver and a list of MikePosOrders for each traded instrument:
         posOrdersManager = new PosOrdersManager(this, tradedInstrumentMap /*this*/);
         algoManager = new AlgoManager(this);
+        tradingStatistics = new TradingDayStatistics(0);
         setupInitialPosOrders();
     }
 
@@ -77,6 +79,7 @@ public class MainModelThread extends Thread {
                 if (System.currentTimeMillis() > timeOfLastModelUpdate + mainLoopThrottleSetting) {
                     processOrdersAndCalculatePL();
                     processAlgos();
+                    tradingStatistics.calculate(posOrdersManager);
                     mainLoopTurnaroundTime = System.currentTimeMillis() - timeOfLastModelUpdate;
                     timeOfLastModelUpdate = System.currentTimeMillis();
                     count++;
@@ -126,6 +129,7 @@ public class MainModelThread extends Thread {
                 positions.processFilledOrders();
                 positions.recalcutlatePL();
             }
+            //calulate global current P/L, highest P/L and highest loss, open long/short positions
 
             //process historical data:
             data.getPriceServer().processHistoricalData();
@@ -162,6 +166,8 @@ public class MainModelThread extends Thread {
 
                     mainGUIClass.controllerPrimaryGUIWindow.mainloopCountTextField.setText("" + count);
                     mainGUIClass.controllerPrimaryGUIWindow.mainloopSpeedTextField.setText("" + mainLoopTurnaroundTime);
+                    if(count%600 == 0) MikeSimLogger.printTradingStatistics(tradingStatistics);
+
 
 
 //                    MikeSimLogger.addLogEvent("Mainloop count: " + count + " MainLoop turnaround in miliseconds: " + mainLoopTurnaroundTime);
