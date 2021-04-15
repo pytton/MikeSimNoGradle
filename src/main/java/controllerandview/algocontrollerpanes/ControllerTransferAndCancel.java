@@ -40,10 +40,14 @@ public class ControllerTransferAndCancel extends AlgoController {
                 new ChangeListener<Toggle>() {
             @Override
             public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
-            if (actionTypeToggleGroup.getSelectedToggle() == movePosDownOrUp) { descriptionRow1 = "MOVE"; descriptionRow3 = "MOVE";}
-                if (actionTypeToggleGroup.getSelectedToggle() == transferBelowOrAbove) { descriptionRow1 = "TRNSF"; descriptionRow3 = controllerPositionsWindow.getTargetMikePosOrders().getName();}
-                if (actionTypeToggleGroup.getSelectedToggle() == cancelBelowOrAbove) { descriptionRow1 = "CX DW/UP"; descriptionRow3 = "CANCEL";}
-             } } );
+                try {
+                    if (actionTypeToggleGroup.getSelectedToggle() == movePosDownOrUp) { descriptionRow1 = "MOVE"; descriptionRow3 = "MOVE";}
+                    if (actionTypeToggleGroup.getSelectedToggle() == transferBelowOrAbove) { descriptionRow1 = "TRNSF"; descriptionRow3 = controllerPositionsWindow.getTargetMikePosOrders().getName();}
+                    if (actionTypeToggleGroup.getSelectedToggle() == cancelBelowOrAbove) { descriptionRow1 = "CX DW/UP"; descriptionRow3 = "CANCEL";}
+                } catch (Exception e) {
+                    MikeSimLogger.addLogEvent("Exception in main.java.controllerandview.algocontrollerpanes.ControllerTransferAndCancel.initialize");
+                }
+            } } );
     }
 
     @Override

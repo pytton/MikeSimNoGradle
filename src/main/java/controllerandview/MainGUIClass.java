@@ -103,13 +103,19 @@ public class MainGUIClass {
         return mainModelThread;
     }
 
+
+    public ControllerPositionsWindow createPosWindow(int xPos, int yPos){
+        return createPosWindow(xPos, yPos, false);
+    }
+
     /**
      * Creates and displays a new Positions window.
      * Default size is 640x1000 pixels
-     * @param xPos
-     * @param yPos
+     * @param xPos initial position of window on screen
+     * @param yPos initial position of window on screen
+     * @param setupColumns populate columns with default actions?
      */
-    public ControllerPositionsWindow createPosWindow(int xPos, int yPos) {
+    public ControllerPositionsWindow createPosWindow(int xPos, int yPos, boolean setupColumns) {
         //create Positions Window:
         //we need to add custom MikeGridPane not defined in FXML:
         MikePositionsWindowCreator creator = null;
@@ -145,16 +151,14 @@ public class MainGUIClass {
                 getMainModelThread().posOrdersManager.getPriceServer(defaultTickerId),
                 defaultTickerId );
 
+        //setup the default column actions if specified:
+        if(setupColumns) WindowControllerCommon.setupDefaultColumnActionsInControllerPositionsWindow(creator.getController());
 
         //add the controller to the list of controllers (for updateGUI):
         updatableWindowsList.add(creator.getController());
         controllerPositionsWindowList.add(creator.getController());
 
-
-
         return creator.getController();
-
-
     }
 
     /**

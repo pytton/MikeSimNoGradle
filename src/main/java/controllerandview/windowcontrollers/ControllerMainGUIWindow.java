@@ -35,7 +35,7 @@ public class ControllerMainGUIWindow {
         int xPos, yPos;
         xPos = 0;
         yPos = 0;
-        mainGUIClass.createPosWindow(xPos, yPos);
+        mainGUIClass.createPosWindow(xPos, yPos, true);
     }
 
     @FXML

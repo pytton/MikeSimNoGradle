@@ -16,26 +16,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0212a54c-a94c-4dfe-9eec-4ace680f76bc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/algocontrol/TrailingStopAlgo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/WindowControllerCommon.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/PositionsWindow/PositionsWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/PositionsWindow/PositionsWindow.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/PositionsWindow/algoControllers/PlainOrderControlPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/PositionsWindow/algoControllers/PlainOrderControlPanel.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollerpanes/ControllerPlainOrder$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollerpanes/ControllerPlainOrder$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollerpanes/ControllerPlainOrder$MultipleOrderCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollerpanes/ControllerPlainOrder$MultipleOrderCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollerpanes/ControllerPlainOrder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollerpanes/ControllerPlainOrder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollerpanes/ControllerTransferAndCancel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollerpanes/ControllerTransferAndCancel$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollerpanes/ControllerTransferAndCancel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollerpanes/ControllerTransferAndCancel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow$1ChoiceBoxChangeListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow$1ChoiceBoxChangeListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow$1MyInstrumentChangeListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow$1MyInstrumentChangeListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow$1MyPosOrdersChangeListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow$1MyPosOrdersChangeListener.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/algocontrol/AlgoManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/algocontrol/AlgoManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/algocontrol/BaseAlgo$Status.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/algocontrol/BaseAlgo$Status.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/positionsorders/MikePosOrders.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/positionsorders/MikePosOrders.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/PositionsWindow/PositionsWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/PositionsWindow/PositionsWindow.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/PositionsWindow/algoControllers/PlainOrderControlPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/PositionsWindow/algoControllers/PlainOrderControlPanel.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerPlainOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerPlainOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/MainGUIClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/MainGUIClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerTransferAndCancel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerTransferAndCancel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerMainGUIWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerMainGUIWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/algocontrol/AlgoManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/algocontrol/AlgoManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/algocontrol/BaseAlgo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/algocontrol/BaseAlgo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/positionsorders/MikePosOrders.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/positionsorders/MikePosOrders.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/PositionsWindow/PositionsWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PositionsWindow/PositionsWindow.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/PositionsWindow/algoControllers/PlainOrderControlPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PositionsWindow/algoControllers/PlainOrderControlPanel.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,11 +103,11 @@
       <recent name="$PROJECT_DIR$/MikeSimDevelopingExperiments/src/main/java/model" />
     </key>
     <key name="MoveMembersDialog.RECENTS_KEY">
+      <recent name="main.java.controllerandview.windowcontrollers.WindowControllerCommon" />
       <recent name="main.java.model.positionsorders.PosOrdersManager" />
       <recent name="main.java.model.positionsorders.MikePosOrders" />
       <recent name="main.java.model.PosOrdersManager" />
       <recent name="main.java.controllerandview.CommonGUI" />
-      <recent name="main.java.controllerandview.MikeGridPane" />
     </key>
     <key name="MoveInnerDialog.RECENTS_KEY">
       <recent name="main.java.model" />
