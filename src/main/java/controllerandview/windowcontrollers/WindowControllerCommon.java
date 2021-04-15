@@ -24,14 +24,12 @@ public class WindowControllerCommon {
     public static void setupDefaultColumnActionsInControllerPositionsWindow(ControllerPositionsWindow controllerPositionsWindow) {
         MikeSimLogger.addLogEvent("setting initial column actions in Positionswindow");
         try {
-            ControllerSimpleScalperAlgo controllerSimpleScalperAlgo;// = loader.getController();
             ControllerPlainOrder controllerPlainOrder;// = loader.getController();
+            ControllerTransferAndCancel transferAndCancel;
 
             //setup first column:
-            setupSimpleScalperInColumn(controllerPositionsWindow, 1);
-
-//            //experiment:
-//            setupSimpleStepperAlgoInColumn(controllerPositionsWindow, 1);
+            transferAndCancel = setupTransferAndCancelInColumn(controllerPositionsWindow, 1);
+            transferAndCancel.cancelBelowOrAbove.fire();
 
             //setup second column:
             controllerPlainOrder = setupPlainOrderInColumn(controllerPositionsWindow, 2);
@@ -45,10 +43,6 @@ public class WindowControllerCommon {
             controllerPlainOrder = setupPlainOrderInColumn(controllerPositionsWindow, 4);
             controllerPlainOrder.cancel.fire();
 
-//            //experiment:
-//            ControllerTransferAndCancel contr = setupTransferAndCancelInColumn(controllerPositionsWindow,4);
-//            contr.cancelBelowOrAbove.fire();
-
             //setup 5th column:
             controllerPlainOrder = setupPlainOrderInColumn(controllerPositionsWindow, 5);
             controllerPlainOrder.sellStop.fire();
@@ -58,8 +52,8 @@ public class WindowControllerCommon {
             controllerPlainOrder.sellLimit.fire();
 
             //setup 7th column:
-            controllerSimpleScalperAlgo = setupSimpleScalperInColumn(controllerPositionsWindow, 7);
-            controllerSimpleScalperAlgo.sellLimit.fire();
+            transferAndCancel = setupTransferAndCancelInColumn(controllerPositionsWindow, 7);
+            transferAndCancel.transferBelowOrAbove.fire();
 
             MikeSimLogger.addLogEvent("Experiment in setting initial column controller  successful");
         } catch (Exception e) {

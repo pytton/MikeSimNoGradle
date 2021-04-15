@@ -6,6 +6,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import main.java.controllerandview.MainGUIClass;
+import main.java.controllerandview.algocontrollerpanes.ControllerPlainOrder;
+import main.java.controllerandview.algocontrollerpanes.ControllerSimpleScalperAlgo;
+import main.java.controllerandview.algocontrollerpanes.ControllerSimpleStepperAlgo;
+import main.java.controllerandview.algocontrollerpanes.ControllerTransferAndCancel;
 import main.java.model.MainModelThread;
 import main.java.model.MikeSimLogger;
 import main.java.model.priceserver.PriceServer;
@@ -121,35 +125,79 @@ public class ControllerMainGUIWindow {
 
         //indexes are defined in main.java.model.MainModelThread.setupInitialPosOrders()
 
-        ControllerPositionsWindow controller = null;
+        ControllerPositionsWindow windowController = null;
+        ControllerPlainOrder plainOrder = null;
+        ControllerSimpleStepperAlgo stepper = null;
+        ControllerSimpleScalperAlgo scalper = null;
+        ControllerTransferAndCancel transferAndCancel = null;
 
-        controller = mainGUIClass.createPosWindow((640*0),0);
-        controller.positionsList.getSelectionModel().clearAndSelect(1);
-        controller.targetPositionsList.getSelectionModel().clearAndSelect(3);
 
-        controller = mainGUIClass.createPosWindow((640*1),0);
-        controller.positionsList.getSelectionModel().clearAndSelect(2);
-        controller.targetPositionsList.getSelectionModel().clearAndSelect(3);
+        //create the first window and setup its column actions for stepper algo long:
+        windowController = mainGUIClass.createPosWindow((640*0),0);
+        windowController.positionsList.getSelectionModel().clearAndSelect(1);
+        windowController.targetPositionsList.getSelectionModel().clearAndSelect(4);
+        stepper = WindowControllerCommon.setupSimpleStepperAlgoInColumn(windowController, 1);
+        stepper.buyStop.fire();
+        plainOrder = WindowControllerCommon.setupPlainOrderInColumn(windowController, 2);
+        plainOrder.multipleCheckBox.setSelected(false);
+        plainOrder.trailingStopCheckbox.setSelected(true);
+        plainOrder.sellStop.fire();
+        plainOrder.size1of8.fire();
+        transferAndCancel = WindowControllerCommon.setupTransferAndCancelInColumn(windowController, 4);
+        transferAndCancel.cancelBelowOrAbove.fire();
+        transferAndCancel = WindowControllerCommon.setupTransferAndCancelInColumn(windowController, 7);
+        transferAndCancel.transferBelowOrAbove.fire();
 
-        controller =  mainGUIClass.createPosWindow((640*2),0);
-        controller.positionsList.getSelectionModel().clearAndSelect(3);
-        controller.targetPositionsList.getSelectionModel().clearAndSelect(7);
-//
-//        mainGUIClass.createPosWindow((640*3),0);
-//        mainGUIClass.createPosWindow((640*4),0);
-//        mainGUIClass.createPosWindow((640*5),0);
+        //create second window for scalper short:
+        windowController = mainGUIClass.createPosWindow((640*1),0);
+        windowController.positionsList.getSelectionModel().clearAndSelect(2);
+        windowController.targetPositionsList.getSelectionModel().clearAndSelect(1);
+        scalper = WindowControllerCommon.setupSimpleScalperInColumn(windowController, 1);
+        scalper.sellLimit.fire();
+        transferAndCancel = WindowControllerCommon.setupTransferAndCancelInColumn(windowController, 4);
+        transferAndCancel.cancelBelowOrAbove.fire();
+        transferAndCancel = WindowControllerCommon.setupTransferAndCancelInColumn(windowController, 7);
+        transferAndCancel.transferBelowOrAbove.fire();
 
-        controller = mainGUIClass.createPosWindow((640*0),1050);
-        controller.positionsList.getSelectionModel().clearAndSelect(4);
-        controller.targetPositionsList.getSelectionModel().clearAndSelect(6);
+        //create third window with default actions:
+        windowController =  mainGUIClass.createPosWindow((640*2),0);
+        windowController.positionsList.getSelectionModel().clearAndSelect(3);
+        windowController.targetPositionsList.getSelectionModel().clearAndSelect(7);
+        WindowControllerCommon.setupDefaultColumnActionsInControllerPositionsWindow(windowController);
 
-        controller = mainGUIClass.createPosWindow((640*1),1050);
-        controller.positionsList.getSelectionModel().clearAndSelect(5);
-        controller.targetPositionsList.getSelectionModel().clearAndSelect(6);
+        //fourth window stepper algo short:
+        windowController = mainGUIClass.createPosWindow((640*0),1050);
+        windowController.positionsList.getSelectionModel().clearAndSelect(4);
+        windowController.targetPositionsList.getSelectionModel().clearAndSelect(1);
+        stepper = WindowControllerCommon.setupSimpleStepperAlgoInColumn(windowController, 1);
+        stepper.sellStop.fire();
+        plainOrder = WindowControllerCommon.setupPlainOrderInColumn(windowController, 2);
+        plainOrder.multipleCheckBox.setSelected(false);
+        plainOrder.trailingStopCheckbox.setSelected(true);
+        plainOrder.buyStop.fire();
+        plainOrder.size1of8.fire();
+        transferAndCancel = WindowControllerCommon.setupTransferAndCancelInColumn(windowController, 4);
+        transferAndCancel.cancelBelowOrAbove.fire();
+        transferAndCancel = WindowControllerCommon.setupTransferAndCancelInColumn(windowController, 7);
+        transferAndCancel.transferBelowOrAbove.fire();
 
-        controller =  mainGUIClass.createPosWindow((640*2),1050);
-        controller.positionsList.getSelectionModel().clearAndSelect(6);
-        controller.targetPositionsList.getSelectionModel().clearAndSelect(7);
+        //fifth window for scalper long:
+        windowController = mainGUIClass.createPosWindow((640*1),1050);
+        windowController.positionsList.getSelectionModel().clearAndSelect(5);
+        windowController.targetPositionsList.getSelectionModel().clearAndSelect(1);
+        scalper = WindowControllerCommon.setupSimpleScalperInColumn(windowController, 1);
+        scalper.buyLimit.fire();
+        transferAndCancel = WindowControllerCommon.setupTransferAndCancelInColumn(windowController, 4);
+        transferAndCancel.cancelBelowOrAbove.fire();
+        transferAndCancel = WindowControllerCommon.setupTransferAndCancelInColumn(windowController, 7);
+        transferAndCancel.transferBelowOrAbove.fire();
+
+        //sixth window with default actions:
+        windowController = mainGUIClass.createPosWindow((640*2),1050);
+        windowController.positionsList.getSelectionModel().clearAndSelect(6);
+        windowController.targetPositionsList.getSelectionModel().clearAndSelect(7);
+        WindowControllerCommon.setupDefaultColumnActionsInControllerPositionsWindow(windowController);
+
 
 //        mainGUIClass.createPosWindow((640*3),1050);
 //        mainGUIClass.createPosWindow((640*4),1050);
