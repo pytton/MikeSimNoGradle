@@ -53,6 +53,21 @@
                   </VBox>
                </children>
             </HBox>
+            <VBox alignment="CENTER" prefWidth="200.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="Order Amount Source:" />
+                  <HBox alignment="CENTER" prefHeight="20.0" prefWidth="200.0">
+                     <children>
+                        <RadioButton fx:id="thisBookRadioBtn" mnemonicParsing="false" selected="true" text="This book">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="orderAmountSource" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="targetBookRadioBtn" mnemonicParsing="false" text="Target book" toggleGroup="$orderAmountSource" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0">
                <children>
                   <Label text="Order Amount" />
@@ -60,17 +75,17 @@
                </children>
             </HBox>
             <CheckBox fx:id="multipleCheckBox" mnemonicParsing="false" text="Multiple?" />
+            <HBox alignment="CENTER_LEFT">
+               <children>
+                  <CheckBox fx:id="trailingStopCheckbox" mnemonicParsing="false" prefWidth="100.0" text="TrailingStop" />
+               </children>
+            </HBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0">
                <children>
                   <Label prefWidth="70.0" text="Amt" />
                   <TextField fx:id="multipleAmount" prefHeight="25.0" prefWidth="70.0" text="30" />
                   <Label prefWidth="70.0" text="Dist" />
                   <TextField fx:id="multipleDistance" prefHeight="25.0" prefWidth="70.0" text="1" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT">
-               <children>
-                  <CheckBox fx:id="trailingStopCheckbox" mnemonicParsing="false" prefWidth="100.0" text="TrailingStop" />
                </children>
             </HBox>
          </children>

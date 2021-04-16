@@ -39,6 +39,8 @@ public class ControllerPlainOrder extends AlgoController {
     public TextField multipleAmount;
     public TextField multipleDistance;
     public CheckBox trailingStopCheckbox;
+    public RadioButton thisBookRadioBtn;
+    public RadioButton targetBookRadioBtn;
 
     private MikeOrder.MikeOrderType orderType = MikeOrder.MikeOrderType.BUYLMT;
     private ControllerPositionsWindow controllerPositionsWindow;
@@ -188,18 +190,21 @@ public class ControllerPlainOrder extends AlgoController {
 
         Integer amount = 1; //Integer.parseInt(orderAmount.getText());
 
-
-
         if (manualSize.isSelected()) amount = Integer.parseInt(orderAmount.getText());
 
         if (controllerPositionsWindow == null) {MikeSimLogger.addLogEvent("null pointer in ControllerPlainOrder.getAmount()");
         return amount; }
 
+        //implement ability to get amount based on open position in posOrders or targetPosOrders that
+        //the ControllerPositionsWindow has selected:
+        MikePosOrders amountSource = controllerPositionsWindow.getMikePosOrders();
+        if(targetBookRadioBtn.isSelected()) amountSource = controllerPositionsWindow.getTargetMikePosOrders();
 
-        if (size1of1.isSelected()) amount = controllerPositionsWindow.getMikePosOrders().getTotalOpenAmount();
-        if (size1of2.isSelected()) amount = (int) (0.5 * controllerPositionsWindow.getMikePosOrders().getTotalOpenAmount());
-        if (size1of4.isSelected()) amount = (int) (0.25 * controllerPositionsWindow.getMikePosOrders().getTotalOpenAmount());
-        if (size1of8.isSelected()) amount = (int) (0.125 * controllerPositionsWindow.getMikePosOrders().getTotalOpenAmount());
+
+        if (size1of1.isSelected()) amount = amountSource.getTotalOpenAmount();
+        if (size1of2.isSelected()) amount = (int) (0.5 * amountSource.getTotalOpenAmount());
+        if (size1of4.isSelected()) amount = (int) (0.25 * amountSource.getTotalOpenAmount());
+        if (size1of8.isSelected()) amount = (int) (0.125 * amountSource.getTotalOpenAmount());
         if(defaultSize.isSelected()) MikeSimLogger.addLogEvent("NOT IMPLEMENTED!");
 
 

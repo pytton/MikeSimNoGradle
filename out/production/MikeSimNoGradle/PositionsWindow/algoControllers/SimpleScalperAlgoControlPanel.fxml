@@ -42,7 +42,7 @@
             <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="200.0">
                <children>
                   <Label text="Scalper Target Interval" />
-                  <TextField fx:id="targetInterval" prefHeight="25.0" prefWidth="70.0" text="2" />
+                  <TextField fx:id="targetInterval" prefHeight="25.0" prefWidth="70.0" text="3" />
                </children>
             </HBox>
             <CheckBox fx:id="multipleCheckBox" mnemonicParsing="false" selected="true" text="Multiple?" />
