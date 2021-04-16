@@ -54,6 +54,7 @@
                   <TextField fx:id="multipleDistance" prefHeight="25.0" prefWidth="70.0" text="1" />
                </children>
             </HBox>
+            <CheckBox fx:id="addPlainOrderCheckbox" mnemonicParsing="false" selected="true" text="Add plain order?" />
          </children>
       </VBox>
    </children>

@@ -31,6 +31,7 @@ public class ControllerSimpleScalperAlgo extends AlgoController {
     public CheckBox multipleCheckBox;
     public TextField multipleAmount;
     public TextField multipleDistance;
+    public CheckBox addPlainOrderCheckbox;
     private MikeOrder.MikeOrderType orderType = MikeOrder.MikeOrderType.BUYLMT;
 
     private final String descriptionRow1 = "SCLP1";
@@ -47,9 +48,10 @@ public class ControllerSimpleScalperAlgo extends AlgoController {
         int priceToSend;
         int orderAmount;
         int interval;
+        boolean addPlainOrder = false;
 
         public MultipleOrderCommand(AlgoManager algoManager, MikePosOrders posOrdersToSendTo,
-                                    MikeOrder.MikeOrderType orderType, int priceToSend, int orderAmount, int interval) {
+                                    MikeOrder.MikeOrderType orderType, int priceToSend, int orderAmount, int interval, boolean addPlainOrder) {
 
             this.posOrdersToSendTo = posOrdersToSendTo;
             this.orderType = orderType;
@@ -57,6 +59,7 @@ public class ControllerSimpleScalperAlgo extends AlgoController {
             this.orderAmount = orderAmount;
             this.algoManager = algoManager;
             this.interval = interval;
+            this.addPlainOrder = addPlainOrder;
         }
 
         @Override
@@ -76,6 +79,9 @@ public class ControllerSimpleScalperAlgo extends AlgoController {
 //            model.algoManager.createScalperAlgo1(posOrders, pricePressed, pricePressed + getInterval(), getAmount(), orderType);
 
             algoManager.createScalperAlgo1(posOrdersToSendTo, priceToSend, priceToSend + getInterval(), getAmount(), orderType);
+
+            //handle adding a plain order if selected by user:
+            if(addPlainOrder) posOrdersToSendTo.placeNewOrder(orderType, priceToSend, priceToSend, getAmount());
 
 //            algoManager.createSimpleStepperAlgo(posOrdersToSendTo, priceToSend, getInterval(), getAmount(), orderType,
 //                    smTrailingStopCheckBox.isSelected(), fixedTrailingStopCheckBox.isSelected());
@@ -144,15 +150,18 @@ public class ControllerSimpleScalperAlgo extends AlgoController {
                 MikeSimLogger.addLogEvent("Attempting multiple");
 
                 ControllerSimpleScalperAlgo.MultipleOrderCommand command = new ControllerSimpleScalperAlgo.MultipleOrderCommand(model.algoManager,
-                        posOrders, orderType, pricePressed, getAmount(), getInterval());
+                        posOrders, orderType, pricePressed, getAmount(), getInterval(), addPlainOrderCheckbox.isSelected());
 
                 CommonGUI.placeMultipleOrder(command, multipleAmount, multipleDistance, orderType, pricePressed);
 
                 return;
             }
 
-
             model.algoManager.createScalperAlgo1(posOrders, pricePressed, pricePressed + getInterval(), getAmount(), orderType);
+            if (addPlainOrderCheckbox.isSelected()) {
+                posOrders.placeNewOrder(orderType, pricePressed, pricePressed, getAmount());
+            }
+
         } else {
             model.algoManager.cancelAllSimpleScalperAlgosAtPrice(pricePressed, posOrders);
         }
