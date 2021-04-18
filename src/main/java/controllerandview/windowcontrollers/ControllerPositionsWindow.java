@@ -296,25 +296,34 @@ public class ControllerPositionsWindow
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
                 try {
+                    if(positionsList.getSelectionModel().getSelectedItem() == null) return;
+                    if(targetPositionsList.getSelectionModel().getSelectedItem() == null) return;
                     //set the MikePosOrders to the one selected:
                     controllerPositionsWindow.mikePosOrders = (MikePosOrders) positionsList.getSelectionModel().getSelectedItem();
-                    MikeSimLogger.addLogEvent("Chosen: " + ((MikePosOrders) positionsList.getSelectionModel().getSelectedItem()).getName());
-
+                    MikeSimLogger.addLogEvent("Chosen posOrders: "
+                            + ((MikePosOrders) positionsList.getSelectionModel().getSelectedItem()).getName()
+                    + " . Chosen target: "
+                    + ((MikePosOrders) targetPositionsList.getSelectionModel().getSelectedItem()).getName()
+                    );
+                    
                     //rename the window:
                     Stage stage = (Stage) controllerPositionsWindow.getMainBorderPane().getScene().getWindow();
-                    stage.setTitle(((MikePosOrders) positionsList.getSelectionModel().getSelectedItem()).getName());
+                    stage.setTitle(
+                            ((MikePosOrders) positionsList.getSelectionModel().getSelectedItem()).getName()
+                            + " " + ((MikePosOrders) targetPositionsList.getSelectionModel().getSelectedItem()).getName());
 
                     //notify aggregatedPosOrders about all the selected MikePosOrders:
                     aggregatedPosOrders.setPosOrdersList(positionsList.getSelectionModel().getSelectedItems());
 
                 } catch (Exception e) {
-//                    e.printStackTrace();
+                    e.printStackTrace();
                     MikeSimLogger.addLogEvent("Exception thrown in MyPosOrdersChangeListener");
                 }
             }
         }
         MyPosOrdersChangeListener posListener = new MyPosOrdersChangeListener(this);
         positionsList.getSelectionModel().selectedItemProperty().addListener(posListener);
+        targetPositionsList.getSelectionModel().selectedItemProperty().addListener(posListener);
 
         //setup the column action tabs. define algo controllers here :
         class ChoiceBoxChangeListener implements ChangeListener {

@@ -137,7 +137,7 @@ public class ControllerGuardAlgoPane1 extends AlgoController implements CommonGU
             {
             status = guardAlgoDOWNThatIsControlled.getStatus();
             statusAndCreateDownBtn.setText(status);
-            if (status.contentEquals("CREATED")) statusAndCreateDownBtn.setStyle("-fx-background-color: light-blue");
+            if (status.contentEquals("CREATED")) statusAndCreateDownBtn.setStyle("-fx-background-color: skyblue");
             if (status.contentEquals("RUNNING")) statusAndCreateDownBtn.setStyle("-fx-background-color: green");
             if (status.contentEquals("FAILED")) statusAndCreateDownBtn.setStyle("-fx-background-color: red");
             if (status.contentEquals("SUSPENDED")) statusAndCreateDownBtn.setStyle("-fx-background-color: yellow");
@@ -151,7 +151,7 @@ public class ControllerGuardAlgoPane1 extends AlgoController implements CommonGU
         } else {
             status = guardAlgoUPThatIsControlled.getStatus();
             statusAndCreateUpBtn.setText(status);
-            if (status.contentEquals("CREATED")) statusAndCreateUpBtn.setStyle("-fx-background-color: light-blue");
+            if (status.contentEquals("CREATED")) statusAndCreateUpBtn.setStyle("-fx-background-color: skyblue");
             if (status.contentEquals("RUNNING")) statusAndCreateUpBtn.setStyle("-fx-background-color: green");
             if (status.contentEquals("FAILED")) statusAndCreateUpBtn.setStyle("-fx-background-color: red");
             if (status.contentEquals("SUSPENDED")) statusAndCreateUpBtn.setStyle("-fx-background-color: yellow");

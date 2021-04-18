@@ -79,6 +79,7 @@ public class ControllerPlainOrder extends AlgoController {
     @Override
     public String getSimpleDescriptionRow3() {
 
+        if(trailingStopCheckbox.isSelected()) return ("T " + getAmount());
         if(multipleCheckBox.isSelected()) return ("M " + getAmount());
         return ("" + getAmount());
     }

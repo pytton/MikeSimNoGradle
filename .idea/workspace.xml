@@ -17,11 +17,14 @@
   <component name="ChangeListManager">
     <list default="true" id="0212a54c-a94c-4dfe-9eec-4ace680f76bc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/PositionsWindow/algoControllers/SimpleScalperAlgoControlPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/PositionsWindow/algoControllers/SimpleScalperAlgoControlPanel.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/PositionsWindow/algoControllers/SimpleScalperAlgoControlPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/PositionsWindow/algoControllers/SimpleScalperAlgoControlPanel.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow$1ChoiceBoxChangeListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow$1ChoiceBoxChangeListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow$1MyPosOrdersChangeListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow$1MyPosOrdersChangeListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/MainGUIWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/MainGUIWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerGuardAlgoPane1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerGuardAlgoPane1.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerPlainOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerPlainOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/PositionsWindow/algoControllers/PlainOrderControlPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PositionsWindow/algoControllers/PlainOrderControlPanel.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/PositionsWindow/algoControllers/SimpleScalperAlgoControlPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PositionsWindow/algoControllers/SimpleScalperAlgoControlPanel.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/MainGUIWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/MainGUIWindow.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -499,7 +502,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618572048207</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="MSim-53 Plain Order - amount option done">
+      <created>1618574957133</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1618574957133</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -575,7 +585,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed gitignore" />
     <MESSAGE value="commiting from Intellij" />
     <MESSAGE value="added button 'test conf dialog' to PositionsWindow" />
     <MESSAGE value="MSim-36 Confirmation dialog before quitting done." />
@@ -600,7 +609,8 @@
     <MESSAGE value="MSim-49 Create 6 PosWindows on 4K screen done" />
     <MESSAGE value="MSim-51 Trading Statistics printout done" />
     <MESSAGE value="MSim-52 Add plain order to scalper algo done" />
-    <option name="LAST_COMMIT_MESSAGE" value="MSim-52 Add plain order to scalper algo done" />
+    <MESSAGE value="MSim-53 Plain Order - amount option done" />
+    <option name="LAST_COMMIT_MESSAGE" value="MSim-53 Plain Order - amount option done" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/MikeSimNoGradle$Main.ic" NAME="Main Coverage Results" MODIFIED="1609257311491" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
