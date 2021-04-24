@@ -76,6 +76,10 @@ public class MikePosition {
         }
     }
 
+    protected void setClosedPL(int amount){
+        closed_pl = amount;
+    }
+
     public int getPrice() {
         return price;
     }

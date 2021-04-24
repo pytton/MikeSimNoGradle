@@ -13,6 +13,82 @@ import java.util.*;
  */
 public class MikePosOrders {
 
+
+
+    /**
+     * The name of this MikePosOrders:
+     */
+    private String name;
+    /**
+     * positive totalOpenAmount means the total position is long
+     * negative means it is short
+     */
+    protected int totalOpenAmount = 0;
+    protected int openPL = 0;
+    /**
+     * This is the closedPL of all of the MikePositions contained in positionsMap
+     */
+    protected int closedPL = 0;
+
+    /**
+     * This is an independent Closed Profit Loss not assigned to any MikePosition but to this whole MikePosOrders
+     * separately - it does not get moved when moving individual MikePositions from one MikePosOrders to another.
+     * It is included in calculating the totalPL and zeroProfitPoint. You can move it to another MikePosOrders using
+     * a dedicated method: moveInternalClosedPL
+     */
+    protected int internalClosedPL = 0;
+
+    public int getInternalClosedPL(){return internalClosedPL;}
+    protected void setInternalClosedPL(int amount){internalClosedPL = amount;}
+
+    /**
+     * Reduces this MikePosOrders InternalClosedPL by amount and increases it by the same amount in
+     * the targetMikePosOrders
+     * @param amount amount of PL to be removed from this MikePosOrders
+     * @param targetPosOrders the MikePosOrders to transfer the PL to
+     */
+    public synchronized void moveInternalClosedPL(int amount, MikePosOrders targetPosOrders){
+        if(targetPosOrders == null) return;
+        internalClosedPL = internalClosedPL - amount;
+        int targetInterClosedPL = targetPosOrders.getInternalClosedPL();
+        targetPosOrders.setInternalClosedPL(targetInterClosedPL + amount );
+    }
+
+    /**
+     * This moves all the closed PL from individual MikePositions in this MikePosOrders to
+     * InternalClosedPL
+     */
+    public synchronized void transferClosedPLFromPositionsToInternal(){
+        int closedPLToAdd = 0;
+        int bidPrice = priceServer.getBidPrice();
+        int askPrice = priceServer.getAskPrice();
+        for(MikePosition position : positionsMap.values()){
+            closedPLToAdd += position.getClosed_pl();
+            position.setClosedPL(0);
+//            position.calculatePL(bidPrice, askPrice);
+        }
+        internalClosedPL = internalClosedPL + closedPLToAdd;
+    }
+
+    protected int totalPL = 0;
+    protected Double averagePrice = null;
+    protected Double zeroProfitPoint = null;
+
+    private Map<Integer, MikePosition> positionsMap = new HashMap<>();
+    private SortedSet<Long> activeOrdersSet = new TreeSet<>();
+    private Set<Long> filledOrdersToBeProcessed = new HashSet<>();
+    public OrdersAtPrice ordersAtPrice;
+
+    private MikePosOrders parent = null;
+
+    private Set<MikePosOrders> childPosOrders = new HashSet<>();
+
+    private OrderServer orderServer;
+    public PriceServer priceServer; //we need this to calculate Profit/Loss (PL)
+    protected MikePosOrders() {
+
+    }
+
     public MikePosOrders(OrderServer orderServer, PriceServer priceServer) {
         this.orderServer = orderServer;
         this.priceServer = priceServer;
@@ -57,7 +133,10 @@ public class MikePosOrders {
         ordersAtPrice.recalculateOpenOrdersAtPrice();
     }
 
-    //todo: this doesn't cancel the orders at this price in child MikePosOrders
+    /**
+     * this doesn't cancel the orders at this price in child MikePosOrders
+     * @param price
+     */
     public synchronized void cancelAllOrdersAtPrice(int price) {
         Set<Long> orderIdToCancelSet = new HashSet<>();
 
@@ -77,12 +156,13 @@ public class MikePosOrders {
 
     /**
      * This makes the position flat by submitting stop orders 5 pricepoints below bid/ask for instant fill
+     * @param percentage the percent by which we want to reduce it. 1 is all, 0.25 is by 25%, 0.7 is by 70%
      */
-    public synchronized void flattenThisPosition(){
+    public synchronized void flattenThisPosition(float percentage){
         int safetyAmount = 5; //this is how far from the bid/ask we want to place the stop orders
         int openAmount = getTotalOpenAmount();
-        if(openAmount > 0) placeNewOrder(MikeOrder.MikeOrderType.SELLSTP, getAskPrice(), (getAskPrice() + safetyAmount), openAmount);
-        if(openAmount < 0) placeNewOrder(MikeOrder.MikeOrderType.BUYSTP, getBidPrice(), (getBidPrice() - safetyAmount), openAmount);
+        if(openAmount > 0) placeNewOrder(MikeOrder.MikeOrderType.SELLSTP, getAskPrice(), (getAskPrice() + safetyAmount), (int) (openAmount * percentage));
+        if(openAmount < 0) placeNewOrder(MikeOrder.MikeOrderType.BUYSTP, getBidPrice(), (getBidPrice() - safetyAmount), (int) (openAmount * percentage));
     }
 
     /**
@@ -128,41 +208,6 @@ public class MikePosOrders {
         }
 
     }
-
-
-    protected MikePosOrders() {
-
-    }
-
-    /**
-     * The name of this MikePosOrders:
-     */
-    private String name;
-    /**
-     * positive totalOpenAmount means the total position is long
-     * negative means it is short
-     */
-    protected int totalOpenAmount = 0;
-    protected int openPL = 0;
-    protected int closedPL = 0;
-    protected int totalPL = 0;
-    protected Double averagePrice = null;
-    protected Double zeroProfitPoint = null;
-
-    private Map<Integer, MikePosition> positionsMap = new HashMap<>();
-    private SortedSet<Long> activeOrdersSet = new TreeSet<>();
-    private Set<Long> filledOrdersToBeProcessed = new HashSet<>();
-    public OrdersAtPrice ordersAtPrice;
-
-    private MikePosOrders parent = null;
-
-    public void setParent(MikePosOrders posOrders) {
-        parent = posOrders;
-    }
-
-    private Set<MikePosOrders> childPosOrders = new HashSet<>();
-    private OrderServer orderServer;
-    public PriceServer priceServer; //we need this to calculate Profit/Loss (PL)
 
     /**
      * Returns the total amount of all open BUY orders in this MikePosOrders.
@@ -224,7 +269,7 @@ public class MikePosOrders {
     /**
      * ask this class for the amount of open buy and sell orders at a given price
      */
-    private class OrdersAtPrice {
+    public class OrdersAtPrice {
 
         private Map<Integer, Integer> buyOrdersAtPrice = new TreeMap<>();
         private Map<Integer, Integer> sellOrdersAtPrice = new TreeMap<>();
@@ -251,14 +296,6 @@ public class MikePosOrders {
             if (sellOrdersAtPrice.containsKey(price)) return sellOrdersAtPrice.get(price);
             else return 0;
         }
-
-
-        synchronized private OrdersAtPrice recalculate(OrdersAtPrice ordersAtPrice) {
-            return ordersAtPrice;
-        }
-
-
-
 
         synchronized private OrdersAtPrice recalc(OrdersAtPrice ordersAtPrice) {
 
@@ -364,9 +401,11 @@ public class MikePosOrders {
         totalPL = 0;
         totalOpenAmount = 0;
         averagePrice = 0.0;
+        int bidPrice = priceServer.getBidPrice();
+        int askPrice = priceServer.getAskPrice();
         double averagePriceCalculator = 0;
         for (MikePosition position : positionsMap.values()) {
-            position.calculatePL(priceServer.getBidPrice(), priceServer.getAskPrice());
+            position.calculatePL(bidPrice, askPrice);
             openPL += position.getOpen_pl();
             closedPL += position.getClosed_pl();
             totalPL += position.getTotal_pl();
@@ -386,18 +425,31 @@ public class MikePosOrders {
             }
         }
 
+        //internaClosedPL belongs to this MikePosOrders, it is independent from all individual MikePositions
+        closedPL = closedPL + internalClosedPL;
+        totalPL = openPL + closedPL;
+//        totalPL = totalPL + internalClosedPL;
 
+        //this is suspicious
         if (totalOpenAmount == 0) {
+            //chenging stuff here - test this:
             openPL = 0;
             closedPL = totalPL;
+//            zeroProfitPoint = null;
+//            averagePrice = null;
         }
 
         if (totalOpenAmount != 0) {
             averagePrice = averagePriceCalculator / totalOpenAmount;
         } else averagePrice = null;
+
         if (totalOpenAmount != 0) zeroProfitPoint = (averagePrice) - (closedPL / totalOpenAmount);
         else if (averagePrice != null) zeroProfitPoint = averagePrice;
         else zeroProfitPoint = null;
+
+
+
+
     }
 
     private MikePosition getMikePositionAtPrice(int price) {
@@ -646,7 +698,6 @@ public class MikePosOrders {
         return priceServer.getAskPrice();
     }
 
-
     private boolean recalculateChildren = true;
 
     /**
@@ -668,6 +719,10 @@ public class MikePosOrders {
         child.setParent(this);
         childPosOrders.add(child);
         return child;
+    }
+
+    public void setParent(MikePosOrders posOrders) {
+        parent = posOrders;
     }
 
 }

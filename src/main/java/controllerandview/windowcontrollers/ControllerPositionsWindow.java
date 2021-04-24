@@ -981,8 +981,26 @@ public class ControllerPositionsWindow
 
     }
 
-    public void testTargetPosClicked(ActionEvent actionEvent) {
-        MikeSimLogger.addLogEvent("Selected: " + targetPositionsList.getSelectionModel().getSelectedItem().toString());
+    public void testTransferHalfClosedPLClicked(ActionEvent actionEvent) {
+
+        MikeSimLogger.addLogEvent("Transferring all ClosedPL from positions to internalClosedPL and moving half" +
+                "\nof it to targerPosOrders");
+        MikeSimLogger.addLogEvent("Internal PL before: " + mikePosOrders.getInternalClosedPL());
+        mikePosOrders.transferClosedPLFromPositionsToInternal();
+        MikeSimLogger.addLogEvent("Internal PL after: " + mikePosOrders.getInternalClosedPL()      );
+
+        mikePosOrders.moveInternalClosedPL( (mikePosOrders.getInternalClosedPL()/2), getTargetMikePosOrders() );
+        MikeSimLogger.addLogEvent("Internal Closed PL after moving half: " + mikePosOrders.getInternalClosedPL());
+
+        MikeSimLogger.addLogEvent("Internal PL in target: " + getTargetMikePosOrders().getInternalClosedPL());
+
+
+
+
+
+
+
+//        MikeSimLogger.addLogEvent("Selected: " + targetPositionsList.getSelectionModel().getSelectedItem().toString());
     }
 
     /**
@@ -993,7 +1011,7 @@ public class ControllerPositionsWindow
         if(CommonGUI.showConfirmationDialog("Are you sure you want to CANCEL EVERYTHING AND FLATTEN THIS BOOK (INCLUDING ALGOS) ???")){
         model.algoManager.cancelAllAlgosInMikePosOrders(mikePosOrders);
         mikePosOrders.cancelAllOrders();
-        mikePosOrders.flattenThisPosition();}
+        mikePosOrders.flattenThisPosition(1);}
     }
 
     public void testSellTrailingStopClicked(ActionEvent actionEvent) {

@@ -15,141 +15,22 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0212a54c-a94c-4dfe-9eec-4ace680f76bc" name="Default Changelist" comment="">
+    <list default="true" id="0212a54c-a94c-4dfe-9eec-4ace680f76bc" name="Default Changelist" comment="Updated javadoc">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/allclasses-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/allclasses-frame.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/allclasses-noframe.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/allclasses-noframe.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/constant-values.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/constant-values.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/deprecated-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/deprecated-list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/help-doc.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/help-doc.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/index-files/index-1.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/index-files/index-1.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/index-files/index-10.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/index-files/index-10.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/index-files/index-11.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/index-files/index-11.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/index-files/index-12.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/index-files/index-12.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/index-files/index-13.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/index-files/index-13.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/index-files/index-14.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/index-files/index-14.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/index-files/index-15.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/index-files/index-15.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/index-files/index-16.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/index-files/index-16.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/index-files/index-17.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/index-files/index-17.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/index-files/index-18.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/index-files/index-18.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/index-files/index-19.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/index-files/index-19.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/index-files/index-2.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/index-files/index-2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/index-files/index-20.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/index-files/index-20.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/index-files/index-21.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/index-files/index-21.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/index-files/index-3.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/index-files/index-3.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/index-files/index-4.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/index-files/index-4.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/index-files/index-5.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/index-files/index-5.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/index-files/index-6.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/index-files/index-6.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/index-files/index-7.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/index-files/index-7.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/index-files/index-8.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/index-files/index-8.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/index-files/index-9.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/index-files/index-9.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/controllerandview/CommonGUI.GUICommandMultipleOrder.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/CommonGUI.GUICommandMultipleOrder.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/controllerandview/CommonGUI.ICommonGUI.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/CommonGUI.ICommonGUI.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/controllerandview/CommonGUI.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/CommonGUI.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/controllerandview/MainGUIClass.MikePositionsWindowCreator.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/MainGUIClass.MikePositionsWindowCreator.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/controllerandview/MainGUIClass.Updatable.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/MainGUIClass.Updatable.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/controllerandview/MainGUIClass.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/MainGUIClass.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/controllerandview/MikeGridPane.EmptyMikeButtonHandler.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/MikeGridPane.EmptyMikeButtonHandler.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/controllerandview/MikeGridPane.MikeButton.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/MikeGridPane.MikeButton.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/controllerandview/MikeGridPane.MikeButtonHandler.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/MikeGridPane.MikeButtonHandler.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/controllerandview/MikeGridPane.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/MikeGridPane.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/controllerandview/Nonnull.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/Nonnull.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/controllerandview/algocontrollerpanes/AlgoController.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/algocontrollerpanes/AlgoController.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/controllerandview/algocontrollerpanes/ControllerComplexScalperAlgo.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/algocontrollerpanes/ControllerComplexScalperAlgo.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/controllerandview/algocontrollerpanes/ControllerGuardAlgoPane1.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/algocontrollerpanes/ControllerGuardAlgoPane1.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/controllerandview/algocontrollerpanes/ControllerPlainOrder.MultipleOrderCommand.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/algocontrollerpanes/ControllerPlainOrder.MultipleOrderCommand.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/controllerandview/algocontrollerpanes/ControllerPlainOrder.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/algocontrollerpanes/ControllerPlainOrder.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/controllerandview/algocontrollerpanes/ControllerScalperAlgo1.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/algocontrollerpanes/ControllerScalperAlgo1.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/controllerandview/algocontrollerpanes/ControllerSimpleScalperAlgo.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/algocontrollerpanes/ControllerSimpleScalperAlgo.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/controllerandview/algocontrollerpanes/ControllerSimpleStepperAlgo.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/algocontrollerpanes/ControllerSimpleStepperAlgo.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/controllerandview/algocontrollerpanes/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/algocontrollerpanes/package-frame.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/controllerandview/algocontrollerpanes/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/algocontrollerpanes/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/controllerandview/algocontrollerpanes/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/algocontrollerpanes/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/controllerandview/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/package-frame.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/controllerandview/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/controllerandview/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/controllerandview/windowcontrollers/ControllerAlgoManagerPanel.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/windowcontrollers/ControllerAlgoManagerPanel.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/controllerandview/windowcontrollers/ControllerMainGUIWindow.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/windowcontrollers/ControllerMainGUIWindow.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/controllerandview/windowcontrollers/ControllerMultipleStepperAlgoWindow.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/windowcontrollers/ControllerMultipleStepperAlgoWindow.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/controllerandview/windowcontrollers/ControllerPriceControlWindow.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/windowcontrollers/ControllerPriceControlWindow.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/controllerandview/windowcontrollers/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/windowcontrollers/package-frame.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/controllerandview/windowcontrollers/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/windowcontrollers/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/controllerandview/windowcontrollers/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/controllerandview/windowcontrollers/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/Main.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/Main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/MainModelThread.GUIUpdateDispatcher.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/MainModelThread.GUIUpdateDispatcher.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/MainModelThread.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/MainModelThread.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/MikeSimLogger.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/MikeSimLogger.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/TradedInstrument.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/TradedInstrument.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/algocontrol/AlgoManager.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/algocontrol/AlgoManager.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/algocontrol/BaseAlgo.Status.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/algocontrol/BaseAlgo.Status.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/algocontrol/BaseAlgo.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/algocontrol/BaseAlgo.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/algocontrol/ComplexScalperAlgo1.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/algocontrol/ComplexScalperAlgo1.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/algocontrol/GuardAlgo.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/algocontrol/GuardAlgo.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/algocontrol/GuardAlgoDown.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/algocontrol/GuardAlgoDown.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/algocontrol/GuardAlgoUp.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/algocontrol/GuardAlgoUp.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/algocontrol/SimpleScalperAlgo.Status.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/algocontrol/SimpleScalperAlgo.Status.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/algocontrol/SimpleScalperAlgo.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/algocontrol/SimpleScalperAlgo.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/algocontrol/SimpleStepperAlgo.Status.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/algocontrol/SimpleStepperAlgo.Status.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/algocontrol/SimpleStepperAlgo.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/algocontrol/SimpleStepperAlgo.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/algocontrol/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/algocontrol/package-frame.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/algocontrol/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/algocontrol/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/algocontrol/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/algocontrol/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/helpers/DoubleCompare.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/helpers/DoubleCompare.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/helpers/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/helpers/package-frame.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/helpers/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/helpers/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/helpers/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/helpers/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/livemarketdata/InteractiveBrokersAPI.PriceData.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/livemarketdata/InteractiveBrokersAPI.PriceData.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/livemarketdata/InteractiveBrokersAPI.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/livemarketdata/InteractiveBrokersAPI.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/livemarketdata/InteractiveBrokersAPITestDrive.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/livemarketdata/InteractiveBrokersAPITestDrive.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/livemarketdata/OutsideTradingSoftwareAPIConnection.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/livemarketdata/OutsideTradingSoftwareAPIConnection.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/livemarketdata/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/livemarketdata/package-frame.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/livemarketdata/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/livemarketdata/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/livemarketdata/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/livemarketdata/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/orderserver/MikeOrder.MikeOrderType.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/orderserver/MikeOrder.MikeOrderType.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/orderserver/MikeOrder.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/orderserver/MikeOrder.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/orderserver/OrderServer.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/orderserver/OrderServer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/orderserver/OrderServerRealExternal.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/orderserver/OrderServerRealExternal.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/orderserver/OrderServerSimulatedInternal.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/orderserver/OrderServerSimulatedInternal.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/orderserver/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/orderserver/package-frame.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/orderserver/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/orderserver/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/orderserver/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/orderserver/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/package-frame.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/positionsorders/AggregatedPosOrders.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/positionsorders/AggregatedPosOrders.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/positionsorders/MikePosOrders.OrdersAtPrice.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/positionsorders/MikePosOrders.OrdersAtPrice.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/positionsorders/MikePosOrders.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/positionsorders/MikePosOrders.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/positionsorders/MikePosition.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/positionsorders/MikePosition.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/positionsorders/PosOrdersManager.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/positionsorders/PosOrdersManager.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/positionsorders/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/positionsorders/package-frame.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/positionsorders/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/positionsorders/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/positionsorders/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/positionsorders/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/priceserver/PriceServer.PriceType.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/priceserver/PriceServer.PriceType.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/priceserver/PriceServer.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/priceserver/PriceServer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/priceserver/PriceServerManager.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/priceserver/PriceServerManager.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/priceserver/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/priceserver/package-frame.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/priceserver/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/priceserver/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/model/priceserver/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/model/priceserver/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/prototypes/DoubleEqualTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/prototypes/DoubleEqualTest.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/prototypes/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/prototypes/package-frame.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/prototypes/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/prototypes/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/main/java/prototypes/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/main/java/prototypes/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/overview-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/overview-frame.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/overview-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/overview-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/overview-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/overview-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/CommonGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/CommonGUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MainGUIClass$MikePositionsWindowCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MainGUIClass$MikePositionsWindowCreator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MainGUIClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/MainGUIClass.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow$1ChoiceBoxChangeListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow$1ChoiceBoxChangeListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow$1MyInstrumentChangeListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow$1MyInstrumentChangeListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow$1MyPosOrdersChangeListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow$1MyPosOrdersChangeListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/PositionsWindow/PositionsWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/PositionsWindow/PositionsWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/PositionsWindow/algoControllers/TransferAndCancelControlPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/PositionsWindow/algoControllers/TransferAndCancelControlPanel.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/CommonGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/CommonGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/MainGUIClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/MainGUIClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/positionsorders/MikePosOrders$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/positionsorders/MikePosOrders$OrdersAtPrice.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/positionsorders/MikePosOrders$OrdersAtPrice.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/positionsorders/MikePosOrders.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/positionsorders/MikePosOrders.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/positionsorders/MikePosition.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/model/positionsorders/MikePosition.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/PositionsWindow/PositionsWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/PositionsWindow/PositionsWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerTransferAndCancel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerTransferAndCancel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/algocontrol/AlgoManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/algocontrol/AlgoManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/positionsorders/MikePosOrders.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/positionsorders/MikePosOrders.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/positionsorders/MikePosition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/positionsorders/MikePosition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/PositionsWindow/PositionsWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PositionsWindow/PositionsWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/PositionsWindow/algoControllers/TransferAndCancelControlPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PositionsWindow/algoControllers/TransferAndCancelControlPanel.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -641,7 +522,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618762638582</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="Updated javadoc">
+      <created>1619269221181</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1619269221181</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -717,7 +605,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added button 'test conf dialog' to PositionsWindow" />
     <MESSAGE value="MSim-36 Confirmation dialog before quitting done." />
     <MESSAGE value="MSim-10 Multiple Stepper Algo ready for testing." />
     <MESSAGE value="MSim-37 add multiple option to simple scalper algo ready for testing." />
@@ -742,7 +629,8 @@
     <MESSAGE value="MSim-52 Add plain order to scalper algo done" />
     <MESSAGE value="MSim-53 Plain Order - amount option done" />
     <MESSAGE value="MSim-55 minor improvements done" />
-    <option name="LAST_COMMIT_MESSAGE" value="MSim-55 minor improvements done" />
+    <MESSAGE value="Updated javadoc" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated javadoc" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/MikeSimNoGradle$Main.ic" NAME="Main Coverage Results" MODIFIED="1609257311491" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

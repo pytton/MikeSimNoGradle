@@ -32,12 +32,12 @@
                   </RadioButton>
                   <RadioButton fx:id="transferBelowOrAbove" mnemonicParsing="false" text="Transfer below/above" toggleGroup="$actionTypeToggleGroup" />
                   <RadioButton fx:id="cancelBelowOrAbove" mnemonicParsing="false" text="Cancel below/above" toggleGroup="$actionTypeToggleGroup" />
-                  <Button mnemonicParsing="false" text="Transfer ALL Closed P/L" />
-                  <Button mnemonicParsing="false" text="Transfer HALF Closed P/L" />
-                  <Button mnemonicParsing="false" text="Consolidate all MikePos into one" />
-                  <Button mnemonicParsing="false" text="Reduce Position by 1/4" />
-                  <Button mnemonicParsing="false" text="Reduce Position by 1/2" />
-                  <Button mnemonicParsing="false" text="FLATTEN Position" />
+                  <Button mnemonicParsing="false" onAction="#transferAllClosedPLClicked" text="Transfer ALL Closed P/L" />
+                  <Button mnemonicParsing="false" onAction="#transferHalfClosedPLClicked" text="Transfer HALF Closed P/L" />
+                  <Button mnemonicParsing="false" onAction="#consolidateAllMikePosClicked" text="Consolidate all MikePos into one" />
+                  <Button mnemonicParsing="false" onAction="#reducePosByQuarterClicked" text="Reduce Position by 1/4" />
+                  <Button mnemonicParsing="false" onAction="#reducePosHalfClicked" text="Reduce Position by 1/2" />
+                  <Button mnemonicParsing="false" onAction="#flattenPosClicked" text="FLATTEN Position" />
                </children>
             </VBox>
          </children>

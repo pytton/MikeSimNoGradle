@@ -2,6 +2,7 @@ package main.java.controllerandview.algocontrollerpanes;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
@@ -191,8 +192,55 @@ public class ControllerTransferAndCancel extends AlgoController {
         return false;
     }
 
-    //todo:
+
     public void setControllerPositionsWindow(ControllerPositionsWindow controllerPositionsWindow) {
         this.controllerPositionsWindow = controllerPositionsWindow;
+    }
+
+    public void transferAllClosedPLClicked(ActionEvent actionEvent) {
+        transferClosedPL(1f);
+    }
+
+    public void transferHalfClosedPLClicked(ActionEvent actionEvent) {
+        transferClosedPL(0.5f);
+    }
+
+    private void transferClosedPL(float percentage) {
+        MikePosOrders mikePosOrders = controllerPositionsWindow.getMikePosOrders();
+        MikePosOrders targetPosOrders = controllerPositionsWindow.getTargetMikePosOrders();
+        MikeSimLogger.addLogEvent("Transferring all ClosedPL from positions to internalClosedPL and moving half" +
+                "\nof it to targerPosOrders");
+        MikeSimLogger.addLogEvent("Internal PL before: " + mikePosOrders.getInternalClosedPL());
+        mikePosOrders.transferClosedPLFromPositionsToInternal();
+        MikeSimLogger.addLogEvent("Internal PL after: " + mikePosOrders.getInternalClosedPL());
+
+        mikePosOrders.moveInternalClosedPL((int) (mikePosOrders.getInternalClosedPL() * percentage), targetPosOrders );
+
+        MikeSimLogger.addLogEvent("Internal Closed PL after moving half: " + mikePosOrders.getInternalClosedPL());
+        MikeSimLogger.addLogEvent("Internal PL in target: " + targetPosOrders.getInternalClosedPL());
+    }
+
+    public void consolidateAllMikePosClicked(ActionEvent actionEvent) {
+        MikeSimLogger.addLogEvent("Not implemented!");
+    }
+
+    public void reducePosByQuarterClicked(ActionEvent actionEvent) {
+        MikeSimLogger.addLogEvent("Reducing " +
+                controllerPositionsWindow.getMikePosOrders().getName() +
+                " by 25%");
+        controllerPositionsWindow.getMikePosOrders().flattenThisPosition(0.25f);
+    }
+
+    public void reducePosHalfClicked(ActionEvent actionEvent) {
+        MikeSimLogger.addLogEvent("Reducing " +
+                controllerPositionsWindow.getMikePosOrders().getName() +
+                " by 50%");
+        controllerPositionsWindow.getMikePosOrders().flattenThisPosition(0.5f);
+    }
+
+    public void flattenPosClicked(ActionEvent actionEvent) {
+        MikeSimLogger.addLogEvent("Flattening " +
+                controllerPositionsWindow.getMikePosOrders().getName() );
+        controllerPositionsWindow.getMikePosOrders().flattenThisPosition(1);
     }
 }

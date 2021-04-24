@@ -284,7 +284,7 @@
                                                 <Button fx:id="testTwoButton" mnemonicParsing="false" onAction="#testTwoButtonClicked" text="Test Two" />
                                                 <Button fx:id="testThreeButton" mnemonicParsing="false" onAction="#testThreeButtonClicked" onMouseClicked="#testThreeMouseClicked" text="Test Three" />
                                                 <Button fx:id="testConfDialog" mnemonicParsing="false" onAction="#testConfDialogClicked" onMouseClicked="#testThreeMouseClicked" text="Test  Conf Dialog" />
-                                                <Button fx:id="testTargetPos" mnemonicParsing="false" onAction="#testTargetPosClicked" onMouseClicked="#testThreeMouseClicked" text="Test  targetpos" />
+                                                <Button fx:id="testTransferClosedPL" mnemonicParsing="false" onAction="#testTransferHalfClosedPLClicked" onMouseClicked="#testThreeMouseClicked" text="Test transfer PL" />
                                                 <Button mnemonicParsing="false" onAction="#testSellTrailingStopClicked" onMouseClicked="#testThreeMouseClicked" text="Test  Sell Trailing Stop" />
                                                 <Button mnemonicParsing="false" onAction="#testBuyTrailingStopClicked" onMouseClicked="#testThreeMouseClicked" text="Test  Buy Trailing Stop" />
                                              </children>
