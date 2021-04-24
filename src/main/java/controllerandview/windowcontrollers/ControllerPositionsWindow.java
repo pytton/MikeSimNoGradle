@@ -27,8 +27,6 @@ import main.java.model.positionsorders.MikePosOrders;
 import main.java.model.priceserver.PriceServer;
 import main.java.controllerandview.MikeGridPane;
 import main.java.controllerandview.CommonGUI;
-
-import java.io.IOException;
 import java.util.*;
 
 /**
@@ -305,7 +303,7 @@ public class ControllerPositionsWindow
                     + " . Chosen target: "
                     + ((MikePosOrders) targetPositionsList.getSelectionModel().getSelectedItem()).getName()
                     );
-                    
+
                     //rename the window:
                     Stage stage = (Stage) controllerPositionsWindow.getMainBorderPane().getScene().getWindow();
                     stage.setTitle(

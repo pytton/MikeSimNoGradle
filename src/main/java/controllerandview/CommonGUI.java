@@ -17,6 +17,9 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+/**
+ * Stores static methods and other stuff useful for all GUI classes in project
+ */
 public class CommonGUI {
 
     public interface ICommonGUI {
@@ -247,5 +250,28 @@ public class CommonGUI {
         + sourceStage.getY() + " Y");
 
     }
+
+    /**
+     * Tries to parse the TextField submitted and return an int value.
+     * If parsing throws an exception, returns the defaultValue passed in as parameter
+     * @param textField field to retrieve int from
+     * @param defaultValue this gets returned if textField has non-int string input by user
+     * @return
+     */
+    public static int getIntFromTextfield(TextField textField, int defaultValue){
+        int parsedInt = defaultValue;
+        try{
+            Integer result = Integer.parseInt(textField.getText());
+            parsedInt = result;
+        }catch (Exception e){
+            parsedInt = defaultValue;
+        }
+        return parsedInt;
+    }
+
+
+
+
+
 
 }

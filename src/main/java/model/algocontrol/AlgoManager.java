@@ -1,6 +1,5 @@
 package main.java.model.algocontrol;
 
-import com.sun.xml.internal.rngom.parse.host.Base;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import main.java.model.MainModelThread;
@@ -8,11 +7,9 @@ import main.java.model.MikeSimLogger;
 import main.java.model.orderserver.MikeOrder;
 import main.java.model.positionsorders.MikePosOrders;
 
-import java.time.temporal.TemporalQueries;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 /**
  * Creates, stores and manages all the trading algos available
