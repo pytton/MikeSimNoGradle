@@ -221,9 +221,9 @@ public class ControllerPlainOrder extends AlgoController {
 
     /**
      * this doesn't get called unless user clicks on a choicebox inside PositionsWindow
-     * @param controllerPositionsWindow
+     * @param cntrlParentWindow
      */
-    public void setControllerPositionsWindow(ControllerPositionsWindow controllerPositionsWindow) {
-        this.controllerPositionsWindow = controllerPositionsWindow;
+    public void setCntrlParentWindow(ControllerPositionsWindow cntrlParentWindow) {
+        this.controllerPositionsWindow = cntrlParentWindow;
     }
 }

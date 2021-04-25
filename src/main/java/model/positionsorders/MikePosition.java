@@ -99,4 +99,11 @@ public class MikePosition {
     public int getTotal_pl() {
         return total_pl;
     }
+
+    public void zeroOut(){
+        open_amount = 0;
+        open_pl = 0;
+        closed_pl = 0;
+        total_pl = 0;
+    }
 }

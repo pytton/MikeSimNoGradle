@@ -77,7 +77,7 @@ public class WindowControllerCommon {
             //MikeGridPane inside controllerPositionsWindow will call this controller whenever a button inside MikeGridPane is pressed:
             controllerPositionsWindow.setAlgoController(columnNumber, controllerSimpleScalperAlgo);
             controllerSimpleScalperAlgo.buyLimit.fire();
-            controllerSimpleScalperAlgo.setControllerPositionsWindow(controllerPositionsWindow);
+            controllerSimpleScalperAlgo.setCntrlParentWindow(controllerPositionsWindow);
 
             return controllerSimpleScalperAlgo;
 
@@ -105,7 +105,7 @@ public class WindowControllerCommon {
             //set default action:
             controllerPlainOrder.buyLimit.fire();
             //this is required for controllerPlainOrder to work:
-            controllerPlainOrder.setControllerPositionsWindow(controllerPositionsWindow);
+            controllerPlainOrder.setCntrlParentWindow(controllerPositionsWindow);
 
             return controllerPlainOrder;
 
@@ -133,7 +133,7 @@ public class WindowControllerCommon {
             //set default action:
             controllerStepperAlgo.buyStop.fire();
             //this is required for controllerStepperAlgo to work:
-            controllerStepperAlgo.setControllerPositionsWindow(controllerPositionsWindow);
+            controllerStepperAlgo.setCntrlParentWindow(controllerPositionsWindow);
 
             return controllerStepperAlgo;
 
@@ -161,7 +161,7 @@ public class WindowControllerCommon {
             //set default action:
             controllerTransferAndCancel.transferBelowOrAbove.fire();
             //this is required for controllerTransferAndCancel to work:
-            controllerTransferAndCancel.setControllerPositionsWindow(controllerPositionsWindow);
+            controllerTransferAndCancel.setCntrlParentWindow(controllerPositionsWindow);
 
             return controllerTransferAndCancel;
 

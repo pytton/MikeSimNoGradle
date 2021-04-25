@@ -83,7 +83,7 @@ public class ControllerComplexScalperAlgo extends AlgoController {
     }
 
     @Override
-    public void setControllerPositionsWindow(ControllerPositionsWindow controllerPositionsWindow) {
+    public void setCntrlParentWindow(ControllerPositionsWindow cntrlParentWindow) {
         MikeSimLogger.addLogEvent("NOT IMPLEMENTED!");
     }
 

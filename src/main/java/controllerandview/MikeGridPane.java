@@ -87,9 +87,6 @@ public class MikeGridPane extends GridPane {
             if (openPosAtPrice == 0) {
                 setTextForButtonInMikeGridPane(mikeGridPane, row, openLongPositionsColumn, "" );
                 setTextForButtonInMikeGridPane(mikeGridPane, row, openShortPositionsCol, "" );
-
-
-
                 mikeGridPane.getButton(row, openLongPositionsColumn).setStyle("-fx-background-color: lightyellow  ; -fx-border-color : black");
                 mikeGridPane.getButton(row, openShortPositionsCol).setStyle("-fx-background-color: lightyellow  ; -fx-border-color : black");
             } else {
@@ -98,14 +95,20 @@ public class MikeGridPane extends GridPane {
                             "-fx-background-color: " + longPosBackgroundColor + "   ; -fx-text-fill: " + longPosTextColor +
                             "; -fx-font-weight: bolder;-fx-border-color : black");
 
-
-
                     setTextForButtonInMikeGridPane(mikeGridPane, row, openLongPositionsColumn, "" + openPosAtPrice);
+
+                    //erase the short position in this row if it is long:
+                    setTextForButtonInMikeGridPane(mikeGridPane, row, openShortPositionsCol, "" );
+                    mikeGridPane.getButton(row, openShortPositionsCol).setStyle("-fx-background-color: lightyellow  ; -fx-border-color : black");
                 } else if(openPosAtPrice < 0){
                     mikeGridPane.getButton(row, openShortPositionsCol).setStyle("" +
                             "-fx-background-color: " + shortPosBackgroundColor + "; -fx-text-fill: " + shortPosTextColor +
                             "; -fx-font-weight: bolder; -fx-border-color : black");
                     setTextForButtonInMikeGridPane(mikeGridPane, row, openShortPositionsCol, "" + openPosAtPrice);
+
+                    //erase the long position in this row if it is short:
+                    setTextForButtonInMikeGridPane(mikeGridPane, row, openLongPositionsColumn, "" );
+                    mikeGridPane.getButton(row, openLongPositionsColumn).setStyle("-fx-background-color: lightyellow  ; -fx-border-color : black");
                 }
             }
 

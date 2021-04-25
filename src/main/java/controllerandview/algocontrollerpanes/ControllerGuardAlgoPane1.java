@@ -348,7 +348,7 @@ public class ControllerGuardAlgoPane1 extends AlgoController implements CommonGU
     }
 
     @Override
-    public void setControllerPositionsWindow(ControllerPositionsWindow controllerPositionsWindow) {
+    public void setCntrlParentWindow(ControllerPositionsWindow cntrlParentWindow) {
         MikeSimLogger.addLogEvent("NOT IMPLEMENTED!");
     }
 

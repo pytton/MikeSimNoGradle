@@ -19,7 +19,7 @@ public abstract class AlgoController {
 
     public abstract void mikeGridPaneButtonPressed(ControllerPositionsWindow contrPoswindow, int pricePressed, MainModelThread model, MikePosOrders posOrders,
                                                    MikeGridPane.MikeButton button, MouseEvent event);
-    public abstract void setControllerPositionsWindow(ControllerPositionsWindow controllerPositionsWindow);
+    public abstract void setCntrlParentWindow(ControllerPositionsWindow cntrlParentWindow);
 
     public abstract String getSimpleDescriptionRow1();
     public abstract String getSimpleDescriptionRow2();

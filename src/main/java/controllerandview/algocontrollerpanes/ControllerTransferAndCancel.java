@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import main.java.controllerandview.CommonGUI;
 import main.java.controllerandview.MikeGridPane;
 import main.java.controllerandview.windowcontrollers.ControllerPositionsWindow;
 import main.java.model.MainModelThread;
@@ -27,7 +28,9 @@ public class ControllerTransferAndCancel extends AlgoController {
     public RadioButton transferBelowOrAbove;
     public RadioButton cancelBelowOrAbove;
     public Label trnsfTargetName;
-    private ControllerPositionsWindow controllerPositionsWindow;
+    public CheckBox snapCheckBox;
+    public TextField moveSnapValue;
+    private ControllerPositionsWindow cntrlParentWindow;
 
     private String descriptionRow1 = "TRNSF:";
     private String descriptionRow2 = "DN / UP";
@@ -43,7 +46,7 @@ public class ControllerTransferAndCancel extends AlgoController {
             public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
                 try {
                     if (actionTypeToggleGroup.getSelectedToggle() == movePosDownOrUp) { descriptionRow1 = "MOVE"; descriptionRow3 = "MOVE";}
-                    if (actionTypeToggleGroup.getSelectedToggle() == transferBelowOrAbove) { descriptionRow1 = "TRNSF"; descriptionRow3 = controllerPositionsWindow.getTargetMikePosOrders().getName();}
+                    if (actionTypeToggleGroup.getSelectedToggle() == transferBelowOrAbove) { descriptionRow1 = "TRNSF"; descriptionRow3 = cntrlParentWindow.getTargetMikePosOrders().getName();}
                     if (actionTypeToggleGroup.getSelectedToggle() == cancelBelowOrAbove) { descriptionRow1 = "CX DW/UP"; descriptionRow3 = "CANCEL";}
                 } catch (Exception e) {
                     MikeSimLogger.addLogEvent("Exception in main.java.controllerandview.algocontrollerpanes.ControllerTransferAndCancel.initialize");
@@ -55,7 +58,7 @@ public class ControllerTransferAndCancel extends AlgoController {
     public String getSimpleDescriptionRow1() {
 
         //update the label here in this controller:
-        trnsfTargetName.setText(controllerPositionsWindow.getTargetMikePosOrders().getName());
+        trnsfTargetName.setText(cntrlParentWindow.getTargetMikePosOrders().getName());
 
         //and give them what they want
         return descriptionRow1;
@@ -123,7 +126,7 @@ public class ControllerTransferAndCancel extends AlgoController {
     private void processTransferClicked(int pricePressed, MainModelThread model, MikePosOrders posOrders, MikeGridPane.MikeButton button, MouseEvent event) {
 
 
-        MikePosOrders targetPosOrders = controllerPositionsWindow.getTargetMikePosOrders();
+        MikePosOrders targetPosOrders = cntrlParentWindow.getTargetMikePosOrders();
 
         //this will store all the prices of the MikePositions that we want to move:
         Set<Integer> positionPricesToMove = new HashSet<>();
@@ -160,41 +163,42 @@ public class ControllerTransferAndCancel extends AlgoController {
                     + " to MikePosOrders: " + targetPosOrders.getName());
             posOrders.movePositionToDifferentMikePosOrders(price, targetPosOrders);
         }
-
-
-
     }
 
     private void processMovePosClicked(int pricePressed, MainModelThread model, MikePosOrders posOrders, MikeGridPane.MikeButton button, MouseEvent event) {
-
+        //how much should we move the position up or down?
+        int amountToMove = CommonGUI.getIntFromTextfield(moveSnapValue, 1);
+        Integer newPrice = pricePressed;
         //if left button was clicked move the single MikePosition at that price to the next MikePosition at a lower price, or if none exists, one cent lower
         if (event.getButton() == MouseButton.PRIMARY) {
-            MikeSimLogger.addLogEvent("Moving single MikePosition at price " + pricePressed + " lower NOT IMPLEMENTED!");
-//            MikeSimLogger.addLogEvent("TargetPosOrders is: " + controllerPositionsWindow.getTargetMikePosOrders());
+            newPrice = pricePressed - amountToMove;
+            if(snapCheckBox.isSelected()) {
+                newPrice = posOrders.findFirstPosAboveOrBelowPrice(pricePressed, false); //returns null if nothing found
+                if(newPrice == null) newPrice = pricePressed - amountToMove;
+            }
+            MikeSimLogger.addLogEvent("Moving single MikePosition at price " + pricePressed + " lower ");
+            posOrders.moveSinglePosToNewPrice(pricePressed, newPrice);
         }
 
         //move higher if right button clicked
         if (event.getButton() == MouseButton.SECONDARY) {
-            MikeSimLogger.addLogEvent("Moving single MikePosition at price " + pricePressed + " higher NOT IMPLEMENTED!");
-//            MikeSimLogger.addLogEvent("TargetPosOrders is: " + controllerPositionsWindow.getTargetMikePosOrders());
+            newPrice = pricePressed + amountToMove;
+            if(snapCheckBox.isSelected()) {
+                newPrice = posOrders.findFirstPosAboveOrBelowPrice(pricePressed, true); //returns null if nothing found
+                if(newPrice == null) newPrice = pricePressed + amountToMove;
+            }
+            MikeSimLogger.addLogEvent("Moving single MikePosition at price " + pricePressed + " higher ");
+            posOrders.moveSinglePosToNewPrice(pricePressed, newPrice);
         }
-
-
     }
-
-
-//    private int getAmount() {
-//    return 0;
-//    }
 
     @Override
     public boolean cancel(int entryPrice, MainModelThread model, MikePosOrders posOrders) {
         return false;
     }
 
-
-    public void setControllerPositionsWindow(ControllerPositionsWindow controllerPositionsWindow) {
-        this.controllerPositionsWindow = controllerPositionsWindow;
+    public void setCntrlParentWindow(ControllerPositionsWindow cntrlParentWindow) {
+        this.cntrlParentWindow = cntrlParentWindow;
     }
 
     public void transferAllClosedPLClicked(ActionEvent actionEvent) {
@@ -206,8 +210,8 @@ public class ControllerTransferAndCancel extends AlgoController {
     }
 
     private void transferClosedPL(float percentage) {
-        MikePosOrders mikePosOrders = controllerPositionsWindow.getMikePosOrders();
-        MikePosOrders targetPosOrders = controllerPositionsWindow.getTargetMikePosOrders();
+        MikePosOrders mikePosOrders = cntrlParentWindow.getMikePosOrders();
+        MikePosOrders targetPosOrders = cntrlParentWindow.getTargetMikePosOrders();
         MikeSimLogger.addLogEvent("Transferring all ClosedPL from positions to internalClosedPL and moving half" +
                 "\nof it to targerPosOrders");
         MikeSimLogger.addLogEvent("Internal PL before: " + mikePosOrders.getInternalClosedPL());
@@ -220,27 +224,38 @@ public class ControllerTransferAndCancel extends AlgoController {
         MikeSimLogger.addLogEvent("Internal PL in target: " + targetPosOrders.getInternalClosedPL());
     }
 
+    //todo: investigating bug in MikePosOrders:
     public void consolidateAllMikePosClicked(ActionEvent actionEvent) {
-        MikeSimLogger.addLogEvent("Not implemented!");
+
+        cntrlParentWindow.getMikePosOrders().printPositionsToConsole();
+
+
+        int consolidationPrice = cntrlParentWindow.getPriceServer().getBidPrice();
+        cntrlParentWindow.getMikePosOrders().consolidatePositions(consolidationPrice);
+        MikeSimLogger.addLogEvent("Consolidating all MikePositions at bid price: " + consolidationPrice );
+
+        cntrlParentWindow.getMikePosOrders().printPositionsToConsole();
+
+
     }
 
     public void reducePosByQuarterClicked(ActionEvent actionEvent) {
         MikeSimLogger.addLogEvent("Reducing " +
-                controllerPositionsWindow.getMikePosOrders().getName() +
+                cntrlParentWindow.getMikePosOrders().getName() +
                 " by 25%");
-        controllerPositionsWindow.getMikePosOrders().flattenThisPosition(0.25f);
+        cntrlParentWindow.getMikePosOrders().flattenThisPosition(0.25f);
     }
 
     public void reducePosHalfClicked(ActionEvent actionEvent) {
         MikeSimLogger.addLogEvent("Reducing " +
-                controllerPositionsWindow.getMikePosOrders().getName() +
+                cntrlParentWindow.getMikePosOrders().getName() +
                 " by 50%");
-        controllerPositionsWindow.getMikePosOrders().flattenThisPosition(0.5f);
+        cntrlParentWindow.getMikePosOrders().flattenThisPosition(0.5f);
     }
 
     public void flattenPosClicked(ActionEvent actionEvent) {
         MikeSimLogger.addLogEvent("Flattening " +
-                controllerPositionsWindow.getMikePosOrders().getName() );
-        controllerPositionsWindow.getMikePosOrders().flattenThisPosition(1);
+                cntrlParentWindow.getMikePosOrders().getName() );
+        cntrlParentWindow.getMikePosOrders().flattenThisPosition(1);
     }
 }

@@ -1,6 +1,7 @@
 package main.java.model.positionsorders;
 
 import com.ib.client.Order;
+import javafx.collections.transformation.SortedList;
 import main.java.model.MikeSimLogger;
 import main.java.model.orderserver.MikeOrder;
 import main.java.model.orderserver.OrderServer;
@@ -262,7 +263,6 @@ public class MikePosOrders {
         if (positionsMap.get(price) != null) {
             return positionsMap.get(price).getOpen_amount();
         } else return 0;
-        //Todo: add handling of child PosOrders
     }
 
 
@@ -446,10 +446,6 @@ public class MikePosOrders {
         if (totalOpenAmount != 0) zeroProfitPoint = (averagePrice) - (closedPL / totalOpenAmount);
         else if (averagePrice != null) zeroProfitPoint = averagePrice;
         else zeroProfitPoint = null;
-
-
-
-
     }
 
     private MikePosition getMikePositionAtPrice(int price) {
@@ -530,6 +526,89 @@ public class MikePosOrders {
         recalcutlatePL();
 
         //currently not moving children
+    }
+
+    /**
+     * This takes a single MikePosition and moves it to a different price level while keeping the totalPL for
+     * it unchanged by altering its closedPL
+     * @param originalPrice
+     * @param newPrice
+     */
+    public synchronized void moveSinglePosToNewPrice(int originalPrice, int newPrice){
+        //IT IS POSSIBLE THAT originalPrice = newPrice which will CAUSE BUGS!!!!!
+        if(originalPrice == newPrice) return;
+        if( (originalPrice <0) || (newPrice <0) ) return;
+        MikePosition mikePosition = positionsMap.get(originalPrice);
+        if(mikePosition == null) return;
+
+        int differenceInPrice = newPrice - originalPrice;
+        //we alter the closed PL of the position so that the total PL at the new price level is still the same:
+        int openAmount = mikePosition.getOpen_amount();
+
+        int closedPLAdjustment = openAmount * differenceInPrice;
+        MikePosition newPosition = new MikePosition(newPrice, mikePosition.getOpen_amount(), mikePosition.getOpen_pl(),
+                mikePosition.getClosed_pl() + closedPLAdjustment,
+                mikePosition.getTotal_pl() + closedPLAdjustment
+                );
+        //add the position with adjusted PL to this MikePosOrders:
+        addToMikePosition(newPosition);
+
+        //set everything in the old one to zero so it doesn't get double counted:
+        mikePosition.zeroOut();
+        //remove it from this MikePosOrders:
+        positionsMap.remove(mikePosition.getPrice());
+
+    }
+
+    /**
+     * Returns the price of the first MikePosition above or below the submitted price. If nothing found returns
+     * the price entered or price entered +1
+     * @param priceEntered
+     * @param above returns above for true, below for negative
+     * @return
+     */
+    public Integer findFirstPosAboveOrBelowPrice(int priceEntered, boolean above){
+        int minimumPriceInterval = 1;
+        //create a list of all the prices:
+        NavigableSet<Integer> priceList = new TreeSet<>();
+        priceList.addAll(positionsMap.keySet());
+        if(priceList.isEmpty()) return null;
+        //https://stackoverflow.com/questions/19613650/java-find-closest-number-in-some-collection
+        Integer found = priceEntered;
+        if(above) found = priceList.higher(priceEntered);
+        if(!above) found = priceList.lower(priceEntered);
+
+        if (found == null) MikeSimLogger.addLogEvent("Nothing above/below! Returning null!");
+
+
+        return found;
+
+//        for(Integer members : priceList){
+//            MikeSimLogger.addLogEvent("Position at: " + members);
+//        }
+//        MikeSimLogger.addLogEvent("First above found: " + found);
+//        MikeSimLogger.addLogEvent("lower: " + priceList.lower(priceEntered));
+//        MikeSimLogger.addLogEvent("floor: " + priceList.floor(priceEntered));
+//        MikeSimLogger.addLogEvent("ceiling: " + priceList.ceiling(priceEntered));
+    }
+
+    /**
+     * If there are many MikePositions at different price levels, this moves all of them to one preserving the
+     * total PL by altering their closed PL
+     * @param price of the new single MikePosition
+     */
+    public void consolidatePositions(int price){
+        if(price < 0){
+            MikeSimLogger.addLogEvent("Moving to a negative price not implemented! Aborting!");
+            return;
+        }
+        Set<Integer> pricesToMove = new TreeSet<>(); //contains prices of all the individual MikePositions
+        pricesToMove.addAll(positionsMap.keySet());
+
+        //move them all to provided price
+        for (Integer oldPrice : pricesToMove){
+            moveSinglePosToNewPrice(oldPrice, price);
+        }
     }
 
     @Override

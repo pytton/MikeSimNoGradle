@@ -411,7 +411,7 @@ public class ControllerPositionsWindow
 
                         ControllerPlainOrder controller = loader.getController();
                         //let Plain Order Controller know where to find targetPosOrders for transferring positions:
-                        controller.setControllerPositionsWindow(controllerPositionsWindow);
+                        controller.setCntrlParentWindow(controllerPositionsWindow);
                         //MikeGridPane will call this controller whenever a button inside MikeGridPane is pressed:
                         controllerPositionsWindow.setAlgoController(colNumber, controller);
 
@@ -439,7 +439,7 @@ public class ControllerPositionsWindow
 
                         ControllerTransferAndCancel controller = loader.getController();
                         //let Plain Order Controller know where to find targetPosOrders for transferring positions:
-                        controller.setControllerPositionsWindow(controllerPositionsWindow);
+                        controller.setCntrlParentWindow(controllerPositionsWindow);
                         //MikeGridPane will call this controller whenever a button inside MikeGridPane is pressed:
                         controllerPositionsWindow.setAlgoController(colNumber, controller);
 
