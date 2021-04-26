@@ -15,7 +15,17 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0212a54c-a94c-4dfe-9eec-4ace680f76bc" name="Default Changelist" comment="Updated javadoc" />
+    <list default="true" id="0212a54c-a94c-4dfe-9eec-4ace680f76bc" name="Default Changelist" comment="minor fix to MainGUIWindow.fxml">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/CustomFXMLs_jar/CustomFXMLs.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/CustomFXMLs_jar/CustomFXMLs.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/MikeSimNoGradle_jar/MikeSimNoGradle.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/MikeSimNoGradle_jar/MikeSimNoGradle.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/MainGUIWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/MainGUIWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/MainGUIWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/MainGUIWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerMainGUIWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerMainGUIWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/PositionsWindow/PositionsWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PositionsWindow/PositionsWindow.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -70,7 +80,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/PositionsWindow/algoControllers" />
+    <property name="last_opened_file_path" value="$USER_HOME$/AppData/Local/SceneBuilder/SceneBuilder.exe" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.25876662" />
@@ -516,7 +526,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619269221181</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="minor fix to MainGUIWindow.fxml">
+      <created>1619375209084</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1619375209084</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -592,7 +609,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="MSim-36 Confirmation dialog before quitting done." />
     <MESSAGE value="MSim-10 Multiple Stepper Algo ready for testing." />
     <MESSAGE value="MSim-37 add multiple option to simple scalper algo ready for testing." />
     <MESSAGE value="MSim-38 fix interval in SimpleScalperAlgo ready for testing. Moved manual orders to accordion pane in PositionsWindow" />
@@ -617,7 +633,8 @@
     <MESSAGE value="MSim-53 Plain Order - amount option done" />
     <MESSAGE value="MSim-55 minor improvements done" />
     <MESSAGE value="Updated javadoc" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated javadoc" />
+    <MESSAGE value="minor fix to MainGUIWindow.fxml" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor fix to MainGUIWindow.fxml" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/MikeSimNoGradle$Main.ic" NAME="Main Coverage Results" MODIFIED="1609257311491" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

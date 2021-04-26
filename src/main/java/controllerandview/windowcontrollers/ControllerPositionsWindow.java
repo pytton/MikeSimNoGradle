@@ -653,11 +653,30 @@ public class ControllerPositionsWindow
      * set the current top row price to ask price + 50
      */
     public void ask50Clicked(ActionEvent event) {
+
+
+
+
+
 //        topRowPrice = priceServer.getAskPrice() + 50;
 //        bottomRowPrice = topRowPrice - mikeGridPane.getHowManyRows();
         setTopRowPrice(priceServer.getAskPrice() + 50);
         sp.setVvalue(0.5);
+
+
     }
+
+    public void ask50MouseClicked(MouseEvent mouseEvent) {
+
+        if(mouseEvent.getButton() == MouseButton.PRIMARY){
+            ask50Clicked(new ActionEvent());
+        }
+        if(mouseEvent.getButton() == MouseButton.SECONDARY){
+            model.mainGUIClass.controllerPrimaryGUIWindow.ask50everywherePressed(new ActionEvent());
+        }
+
+    }
+
 
     private void setTopRowPrice(int topRowPrice) {
         this.topRowPrice = topRowPrice;
@@ -1024,6 +1043,8 @@ public class ControllerPositionsWindow
         model.algoManager.createTrailingStopAlgo(MikeOrder.MikeOrderType.BUYSTP, 20, 8, mikePosOrders);
 
     }
+
+
 
 
 //    public void mikeGridPaneButtonClicked(ActionEvent event) {

@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="mainBorderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pickOnBounds="false" prefHeight="1000.0" prefWidth="640.0" scaleShape="false" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllerandview.windowcontrollers.ControllerPositionsWindow">
+<BorderPane fx:id="mainBorderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pickOnBounds="false" prefHeight="1000.0" prefWidth="640.0" scaleShape="false" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllerandview.windowcontrollers.ControllerPositionsWindow">
    <center>
       <!--<TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">-->
         <!--<columns>-->
@@ -44,7 +44,7 @@
                      </font>
                   </Button>
                   <TextField fx:id="TopRowPriceTextField" prefHeight="25.0" prefWidth="80.0" />
-                  <Button fx:id="ask50" mnemonicParsing="false" onAction="#ask50Clicked" prefHeight="24.0" prefWidth="60.0" text="Ask +50">
+                  <Button fx:id="ask50" mnemonicParsing="false" onAction="#ask50Clicked" onMouseClicked="#ask50MouseClicked" prefHeight="24.0" prefWidth="60.0" text="Ask +50">
                      <font>
                         <Font size="11.0" />
                      </font>
