@@ -130,6 +130,8 @@ public class ControllerPlainOrder extends AlgoController {
                     //we don't want buy stop orders placed below the ask price?:
                     if(distanceFromBidOrAsk < 0) distanceFromBidOrAsk = 0;
                     MikeSimLogger.addLogEvent("Placing trailing stop buy order");
+                    model.algoManager.createTrailingStopAlgo(orderType, getAmount(), distanceFromBidOrAsk, posOrders);
+                    return;
                 }
                 if(orderType == MikeOrder.MikeOrderType.SELLSTP){
                     //distance from bid is used in trailing stop algo to place sell stop orders. calculate it:
@@ -137,8 +139,12 @@ public class ControllerPlainOrder extends AlgoController {
                     //we don't want sell stop orders placed above the bid price?:
                     if(distanceFromBidOrAsk < 0) distanceFromBidOrAsk = 0;
                     MikeSimLogger.addLogEvent("Placing trailing stop sell order");
-                }
                     model.algoManager.createTrailingStopAlgo(orderType, getAmount(), distanceFromBidOrAsk, posOrders);
+                    return;
+                }
+
+
+                posOrders.placeNewOrder(orderType, pricePressed, pricePressed, getAmount());
                     return;
             }
 
