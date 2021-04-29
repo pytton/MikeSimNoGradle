@@ -17,7 +17,19 @@
   <component name="ChangeListManager">
     <list default="true" id="0212a54c-a94c-4dfe-9eec-4ace680f76bc" name="Default Changelist" comment="minor fix to MainGUIWindow.fxml">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/PositionsWindow/PositionsWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/PositionsWindow/PositionsWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollerpanes/ControllerPlainOrder$MultipleOrderCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollerpanes/ControllerPlainOrder$MultipleOrderCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollerpanes/ControllerPlainOrder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollerpanes/ControllerPlainOrder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollerpanes/ControllerSimpleScalperAlgo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollerpanes/ControllerSimpleScalperAlgo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollerpanes/ControllerSimpleStepperAlgo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollerpanes/ControllerSimpleStepperAlgo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/PositionsWindow/PositionsWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/PositionsWindow/PositionsWindow.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerPlainOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerPlainOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerSimpleScalperAlgo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerSimpleScalperAlgo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerSimpleStepperAlgo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerSimpleStepperAlgo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/PositionsWindow/PositionsWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PositionsWindow/PositionsWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/PositionsWindow/algoControllers/PlainOrderControlPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PositionsWindow/algoControllers/PlainOrderControlPanel.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/PositionsWindow/algoControllers/SimpleScalperAlgoControlPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PositionsWindow/algoControllers/SimpleScalperAlgoControlPanel.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/PositionsWindow/algoControllers/SimpleStepperControlPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PositionsWindow/algoControllers/SimpleStepperControlPanel.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +54,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="refactoring" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />

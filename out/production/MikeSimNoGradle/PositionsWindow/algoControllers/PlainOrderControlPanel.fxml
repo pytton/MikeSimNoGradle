@@ -34,6 +34,8 @@
                         <RadioButton fx:id="sellStop" mnemonicParsing="false" text="Sell Stop" toggleGroup="$orderTypeToggleGroup" />
                         <RadioButton fx:id="cancel" mnemonicParsing="false" text="Cancel" toggleGroup="$orderTypeToggleGroup" />
                         <RadioButton fx:id="transfer" mnemonicParsing="false" text="Transfer to target PosOrders" toggleGroup="$orderTypeToggleGroup" />
+                        <RadioButton fx:id="buyLmtStp" mnemonicParsing="false" text="Buy Lmt/Stop" toggleGroup="$orderTypeToggleGroup" />
+                        <RadioButton fx:id="sellLmtStp" mnemonicParsing="false" text="Sell Lmt/Stop" toggleGroup="$orderTypeToggleGroup" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER_LEFT" prefWidth="100.0" spacing="3.0">

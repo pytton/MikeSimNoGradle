@@ -4,6 +4,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import main.java.controllerandview.CommonGUI;
 import main.java.controllerandview.MikeGridPane;
@@ -32,6 +33,8 @@ public class ControllerSimpleScalperAlgo extends AlgoController {
     public TextField multipleAmount;
     public TextField multipleDistance;
     public CheckBox addPlainOrderCheckbox;
+    public RadioButton buyLmtStp;
+    public RadioButton sellLmtStp;
     private MikeOrder.MikeOrderType orderType = MikeOrder.MikeOrderType.BUYLMT;
 
     private final String descriptionRow1 = "SCLP1";
@@ -101,10 +104,12 @@ public class ControllerSimpleScalperAlgo extends AlgoController {
                 new ChangeListener<Toggle>() {
             @Override
             public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
-            if (orderTypeToggleGroup.getSelectedToggle() == buyLimit) {orderType = MikeOrder.MikeOrderType.BUYLMT; descriptionRow2 = "B LMT"; }
-                if (orderTypeToggleGroup.getSelectedToggle() == buyStop) {orderType = MikeOrder.MikeOrderType.BUYSTP; descriptionRow2 = "B STP"; }
+            if (orderTypeToggleGroup.getSelectedToggle() == buyLimit) {orderType = MikeOrder.MikeOrderType.BUYLMT; descriptionRow2 = "B LMT";}
+                if (orderTypeToggleGroup.getSelectedToggle() == buyStop) {orderType = MikeOrder.MikeOrderType.BUYSTP; descriptionRow2 = "B STP";}
+                if (orderTypeToggleGroup.getSelectedToggle() == buyLmtStp) {orderType = MikeOrder.MikeOrderType.BUYLMT; descriptionRow2 = "BUY L/S";}
                 if (orderTypeToggleGroup.getSelectedToggle() == sellLimit) {orderType = MikeOrder.MikeOrderType.SELLLMT; descriptionRow2 = "S LMT";}
                 if (orderTypeToggleGroup.getSelectedToggle() == sellStop) {orderType = MikeOrder.MikeOrderType.SELLSTP; descriptionRow2 = "S STP";}
+                if (orderTypeToggleGroup.getSelectedToggle() == sellLmtStp) {orderType = MikeOrder.MikeOrderType.SELLLMT; descriptionRow2 = "SELL L/S";}
                 if (orderTypeToggleGroup.getSelectedToggle() == cancel) {orderType = MikeOrder.MikeOrderType.CANCEL; descriptionRow2 = "CANCEL";}
              } } );
 
@@ -141,8 +146,18 @@ public class ControllerSimpleScalperAlgo extends AlgoController {
                                           int pricePressed, MainModelThread model, MikePosOrders posOrders,
                                           MikeGridPane.MikeButton button,
                                           MouseEvent event) {
-//        MikeSimLogger.addLogEvent("SimpleScalperAlgo: mikeGridPaneButtonPressed. Price: " + pricePressed
-//        + " target price: " + (pricePressed + getInterval()) + " Amount: " + (getAmount())  );
+
+        //handle left button pressed for limit orders right button for stop orders:
+        if(buyLmtStp.isSelected()){
+            if(event.getButton() == MouseButton.PRIMARY) orderType = MikeOrder.MikeOrderType.BUYLMT;
+            if(event.getButton() == MouseButton.SECONDARY) orderType = MikeOrder.MikeOrderType.BUYSTP;
+        }
+
+        if(sellLmtStp.isSelected()){
+            if(event.getButton() == MouseButton.PRIMARY) orderType = MikeOrder.MikeOrderType.SELLLMT;
+            if(event.getButton() == MouseButton.SECONDARY) orderType = MikeOrder.MikeOrderType.SELLSTP;
+        }
+
         if (orderType != MikeOrder.MikeOrderType.CANCEL) {
 
             //handle multiple alogos created with one click if checkbox clicked:

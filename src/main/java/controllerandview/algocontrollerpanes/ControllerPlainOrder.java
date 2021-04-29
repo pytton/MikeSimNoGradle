@@ -4,6 +4,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import main.java.controllerandview.CommonGUI;
 import main.java.controllerandview.MikeGridPane;
@@ -41,6 +42,8 @@ public class ControllerPlainOrder extends AlgoController {
     public CheckBox trailingStopCheckbox;
     public RadioButton thisBookRadioBtn;
     public RadioButton targetBookRadioBtn;
+    public RadioButton buyLmtStp;
+    public RadioButton sellLmtStp;
 
     private MikeOrder.MikeOrderType orderType = MikeOrder.MikeOrderType.BUYLMT;
     private ControllerPositionsWindow controllerPositionsWindow;
@@ -55,10 +58,12 @@ public class ControllerPlainOrder extends AlgoController {
                 new ChangeListener<Toggle>() {
             @Override
             public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
-            if (orderTypeToggleGroup.getSelectedToggle() == buyLimit) {orderType = MikeOrder.MikeOrderType.BUYLMT; descriptionRow2 = "B LMT"; }
-                if (orderTypeToggleGroup.getSelectedToggle() == buyStop) {orderType = MikeOrder.MikeOrderType.BUYSTP; descriptionRow2 = "B STP"; }
+            if (orderTypeToggleGroup.getSelectedToggle() == buyLimit) {orderType = MikeOrder.MikeOrderType.BUYLMT; descriptionRow2 = "B LMT";}
+                if (orderTypeToggleGroup.getSelectedToggle() == buyStop) {orderType = MikeOrder.MikeOrderType.BUYSTP; descriptionRow2 = "B STP";}
+                if (orderTypeToggleGroup.getSelectedToggle() == buyLmtStp) {orderType = MikeOrder.MikeOrderType.BUYLMT; descriptionRow2 = "BUY L/S";}
                 if (orderTypeToggleGroup.getSelectedToggle() == sellLimit) {orderType = MikeOrder.MikeOrderType.SELLLMT; descriptionRow2 = "S LMT";}
                 if (orderTypeToggleGroup.getSelectedToggle() == sellStop) {orderType = MikeOrder.MikeOrderType.SELLSTP; descriptionRow2 = "S STP";}
+                if (orderTypeToggleGroup.getSelectedToggle() == sellLmtStp) {orderType = MikeOrder.MikeOrderType.SELLLMT; descriptionRow2 = "SELL L/S";}
                 if (orderTypeToggleGroup.getSelectedToggle() == cancel) {orderType = MikeOrder.MikeOrderType.CANCEL; descriptionRow2 = "CANCEL";}
                 if (orderTypeToggleGroup.getSelectedToggle() == transfer) {orderType = MikeOrder.MikeOrderType.TRANSFER; descriptionRow2 = "TRANSFER";}
              } } );
@@ -91,6 +96,17 @@ public class ControllerPlainOrder extends AlgoController {
                                           MouseEvent event) {
 
         this.controllerPositionsWindow = controllerPositionsWindow;
+
+        //handle left button pressed for limit orders right button for stop orders:
+        if(buyLmtStp.isSelected()){
+            if(event.getButton() == MouseButton.PRIMARY) orderType = MikeOrder.MikeOrderType.BUYLMT;
+            if(event.getButton() == MouseButton.SECONDARY) orderType = MikeOrder.MikeOrderType.BUYSTP;
+        }
+
+        if(sellLmtStp.isSelected()){
+            if(event.getButton() == MouseButton.PRIMARY) orderType = MikeOrder.MikeOrderType.SELLLMT;
+            if(event.getButton() == MouseButton.SECONDARY) orderType = MikeOrder.MikeOrderType.SELLSTP;
+        }
 
         if (orderType == MikeOrder.MikeOrderType.TRANSFER && controllerPositionsWindow.targetPositionsList.getSelectionModel().getSelectedItem() != null){
             MikeSimLogger.addLogEvent("Attempting transfer");
