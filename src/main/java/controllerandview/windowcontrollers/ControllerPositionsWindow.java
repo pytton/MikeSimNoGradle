@@ -38,9 +38,61 @@ public class ControllerPositionsWindow
         MainGUIClass.Updatable,
         CommonGUI.ICommonGUI {
 
+    public TitledPane colActionsSetupTitledPane;
+    @FXML
+    private TabPane columnsTabPane;
+    @FXML
+    private Tab colTab1;
+    @FXML
+    private Tab colTab2;
+    @FXML
+    private Tab colTab3;
+    @FXML
+    private Tab colTab4;
+    @FXML
+    private Tab colTab5;
+    @FXML
+    private Tab colTab6;
+    @FXML
+    private Tab colTab7;
+    public TopGridPaneClickHandler topGridPaneClickHandler = new TopGridPaneClickHandler();
+    /**
+     * Used for handling clicks in the top MikeGridPane
+     */
+    public class TopGridPaneClickHandler implements MikeGridPane.MikeButtonHandler{
 
-    private int topRowPrice = 27150; //used with MikeGridPane and UpdateGUI
-    private int bottomRowPrice = 27100;
+        @Override
+        public void handleMikeButtonClicked(MikeGridPane.MikeButton mikeButton, MouseEvent event) {
+            MikeSimLogger.addLogEvent("TopGridPane button clicked. Column: " +
+                    mikeButton.getColOfButton());
+
+            int colNumber = mikeButton.getColOfButton();
+            Tab tab;
+            switch (colNumber) {
+                case 0: tab = colTab1;
+                    break;
+                case 1: tab = colTab2;
+                    break;
+                case 2: tab = colTab3;
+                    break;
+                case 3: tab = colTab4;
+                    break;
+                case 4: tab = colTab5;
+                    break;
+                case 5: tab = colTab6;
+                    break;
+                case 6: tab = colTab7;
+                    break;
+                default: tab = colTab1;
+            }
+
+            colActionsSetupTitledPane.setExpanded(true);
+            columnsTabPane.getSelectionModel().select(tab);
+        }
+    }
+
+    private int topRowPrice = 41150; //used with MikeGridPane and UpdateGUI
+    private int bottomRowPrice = 41100;
     private int tickerId = 0;
 
     private MikeGridPane mikeGridPane = null;
@@ -548,42 +600,52 @@ public class ControllerPositionsWindow
         }
     }
 
+    boolean selection = false;
+
     @FXML
     public void testTwoButtonClicked(ActionEvent actionEvent) {
 
-
-        if (CommonGUI.showConfirmationDialog("Are you sure?")) {
-            Stage thisWindowStage = (Stage) mainBorderPane.getScene().getWindow();
-
-            MikeSimLogger.addLogEvent("Screen window displayed on: " + CommonGUI.getScreenForStage(thisWindowStage));
-
-            Stage stage = new Stage();
-
-
-            VBox root = new VBox(10);
-            root.setAlignment(Pos.CENTER);
-            Scene scene = new Scene(root, 200, 250);
-
-            int index = 1;
-            for (Screen screen : Screen.getScreens()) {
-                Rectangle2D bounds = screen.getVisualBounds();
-
-                Button btn = new Button("Move me to Screen " + index++);
-                btn.setOnAction((e) -> {
-                    stage.setX(bounds.getMinX() + 100);
-                    stage.setY(bounds.getMinY() + 100);
-                    MikeSimLogger.addLogEvent("Visual bounds of screen: " + screen.getVisualBounds());
-                });
-                root.getChildren().add(btn);
-            }
-
-            stage.setTitle("Screen Jumper");
-            stage.setScene(scene);
-            stage.show();
-        }
+//
+//        if (CommonGUI.showConfirmationDialog("Are you sure?")) {
+//            Stage thisWindowStage = (Stage) mainBorderPane.getScene().getWindow();
+//
+//            MikeSimLogger.addLogEvent("Screen window displayed on: " + CommonGUI.getScreenForStage(thisWindowStage));
+//
+//            Stage stage = new Stage();
+//
+//
+//            VBox root = new VBox(10);
+//            root.setAlignment(Pos.CENTER);
+//            Scene scene = new Scene(root, 200, 250);
+//
+//            int index = 1;
+//            for (Screen screen : Screen.getScreens()) {
+//                Rectangle2D bounds = screen.getVisualBounds();
+//
+//                Button btn = new Button("Move me to Screen " + index++);
+//                btn.setOnAction((e) -> {
+//                    stage.setX(bounds.getMinX() + 100);
+//                    stage.setY(bounds.getMinY() + 100);
+//                    MikeSimLogger.addLogEvent("Visual bounds of screen: " + screen.getVisualBounds());
+//                });
+//                root.getChildren().add(btn);
+//            }
+//
+//            stage.setTitle("Screen Jumper");
+//            stage.setScene(scene);
+//            stage.show();
+//        }
 
 //        MikeSimLogger.addLogEvent("X position of window: " + getMainBorderPane().getScene().getWindow().getX());
 
+
+        if (selection) {
+            columnsTabPane.getSelectionModel().select(colTab3);
+            selection = !selection;
+        } else {
+            columnsTabPane.getSelectionModel().select(colTab1);
+            selection = !selection;
+        }
 
 
     }

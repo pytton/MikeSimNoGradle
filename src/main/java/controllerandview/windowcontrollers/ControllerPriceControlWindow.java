@@ -53,9 +53,9 @@ public class ControllerPriceControlWindow implements MainGUIClass.Updatable {
     public RadioButton liveRadioButton;
     public TextField experimentalTextField1;
     @FXML
-    private Integer minSliderValue = 27100;
+    private Integer minSliderValue = 41100;
     @FXML
-    private Integer maxSliderValue = 27200;
+    private Integer maxSliderValue = 41200;
 
     @FXML
     public void initialize() {

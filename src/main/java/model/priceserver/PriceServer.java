@@ -48,8 +48,8 @@ public class PriceServer {
     }
 
     //simulatad manual prices and volumes:
-    private int bidPrice = 33100;
-    private int askPrice = 33101;
+    private int bidPrice = 41120;
+    private int askPrice = 41121;
     private int bidVolume = -5;
     private int askVolume = -5;
 

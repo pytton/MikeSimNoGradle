@@ -215,11 +215,11 @@
                         <Font size="11.0" />
                      </font>
                 </TitledPane>
-                  <TitledPane prefHeight="200.0" prefWidth="200.0" style="-fx-padding: 1;" text="Column Actions Setup">
+                  <TitledPane fx:id="colActionsSetupTitledPane" prefHeight="200.0" prefWidth="200.0" style="-fx-padding: 1;" text="Column Actions Setup">
                      <content>
-                        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+                        <TabPane fx:id="columnsTabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
                           <tabs>
-                            <Tab text=" 1">
+                            <Tab fx:id="colTab1" text=" 1">
                                  <content>
                                     <VBox prefHeight="700.0" prefWidth="200.0">
                                        <children>
@@ -229,7 +229,7 @@
                                     </VBox>
                                  </content>
                             </Tab>
-                              <Tab text=" 2">
+                              <Tab fx:id="colTab2" text=" 2">
                                  <content>
                                     <VBox prefHeight="700.0" prefWidth="200.0">
                                        <children>
@@ -239,7 +239,7 @@
                                     </VBox>
                                  </content>
                               </Tab>
-                              <Tab text=" 3">
+                              <Tab fx:id="colTab3" text=" 3">
                                  <content>
                                     <VBox prefHeight="700.0" prefWidth="200.0">
                                        <children>
@@ -249,7 +249,7 @@
                                     </VBox>
                                  </content>
                               </Tab>
-                              <Tab text=" 4">
+                              <Tab fx:id="colTab4" text=" 4">
                                  <content>
                                     <VBox prefHeight="700.0" prefWidth="200.0">
                                        <children>
@@ -259,7 +259,7 @@
                                     </VBox>
                                  </content>
                               </Tab>
-                              <Tab text=" 5">
+                              <Tab fx:id="colTab5" text=" 5">
                                  <content>
                                     <VBox prefHeight="700.0" prefWidth="200.0">
                                        <children>
@@ -269,7 +269,7 @@
                                     </VBox>
                                  </content>
                               </Tab>
-                              <Tab text=" 6">
+                              <Tab fx:id="colTab6" text=" 6">
                                  <content>
                                     <VBox prefHeight="700.0" prefWidth="200.0">
                                        <children>
@@ -279,7 +279,7 @@
                                     </VBox>
                                  </content>
                               </Tab>
-                              <Tab text=" 7">
+                              <Tab fx:id="colTab7" text=" 7">
                                  <content>
                                     <VBox prefHeight="700.0" prefWidth="200.0">
                                        <children>

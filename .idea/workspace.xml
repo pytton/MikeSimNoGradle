@@ -15,21 +15,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0212a54c-a94c-4dfe-9eec-4ace680f76bc" name="Default Changelist" comment="minor fix to MainGUIWindow.fxml">
+    <list default="true" id="0212a54c-a94c-4dfe-9eec-4ace680f76bc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/PositionsWindow/PositionsWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/PositionsWindow/PositionsWindow.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollerpanes/ControllerPlainOrder$MultipleOrderCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollerpanes/ControllerPlainOrder$MultipleOrderCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollerpanes/ControllerPlainOrder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollerpanes/ControllerPlainOrder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollerpanes/ControllerSimpleScalperAlgo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollerpanes/ControllerSimpleScalperAlgo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollerpanes/ControllerSimpleStepperAlgo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/java/controllerandview/algocontrollerpanes/ControllerSimpleStepperAlgo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/PositionsWindow/PositionsWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MikeSimNoGradle/main/resources/PositionsWindow/PositionsWindow.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerPlainOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerPlainOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerSimpleScalperAlgo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerSimpleScalperAlgo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerSimpleStepperAlgo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/algocontrollerpanes/ControllerSimpleStepperAlgo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/MainGUIClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/MainGUIClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerPositionsWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerPriceControlWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllerandview/windowcontrollers/ControllerPriceControlWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/priceserver/PriceServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/priceserver/PriceServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/PositionsWindow/PositionsWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PositionsWindow/PositionsWindow.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/PositionsWindow/algoControllers/PlainOrderControlPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PositionsWindow/algoControllers/PlainOrderControlPanel.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/PositionsWindow/algoControllers/SimpleScalperAlgoControlPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PositionsWindow/algoControllers/SimpleScalperAlgoControlPanel.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/PositionsWindow/algoControllers/SimpleStepperControlPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PositionsWindow/algoControllers/SimpleStepperControlPanel.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,13 +186,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1583901151189</updated>
-    </task>
-    <task id="LOCAL-00001" summary="a little clean-up">
-      <created>1586785652187</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1586785652187</updated>
     </task>
     <task id="LOCAL-00002" summary="2020/11/15:&#10;Added CommonGUI.java&#10;Added Development log.txt to project&#10;Changed InterActiveBrokersAPI constructor to private and made a singleton accessor.&#10;Made EClientSocket in InterActiveBrokersAPI private&#10;Added getPosOrdersObservableList to  MainModelThread.PosOrdersManager&#10;changed ControllerPositionsWindow.printout() to synchronized&#10;Added MikeSimLogger and updated .gitignore&#10;Updated javadoc in documentation&#10;Before moving CommonGUI from prototype to controllerandview">
       <created>1605616631547</created>
@@ -538,7 +523,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619375209084</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="Testing MSim-58 improvements">
+      <created>1619716854156</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1619716854156</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -614,7 +606,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="MSim-10 Multiple Stepper Algo ready for testing." />
     <MESSAGE value="MSim-37 add multiple option to simple scalper algo ready for testing." />
     <MESSAGE value="MSim-38 fix interval in SimpleScalperAlgo ready for testing. Moved manual orders to accordion pane in PositionsWindow" />
     <MESSAGE value="MSim-39 and MSim-40 ready for testing - cancelling algos globally, in this book, and cancelling all orders this book." />
@@ -639,7 +630,8 @@
     <MESSAGE value="MSim-55 minor improvements done" />
     <MESSAGE value="Updated javadoc" />
     <MESSAGE value="minor fix to MainGUIWindow.fxml" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor fix to MainGUIWindow.fxml" />
+    <MESSAGE value="Testing MSim-58 improvements" />
+    <option name="LAST_COMMIT_MESSAGE" value="Testing MSim-58 improvements" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/MikeSimNoGradle$Main.ic" NAME="Main Coverage Results" MODIFIED="1609257311491" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
