@@ -38,6 +38,19 @@ public class ControllerPositionsWindow
         MainGUIClass.Updatable,
         CommonGUI.ICommonGUI {
 
+    private int topRowPrice = 41150; //used with MikeGridPane and UpdateGUI
+    private int bottomRowPrice = 41100;
+    private int tickerId = 0;
+
+    private MikeGridPane mikeGridPane = null;
+    public MikeGridPane topMikeGridPane = null;
+    public MikeGridPane bottomMikeGridPane = null;
+
+    private PriceServer priceServer;
+    private MainModelThread model;
+    protected MikePosOrders mikePosOrders;
+    private AggregatedPosOrders aggregatedPosOrders = new AggregatedPosOrders();
+
     public TitledPane colActionsSetupTitledPane;
     @FXML
     private TabPane columnsTabPane;
@@ -91,18 +104,7 @@ public class ControllerPositionsWindow
         }
     }
 
-    private int topRowPrice = 41150; //used with MikeGridPane and UpdateGUI
-    private int bottomRowPrice = 41100;
-    private int tickerId = 0;
 
-    private MikeGridPane mikeGridPane = null;
-    public MikeGridPane topMikeGridPane = null;
-    public MikeGridPane bottomMikeGridPane = null;
-
-    private PriceServer priceServer;
-    private MainModelThread model;
-    protected MikePosOrders mikePosOrders;
-    private AggregatedPosOrders aggregatedPosOrders = new AggregatedPosOrders();
     @FXML
     public BorderPane mainBorderPane;
     @FXML //this is where all the orders are routed to
@@ -790,7 +792,6 @@ public class ControllerPositionsWindow
             MikeSimLogger.addLogEvent("Error trying to select targetPosOrders in ControllerPositionsWindow!");
         }
 
-
         return posOrdersToReturn;
     }
 
@@ -831,7 +832,6 @@ public class ControllerPositionsWindow
 //        model.getOrderServer().placeNewOrder(MikeOrder.MikeOrderType.BUYSTP, price, price, amount);
     }
 
-
     public void testThreeMouseClicked(MouseEvent mouseEvent) {
         if (mouseEvent.getButton() == MouseButton.SECONDARY) {
             MikeSimLogger.addLogEvent("Test Three RIGHT BUTTON CLICKED");
@@ -839,53 +839,45 @@ public class ControllerPositionsWindow
     }
 
     public void cancelAlgosThisBookBtnPressed(ActionEvent actionEvent) {
-
         if(CommonGUI.showConfirmationDialog("Are you sure you want to CANCEL ALL ALGOS IN THIS BOOK ???")) {
-
             model.algoManager.cancelAllAlgosInMikePosOrders(mikePosOrders);
             MikeSimLogger.addLogEvent("Cancelling all algos in book " + mikePosOrders.getName());
         }
-
     }
 
     public void cancelAlgosGloballyBtnPressed(ActionEvent actionEvent) {
         if(CommonGUI.showConfirmationDialog("Are you sure you want to CANCEL ALL GLOBALLY ???")) {
-
             model.algoManager.cancelAllAlgosGlobally();
         MikeSimLogger.addLogEvent("Cancelling all algos GLOBALLY!!!");}
     }
 
 
     public void cancelAllOrdersThisBookPressed(ActionEvent actionEvent){
-
-
-
         if(CommonGUI.showConfirmationDialog("Are you sure you want to CANCEL ALL ORDERS IN THIS BOOK (INCLUDING ALGO ORDERS) ???")) {
-
-
             MikeSimLogger.addLogEvent("Canceling all orders in book " + mikePosOrders.getName());
             mikePosOrders.cancelAllOrders();
-
-
         }
-
-
-
-
     }
 
     public void cancelOrdersGlobally(ActionEvent actionEvent) {
-//        MikeSimLogger.addLogEvent("cancelOrdersGlobally NOT IMPLEMENTED!");
-
         if(CommonGUI.showConfirmationDialog("Are you sure you want to CANCEL ALL ORDERS FOR THIS INSTRUMENT (INCLUDING ALGO ORDERS) "
         + priceServer.toString() + " ???") ) {
-
             MikeSimLogger.addLogEvent("Canceling all orders for instrument " + priceServer.toString());
-
             for(MikePosOrders posOrdersToCancel : model.posOrdersManager.getPosOrdersObservableList(priceServer.getTickerID())   ){
                 posOrdersToCancel.cancelAllOrders();
             }
         }
+    }
+
+    /**
+     * This cancels all algos and orders in PositionsOrders of this Window and flattens the position
+     * @param actionEvent
+     */
+    public void cancelAndFlattenThisBook(ActionEvent actionEvent) {
+        if(CommonGUI.showConfirmationDialog("Are you sure you want to CANCEL EVERYTHING AND FLATTEN THIS BOOK (INCLUDING ALGOS) ???")){
+            model.algoManager.cancelAllAlgosInMikePosOrders(mikePosOrders);
+            mikePosOrders.cancelAllOrders();
+            mikePosOrders.flattenThisPosition(1);}
     }
 
     /**
@@ -1045,9 +1037,7 @@ public class ControllerPositionsWindow
         Integer amount = Integer.parseInt(manualOrderSizeTextField.getText());
 
         MikeSimLogger.addLogEvent("Sell stop pressed. Order price: " + price + " Order size: " + amount);
-
         mikePosOrders.placeNewOrder(MikeOrder.MikeOrderType.SELLSTP, price, price, amount);
-//        model.getOrderServer().placeNewOrder(MikeOrder.MikeOrderType.SELLSTP, price, price, amount);
     }
 
     private int getPriceOfRow(int rowClicked) {
@@ -1056,10 +1046,7 @@ public class ControllerPositionsWindow
 
     public void testConfDialogClicked(ActionEvent actionEvent) {
         MikeSimLogger.addLogEvent("Test dialog clicked");
-
         if (CommonGUI.showConfirmationDialog("Dialog Test")) testTwoButtonClicked(null);
-
-
     }
 
     public void testTransferHalfClosedPLClicked(ActionEvent actionEvent) {
@@ -1075,24 +1062,7 @@ public class ControllerPositionsWindow
 
         MikeSimLogger.addLogEvent("Internal PL in target: " + getTargetMikePosOrders().getInternalClosedPL());
 
-
-
-
-
-
-
 //        MikeSimLogger.addLogEvent("Selected: " + targetPositionsList.getSelectionModel().getSelectedItem().toString());
-    }
-
-    /**
-     * This cancels all algos and orders in PositionsOrders of this Window and flattens the position
-     * @param actionEvent
-     */
-    public void cancelAndFlattenThisBook(ActionEvent actionEvent) {
-        if(CommonGUI.showConfirmationDialog("Are you sure you want to CANCEL EVERYTHING AND FLATTEN THIS BOOK (INCLUDING ALGOS) ???")){
-        model.algoManager.cancelAllAlgosInMikePosOrders(mikePosOrders);
-        mikePosOrders.cancelAllOrders();
-        mikePosOrders.flattenThisPosition(1);}
     }
 
     public void testSellTrailingStopClicked(ActionEvent actionEvent) {
@@ -1105,24 +1075,5 @@ public class ControllerPositionsWindow
         model.algoManager.createTrailingStopAlgo(MikeOrder.MikeOrderType.BUYSTP, 20, 8, mikePosOrders);
 
     }
-
-
-
-
-//    public void mikeGridPaneButtonClicked(ActionEvent event) {
-//
-//    }
-//    public void setAskPriceTextField(Integer price){
-//        askPriceTextField.setText(price.toString());
-//    }
-//    public void setExperimentalTextField(int num) {
-//        experimentalTextField.setText("" + num);
-//    }
-//    public MikeGridPane getMikeGridPane(){
-//        return mikeGridPane;
-//    }
-
-
-
 
 }
